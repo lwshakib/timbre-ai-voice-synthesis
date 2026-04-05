@@ -1,0 +1,178 @@
+"use client";
+
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import {
+  type LucideIcon,
+  Home,
+  LayoutGrid,
+  AudioLines,
+  Volume2,
+  Settings,
+  Headphones,
+  User,
+} from "lucide-react";
+import Link from "next/link";
+
+interface MenuItem {
+  title: string;
+  url?: string;
+  icon: LucideIcon;
+  onClick?: () => void;
+};
+
+interface NavSectionProps {
+  label?: string;
+  items: MenuItem[];
+  pathname: string;
+};
+
+function NavSection({ label, items, pathname }: NavSectionProps) {
+  return (
+    <SidebarGroup>
+      {label && (
+        <SidebarGroupLabel className="text-[11px] uppercase text-[#828179] font-mono-custom tracking-[0.2em] mb-2 px-3">
+          {label}
+        </SidebarGroupLabel>
+      )}
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {items.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton
+                asChild={!!item.url}
+                isActive={
+                  item.url
+                    ? item.url === "/dashboard"
+                      ? pathname === "/dashboard"
+                      : pathname.startsWith(item.url)
+                    : false
+                }
+                onClick={item.onClick}
+                tooltip={item.title}
+                className="h-10 px-4 py-2 text-[13px] tracking-tight font-medium border border-transparent data-[active=true]:border-[#d4b87a] data-[active=true]:bg-[#d4b87a]/10 data-[active=true]:text-[#f5f5f0] hover:bg-[#111111] transition-all duration-200"
+              >
+                {item.url ? (
+                  <Link href={item.url} className="flex items-center gap-3">
+                    <item.icon size={18} />
+                    <span>{item.title}</span>
+                  </Link>
+                ) : (
+                  <div className="flex items-center gap-3 w-full">
+                    <item.icon size={18} />
+                    <span>{item.title}</span>
+                  </div>
+                )}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
+  );
+}
+
+export function DashboardSidebar() {
+  const pathname = usePathname();
+
+  const mainMenuItems: MenuItem[] = [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: Home,
+    },
+    {
+      title: "Explore voices",
+      url: "/voices",
+      icon: LayoutGrid,
+    },
+    {
+      title: "Text to speech",
+      url: "/text-to-speech",
+      icon: AudioLines,
+    },
+    {
+      title: "Voice cloning",
+      icon: Volume2,
+      onClick: () => console.log("Voice cloning dialog requested"),
+    },
+  ];
+
+  const othersMenuItems: MenuItem[] = [
+    {
+      title: "Settings",
+      url: "/settings",
+      icon: Settings,
+    },
+    {
+      title: "Help and support",
+      url: "mailto:support@timbreai.build",
+      icon: Headphones,
+    },
+  ];
+
+  return (
+    <Sidebar collapsible="icon" className="border-r border-[#1f1f1e] bg-[#050505]">
+      <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
+        <div 
+        className="flex items-center gap-3 px-4 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
+          <Image
+            src="/logo.svg"
+            alt="Timbre AI"
+            width={24}
+            height={24}
+            className="rounded-sm"
+          />
+          <span className="group-data-[collapsible=icon]:hidden font-medium text-xl tracking-tighter text-[#f5f5f0]">
+            Timbre AI
+          </span>
+          <SidebarTrigger className="ml-auto lg:hidden" />
+        </div>
+      </SidebarHeader>
+      
+      <div className="mx-4 border-b border-[#1f1f1e]" />
+      
+      <SidebarContent className="py-4">
+        <NavSection items={mainMenuItems} pathname={pathname} />
+        <NavSection
+          label="Others"
+          items={othersMenuItems}
+          pathname={pathname}
+        />
+      </SidebarContent>
+      
+      <div className="mx-4 border-b border-[#1f1f1e]" />
+      
+      <SidebarFooter className="p-4">
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton className="h-12 w-full justify-start gap-3 bg-[#0a0a0a] border border-[#1f1f1e] rounded-sm px-3 hover:border-[#d4b87a] transition-all duration-300">
+               <div className="w-6 h-6 rounded-full bg-[#d4b87a]/20 flex items-center justify-center text-[#d4b87a]">
+                 <User size={14} />
+               </div>
+               <div className="flex flex-col text-left group-data-[collapsible=icon]:hidden">
+                 <span className="text-[13px] font-medium text-[#f5f5f0]">Institutional User</span>
+                 <span className="text-[10px] text-[#828179] font-mono-custom tracking-wider">[SEC_LEVEL_01]</span>
+               </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  );
+}

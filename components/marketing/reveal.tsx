@@ -7,9 +7,10 @@ interface RevealProps {
   children: React.ReactNode;
   className?: string;
   trigger?: string;
+  delay?: number;
 }
 
-export const Reveal = ({ children, className, trigger }: RevealProps) => {
+export const Reveal = ({ children, className, trigger, delay = 0 }: RevealProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -43,6 +44,7 @@ export const Reveal = ({ children, className, trigger }: RevealProps) => {
     <div
       ref={sectionRef}
       className={cn(isVisible ? "is-visible" : "opacity-0 translate-y-6 transition-all duration-700", className)}
+      style={{ transitionDelay: `${delay}s` }}
       data-trigger={trigger}
     >
       {children}

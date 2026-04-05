@@ -39,5 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-resonance-main
+
+
 /generated/prisma
+
+
+__pycache__
+resonance-main
