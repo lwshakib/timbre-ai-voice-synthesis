@@ -1,4 +1,4 @@
-# Timbre AI: Institutional-Grade Vocal Synthesis
+# <img src="public/logo.svg" width="32" height="32" align="left" style="margin-right: 12px; margin-top: 4px;" /> Timbre AI: Institutional-Grade Vocal Synthesis
 
 ![Timbre AI Demo](public/app_demo/text-to-speech-dark.png)
 
@@ -30,7 +30,7 @@ Ensure you have the following installed:
 ### 2. Installation
 Clone the repository and initialize the dependencies:
 ```bash
-git clone https://github.com/USER/timbre-ai-voice-synthesis.git
+git clone https://github.com/lwshakib/timbre-ai-voice-synthesis.git
 cd timbre-ai-voice-synthesis
 npm install
 ```
