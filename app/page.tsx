@@ -395,7 +395,7 @@ export default function LandingPage() {
         </div>
         <div className="border-t border-[#1f1f1e] bg-[#0a0a0a] h-12 flex items-center">
             <div className="max-w-[83.75rem] mx-auto px-6 w-full flex items-center justify-between font-mono-custom text-[0.625rem] text-muted-foreground/50">
-                <div>© 2025 Timbre AI Technologies AG</div>
+                <div>© {new Date().getFullYear()} Timbre AI Technologies AG</div>
                 <div>[SYS_STATE: SECURE]</div>
             </div>
         </div>
