@@ -26,11 +26,23 @@ import {
   Settings,
   Headphones,
   User as UserIcon,
+  LogOut,
 } from "lucide-react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { VoiceCreateDialog } from "@/components/voices/voice-create-dialog";
 import { OrgSwitcher } from "@/components/organization/org-switcher";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface MenuItem {
   title: string;
@@ -149,39 +161,67 @@ export function DashboardSidebar() {
         
         <SidebarContent className="py-4">
           <NavSection items={mainMenuItems} pathname={pathname} />
-          <NavSection
-            label="Others"
-            items={othersMenuItems}
-            pathname={pathname}
-          />
         </SidebarContent>
         
         <div className="mx-4 border-b border-border" />
         
-        <SidebarFooter className="p-4">
+        <SidebarFooter className="p-4 pt-0">
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton 
-                className="h-12 w-full justify-start gap-3 bg-secondary border border-border rounded-sm px-3 hover:border-primary transition-all duration-300"
-                onClick={async () => {
-                  await authClient.signOut();
-                  window.location.href = "/sign-in";
-                }}
-              >
-                 <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
-                   {user?.image ? (
-                     <Image src={user.image} alt={user?.name || "User"} width={24} height={24} className="rounded-full" />
-                   ) : (
-                     <UserIcon size={14} />
-                   )}
-                 </div>
-                 <div className="flex flex-col text-left group-data-[collapsible=icon]:hidden overflow-hidden">
-                   <span className="text-[13px] font-medium text-foreground truncate">{user?.name || "Digital Creator"}</span>
-                   <span className="text-[10px] text-muted-foreground font-mono-custom tracking-wider truncate">
-                     {user?.email || "[SEC_LEVEL_01]"}
-                   </span>
-                 </div>
-              </SidebarMenuButton>
+            {othersMenuItems.map((item) => (
+              <SidebarMenuItem key={item.title}>
+                <SidebarMenuButton
+                  asChild={!!item.url}
+                  isActive={item.url ? pathname.startsWith(item.url) : false}
+                  onClick={item.onClick}
+                  tooltip={item.title}
+                  className="h-10 px-3 text-[13px] tracking-tight font-medium hover:bg-secondary transition-all"
+                >
+                  {item.url ? (
+                    <Link href={item.url} className="flex items-center gap-3">
+                      <item.icon size={18} />
+                      <span>{item.title}</span>
+                    </Link>
+                  ) : (
+                    <div className="flex items-center gap-3 w-full">
+                      <item.icon size={18} />
+                      <span>{item.title}</span>
+                    </div>
+                  )}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+            
+            <SidebarMenuItem className="mt-2 pt-2 border-t border-border">
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <SidebarMenuButton
+                    className="h-10 px-3 text-[13px] tracking-tight font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-all"
+                  >
+                    <LogOut size={18} />
+                    <span>Sign Out</span>
+                  </SidebarMenuButton>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Sign Out</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Are you sure you want to sign out of your account? Your current session will be terminated.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={async () => {
+                        await authClient.signOut();
+                        window.location.href = "/sign-in";
+                      }}
+                      className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                    >
+                      Sign Out
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>
