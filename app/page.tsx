@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { HeroCanvas } from "@/components/marketing/hero-canvas";
 import { ScrambleText } from "@/components/marketing/scramble-text";
@@ -35,12 +36,12 @@ export default function LandingPage() {
           </div>
           
           <nav className="hidden md:flex items-center gap-8 text-[0.8125rem]">
-            <a href="#platform" className="nav-link"><ScrambleText text="PLATFORM" /></a>
-            <a href="#intelligence" className="nav-link"><ScrambleText text="INTELLIGENCE" /></a>
-            <a href="#secondary" className="nav-link"><ScrambleText text="MARKET" /></a>
-            <a href="#access" className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em] ml-4">
-              <ScrambleText text="INITIATE ACCESS" />
-            </a>
+            <a href="#platform" className="nav-link"><ScrambleText text="SYNTHESIS" /></a>
+            <a href="#intelligence" className="nav-link"><ScrambleText text="CLONING" /></a>
+            <a href="#secondary" className="nav-link"><ScrambleText text="REGISTRY" /></a>
+            <Link href="/dashboard" className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em] ml-4">
+              <ScrambleText text="DASHBOARD" className="relative z-10" />
+            </Link>
           </nav>
           
           <button className="md:hidden text-foreground">
@@ -74,32 +75,32 @@ export default function LandingPage() {
                 <Icon icon="solar:cpu-bolt-linear" className="text-primary" />
                 [SYS·000] // CORE_ARCHITECTURE
               </div>
-              <h1 className="text-[#f5f5f0] text-[clamp(3rem,6vw,6.5rem)] font-light tracking-tighter leading-[0.95] mb-8">
-                Private equity <br />structured <br />for exit.
+              <h1 className="text-foreground text-[clamp(3.15rem,6.2vw,6.5rem)] font-light tracking-tighter leading-[0.95] mb-8">
+                Vocal identity <br />synthesized <br />at scale.
               </h1>
               <p className="text-[clamp(1rem,1.2vw,1.125rem)] mb-10 text-muted-foreground max-w-[28rem]">
-                Timbre AI furnishes GPs and LPs with an institutional secondary market and AI-predicted exit topography. Engineered for entities managing $200M+.
+                Timbre AI provides developers with an institutional-grade synthesis engine and AI-modeled vocal topography. Engineered for latency under 200ms.
               </p>
               <div className="flex flex-wrap items-center gap-4 mb-10">
-                <a href="#access" className="btn-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em]">
-                  <ScrambleText text="REQUEST_ACCESS" />
-                </a>
+                <Link href="/dashboard" className="btn-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em]">
+                  <ScrambleText text="GO_TO_DASHBOARD" className="relative z-10" />
+                </Link>
                 <button className="btn-ghost-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em] bg-[#050505]">
                   <ScrambleText text="VIEW_TELEMETRY" />
                 </button>
               </div>
-              <div className="grid grid-cols-3 gap-6 font-mono-custom text-[0.6875rem] text-[#828179] border-t border-[#1f1f1e] pt-6">
+              <div className="grid grid-cols-3 gap-6 font-mono-custom text-[0.6875rem] text-muted-foreground border-t border-border pt-6">
                 <div>
-                  <div className="text-[#f5f5f0] text-lg mb-1">$<CountingNumber value={2.47} format="currency-b" />B</div>
-                  ASSETS_ANALYZED
+                  <div className="text-foreground text-lg mb-1"><CountingNumber value={2.47} />B</div>
+                  CHARS_GENERATED
                 </div>
                 <div>
-                  <div className="text-[#f5f5f0] text-lg mb-1"><CountingNumber value={34} /></div>
-                  TIER-1_FIRMS
+                  <div className="text-foreground text-lg mb-1"><CountingNumber value={34} /></div>
+                  LANGUAGES_SUPPORTED
                 </div>
                 <div>
-                  <div className="text-[#d4b87a] text-lg mb-1"><CountingNumber value={83.4} format="percent" />%</div>
-                  PREDICTION_ACC
+                  <div className="text-primary text-lg mb-1"><CountingNumber value={99.9} format="percent" />%</div>
+                  SYNTHESIS_QUALITY
                 </div>
               </div>
             </Reveal>
@@ -123,42 +124,42 @@ export default function LandingPage() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-3 font-mono-custom text-[0.625rem] text-[#828179] border-b border-[#1f1f1e] bg-[#050505]/50">
-                  <div>ENTITY_ID</div>
-                  <div>CAPITAL_INV</div>
-                  <div>CURR_NAV</div>
-                  <div>IRR_TRAJ</div>
-                  <div>OPT_EXIT</div>
+                <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-3 font-mono-custom text-[0.625rem] text-muted-foreground border-b border-border bg-background/50">
+                  <div>MODEL_ID</div>
+                  <div>BITRATE</div>
+                  <div>LATENCY</div>
+                  <div>FIDELITY</div>
+                  <div>STATUS</div>
                 </div>
 
-                <div className="flex-1 font-mono-custom text-[0.6875rem] bg-[#0a0a0a]/40">
-                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-4 border-b border-[#1f1f1e]/50 text-[#828179]">
-                    <div className="text-[#f5f5f0]">Aeronautics Tech</div>
-                    <div>€12.4M</div>
-                    <div>1.42x</div>
-                    <div>+14.2%</div>
-                    <div>Q4 2027</div>
+                <div className="flex-1 font-mono-custom text-[0.6875rem] bg-card/40">
+                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-4 border-b border-border/50 text-muted-foreground">
+                    <div className="text-foreground">Nova Prime (English)</div>
+                    <div>192kbps</div>
+                    <div>142ms</div>
+                    <div>+98.2%</div>
+                    <div>OPTIMAL</div>
                   </div>
-                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-4 border-b border-[#1f1f1e]/50 text-[#828179]">
-                    <div className="text-[#f5f5f0]">Vellamo Bio</div>
-                    <div>€28.1M</div>
-                    <div>0.94x</div>
-                    <div>-2.1%</div>
-                    <div>HOLD</div>
+                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-4 border-b border-border/50 text-muted-foreground">
+                    <div className="text-foreground">Atlas-7 (Nordic)</div>
+                    <div>128kbps</div>
+                    <div>184ms</div>
+                    <div>+94.1%</div>
+                    <div>STABLE</div>
                   </div>
                   
-                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-5 bg-[#111111]/80 border-l-2 border-[#d4b87a] relative overflow-hidden">
-                    <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-[#d4b87a]/10 to-transparent pointer-events-none"></div>
-                    <div className="text-[#f5f5f0] relative z-10 flex items-center gap-2">
-                      <Icon icon="solar:target-linear" className="text-[#d4b87a]" />
-                      Kessler Hldgs
+                  <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1.2fr] px-6 py-5 bg-secondary/80 border-l-2 border-primary relative overflow-hidden">
+                    <div className="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
+                    <div className="text-foreground relative z-10 flex items-center gap-2">
+                      <Icon icon="solar:target-linear" className="text-primary" />
+                      Vocal Clone Alpha
                     </div>
-                    <div>€48.2M</div>
-                    <div className="text-[#d4b87a]">2.71x</div>
-                    <div className="text-[#d4b87a]">+28.4%</div>
-                    <div className="text-[#f5f5f0] flex items-center gap-2">
+                    <div>320kbps</div>
+                    <div className="text-primary">84ms</div>
+                    <div className="text-primary">+99.9%</div>
+                    <div className="text-foreground flex items-center gap-2">
                       <span className="blinking-dot"></span>
-                      Q2 2026
+                      ACTIVE
                     </div>
                   </div>
                 </div>
@@ -174,34 +175,34 @@ export default function LandingPage() {
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 [SYS·001] // DIAGNOSTIC
               </div>
-              <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
-                Your portfolio is illiquid by design. Not necessity.
+              <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
+                Your brand's voice is static by design. Not necessity.
               </h2>
-              <p className="text-[#828179] text-[clamp(1rem,1.1vw,1.125rem)]">
-                Conventional PE infrastructure dictates that distributions are administered via archaic spreadsheet models. LPs endure protracted illiquidity that could be structurally bypassed quarters in advance. The consequence is quantified in carry and reputation.
+              <p className="text-muted-foreground text-[clamp(1rem,1.1vw,1.125rem)]">
+                Conventional TTS infrastructure dictates that vocal outputs are restricted to robotic, monotone models. Creators endure poor engagement that could be bypassed with expressive, AI-cloned identity in real-time.
               </p>
             </Reveal>
             
             <Reveal className="grid grid-cols-2 gap-y-16 gap-x-8">
-              <div className="relative border-l border-[#1f1f1e] pl-6">
-                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-[#d4b87a]"></div>
-                <div className="font-mono-custom text-4xl text-[#f5f5f0] mb-2 tracking-tight"><CountingNumber value={7.2} /><span className="text-[#828179] text-lg ml-1">yrs</span></div>
-                <div className="text-[0.625rem] uppercase tracking-wider text-[#828179]">Avg unmanaged hold</div>
+              <div className="relative border-l border-border pl-6">
+                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-primary"></div>
+                <div className="font-mono-custom text-4xl text-foreground mb-2 tracking-tight"><CountingNumber value={7.2} /><span className="text-muted-foreground text-lg ml-1">ms</span></div>
+                <div className="text-[0.625rem] uppercase tracking-wider text-muted-foreground">LATENCY OVERHEAD</div>
               </div>
-              <div className="relative border-l border-[#1f1f1e] pl-6">
-                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-[#d4b87a]"></div>
-                <div className="font-mono-custom text-4xl text-[#f5f5f0] mb-2 tracking-tight">$<CountingNumber value={340} format="k" /><span className="text-[#828179] text-lg ml-1">K</span></div>
-                <div className="text-[0.625rem] uppercase tracking-wider text-[#828179]">Annual admin drag</div>
+              <div className="relative border-l border-border pl-6">
+                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-primary"></div>
+                <div className="font-mono-custom text-4xl text-foreground mb-2 tracking-tight">$<CountingNumber value={340} format="k" /><span className="text-muted-foreground text-lg ml-1">K</span></div>
+                <div className="text-[0.625rem] uppercase tracking-wider text-muted-foreground">ANNUAL ASSET LOSS</div>
               </div>
-              <div className="relative border-l border-[#1f1f1e] pl-6">
-                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-[#d4b87a]"></div>
-                <div className="font-mono-custom text-4xl text-[#f5f5f0] mb-2 tracking-tight"><CountingNumber value={62} /><span className="text-[#828179] text-lg ml-1">%</span></div>
-                <div className="text-[0.625rem] uppercase tracking-wider text-[#828179]">LP Opacity Dissatisfaction</div>
+              <div className="relative border-l border-border pl-6">
+                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-primary"></div>
+                <div className="font-mono-custom text-4xl text-foreground mb-2 tracking-tight"><CountingNumber value={99} /><span className="text-muted-foreground text-lg ml-1">%</span></div>
+                <div className="text-[0.625rem] uppercase tracking-wider text-muted-foreground">SYNTHESIS REALISM</div>
               </div>
-              <div className="relative border-l border-[#1f1f1e] pl-6">
-                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-[#d4b87a]"></div>
-                <div className="font-mono-custom text-4xl text-[#f5f5f0] mb-2 tracking-tight"><CountingNumber value={18} /><span className="text-[#828179] text-lg ml-1">mo</span></div>
-                <div className="text-[0.625rem] uppercase tracking-wider text-[#828179]">Time reclaimed</div>
+              <div className="relative border-l border-border pl-6">
+                <div className="absolute top-0 left-[-1px] w-[2px] h-4 bg-primary"></div>
+                <div className="font-mono-custom text-4xl text-foreground mb-2 tracking-tight"><CountingNumber value={0.12} /><span className="text-muted-foreground text-lg ml-1">sec</span></div>
+                <div className="text-[0.625rem] uppercase tracking-wider text-muted-foreground">CLONE_INIT TIME</div>
               </div>
             </Reveal>
           </div>
@@ -212,17 +213,17 @@ export default function LandingPage() {
           <div className="max-w-[83.75rem] mx-auto px-6">
             <Reveal>
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
-                [SYS·002] // OMNI_VISIBILITY
+                [SYS·002] // VOCAL_RESONANCE
               </div>
               <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-16 max-w-3xl">
-                Singular interface. Absolute portfolio command.
+                Total vocal command. <br />Infinite range.
               </h2>
             </Reveal>
 
             <div className="grid lg:grid-cols-[2fr_1fr] gap-6">
               {/* --- Interactive Map Mock (Simplified SVG) --- */}
               <Reveal className="glass-panel rounded-sm relative overflow-hidden group min-h-[450px]">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Cyber Server" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen transition-transform duration-1000 group-hover:scale-105" />
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Acoustic Processor" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen transition-transform duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-[#050505]/60 mix-blend-multiply"></div>
                 
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
@@ -236,22 +237,22 @@ export default function LandingPage() {
                     </g>
                   </svg>
                 </div>
-                <div className="absolute bottom-6 left-6 tech-badge font-mono-custom text-[0.625rem] text-[#828179]">
-                  TOPOGRAPHY: EUR-II // REALTIME
+                <div className="absolute bottom-6 left-6 tech-badge font-mono-custom text-[0.625rem] text-muted-foreground">
+                  SIGNAL_ANALYSIS: EUR-II // REALTIME
                 </div>
               </Reveal>
 
               <div className="grid grid-rows-2 gap-6">
                 <Reveal className="glass-panel rounded-sm p-8 flex flex-col justify-center relative overflow-hidden">
-                  <Icon icon="solar:cpu-linear" className="text-[#828179] text-2xl mb-4" />
-                  <h3 className="text-[#f5f5f0] text-lg tracking-tight mb-2">Algorithmic Exit Windows</h3>
-                  <div className="font-mono-custom text-4xl text-[#d4b87a] mb-2 leading-none tracking-tighter"><CountingNumber value={83.4} format="percent" />%</div>
-                  <p className="text-[0.75rem] text-[#828179]">140+ quantitative signals parsed bi-weekly to compute maximal liquidity thresholds.</p>
+                  <Icon icon="solar:microphone-linear" className="text-muted-foreground text-2xl mb-4" />
+                  <h3 className="text-foreground text-lg tracking-tight mb-2">High-Fidelity Synthesis</h3>
+                  <div className="font-mono-custom text-4xl text-primary mb-2 leading-none tracking-tighter"><CountingNumber value={99.9} format="percent" />%</div>
+                  <p className="text-[0.75rem] text-muted-foreground">Studio-quality audio output with natural inflection and emotive resonance.</p>
                 </Reveal>
                 <Reveal className="glass-panel rounded-sm p-8 flex flex-col justify-center relative overflow-hidden">
-                  <Icon icon="solar:network-linear" className="text-[#828179] text-2xl mb-4" />
-                  <h3 className="text-[#f5f5f0] text-lg tracking-tight mb-2">Equity Routing Engine</h3>
-                  <p className="text-[0.75rem] text-[#828179]">Autonomous secondary sale distribution to pre-cleared buyers inside your LP cohort. Zero friction.</p>
+                  <Icon icon="solar:wave-linear" className="text-muted-foreground text-2xl mb-4" />
+                  <h3 className="text-foreground text-lg tracking-tight mb-2">Vocal Topology Engine</h3>
+                  <p className="text-[0.75rem] text-muted-foreground">Autonomous cloning protocols map 1,000+ unique vocal characteristics from 30 seconds of audio.</p>
                 </Reveal>
               </div>
             </div>
@@ -263,13 +264,13 @@ export default function LandingPage() {
           <div className="max-w-[83.75rem] mx-auto px-6 grid lg:grid-cols-[40%_60%] gap-16 items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
-                [SYS·003] // MARKET_MAKER
+                [SYS·003] // MODEL_REGISTRY
               </div>
-              <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
-                An institutional order book. Deployed internally.
+              <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
+                An institutional voice registry. Deployed via API.
               </h2>
               <p className="text-muted-foreground text-[clamp(1rem,1.1vw,1.125rem)] mb-8">
-                Timbre AI initializes a strictly regulated internal market specifically for your LP syndicate. It executes clean secondary transfers devoid of intermediaries.
+                Timbre AI initializes a strictly regulated internal registry for your specialized voice models. It executes clean synthesis transfers devoid of latency.
               </p>
               <button className="btn-ghost-swiss inline-flex font-mono-custom text-[0.75rem] tracking-[0.05em]">
                 <ScrambleText text="VIEW_LEDGER_SPECS" />
@@ -279,10 +280,10 @@ export default function LandingPage() {
             {/* --- Market Depth UI Mock --- */}
             <Reveal className="order-1 lg:order-2 glass-panel rounded-sm p-8 relative overflow-hidden">
                <div className="relative z-10">
-                  <div className="flex justify-between items-end border-b border-[#1f1f1e] pb-4 mb-8">
-                    <div className="font-mono-custom text-[0.625rem] text-[#828179]">INTERNAL_EXCHANGE // EUR-II</div>
-                    <div className="font-mono-custom text-[0.625rem] text-[#d4b87a] flex items-center gap-2">
-                       <span className="blinking-dot"></span> MATCHING_ENGINE: ACTIVE
+                  <div className="flex justify-between items-end border-b border-border pb-4 mb-8">
+                    <div className="font-mono-custom text-[0.625rem] text-muted-foreground">VOICE_EXCHANGE // EUR-II</div>
+                    <div className="font-mono-custom text-[0.625rem] text-primary flex items-center gap-2">
+                       <span className="blinking-dot"></span> SYNTHESIS_ENGINE: ACTIVE
                     </div>
                   </div>
                   
@@ -317,22 +318,22 @@ export default function LandingPage() {
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 [SYS·006] // CLEARANCE
               </div>
-              <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
-                Clearance via application.
+              <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
+                Access via invitation.
               </h2>
               <p className="text-muted-foreground mb-12 max-w-[28rem] text-[1.0625rem]">
-                Timbre AI restricts access to a hermetic GP/LP cohort. We process exactly 12 institutional onboarding protocols per quarter.
+                Timbre AI restricts API access to a hermetic developer cohort. We process exactly 12 institutional onboarding protocols per quarter.
               </p>
               
               <div className="glass-panel p-6 rounded-sm border-l-2 border-l-[#d4b87a] max-w-sm">
-                <div className="font-mono-custom text-[0.625rem] text-[#828179] mb-4 border-b border-[#1f1f1e] pb-2 flex justify-between">
-                  <span>COHORT_STATUS</span>
-                  <span className="text-[#d4b87a]">OPEN</span>
+                <div className="font-mono-custom text-[0.625rem] text-muted-foreground mb-4 border-b border-border pb-2 flex justify-between">
+                  <span>REGISTRY_STATUS</span>
+                  <span className="text-primary">OPEN</span>
                 </div>
-                <ul className="font-mono-custom text-[0.75rem] text-[#f5f5f0] space-y-2">
-                  <li className="flex justify-between"><span>ACTIVE_CYCLE:</span> <span className="text-[#828179]">Q1 2026</span></li>
-                  <li className="flex justify-between"><span>CAPACITY_REMAINING:</span> <span className="text-[#828179]">04 SLOTS</span></li>
-                  <li className="flex justify-between"><span>PREREQUISITE:</span> <span className="text-[#828179]">NDA_EXECUTION</span></li>
+                <ul className="font-mono-custom text-[0.75rem] text-foreground space-y-2">
+                  <li className="flex justify-between"><span>ACTIVE_CYCLE:</span> <span className="text-muted-foreground">Q1 2026</span></li>
+                  <li className="flex justify-between"><span>CAPACITY_REMAINING:</span> <span className="text-muted-foreground">04 SLOTS</span></li>
+                  <li className="flex justify-between"><span>PREREQUISITE:</span> <span className="text-muted-foreground">API_CLEARANCE</span></li>
                 </ul>
               </div>
             </Reveal>
@@ -344,20 +345,20 @@ export default function LandingPage() {
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-4">
                   <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-wider">ENTITY_NAME</label>
-                    <input type="text" className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none focus:border-[#d4b87a] transition-colors" placeholder="e.g. Nordic Infrastructure Partners" />
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">ORGANIZATION_NAME</label>
+                    <input type="text" className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors" placeholder="e.g. Acme Voice Labs" />
                   </div>
                   <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-wider">AUM_PARAMETER</label>
-                    <select className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none cursor-pointer">
-                      <option value="" disabled>Select threshold...</option>
-                      <option value="200-500">$200M – $500M</option>
-                      <option value="500-2b">$500M – $2B</option>
-                      <option value="2b+">$2B+</option>
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">USAGE_TIER</label>
+                    <select className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none cursor-pointer">
+                      <option value="" disabled>Select volume...</option>
+                      <option value="1m-5m">1M – 5M Chars/mo</option>
+                      <option value="5m-20m">5M – 20M Chars/mo</option>
+                      <option value="20m+">20M+ Chars/mo</option>
                     </select>
                   </div>
                   <button type="submit" className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em] mt-4">
-                    <ScrambleText text="TRANSMIT_PROTOCOL" />
+                    <ScrambleText text="TRANSMIT_PROTOCOL" className="relative z-10" />
                   </button>
                 </form>
               </div>
@@ -373,7 +374,7 @@ export default function LandingPage() {
               <Logo size={20} />
               Timbre AI
             </div>
-            <div className="text-[0.8125rem] text-muted-foreground mb-12">Architecting PE Liquidity.</div>
+            <div className="text-[0.8125rem] text-muted-foreground mb-12">Architecting the future of AI Voice.</div>
             <address className="not-italic font-mono-custom text-[0.625rem] text-muted-foreground leading-relaxed">
               Timbre AI Technologies AG<br />
               Talstrasse 82, 8001 Zürich, Switzerland
@@ -381,14 +382,14 @@ export default function LandingPage() {
           </div>
           <div className="grid grid-cols-2 gap-8 font-mono-custom text-[0.625rem]">
             <div className="flex flex-col gap-4">
-              <span className="text-[#f5f5f0] mb-2 tracking-wider">SYSTEMS</span>
-              <a href="#" className="hover:text-[#d4b87a] transition-colors">Platform</a>
-              <a href="#" className="hover:text-[#d4b87a] transition-colors">Intelligence</a>
+              <span className="text-foreground mb-2 tracking-wider">SYSTEMS</span>
+              <a href="#" className="hover:text-primary transition-colors">Synthesis</a>
+              <a href="#" className="hover:text-primary transition-colors">Models</a>
             </div>
             <div className="flex flex-col gap-4">
-              <span className="text-[#f5f5f0] mb-2 tracking-wider">PROTOCOLS</span>
-              <a href="#" className="hover:text-[#d4b87a] transition-colors">Compliance</a>
-              <a href="#" className="hover:text-[#d4b87a] transition-colors">Privacy</a>
+              <span className="text-foreground mb-2 tracking-wider">PROTOCOLS</span>
+              <a href="#" className="hover:text-primary transition-colors">Legal</a>
+              <a href="#" className="hover:text-primary transition-colors">Security</a>
             </div>
           </div>
         </div>

@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
                         rel="noreferrer"
                         className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
                     >
-                        <ScrambleText text="CHECK_INBOX" />
+                        <ScrambleText text="CHECK_INBOX" className="relative z-10" />
                     </a>
                     
                     <Link 
@@ -110,7 +110,7 @@ export default function ForgotPasswordPage() {
                     {loading ? (
                         <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                     ) : ( 
-                        <ScrambleText text="INITIATE_RECOVERY" />
+                        <ScrambleText text="INITIATE_RECOVERY" className="relative z-10" />
                     )}
                 </button>
             </form>

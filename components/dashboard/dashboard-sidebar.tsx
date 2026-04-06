@@ -49,7 +49,7 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
   return (
     <SidebarGroup>
       {label && (
-        <SidebarGroupLabel className="text-[11px] uppercase text-[#828179] font-mono-custom tracking-[0.2em] mb-2 px-3">
+        <SidebarGroupLabel className="text-[11px] uppercase text-muted-foreground font-mono-custom tracking-[0.2em] mb-2 px-3">
           {label}
         </SidebarGroupLabel>
       )}
@@ -68,7 +68,7 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
                 }
                 onClick={item.onClick}
                 tooltip={item.title}
-                className="h-10 px-4 py-2 text-[13px] tracking-tight font-medium border border-transparent data-[active=true]:border-[#d4b87a] data-[active=true]:bg-[#d4b87a]/10 data-[active=true]:text-[#f5f5f0] hover:bg-[#111111] transition-all duration-200"
+                className="h-10 px-4 py-2 text-[13px] tracking-tight font-medium border border-transparent data-[active=true]:border-primary data-[active=true]:bg-primary/10 data-[active=true]:text-foreground hover:bg-secondary transition-all duration-200"
               >
                 {item.url ? (
                   <Link href={item.url} className="flex items-center gap-3">
@@ -139,12 +139,12 @@ export function DashboardSidebar() {
         open={voiceDialogOpen}
         onOpenChange={setVoiceDialogOpen}
       />
-      <Sidebar collapsible="icon" className="border-r border-[#1f1f1e] bg-[#050505]">
+      <Sidebar collapsible="icon" className="border-r border-border bg-background">
         <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
           <OrgSwitcher />
         </SidebarHeader>
         
-        <div className="mx-4 border-b border-[#1f1f1e]" />
+        <div className="mx-4 border-b border-border" />
 
         
         <SidebarContent className="py-4">
@@ -156,19 +156,19 @@ export function DashboardSidebar() {
           />
         </SidebarContent>
         
-        <div className="mx-4 border-b border-[#1f1f1e]" />
+        <div className="mx-4 border-b border-border" />
         
         <SidebarFooter className="p-4">
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton 
-                className="h-12 w-full justify-start gap-3 bg-[#0a0a0a] border border-[#1f1f1e] rounded-sm px-3 hover:border-[#d4b87a] transition-all duration-300"
+                className="h-12 w-full justify-start gap-3 bg-secondary border border-border rounded-sm px-3 hover:border-primary transition-all duration-300"
                 onClick={async () => {
                   await authClient.signOut();
                   window.location.href = "/sign-in";
                 }}
               >
-                 <div className="w-6 h-6 rounded-full bg-[#d4b87a]/20 flex items-center justify-center text-[#d4b87a] shrink-0">
+                 <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
                    {user?.image ? (
                      <Image src={user.image} alt={user?.name || "User"} width={24} height={24} className="rounded-full" />
                    ) : (
@@ -176,8 +176,8 @@ export function DashboardSidebar() {
                    )}
                  </div>
                  <div className="flex flex-col text-left group-data-[collapsible=icon]:hidden overflow-hidden">
-                   <span className="text-[13px] font-medium text-[#f5f5f0] truncate">{user?.name || "Institutional User"}</span>
-                   <span className="text-[10px] text-[#828179] font-mono-custom tracking-wider truncate">
+                   <span className="text-[13px] font-medium text-foreground truncate">{user?.name || "Digital Creator"}</span>
+                   <span className="text-[10px] text-muted-foreground font-mono-custom tracking-wider truncate">
                      {user?.email || "[SEC_LEVEL_01]"}
                    </span>
                  </div>

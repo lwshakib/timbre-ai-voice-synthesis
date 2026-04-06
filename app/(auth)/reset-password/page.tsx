@@ -62,7 +62,7 @@ export default function ResetPasswordPage() {
                     onClick={() => router.push("/forgot-password")}
                     className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
                 >
-                    <ScrambleText text="RE_ISSUE_RECOVERY" />
+                    <ScrambleText text="RE_ISSUE_RECOVERY" className="relative z-10" />
                 </button>
             </div>
         );
@@ -118,7 +118,7 @@ export default function ResetPasswordPage() {
                         {loading ? (
                             <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                         ) : ( 
-                            <ScrambleText text="FINALIZE_SECURITY_RESET" />
+                            <ScrambleText text="FINALIZE_SECURITY_RESET" className="relative z-10" />
                         )}
                     </button>
                 </div>

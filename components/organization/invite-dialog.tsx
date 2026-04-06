@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
+import { ScrambleText } from "@/components/marketing/scramble-text";
 
 export function InviteDialog() {
   const [email, setEmail] = React.useState("");
@@ -55,8 +56,8 @@ export function InviteDialog() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <button className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em] flex items-center gap-2">
-          <Icon icon="solar:user-plus-linear" width={16} height={16} />
-          ADD_PERSONNEL
+          <Icon icon="solar:user-plus-linear" width={16} height={16} className="relative z-10" />
+          <ScrambleText text="ADD_PERSONNEL" className="relative z-10" />
         </button>
       </DialogTrigger>
       <DialogContent className="bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0]">

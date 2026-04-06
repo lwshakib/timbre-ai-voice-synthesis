@@ -103,29 +103,36 @@
 @layer components {
   /* Swiss Tech Chamfered Buttons */
   .btn-swiss {
-    @apply relative bg-transparent text-primary border border-border cursor-pointer transition-all duration-300 px-6 py-2.5;
+    @apply relative bg-transparent text-primary border border-border cursor-pointer px-6 py-2.5;
     clip-path: polygon(0.75rem 0, 100% 0, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%, 0 0.75rem);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     z-index: 1;
+    isolation: isolate; /* Force separate stacking context for z-index: -1 children */
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .btn-swiss::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: var(--primary);
+    background-color: #d4b87a; /* Hardcoded gold */
     z-index: -1;
-    clip-path: polygon(0.75rem 0, 100% 0, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%, 0 0.75rem);
     transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .btn-swiss:hover {
-    @apply text-background border-primary;
+    color: #050505 !important;
+    border-color: #d4b87a;
+  }
+  .btn-swiss:hover * {
+    color: #050505 !important;
   }
   .btn-swiss:hover::before {
-    @apply scale-x-100 origin-left;
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .btn-ghost-swiss {

@@ -119,7 +119,7 @@ export default function SignInPage() {
                     {loading ? (
                         <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                     ) : ( 
-                        <ScrambleText text="AUTHENTICATE_SESSION" />
+                        <ScrambleText text="AUTHENTICATE_SESSION" className="relative z-10" />
                     )}
                 </button>
             </form>

@@ -11,11 +11,11 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider className="h-svh bg-[#050505]">
+    <SidebarProvider className="h-svh bg-background">
       {/* Dashboard Sidebar */}
       <DashboardSidebar />
       
-      <SidebarInset className="relative overflow-hidden bg-[#0a0a0a] border-l border-[#1f1f1e]">
+      <SidebarInset className="relative overflow-hidden bg-background border-l border-border">
         {/* Subtle Background Interaction */}
         <HeroCanvas />
         
