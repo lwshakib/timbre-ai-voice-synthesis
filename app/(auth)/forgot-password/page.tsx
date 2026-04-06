@@ -33,15 +33,15 @@ export default function ForgotPasswordPage() {
     if (isSuccess) {
         return (
             <div className="glass-panel p-10 rounded-sm animate-in fade-in zoom-in-95 duration-700 text-center flex flex-col items-center">
-                <div className="w-16 h-16 rounded-full border border-[#d4b87a] flex items-center justify-center mb-6 bg-[#d4b87a]/10">
-                    <Icon icon="solar:shield-keyhole-linear" className="text-[#d4b87a] text-3xl animate-pulse" />
+                <div className="w-16 h-16 rounded-full border border-primary flex items-center justify-center mb-6 bg-primary/10">
+                    <Icon icon="solar:shield-keyhole-linear" className="text-primary text-3xl animate-pulse" />
                 </div>
                 
-                <h2 className="text-[#f5f5f0] text-2xl font-light tracking-tight mb-3">
+                <h2 className="text-foreground text-2xl font-light tracking-tight mb-3">
                     Check your email
                 </h2>
-                <p className="text-[#828179] text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
-                    We've sent a password recovery link to <span className="text-[#f5f5f0]">{email}</span>. Please authorize via the link in your inbox.
+                <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
+                    We've sent a password recovery link to <span className="text-primary">{email}</span>. Please authorize via the link in your inbox.
                 </p>
 
                 <div className="w-full space-y-4">
@@ -56,15 +56,15 @@ export default function ForgotPasswordPage() {
                     
                     <Link 
                         href="/sign-in" 
-                        className="btn-ghost-swiss w-full flex items-center justify-center py-4 bg-[#0a0a0a]/50 text-[#828179] font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-[#f5f5f0]"
+                        className="btn-ghost-swiss w-full flex items-center justify-center py-4 bg-secondary/50 text-muted-foreground font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-foreground"
                     >
                         <ScrambleText text="Back to Login" />
                     </Link>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-[#1f1f1e] w-full">
-                    <p className="font-mono-custom text-[0.625rem] text-[#555] uppercase tracking-widest leading-relaxed">
-                        [SYS·REC // ENCRYPTED_HANDSHAKE]
+                <div className="mt-8 pt-6 border-t border-border w-full">
+                    <p className="font-mono-custom text-[0.625rem] text-muted-foreground/30 uppercase tracking-widest leading-relaxed">
+                        Secure Password Recovery
                     </p>
                 </div>
             </div>
@@ -75,10 +75,10 @@ export default function ForgotPasswordPage() {
         <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="mb-8">
-                <h2 className="text-[#f5f5f0] text-xl font-light tracking-tight mb-1">
+                <h2 className="text-foreground text-xl font-light tracking-tight mb-1">
                     Reset your password
                 </h2>
-                <p className="text-[#828179] text-xs font-mono-custom tracking-wider">
+                <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
                     We'll send a secure link to your email.
                 </p>
             </div>
@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
             {/* Email Form */}
             <form onSubmit={handleForgetPassword} className="space-y-6">
                 <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
                         Email Address
                     </label>
                     <input
@@ -94,10 +94,10 @@ export default function ForgotPasswordPage() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none focus:border-[#d4b87a] transition-colors"
+                        className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
                         placeholder="institutional@entity.com"
                     />
-                    <p className="mt-2 font-mono-custom text-[0.625rem] text-[#555] tracking-tight">
+                    <p className="mt-2 font-mono-custom text-[0.625rem] text-muted-foreground/30 tracking-tight">
                         We will send a secure link to reset your password.
                     </p>
                 </div>
@@ -115,12 +115,12 @@ export default function ForgotPasswordPage() {
                 </button>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-[#1f1f1e] text-center">
-                <p className="font-mono-custom text-[0.6875rem] text-[#828179] tracking-wider uppercase">
+            <div className="mt-8 pt-6 border-t border-border text-center">
+                <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
                     Remembered? {" "}
                     <Link
                         href="/sign-in"
-                        className="text-[#d4b87a] hover:underline underline-offset-4"
+                        className="text-primary hover:underline underline-offset-4"
                     >
                         Sign In
                     </Link>

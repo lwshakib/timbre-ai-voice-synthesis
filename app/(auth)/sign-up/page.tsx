@@ -68,7 +68,7 @@ export default function SignUpPage() {
 
                 <div className="mt-8 pt-6 border-t border-border w-full">
                     <p className="font-mono-custom text-[0.625rem] text-muted-foreground/30 uppercase tracking-widest">
-                        Protocol ID: TIMBRE_REG_{Math.random().toString(36).substring(7).toUpperCase()}
+                        Registration Reference: Timbre AI
                     </p>
                 </div>
             </div>

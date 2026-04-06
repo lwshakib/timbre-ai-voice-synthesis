@@ -52,10 +52,10 @@ export default function ResetPasswordPage() {
                 <div className="w-16 h-16 rounded-full border border-destructive flex items-center justify-center mx-auto mb-6 bg-destructive/10">
                     <Icon icon="solar:shield-warning-linear" className="text-destructive text-3xl" />
                 </div>
-                <h2 className="text-[#f5f5f0] text-xl font-light tracking-tight mb-4">
+                <h2 className="text-foreground text-xl font-light tracking-tight mb-4">
                     Invalid Session
                 </h2>
-                <p className="text-[#828179] text-[0.8125rem] mb-8">
+                <p className="text-muted-foreground text-[0.8125rem] mb-8">
                     Your password reset link is invalid or has expired. Please request a new one.
                 </p>
                 <button
@@ -72,10 +72,10 @@ export default function ResetPasswordPage() {
         <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="mb-8">
-                <h2 className="text-[#f5f5f0] text-xl font-light tracking-tight mb-1">
+                <h2 className="text-foreground text-xl font-light tracking-tight mb-1">
                     Set New Password
                 </h2>
-                <p className="text-[#828179] text-xs font-mono-custom tracking-wider">
+                <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
                     Update your credentials to regain access.
                 </p>
             </div>
@@ -83,7 +83,7 @@ export default function ResetPasswordPage() {
             {/* Email Form */}
             <form onSubmit={handleResetPassword} className="space-y-5">
                 <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
                         New Password
                     </label>
                     <input
@@ -91,12 +91,12 @@ export default function ResetPasswordPage() {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none focus:border-[#d4b87a] transition-colors"
+                        className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
                         placeholder="••••••••"
                     />
                 </div>
                 <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
                         Confirm Password
                     </label>
                     <input
@@ -104,7 +104,7 @@ export default function ResetPasswordPage() {
                         required
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none focus:border-[#d4b87a] transition-colors"
+                        className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
                         placeholder="••••••••"
                     />
                 </div>
@@ -124,8 +124,8 @@ export default function ResetPasswordPage() {
                 </div>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-[#1f1f1e] text-center">
-                <p className="font-mono-custom text-[0.625rem] text-[#555] tracking-widest uppercase">
+            <div className="mt-8 pt-6 border-t border-border text-center">
+                <p className="font-mono-custom text-[0.625rem] text-muted-foreground/30 tracking-widest uppercase">
                     Security Level: High
                 </p>
             </div>

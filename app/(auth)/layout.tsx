@@ -18,8 +18,8 @@ export default function AuthLayout({
         <div className="flex flex-col items-center mb-8 text-center">
           <Logo size={40} className="mb-4" />
           <div className="text-foreground text-3xl font-medium tracking-tighter mb-2 uppercase">Timbre AI</div>
-          <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] text-muted-foreground">
-            SYS·AUTH // ESTABLISH_SESSION
+          <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] text-muted-foreground uppercase">
+            Authentication Services
           </div>
         </div>
 
@@ -28,7 +28,7 @@ export default function AuthLayout({
         {/* Institutional Disclosure */}
         <div className="mt-8 text-center">
             <div className="font-mono-custom text-[0.625rem] text-muted-foreground/40 uppercase tracking-widest">
-                [TIMBRE AI // SECURE TERMINAL]
+                Timbre AI Secure Access
             </div>
         </div>
       </div>
