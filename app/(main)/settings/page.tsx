@@ -21,9 +21,12 @@ import {
 } from "@/components/ui/alert-dialog";
 import Image from "next/image";
 
+import { useTheme } from "next-themes";
+
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("Profile");
     const { data: session } = authClient.useSession();
+    const { theme, setTheme } = useTheme();
     const { data: activeOrg } = authClient.useActiveOrganization();
     const [sessions, setSessions] = useState<any[]>([]);
     const [accounts, setAccounts] = useState<any[]>([]);
@@ -249,6 +252,37 @@ export default function SettingsPage() {
                             <div className="max-w-[400px]">
                                 <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Email Address</label>
                                 <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">{user?.email || "team@voice-lab.ai"}</div>
+                            </div>
+                        </section>
+
+                        <div className="h-[1px] w-full bg-gradient-to-r from-[#1f1f1e] via-transparent to-transparent" />
+
+                        <section className="space-y-6">
+                            <h3 className="text-foreground text-sm font-medium uppercase tracking-widest flex items-center gap-3">
+                                <Icon icon="solar:palette-linear" className="text-primary" />
+                                Appearance
+                            </h3>
+                            <div className="grid grid-cols-3 gap-4 max-w-[500px]">
+                                {[
+                                    { id: "light", label: "Light", icon: "solar:sun-linear" },
+                                    { id: "dark", label: "Dark", icon: "solar:moon-linear" },
+                                    { id: "system", label: "System", icon: "solar:monitor-linear" }
+                                ].map((opt) => (
+                                    <button
+                                        key={opt.id}
+                                        onClick={() => setTheme(opt.id)}
+                                        className={`glass-panel p-4 border rounded-sm flex flex-col items-center gap-3 transition-all ${
+                                            theme === opt.id 
+                                                ? "border-primary bg-primary/5 text-primary" 
+                                                : "border-border text-muted-foreground hover:border-primary/30"
+                                        }`}
+                                    >
+                                        <Icon icon={opt.icon} width={20} height={20} />
+                                        <span className="text-[10px] font-mono-custom uppercase tracking-widest">
+                                            {opt.label}
+                                        </span>
+                                    </button>
+                                ))}
                             </div>
                         </section>
                     </Reveal>
