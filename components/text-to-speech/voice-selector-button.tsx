@@ -21,6 +21,7 @@ export function VoiceSelectorButton() {
 
   return (
     <Button
+      type="button"
       variant="outline"
       size="sm"
         className="flex-1 justify-start gap-3 px-3 border-[#1f1f1e] bg-[#0a0a0a] hover:bg-[#111111] hover:border-[#d4b87a]/50 text-[#f5f5f0] h-10 rounded-xl"

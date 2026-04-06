@@ -129,6 +129,7 @@ export function VoicePreviewPanel({
           {/* Player controls */}
           <div className="flex items-center justify-center gap-6">
             <Button
+              type="button"
               variant="ghost"
               size="icon"
               className="rounded-full size-10 hover:bg-[#d4b87a]/10 hover:text-[#d4b87a] text-[#555]"
@@ -139,6 +140,7 @@ export function VoicePreviewPanel({
             </Button>
 
             <Button
+              type="button"
               variant="default"
               size="icon"
               className="size-14 rounded-full bg-[#d4b87a] hover:bg-[#c4a86a] text-black shadow-lg shadow-[#d4b87a]/10 transition-transform hover:scale-105 active:scale-95"
@@ -153,6 +155,7 @@ export function VoicePreviewPanel({
             </Button>
 
             <Button
+              type="button"
               variant="ghost"
               size="icon"
               className="rounded-full size-10 hover:bg-[#d4b87a]/10 hover:text-[#d4b87a] text-[#555]"
@@ -166,6 +169,7 @@ export function VoicePreviewPanel({
           {/* Download */}
           <div className="flex justify-end">
             <Button
+              type="button"
               variant="outline"
               size="sm"
               className="rounded-full border-[#1f1f1e] bg-[#0a0a0a] hover:bg-[#111] hover:border-[#d4b87a]/50 text-[#f5f5f0] font-mono-custom text-[10px] uppercase tracking-widest px-6 h-10"
