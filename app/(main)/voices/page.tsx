@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, Suspense } from 'react';
 import { useQueryState } from 'nuqs';
 import { toast } from 'sonner';
 
@@ -17,7 +17,7 @@ interface VoicesData {
   system: VoiceItem[];
 }
 
-export default function VoicesPage() {
+function VoicesContent() {
   const [query] = useQueryState('query', voicesSearchParams.query);
   const [data, setData] = useState<VoicesData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,5 +63,22 @@ export default function VoicesPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function VoicesPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <Spinner className="size-8 text-primary" />
+          <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
+            [SYS_STATUS // INITIALIZING_LIBRARY]
+          </p>
+        </div>
+      }
+    >
+      <VoicesContent />
+    </Suspense>
   );
 }
