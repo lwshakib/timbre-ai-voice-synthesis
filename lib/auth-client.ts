@@ -1,4 +1,5 @@
-import { createAuthClient } from 'better-auth/react';
+import { createAuthClient } from "better-auth/react";
+import { organizationClient } from "better-auth/client/plugins";
 
 /**
  * Client-side authentication client for Better Auth.
@@ -10,5 +11,8 @@ export const authClient = createAuthClient({
    * The base URL of the authentication server.
    * Defaults to localhost for development if not provided in environment variables.
    */
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
-});
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+  plugins: [
+    organizationClient(),
+  ],
+});

@@ -37,6 +37,8 @@ export interface VoiceItem {
   category: VoiceCategory | null;
   language: string | null;
   variant: VoiceVariant;
+  path: string | null;
+  url: string | null;
 };
 
 interface VoiceCardProps {
@@ -72,7 +74,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
   
   const { flag, region } = parseLanguage(voice.language);
 
-  const audioSrc = `/api/voices/${encodeURIComponent(voice.id)}`;
+  const audioSrc = voice.url ?? "";
   const { isPlaying, isLoading, togglePlay } = useAudioPlayback(audioSrc);
 
   const handleDelete = async () => {

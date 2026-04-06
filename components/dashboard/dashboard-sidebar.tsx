@@ -30,6 +30,7 @@ import {
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { VoiceCreateDialog } from "@/components/voices/voice-create-dialog";
+import { OrgSwitcher } from "@/components/organization/org-switcher";
 
 interface MenuItem {
   title: string;
@@ -140,23 +141,11 @@ export function DashboardSidebar() {
       />
       <Sidebar collapsible="icon" className="border-r border-[#1f1f1e] bg-[#050505]">
         <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
-          <div 
-          className="flex items-center gap-3 px-4 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
-            <Image
-              src="/logo.svg"
-              alt="Timbre AI"
-              width={24}
-              height={24}
-              className="rounded-sm"
-            />
-            <span className="group-data-[collapsible=icon]:hidden font-medium text-xl tracking-tighter text-[#f5f5f0]">
-              Timbre AI
-            </span>
-            <SidebarTrigger className="ml-auto lg:hidden" />
-          </div>
+          <OrgSwitcher />
         </SidebarHeader>
         
         <div className="mx-4 border-b border-[#1f1f1e]" />
+
         
         <SidebarContent className="py-4">
           <NavSection items={mainMenuItems} pathname={pathname} />

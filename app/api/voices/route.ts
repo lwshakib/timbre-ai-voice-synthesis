@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import prisma from "@/lib/prisma";
 import { VoiceVariant, VoiceCategory } from "@/generated/prisma/enums";
-import { uploadAudio } from "@/lib/s3";
+import { uploadAudio, getSignedAudioUrl } from "@/lib/s3";
 import { z } from "zod";
 
 const createVoiceSchema = z.object({
@@ -45,7 +45,12 @@ export async function GET(request: Request) {
       prisma.voice.findMany({
         where: {
           variant: VoiceVariant.CUSTOM,
-          userId: session?.user?.id,
+          OR: [
+            { userId: session?.user?.id },
+            { 
+              organizationId: session?.session?.activeOrganizationId || undefined,
+            }
+          ],
           ...searchFilter,
         },
         orderBy: { createdAt: "desc" },
@@ -56,7 +61,8 @@ export async function GET(request: Request) {
           category: true,
           language: true,
           variant: true,
-          r2ObjectKey: true,
+          path: true,
+          organizationId: true,
         },
       }),
       prisma.voice.findMany({
@@ -72,12 +78,23 @@ export async function GET(request: Request) {
           category: true,
           language: true,
           variant: true,
-          r2ObjectKey: true,
+          path: true,
         },
       }),
     ]);
 
-    return NextResponse.json({ custom, system });
+    const [customWithUrls, systemWithUrls] = await Promise.all([
+      Promise.all(custom.map(async (v) => ({
+        ...v,
+        url: v.path ? await getSignedAudioUrl(v.path) : null,
+      }))),
+      Promise.all(system.map(async (v) => ({
+        ...v,
+        url: v.path ? await getSignedAudioUrl(v.path) : null,
+      }))),
+    ]);
+
+    return NextResponse.json({ custom: customWithUrls, system: systemWithUrls });
   } catch (error) {
     console.error("Failed to fetch voices:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -114,9 +131,12 @@ export async function POST(request: Request) {
     }
 
     const contentType = request.headers.get("content-type") || "audio/wav";
+    const activeOrgId = session.session.activeOrganizationId;
+
     const voice = await prisma.voice.create({
       data: {
         userId: session.user.id,
+        organizationId: activeOrgId,
         name,
         variant: VoiceVariant.CUSTOM,
         description,
@@ -125,17 +145,19 @@ export async function POST(request: Request) {
       },
     });
 
-    const r2ObjectKey = `voices/users/${session.user.id}/${voice.id}.wav`;
+    const path = activeOrgId 
+      ? `voices/orgs/${activeOrgId}/${voice.id}.wav`
+      : `voices/users/${session.user.id}/${voice.id}.wav`;
 
     await uploadAudio({
       buffer: Buffer.from(fileBuffer),
-      key: r2ObjectKey,
+      key: path,
       contentType,
     });
 
     await prisma.voice.update({
       where: { id: voice.id },
-      data: { r2ObjectKey },
+      data: { path },
     });
 
     return NextResponse.json({ id: voice.id, name, message: "Voice created successfully" }, { status: 201 });
@@ -144,3 +166,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+

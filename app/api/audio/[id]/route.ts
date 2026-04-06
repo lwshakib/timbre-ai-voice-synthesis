@@ -26,11 +26,11 @@ export async function GET(
       },
     });
 
-    if (!generation || !generation.r2ObjectKey) {
+    if (!generation || !generation.path) {
       return NextResponse.json({ error: "Audio not found" }, { status: 404 });
     }
 
-    const signedUrl = await getSignedAudioUrl(generation.r2ObjectKey);
+    const signedUrl = await getSignedAudioUrl(generation.path);
     const audioResponse = await fetch(signedUrl);
 
     if (!audioResponse.ok) {

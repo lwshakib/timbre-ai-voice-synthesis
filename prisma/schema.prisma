@@ -24,21 +24,25 @@ model User {
   accounts      Account[]
   voices        Voice[]
   generations   Generation[]
+  members       Member[]
+  invitations   Invitation[]
 
   @@unique([email])
   @@map("user")
 }
 
 model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                    String   @id
+  expiresAt             DateTime
+  token                 String
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  ipAddress             String?
+  userAgent             String?
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activeOrganizationId  String?
+  activeTeamId          String?
 
   @@unique([token])
   @@index([userId])
@@ -105,12 +109,15 @@ model Voice {
   userId      String?
   user        User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
   
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
   name        String
   description String?
   category    VoiceCategory? @default(GENERAL)
   language    String?        @default("en-US")
   variant     VoiceVariant   @default(SYSTEM)
-  r2ObjectKey String?
+  path        String?
 
   generations Generation[]
 
@@ -119,6 +126,7 @@ model Voice {
 
   @@index([variant])
   @@index([userId])
+  @@index([organizationId])
   @@map("voice")
 }
 
@@ -127,12 +135,15 @@ model Generation {
   userId            String
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  organizationId    String?
+  organization      Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
   voiceId           String?
   voice             Voice?   @relation(fields: [voiceId], references: [id], onDelete: SetNull)
 
   text              String
   voiceName         String
-  r2ObjectKey       String?
+  path              String?
   temperature       Float
   topP              Float
   topK              Int
@@ -143,5 +154,91 @@ model Generation {
 
   @@index([userId])
   @@index([voiceId])
+  @@index([organizationId])
   @@map("generation")
 }
+
+model Organization {
+  id          String   @id
+  name        String
+  slug        String   @unique
+  logo        String?
+  metadata    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  members     Member[]
+  invitations Invitation[]
+  voices      Voice[]
+  generations Generation[]
+  teams       Team[]
+  roles       OrganizationRole[]
+
+  @@map("organization")
+}
+
+model Member {
+  id             String   @id
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("member")
+}
+
+model Invitation {
+  id             String   @id
+  email          String
+  inviterId      String
+  inviter        User     @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           String?
+  status         String
+  expiresAt      DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  teamId         String?
+
+  @@map("invitation")
+}
+
+model OrganizationRole {
+  id             String   @id
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role           String
+  permission     String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("organization_role")
+}
+
+model Team {
+  id             String   @id
+  name           String
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  members        TeamMember[]
+
+  @@map("team")
+}
+
+model TeamMember {
+  id        String   @id
+  teamId    String
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("team_member")
+}
+

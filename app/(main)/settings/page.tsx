@@ -4,21 +4,26 @@ import React, { useState } from "react";
 import { Reveal } from "@/components/marketing/reveal";
 import { Icon } from "@iconify/react";
 import { ScrambleText } from "@/components/marketing/scramble-text";
+import { authClient } from "@/lib/auth-client";
+import { MemberList } from "@/components/organization/member-list";
+import { InviteDialog } from "@/components/organization/invite-dialog";
+import { toast } from "sonner";
 
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("PROFILE");
+    const { data: activeOrg } = authClient.useActiveOrganization();
 
-    const tabs = ["PROFILE", "SECURITY", "BILLING", "API"];
+    const tabs = ["PROFILE", "SECURITY", "WORKSPACE", "BILLING", "API"];
 
     return (
         <div className="flex-1 p-8 pt-12 max-w-[1000px] mx-auto w-full">
             <Reveal>
                 <div className="flex flex-col items-start mb-12">
                     <h1 className="text-[#f5f5f0] text-3xl font-light tracking-tight mb-2">
-                        Institutional Configuration
+                        {activeOrg ? `${activeOrg.name} // Configuration` : "Institutional Configuration"}
                     </h1>
                     <p className="text-[#828179] text-xs font-mono-custom tracking-[0.2em] uppercase">
-                        [SYS·SET // ACCOUNT_PARAMETERS]
+                        [SYS·SET // {activeOrg ? "WORKSPACE_PARAMETERS" : "ACCOUNT_PARAMETERS"}]
                     </p>
                 </div>
             </Reveal>
@@ -111,6 +116,49 @@ export default function SettingsPage() {
                                 <ScrambleText text="ROTATE_ACCESS_KEY" />
                              </button>
                              <div className="absolute top-0 right-0 p-4 font-mono-custom text-[0.625rem] text-[#333]">V.02.48</div>
+                        </section>
+                    </Reveal>
+                )}
+
+                {activeTab === "WORKSPACE" && (
+                    <Reveal className="space-y-12 animate-in fade-in duration-500">
+                        <section className="space-y-6">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-[#f5f5f0] text-sm font-medium uppercase tracking-widest flex items-center gap-3">
+                                        <Icon icon="solar:buildings-linear" className="text-[#d4b87a]" />
+                                        Personnel Management
+                                    </h3>
+                                    <p className="text-[#555] text-xs font-mono-custom tracking-wider mt-1 uppercase">AUTHORIZE_TEAM_CLEARANCE</p>
+                                </div>
+                                <InviteDialog />
+                            </div>
+
+                            <MemberList />
+                        </section>
+
+                        <div className="h-[1px] w-full bg-gradient-to-r from-[#1f1f1e] via-transparent to-transparent" />
+
+                        <section className="glass-panel p-8 border border-[#1f1f1e] rounded-sm overflow-hidden relative">
+                             <div className="flex items-center gap-4 mb-6">
+                                <div className="p-3 rounded-full bg-red-500/10 border border-red-500/20 text-red-500">
+                                    <Icon icon="solar:danger-linear" width={24} height={24} />
+                                </div>
+                                <div>
+                                    <h3 className="text-[#f5f5f0] text-lg font-light tracking-tight">Decommission Workspace</h3>
+                                    <p className="text-[#555] text-xs font-mono-custom tracking-wider uppercase">PERMANENT_RESOURCES_WIPE</p>
+                                </div>
+                             </div>
+                             <p className="text-[#828179] text-sm max-w-[500px] mb-8 leading-relaxed">Permanently decommission this institutional organization and all associated synthesis data, voices, and personnel records.</p>
+                             <button 
+                                onClick={async () => {
+                                    if (!activeOrg) return;
+                                    toast.info("Decommissioning protocol initialized. Identity verification required.");
+                                }}
+                                className="btn-ghost-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-red-500/70 border-red-500/20 hover:bg-red-500/10"
+                             >
+                                <ScrambleText text="INITIALIZE_DECOMMISSION" />
+                             </button>
                         </section>
                     </Reveal>
                 )}

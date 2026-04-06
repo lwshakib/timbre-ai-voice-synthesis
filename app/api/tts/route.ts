@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import prisma from "@/lib/prisma";
-import { uploadAudio } from "@/lib/s3";
+import { uploadAudio, getSignedAudioUrl } from "@/lib/s3";
 
 const CHATTERBOX_API_URL = process.env.CHATTERBOX_API_URL;
 const CHATTERBOX_API_KEY = process.env.CHATTERBOX_API_KEY;
@@ -20,9 +20,16 @@ export async function GET(request: Request) {
   const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
 
   try {
+    const activeOrgId = session.session.activeOrganizationId;
+
     const generations = await prisma.generation.findMany({
       where: {
-        userId: session.user.id,
+        OR: [
+          { userId: session.user.id },
+          { 
+            organizationId: activeOrgId || undefined 
+          }
+        ],
       },
       orderBy: {
         createdAt: "desc",
@@ -34,10 +41,19 @@ export async function GET(request: Request) {
         voiceName: true,
         voiceId: true,
         createdAt: true,
+        organizationId: true,
+        path: true,
       },
     });
 
-    return NextResponse.json(generations);
+    const generationsWithUrls = await Promise.all(
+      generations.map(async (g) => ({
+        ...g,
+        url: g.path ? await getSignedAudioUrl(g.path) : null,
+      }))
+    );
+
+    return NextResponse.json(generationsWithUrls);
   } catch (error) {
     console.error("Failed to fetch generations:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -75,11 +91,11 @@ export async function POST(request: Request) {
       select: {
         id: true,
         name: true,
-        r2ObjectKey: true,
+        path: true,
       },
     });
 
-    if (!voice || !voice.r2ObjectKey) {
+    if (!voice || !voice.path) {
       return NextResponse.json({ error: "Voice not found or invalid" }, { status: 404 });
     }
 
@@ -91,7 +107,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         prompt: text,
-        voice_key: voice.r2ObjectKey,
+        voice_key: voice.path,
         temperature,
         top_p: topP,
         top_k: topK,
@@ -109,9 +125,12 @@ export async function POST(request: Request) {
     const audioArrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(audioArrayBuffer);
 
+    const activeOrgId = session.session.activeOrganizationId;
+
     const generation = await prisma.generation.create({
       data: {
         userId: session.user.id,
+        organizationId: activeOrgId,
         text,
         voiceName: voice.name,
         voiceId: voice.id,
@@ -122,18 +141,23 @@ export async function POST(request: Request) {
       },
     });
 
-    const r2ObjectKey = `generations/users/${session.user.id}/${generation.id}.wav`;
+    const path = activeOrgId
+      ? `generations/orgs/${activeOrgId}/${generation.id}.wav`
+      : `generations/users/${session.user.id}/${generation.id}.wav`;
 
-    await uploadAudio({ buffer, key: r2ObjectKey });
+    await uploadAudio({ buffer, key: path });
 
     await prisma.generation.update({
       where: { id: generation.id },
-      data: { r2ObjectKey },
+      data: { path },
     });
 
-    return NextResponse.json({ id: generation.id });
+    const url = await getSignedAudioUrl(path);
+
+    return NextResponse.json({ id: generation.id, url });
   } catch (error) {
     console.error("TTS generation error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+

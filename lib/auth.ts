@@ -3,6 +3,7 @@ import { prismaAdapter } from 'better-auth/adapters/prisma';
 import prisma from './prisma';
 import { Resend } from 'resend';
 import { AuthEmailTemplate } from '@/components/emails/auth-email-template';
+import { organization } from 'better-auth/plugins';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,6 +19,35 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: 'postgresql',
   }),
+
+  /**
+   * Plugins configuration.
+   * Enables additional functionality like organizations and teams.
+   */
+  plugins: [
+    organization({
+      async sendInvitationEmail(data) {
+        const inviteLink = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/accept-invitation/${data.id}`;
+        
+        try {
+          await resend.emails.send({
+            from: 'Timbre AI <noreply@lwshakib.site>',
+            to: data.email,
+            subject: `You've been invited to join ${data.organization.name}`,
+            react: AuthEmailTemplate({ 
+              type: 'email-verification', // Reusing template for now or could create specialized one
+              url: inviteLink 
+            }),
+          });
+        } catch (err) {
+          console.error('Failed to send invitation email:', err);
+        }
+      },
+      teams: {
+        enabled: true,
+      }
+    }),
+  ],
 
   /**
    * Email and Password configuration.
@@ -94,4 +124,4 @@ export const auth = betterAuth({
       enabled: true,
     },
   },
-});
+});
