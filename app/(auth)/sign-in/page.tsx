@@ -52,7 +52,7 @@ export default function SignInPage() {
                     Sign In
                 </h2>
                 <p className="text-[#828179] text-xs font-mono-custom tracking-wider">
-                    [AUTH·PROT] // ENTER_CREDENTIALS
+                    Sign in to your account
                 </p>
             </div>
 
@@ -63,14 +63,14 @@ export default function SignInPage() {
             >
                 <Icon icon="logos:google-icon" width="18" />
                 <span className="font-mono-custom text-[0.75rem] tracking-[0.05em] text-[#f5f5f0]">
-                    CONTINUE WITH GOOGLE
+                    Continue with Google
                 </span>
             </button>
 
             <div className="relative flex items-center justify-center mb-6">
                 <div className="absolute w-full h-[1px] bg-[#1f1f1e]"></div>
-                <span className="relative z-10 bg-[#0a0a0a] px-3 font-mono-custom text-[0.625rem] text-[#555] tracking-widest">
-                    OR_EMAIL_AUTH
+                <span className="relative z-10 bg-[#0a0a0a] px-3 font-mono-custom text-[0.625rem] text-[#555] tracking-widest lowercase">
+                    or sign in with email
                 </span>
             </div>
 
@@ -78,7 +78,7 @@ export default function SignInPage() {
             <form onSubmit={handleEmailSignIn} className="space-y-4">
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
-                        EMAIL_UPLINK
+                        Email address
                     </label>
                     <input
                         type="email"
@@ -92,13 +92,13 @@ export default function SignInPage() {
                 <div>
                     <div className="flex justify-between items-center mb-2">
                         <label className="block font-mono-custom text-[0.625rem] text-[#828179] tracking-[0.1em] uppercase">
-                            ACCESS_KEY
+                            Password
                         </label>
                         <Link
                             href="/forgot-password"
                             className="font-mono-custom text-[0.625rem] text-[#d4b87a] hover:opacity-70 transition-opacity uppercase tracking-widest"
                         >
-                            RECOVER?
+                            Forgot password?
                         </Link>
                     </div>
                     <input
@@ -119,7 +119,7 @@ export default function SignInPage() {
                     {loading ? (
                         <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                     ) : ( 
-                        <ScrambleText text="AUTHENTICATE_SESSION" className="relative z-10" />
+                        <ScrambleText text="Sign In" className="relative z-10" />
                     )}
                 </button>
             </form>
@@ -127,12 +127,12 @@ export default function SignInPage() {
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-[#1f1f1e] text-center">
                 <p className="font-mono-custom text-[0.6875rem] text-[#828179] tracking-wider uppercase">
-                    NO_CLEARANCE? {" "}
+                    Don't have an account? {" "}
                     <Link
                         href="/sign-up"
                         className="text-[#d4b87a] hover:underline underline-offset-4"
                     >
-                        APPLY_FOR_ACCESS
+                        Sign up
                     </Link>
                 </p>
             </div>

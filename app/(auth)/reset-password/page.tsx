@@ -36,10 +36,10 @@ export default function ResetPasswordPage() {
         });
 
         if (error) {
-            toast.error(error.message || "Failed to reset access protocol.");
+            toast.error(error.message || "Failed to reset password.");
             setLoading(false);
         } else {
-            toast.success("Security protocol updated. Redirecting.");
+            toast.success("Password updated. Redirecting.");
             setTimeout(() => {
                 router.push("/sign-in");
             }, 2000);
@@ -56,13 +56,13 @@ export default function ResetPasswordPage() {
                     Invalid Session
                 </h2>
                 <p className="text-[#828179] text-[0.8125rem] mb-8">
-                    Your recovery uplink is invalid or has expired. Please request a new clearance token.
+                    Your password reset link is invalid or has expired. Please request a new one.
                 </p>
                 <button
                     onClick={() => router.push("/forgot-password")}
                     className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
                 >
-                    <ScrambleText text="RE_ISSUE_RECOVERY" className="relative z-10" />
+                    <ScrambleText text="Request New Link" className="relative z-10" />
                 </button>
             </div>
         );
@@ -73,10 +73,10 @@ export default function ResetPasswordPage() {
             {/* Header */}
             <div className="mb-8">
                 <h2 className="text-[#f5f5f0] text-xl font-light tracking-tight mb-1">
-                    Reset Access Key
+                    Set New Password
                 </h2>
                 <p className="text-[#828179] text-xs font-mono-custom tracking-wider">
-                    [RESET·PROT] // UPDATE_CREDENTIALS
+                    Update your credentials to regain access.
                 </p>
             </div>
 
@@ -84,7 +84,7 @@ export default function ResetPasswordPage() {
             <form onSubmit={handleResetPassword} className="space-y-5">
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
-                        NEW_ACCESS_KEY
+                        New Password
                     </label>
                     <input
                         type="password"
@@ -97,7 +97,7 @@ export default function ResetPasswordPage() {
                 </div>
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
-                        CONFIRM_NEW_KEY
+                        Confirm Password
                     </label>
                     <input
                         type="password"
@@ -118,7 +118,7 @@ export default function ResetPasswordPage() {
                         {loading ? (
                             <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                         ) : ( 
-                            <ScrambleText text="FINALIZE_SECURITY_RESET" className="relative z-10" />
+                            <ScrambleText text="Reset Password" className="relative z-10" />
                         )}
                     </button>
                 </div>
@@ -126,7 +126,7 @@ export default function ResetPasswordPage() {
 
             <div className="mt-8 pt-6 border-t border-[#1f1f1e] text-center">
                 <p className="font-mono-custom text-[0.625rem] text-[#555] tracking-widest uppercase">
-                    SEC_LEVEL: OVERRIDE_ADMIN_ONLY
+                    Security Level: High
                 </p>
             </div>
         </div>

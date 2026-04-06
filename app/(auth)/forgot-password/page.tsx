@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
             toast.error(error.message || "Failed to initiate recovery.");
             setLoading(false);
         } else {
-            toast.success("Recovery protocol initiated.");
+            toast.success("Password reset email sent.");
             setIsSuccess(true);
         }
     };
@@ -38,10 +38,10 @@ export default function ForgotPasswordPage() {
                 </div>
                 
                 <h2 className="text-[#f5f5f0] text-2xl font-light tracking-tight mb-3">
-                    Recovery Sent
+                    Check your email
                 </h2>
                 <p className="text-[#828179] text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
-                    A secure password recovery uplink has been sent to <span className="text-[#f5f5f0]">{email}</span>. Valid for 60 minutes.
+                    We've sent a password recovery link to <span className="text-[#f5f5f0]">{email}</span>. Please authorize via the link in your inbox.
                 </p>
 
                 <div className="w-full space-y-4">
@@ -51,14 +51,14 @@ export default function ForgotPasswordPage() {
                         rel="noreferrer"
                         className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
                     >
-                        <ScrambleText text="CHECK_INBOX" className="relative z-10" />
+                        <ScrambleText text="Open Inbox" className="relative z-10" />
                     </a>
                     
                     <Link 
                         href="/sign-in" 
                         className="btn-ghost-swiss w-full flex items-center justify-center py-4 bg-[#0a0a0a]/50 text-[#828179] font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-[#f5f5f0]"
                     >
-                        <ScrambleText text="BACK_TO_LOGIN" />
+                        <ScrambleText text="Back to Login" />
                     </Link>
                 </div>
 
@@ -76,10 +76,10 @@ export default function ForgotPasswordPage() {
             {/* Header */}
             <div className="mb-8">
                 <h2 className="text-[#f5f5f0] text-xl font-light tracking-tight mb-1">
-                    Clearance Recovery
+                    Reset your password
                 </h2>
                 <p className="text-[#828179] text-xs font-mono-custom tracking-wider">
-                    [RECOV·PROT] // IDENTIFY_ACCOUNT
+                    We'll send a secure link to your email.
                 </p>
             </div>
 
@@ -87,7 +87,7 @@ export default function ForgotPasswordPage() {
             <form onSubmit={handleForgetPassword} className="space-y-6">
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
-                        ACCOUNT_EMAIL
+                        Email Address
                     </label>
                     <input
                         type="email"
@@ -98,7 +98,7 @@ export default function ForgotPasswordPage() {
                         placeholder="institutional@entity.com"
                     />
                     <p className="mt-2 font-mono-custom text-[0.625rem] text-[#555] tracking-tight">
-                        Verification of identity required for uplink dispatch.
+                        We will send a secure link to reset your password.
                     </p>
                 </div>
 
@@ -110,19 +110,19 @@ export default function ForgotPasswordPage() {
                     {loading ? (
                         <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                     ) : ( 
-                        <ScrambleText text="INITIATE_RECOVERY" className="relative z-10" />
+                        <ScrambleText text="Send recovery link" className="relative z-10" />
                     )}
                 </button>
             </form>
 
             <div className="mt-8 pt-6 border-t border-[#1f1f1e] text-center">
                 <p className="font-mono-custom text-[0.6875rem] text-[#828179] tracking-wider uppercase">
-                    REMEMBERED? {" "}
+                    Remembered? {" "}
                     <Link
                         href="/sign-in"
                         className="text-[#d4b87a] hover:underline underline-offset-4"
                     >
-                        LOGIN
+                        Sign In
                     </Link>
                 </p>
             </div>

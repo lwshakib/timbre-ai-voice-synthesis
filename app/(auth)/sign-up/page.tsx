@@ -29,7 +29,7 @@ export default function SignUpPage() {
             toast.error(error.message || "Registration failed.");
             setLoading(false);
         } else {
-            toast.success("Registration protocol initiated.");
+            toast.success("Account created successfully.");
             setIsSuccess(true);
         }
     };
@@ -42,10 +42,10 @@ export default function SignUpPage() {
                 </div>
                 
                 <h2 className="text-foreground text-2xl font-light tracking-tight mb-3">
-                    Verification Sent
+                    Verify your email
                 </h2>
                 <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
-                    A secure verification link has been dispatched to <span className="text-foreground">{email}</span>. Please authorize via the secure uplink.
+                    We've sent a verification link to <span className="text-foreground">{email}</span>. Please check your inbox to complete the setup.
                 </p>
 
                 <div className="w-full space-y-4">
@@ -55,14 +55,14 @@ export default function SignUpPage() {
                         rel="noreferrer"
                         className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
                     >
-                        <ScrambleText text="GO_TO_GMAIL" className="relative z-10" />
+                        <ScrambleText text="Open Inbox" className="relative z-10" />
                     </a>
                     
                     <Link 
                         href="/sign-in" 
                         className="btn-ghost-swiss w-full flex items-center justify-center py-4 bg-secondary/50 text-muted-foreground font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-foreground"
                     >
-                        <ScrambleText text="BACK_TO_LOGIN" />
+                        <ScrambleText text="Back to Login" />
                     </Link>
                 </div>
 
@@ -80,10 +80,10 @@ export default function SignUpPage() {
             {/* Header */}
             <div className="mb-8">
                 <h2 className="text-foreground text-xl font-light tracking-tight mb-1">
-                    Apply for Access
+                    Create an account
                 </h2>
                 <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
-                    [REG·PROT] // INITIALIZE_CLEARANCE
+                    Join the Timbre AI network.
                 </p>
             </div>
 
@@ -91,7 +91,7 @@ export default function SignUpPage() {
             <form onSubmit={handleSignUp} className="space-y-4">
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
-                        ORGANIZATION_NAME
+                        Full Name / Organization
                     </label>
                     <input
                         type="text"
@@ -99,12 +99,12 @@ export default function SignUpPage() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
-                        placeholder="John Doe // Voice Lab"
+                        placeholder="John Doe / Voice Lab"
                     />
                 </div>
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
-                        EMAIL_UPLINK
+                        Email Address
                     </label>
                     <input
                         type="email"
@@ -117,7 +117,7 @@ export default function SignUpPage() {
                 </div>
                 <div>
                     <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
-                        SECURE_ACCESS_KEY
+                        Create Password
                     </label>
                     <input
                         type="password"
@@ -138,7 +138,7 @@ export default function SignUpPage() {
                         {loading ? (
                             <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
                         ) : ( 
-                            <ScrambleText text="TRANSMIT_APPLICATION" className="relative z-10" />
+                            <ScrambleText text="Create account" className="relative z-10" />
                         )}
                     </button>
                 </div>
@@ -146,12 +146,12 @@ export default function SignUpPage() {
 
             <div className="mt-8 pt-6 border-t border-border text-center">
                 <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
-                    ALREADY_CLEARED? {" "}
+                    Already have an account? {" "}
                     <Link
                         href="/sign-in"
                         className="text-primary hover:underline underline-offset-4"
                     >
-                        ENTER_TERMINAL
+                        Sign In
                     </Link>
                 </p>
             </div>

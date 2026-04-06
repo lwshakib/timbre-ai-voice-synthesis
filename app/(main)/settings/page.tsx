@@ -10,20 +10,20 @@ import { InviteDialog } from "@/components/organization/invite-dialog";
 import { toast } from "sonner";
 
 export default function SettingsPage() {
-    const [activeTab, setActiveTab] = useState("PROFILE");
+    const [activeTab, setActiveTab] = useState("Profile");
     const { data: activeOrg } = authClient.useActiveOrganization();
 
-    const tabs = ["PROFILE", "SECURITY", "WORKSPACE", "BILLING", "API"];
+    const tabs = ["Profile", "Security", "Workspace", "Billing", "API"];
 
     return (
         <div className="flex-1 p-8 pt-12 max-w-[1000px] mx-auto w-full">
             <Reveal>
                 <div className="flex flex-col items-start mb-12">
                     <h1 className="text-foreground text-3xl font-light tracking-tight mb-2 uppercase">
-                        {activeOrg ? `${activeOrg.name} // Configuration` : "Account Configuration"}
+                        {activeOrg ? `${activeOrg.name} Configuration` : "Account Configuration"}
                     </h1>
                     <p className="text-muted-foreground text-xs font-mono-custom tracking-[0.2em] uppercase">
-                        [SYS·SET // {activeOrg ? "WORKSPACE_PARAMETERS" : "USER_PARAMETERS"}]
+                        Adjust your workspace preferences and identity.
                     </p>
                 </div>
             </Reveal>
@@ -52,7 +52,7 @@ export default function SettingsPage() {
 
             {/* Tab Content */}
             <div className="space-y-12">
-                {activeTab === "PROFILE" && (
+                {activeTab === "Profile" && (
                     <Reveal className="space-y-10 animate-in fade-in duration-500">
                         <section>
                             <h3 className="text-foreground text-sm font-medium uppercase tracking-widest mb-6 flex items-center gap-3">
@@ -62,11 +62,11 @@ export default function SettingsPage() {
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-4">
                                      <div>
-                                        <label className="block text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-2">DISPLAY_NAME</label>
+                                        <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Display Name</label>
                                         <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50 italic">Digital Creator // Timbre Lab</div>
                                      </div>
                                      <div>
-                                        <label className="block text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-2">ACCESS_LEVEL</label>
+                                        <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Access Level</label>
                                         <div className="flex items-center gap-3 text-primary text-xs font-mono-custom tracking-widest uppercase">
                                             <Icon icon="solar:shield-star-linear" />
                                             SEC_LEVEL_01 // CREATOR_PRO
@@ -92,14 +92,14 @@ export default function SettingsPage() {
                                 Communications
                             </h3>
                             <div className="max-w-[400px]">
-                                <label className="block text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-2">UPLINK_EMAIL</label>
+                                <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Email Address</label>
                                 <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">team@voice-lab.ai</div>
                             </div>
                         </section>
                     </Reveal>
                 )}
 
-                {activeTab === "SECURITY" && (
+                {activeTab === "Security" && (
                     <Reveal className="space-y-8 animate-in fade-in duration-500">
                         <section className="glass-panel p-8 border border-border rounded-sm overflow-hidden relative">
                              <div className="flex items-center gap-4 mb-6">
@@ -108,7 +108,7 @@ export default function SettingsPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-foreground text-lg font-light tracking-tight">Access Key Rotation</h3>
-                                    <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">SECURE_RE_AUTHENTICATION_PROTOCOL</p>
+                                    <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">Secure re-authentication protocol</p>
                                 </div>
                              </div>
                              <p className="text-muted-foreground text-sm max-w-[500px] mb-8 leading-relaxed">Ensure account security by rotating your master access key every 90 synthesis cycles. This action requires current identity verification.</p>
@@ -120,7 +120,7 @@ export default function SettingsPage() {
                     </Reveal>
                 )}
 
-                {activeTab === "WORKSPACE" && (
+                {activeTab === "Workspace" && (
                     <Reveal className="space-y-12 animate-in fade-in duration-500">
                         <section className="space-y-6">
                             <div className="flex items-center justify-between">
@@ -146,7 +146,7 @@ export default function SettingsPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-foreground text-lg font-light tracking-tight">Decommission Workspace</h3>
-                                    <p className="text-muted-foreground text-xs font-mono-custom tracking-wider uppercase">PERMANENT_RESOURCES_WIPE</p>
+                                    <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">Permanent data removal</p>
                                 </div>
                              </div>
                              <p className="text-muted-foreground text-sm max-w-[500px] mb-8 leading-relaxed">Permanently decommission this organization and all associated synthesis data, voices, and team records.</p>
@@ -163,16 +163,16 @@ export default function SettingsPage() {
                     </Reveal>
                 )}
 
-                {activeTab === "BILLING" && (
+                {activeTab === "Billing" && (
                     <Reveal className="space-y-10 animate-in fade-in duration-500">
                          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                              <div className="glass-panel p-6 border border-border rounded-sm">
-                                <div className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">CURRENT_PLAN</div>
+                                <div className="text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-4">Current Plan</div>
                                 <div className="text-primary text-xl font-medium tracking-tight mb-1">PRO_SYNTHESIS</div>
                                 <div className="text-muted-foreground/30 text-[10px] font-mono-custom uppercase tracking-widest mt-4">RECURRING_FLAT_FEE</div>
                              </div>
                              <div className="glass-panel p-6 border border-border rounded-sm relative">
-                                <div className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">REMAINING_CREDITS</div>
+                                <div className="text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-4">Remaining Credits</div>
                                 <div className="text-foreground text-3xl font-light tracking-tighter mb-1 tabular-nums">42,480.00</div>
                                 <div className="h-1 w-full bg-border mt-4 rounded-full overflow-hidden">
                                      <div className="h-full w-[42%] bg-primary rounded-full shadow-[0_0_8px_var(--primary)]" />
@@ -185,7 +185,7 @@ export default function SettingsPage() {
 
                          <section className="glass-panel border border-border rounded-sm bg-secondary/30">
                             <div className="px-6 py-4 border-b border-border flex justify-between items-center">
-                                <h3 className="text-muted-foreground text-[0.625rem] font-mono-custom uppercase tracking-widest">RECENT_INVOICES_LEDGER</h3>
+                                <h3 className="text-muted-foreground text-[0.625rem] font-mono-custom tracking-widest">Recent Invoices</h3>
                                 <Icon icon="solar:history-linear" className="text-muted-foreground/20" />
                             </div>
                             <div className="divide-y divide-border">
@@ -223,7 +223,7 @@ export default function SettingsPage() {
                                     <p className="text-muted-foreground text-xs font-mono-custom tracking-wider mt-1 uppercase">AUTHENTICATE_MODEL_HANDSHAKES</p>
                                  </div>
                                  <button className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em]">
-                                    NEW_ENDPOINT_KEY
+                                     Generate new API key
                                  </button>
                              </div>
 

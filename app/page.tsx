@@ -27,20 +27,20 @@ export default function LandingPage() {
         <div className="max-w-[83.75rem] mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Logo size={24} />
-            <span className="text-foreground text-xl font-medium tracking-tighter uppercase">Timbre AI</span>
+            <span className="text-foreground text-xl font-medium tracking-tighter">Timbre AI</span>
             <div className="h-4 w-[1px] bg-border hidden md:block"></div>
             <div className="hidden md:flex items-center gap-2">
               <span className="blinking-dot"></span>
-              <span className="font-mono-custom text-[0.625rem] tracking-[0.15em] text-primary mt-[2px]">SYS.ONLINE</span>
+              <span className="font-mono-custom text-[0.625rem] tracking-[0.15em] text-primary mt-[2px]">System Online</span>
             </div>
           </div>
           
           <nav className="hidden md:flex items-center gap-8 text-[0.8125rem]">
-            <a href="#platform" className="nav-link"><ScrambleText text="SYNTHESIS" /></a>
-            <a href="#intelligence" className="nav-link"><ScrambleText text="CLONING" /></a>
-            <a href="#secondary" className="nav-link"><ScrambleText text="REGISTRY" /></a>
+            <a href="#platform" className="nav-link"><ScrambleText text="Synthesis" /></a>
+            <a href="#intelligence" className="nav-link"><ScrambleText text="Cloning" /></a>
+            <a href="#secondary" className="nav-link"><ScrambleText text="Registry" /></a>
             <Link href="/dashboard" className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em] ml-4">
-              <ScrambleText text="DASHBOARD" className="relative z-10" />
+              <ScrambleText text="Dashboard" className="relative z-10" />
             </Link>
           </nav>
           
@@ -73,7 +73,7 @@ export default function LandingPage() {
             <Reveal className="max-w-[35rem]">
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 <Icon icon="solar:cpu-bolt-linear" className="text-primary" />
-                [SYS·000] // CORE_ARCHITECTURE
+                Core Architecture
               </div>
               <h1 className="text-foreground text-[clamp(3.15rem,6.2vw,6.5rem)] font-light tracking-tighter leading-[0.95] mb-8">
                 Vocal identity <br />synthesized <br />at scale.
@@ -83,24 +83,24 @@ export default function LandingPage() {
               </p>
               <div className="flex flex-wrap items-center gap-4 mb-10">
                 <Link href="/dashboard" className="btn-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em]">
-                  <ScrambleText text="GO_TO_DASHBOARD" className="relative z-10" />
+                  <ScrambleText text="Go to Dashboard" className="relative z-10" />
                 </Link>
                 <button className="btn-ghost-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em] bg-[#050505]">
-                  <ScrambleText text="VIEW_TELEMETRY" />
+                  <ScrambleText text="View Platform" className="relative z-10" />
                 </button>
               </div>
               <div className="grid grid-cols-3 gap-6 font-mono-custom text-[0.6875rem] text-muted-foreground border-t border-border pt-6">
                 <div>
                   <div className="text-foreground text-lg mb-1"><CountingNumber value={2.47} />B</div>
-                  CHARS_GENERATED
+                  Characters Generated
                 </div>
                 <div>
                   <div className="text-foreground text-lg mb-1"><CountingNumber value={34} /></div>
-                  LANGUAGES_SUPPORTED
+                  Languages Supported
                 </div>
                 <div>
                   <div className="text-primary text-lg mb-1"><CountingNumber value={99.9} format="percent" />%</div>
-                  SYNTHESIS_QUALITY
+                  Synthesis Quality
                 </div>
               </div>
             </Reveal>
@@ -173,7 +173,7 @@ export default function LandingPage() {
           <div className="max-w-[83.75rem] mx-auto px-6 grid md:grid-cols-[1.2fr_1fr] gap-24 items-start relative z-10">
             <Reveal className="max-w-[38rem]">
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
-                [SYS·001] // DIAGNOSTIC
+                Problem Diagnostic
               </div>
               <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
                 Your brand's voice is static by design. Not necessity.
@@ -213,7 +213,7 @@ export default function LandingPage() {
           <div className="max-w-[83.75rem] mx-auto px-6">
             <Reveal>
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
-                [SYS·002] // VOCAL_RESONANCE
+                Vocal Resonance
               </div>
               <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-16 max-w-3xl">
                 Total vocal command. <br />Infinite range.
@@ -264,7 +264,7 @@ export default function LandingPage() {
           <div className="max-w-[83.75rem] mx-auto px-6 grid lg:grid-cols-[40%_60%] gap-16 items-center">
             <Reveal className="order-2 lg:order-1">
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
-                [SYS·003] // MODEL_REGISTRY
+                Model Registry
               </div>
               <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
                 An institutional voice registry. Deployed via API.
@@ -273,7 +273,7 @@ export default function LandingPage() {
                 Timbre AI initializes a strictly regulated internal registry for your specialized voice models. It executes clean synthesis transfers devoid of latency.
               </p>
               <button className="btn-ghost-swiss inline-flex font-mono-custom text-[0.75rem] tracking-[0.05em]">
-                <ScrambleText text="VIEW_LEDGER_SPECS" />
+                <ScrambleText text="View Specifications" className="relative z-10" />
               </button>
             </Reveal>
 
@@ -316,7 +316,7 @@ export default function LandingPage() {
           <div className="max-w-[83.75rem] mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-20">
             <Reveal>
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
-                [SYS·006] // CLEARANCE
+                Platform Access
               </div>
               <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
                 Access via invitation.
@@ -345,11 +345,11 @@ export default function LandingPage() {
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-4">
                   <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">ORGANIZATION_NAME</label>
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">Full Name / Organization</label>
                     <input type="text" className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors" placeholder="e.g. Acme Voice Labs" />
                   </div>
                   <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">USAGE_TIER</label>
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">Usage Tier</label>
                     <select className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none cursor-pointer">
                       <option value="" disabled>Select volume...</option>
                       <option value="1m-5m">1M – 5M Chars/mo</option>
@@ -358,7 +358,7 @@ export default function LandingPage() {
                     </select>
                   </div>
                   <button type="submit" className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em] mt-4">
-                    <ScrambleText text="TRANSMIT_PROTOCOL" className="relative z-10" />
+                    <ScrambleText text="Send Request" className="relative z-10" />
                   </button>
                 </form>
               </div>
