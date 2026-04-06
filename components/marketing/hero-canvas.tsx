@@ -64,6 +64,11 @@ export const HeroCanvas = () => {
       if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, width, height);
 
+      // Get colors from CSS variables
+      const bodyStyle = getComputedStyle(document.body);
+      const primaryColor = bodyStyle.getPropertyValue('--primary').trim(); // e.g., #d4b87a
+      const mutedColor = bodyStyle.getPropertyValue('--muted-foreground').trim(); // e.g., #828179
+      
       const time = Date.now() * 0.001;
 
       dots.forEach((dot) => {
@@ -88,7 +93,7 @@ export const HeroCanvas = () => {
               ctx.beginPath();
               ctx.moveTo(dot.x, dot.y);
               ctx.lineTo(adjustedMouseX, adjustedMouseY);
-              ctx.strokeStyle = `rgba(212, 184, 122, ${force * 0.1})`;
+              ctx.strokeStyle = primaryColor + Math.floor(force * 0.2 * 255).toString(16).padStart(2, '0');
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -99,8 +104,9 @@ export const HeroCanvas = () => {
 
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, drawRadius, 0, Math.PI * 2);
-        const r = 130, g = 129, b = 121;
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${dot.alpha})`;
+        
+        // Use muted color for dots
+        ctx.fillStyle = mutedColor + Math.floor(dot.alpha * 255).toString(16).padStart(2, '0');
         ctx.fill();
       });
 

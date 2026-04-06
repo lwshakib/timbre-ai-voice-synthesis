@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VOLX — Secondary Liquidity & Portfolio Intelligence",
+  title: "Timbre AI — Secondary Liquidity & Portfolio Intelligence",
   description: "Private equity structured for exit. Institutional secondary market and AI-predicted exit topography.",
 };
 
@@ -36,7 +36,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-[#050505] selection:bg-[#d4b87a]/30">
+      <body className="min-h-full flex flex-col bg-background">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

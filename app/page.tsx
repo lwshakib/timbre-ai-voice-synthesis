@@ -6,6 +6,8 @@ import { HeroCanvas } from "@/components/marketing/hero-canvas";
 import { ScrambleText } from "@/components/marketing/scramble-text";
 import { Reveal } from "@/components/marketing/reveal";
 import { CountingNumber } from "@/components/marketing/counting-number";
+import { Logo } from "@/components/ui/logo";
+
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -17,17 +19,18 @@ export default function LandingPage() {
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen font-sans bg-[#050505] text-[#828179] overflow-x-hidden selection:bg-[#d4b87a]/30">
+    <div className="relative min-h-screen font-sans bg-background text-muted-foreground overflow-x-hidden selection:bg-primary/30">
       
       {/* --- Navigation --- */}
-      <header className="fixed top-0 w-full z-40 backdrop-blur-xl bg-[#050505]/70 border-b border-[#1f1f1e]">
+      <header className="fixed top-0 w-full z-40 backdrop-blur-xl bg-background/70 border-b border-border">
         <div className="max-w-[83.75rem] mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="text-[#f5f5f0] text-xl font-medium tracking-tighter">VOLX</span>
-            <div className="h-4 w-[1px] bg-[#1f1f1e] hidden md:block"></div>
+            <Logo size={24} />
+            <span className="text-foreground text-xl font-medium tracking-tighter uppercase">Timbre AI</span>
+            <div className="h-4 w-[1px] bg-border hidden md:block"></div>
             <div className="hidden md:flex items-center gap-2">
               <span className="blinking-dot"></span>
-              <span className="font-mono-custom text-[0.625rem] tracking-[0.15em] text-[#d4b87a] mt-[2px]">SYS.ONLINE</span>
+              <span className="font-mono-custom text-[0.625rem] tracking-[0.15em] text-primary mt-[2px]">SYS.ONLINE</span>
             </div>
           </div>
           
@@ -40,21 +43,21 @@ export default function LandingPage() {
             </a>
           </nav>
           
-          <button className="md:hidden text-[#f5f5f0]">
+          <button className="md:hidden text-foreground">
             <Icon icon="solar:hamburger-menu-linear" width="24" height="24" />
           </button>
         </div>
         
         {/* --- Technical Live Ticker --- */}
-        <div className="h-8 bg-[#0a0a0a] border-t border-[#1f1f1e] overflow-hidden flex items-center relative">
-          <div className="animate-marquee font-mono-custom text-[0.625rem] tracking-[0.15em] text-[#828179]">
-            <span className="mx-4">VOLX-EUR-II <span className="text-[#d4b87a] mx-2">/</span> NAV 2.34x <span className="text-[#d4b87a] mx-2">/</span> ΔQ3 +8.2%</span>
-            <span className="mx-4">SYS.LOAD: <span className="text-[#f5f5f0]">OPTIMAL</span></span>
-            <span className="mx-4">EXIT ALERT: KESSLER HLDG <span className="text-[#d4b87a] mx-2">/</span> Q2 2026 <span className="text-[#d4b87a] mx-2">/</span> ACC: 84.3%</span>
+        <div className="h-8 bg-card border-t border-border overflow-hidden flex items-center relative">
+          <div className="animate-marquee font-mono-custom text-[0.625rem] tracking-[0.15em] text-muted-foreground">
+            <span className="mx-4">TIMBRE-EUR-II <span className="text-primary mx-2">/</span> NAV 2.34x <span className="text-primary mx-2">/</span> ΔQ3 +8.2%</span>
+            <span className="mx-4">SYS.LOAD: <span className="text-foreground">OPTIMAL</span></span>
+            <span className="mx-4">EXIT ALERT: KESSLER HLDG <span className="text-primary mx-2">/</span> Q2 2026 <span className="text-primary mx-2">/</span> ACC: 84.3%</span>
             
-            <span className="mx-4">VOLX-EUR-II <span className="text-[#d4b87a] mx-2">/</span> NAV 2.34x <span className="text-[#d4b87a] mx-2">/</span> ΔQ3 +8.2%</span>
-            <span className="mx-4">SYS.LOAD: <span className="text-[#f5f5f0]">OPTIMAL</span></span>
-            <span className="mx-4">EXIT ALERT: KESSLER HLDG <span className="text-[#d4b87a] mx-2">/</span> Q2 2026 <span className="text-[#d4b87a] mx-2">/</span> ACC: 84.3%</span>
+            <span className="mx-4">TIMBRE-EUR-II <span className="text-primary mx-2">/</span> NAV 2.34x <span className="text-primary mx-2">/</span> ΔQ3 +8.2%</span>
+            <span className="mx-4">SYS.LOAD: <span className="text-foreground">OPTIMAL</span></span>
+            <span className="mx-4">EXIT ALERT: KESSLER HLDG <span className="text-primary mx-2">/</span> Q2 2026 <span className="text-primary mx-2">/</span> ACC: 84.3%</span>
           </div>
         </div>
       </header>
@@ -67,15 +70,15 @@ export default function LandingPage() {
           
           <div className="max-w-[83.75rem] mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-16 min-h-[70vh] items-center relative z-10">
             <Reveal className="max-w-[35rem]">
-              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6 text-[#828179]">
-                <Icon icon="solar:cpu-bolt-linear" className="text-[#d4b87a]" />
+              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
+                <Icon icon="solar:cpu-bolt-linear" className="text-primary" />
                 [SYS·000] // CORE_ARCHITECTURE
               </div>
               <h1 className="text-[#f5f5f0] text-[clamp(3rem,6vw,6.5rem)] font-light tracking-tighter leading-[0.95] mb-8">
                 Private equity <br />structured <br />for exit.
               </h1>
-              <p className="text-[clamp(1rem,1.2vw,1.125rem)] mb-10 text-[#828179] max-w-[28rem]">
-                VOLX furnishes GPs and LPs with an institutional secondary market and AI-predicted exit topography. Engineered for entities managing $200M+.
+              <p className="text-[clamp(1rem,1.2vw,1.125rem)] mb-10 text-muted-foreground max-w-[28rem]">
+                Timbre AI furnishes GPs and LPs with an institutional secondary market and AI-predicted exit topography. Engineered for entities managing $200M+.
               </p>
               <div className="flex flex-wrap items-center gap-4 mb-10">
                 <a href="#access" className="btn-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em]">
@@ -103,16 +106,16 @@ export default function LandingPage() {
 
             {/* --- Dashboard Composite --- */}
             <Reveal className="hidden lg:block relative h-[40rem]">
-              <div className="absolute inset-0 rounded-sm overflow-hidden img-mask-chamfer border border-[#1f1f1e]">
+              <div className="absolute inset-0 rounded-sm overflow-hidden img-mask-chamfer border border-border">
                 <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80" alt="Data Architecture" className="w-full h-full object-cover opacity-30 mix-blend-luminosity grayscale" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
               </div>
 
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] glass-panel rounded-sm flex flex-col z-20 overflow-hidden">
                 <div className="h-10 bg-[#0a0a0a]/80 border-b border-[#1f1f1e] flex items-center px-4 justify-between backdrop-blur-md">
                   <div className="flex gap-2">
-                    <Icon icon="solar:shield-check-linear" className="text-[#828179]" />
-                    <span className="font-mono-custom text-[0.625rem] tracking-[0.1em] text-[#828179]">VOLX_TERM_OS // V.2.4</span>
+                    <Icon icon="solar:shield-check-linear" className="text-muted-foreground" />
+                    <span className="font-mono-custom text-[0.625rem] tracking-[0.1em] text-muted-foreground">TIMBRE_TERM_OS // V.2.4</span>
                   </div>
                   <div className="flex gap-1.5">
                     <div className="w-1.5 h-1.5 bg-[#828179]"></div>
@@ -165,10 +168,10 @@ export default function LandingPage() {
         </section>
 
         {/* [SYS.001] PROBLEM */}
-        <section className="py-32 border-t border-[#1f1f1e] bg-[#050505]">
+        <section className="py-32 border-t border-border bg-background">
           <div className="max-w-[83.75rem] mx-auto px-6 grid md:grid-cols-[1.2fr_1fr] gap-24 items-start relative z-10">
             <Reveal className="max-w-[38rem]">
-              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6 text-[#828179]">
+              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 [SYS·001] // DIAGNOSTIC
               </div>
               <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
@@ -205,13 +208,13 @@ export default function LandingPage() {
         </section>
 
         {/* [SYS.002] PLATFORM */}
-        <section id="platform" className="py-32 border-t border-[#1f1f1e] bg-[#0a0a0a]">
+        <section id="platform" className="py-32 border-t border-border bg-card">
           <div className="max-w-[83.75rem] mx-auto px-6">
             <Reveal>
-              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6 text-[#828179]">
+              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 [SYS·002] // OMNI_VISIBILITY
               </div>
-              <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-16 max-w-3xl">
+              <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-16 max-w-3xl">
                 Singular interface. Absolute portfolio command.
               </h2>
             </Reveal>
@@ -256,17 +259,17 @@ export default function LandingPage() {
         </section>
 
         {/* [SYS.003] SECONDARY MARKET */}
-        <section id="secondary" className="py-32 border-t border-[#1f1f1e] bg-[#050505]">
+        <section id="secondary" className="py-32 border-t border-border bg-background">
           <div className="max-w-[83.75rem] mx-auto px-6 grid lg:grid-cols-[40%_60%] gap-16 items-center">
             <Reveal className="order-2 lg:order-1">
-              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6 text-[#828179]">
+              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 [SYS·003] // MARKET_MAKER
               </div>
               <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
                 An institutional order book. Deployed internally.
               </h2>
-              <p className="text-[#828179] text-[clamp(1rem,1.1vw,1.125rem)] mb-8">
-                VOLX initializes a strictly regulated internal market specifically for your LP syndicate. It executes clean secondary transfers devoid of intermediaries.
+              <p className="text-muted-foreground text-[clamp(1rem,1.1vw,1.125rem)] mb-8">
+                Timbre AI initializes a strictly regulated internal market specifically for your LP syndicate. It executes clean secondary transfers devoid of intermediaries.
               </p>
               <button className="btn-ghost-swiss inline-flex font-mono-custom text-[0.75rem] tracking-[0.05em]">
                 <ScrambleText text="VIEW_LEDGER_SPECS" />
@@ -308,17 +311,17 @@ export default function LandingPage() {
         </section>
 
         {/* [SYS.006] ACCESS */}
-        <section id="access" className="py-32 border-b border-[#1f1f1e] bg-[#0a0a0a]">
+        <section id="access" className="py-32 border-b border-border bg-card">
           <div className="max-w-[83.75rem] mx-auto px-6 grid lg:grid-cols-[1.1fr_1fr] gap-20">
             <Reveal>
-              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6 text-[#828179]">
+              <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
                 [SYS·006] // CLEARANCE
               </div>
               <h2 className="text-[#f5f5f0] text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
                 Clearance via application.
               </h2>
-              <p className="text-[#828179] mb-12 max-w-[28rem] text-[1.0625rem]">
-                VOLX restricts access to a hermetic GP/LP cohort. We process exactly 12 institutional onboarding protocols per quarter.
+              <p className="text-muted-foreground mb-12 max-w-[28rem] text-[1.0625rem]">
+                Timbre AI restricts access to a hermetic GP/LP cohort. We process exactly 12 institutional onboarding protocols per quarter.
               </p>
               
               <div className="glass-panel p-6 rounded-sm border-l-2 border-l-[#d4b87a] max-w-sm">
@@ -336,7 +339,7 @@ export default function LandingPage() {
 
             <Reveal className="relative">
               <div className="glass-panel p-8 rounded-sm relative z-10 border-[#333]">
-                <div className="absolute top-0 right-0 p-4 font-mono-custom text-[0.625rem] text-[#828179]">
+                <div className="absolute top-0 right-0 p-4 font-mono-custom text-[0.625rem] text-muted-foreground">
                   SECURE_UPLINK
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-4">
@@ -363,13 +366,16 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="bg-[#050505] relative z-10 border-t border-[#1f1f1e]">
+      <footer className="bg-background relative z-10 border-t border-border">
         <div className="max-w-[83.75rem] mx-auto px-6 py-16 grid md:grid-cols-[1fr_1fr] gap-12">
           <div>
-            <div className="text-[#f5f5f0] text-xl font-medium tracking-tighter mb-2">VOLX</div>
-            <div className="text-[0.8125rem] text-[#828179] mb-12">Architecting PE Liquidity.</div>
-            <address className="not-italic font-mono-custom text-[0.625rem] text-[#828179] leading-relaxed">
-              VOLX Capital Technologies AG<br />
+            <div className="text-foreground text-xl font-medium tracking-tighter mb-2 uppercase flex items-center gap-2">
+              <Logo size={20} />
+              Timbre AI
+            </div>
+            <div className="text-[0.8125rem] text-muted-foreground mb-12">Architecting PE Liquidity.</div>
+            <address className="not-italic font-mono-custom text-[0.625rem] text-muted-foreground leading-relaxed">
+              Timbre AI Technologies AG<br />
               Talstrasse 82, 8001 Zürich, Switzerland
             </address>
           </div>
@@ -387,8 +393,8 @@ export default function LandingPage() {
           </div>
         </div>
         <div className="border-t border-[#1f1f1e] bg-[#0a0a0a] h-12 flex items-center">
-            <div className="max-w-[83.75rem] mx-auto px-6 w-full flex items-center justify-between font-mono-custom text-[0.625rem] text-[#555]">
-                <div>© 2025 VOLX Capital Technologies AG</div>
+            <div className="max-w-[83.75rem] mx-auto px-6 w-full flex items-center justify-between font-mono-custom text-[0.625rem] text-muted-foreground/50">
+                <div>© 2025 Timbre AI Technologies AG</div>
                 <div>[SYS_STATE: SECURE]</div>
             </div>
         </div>
