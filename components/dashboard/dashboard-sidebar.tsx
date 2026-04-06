@@ -162,19 +162,12 @@ export function DashboardSidebar() {
           </div>
           <OrgSwitcher />
         </SidebarHeader>
-        
 
-        
-
-        
         <SidebarContent className="py-4">
           <NavSection items={mainMenuItems} pathname={pathname} />
         </SidebarContent>
-        
 
-        
-        
-        <SidebarFooter className="p-4 pt-0">
+        <SidebarFooter className="p-4">
           <SidebarMenu>
             {othersMenuItems.map((item) => (
               <SidebarMenuItem key={item.title}>

@@ -8,7 +8,6 @@ import { authClient } from "@/lib/auth-client";
 import { MemberList } from "@/components/organization/member-list";
 import { InviteDialog } from "@/components/organization/invite-dialog";
 import { toast } from "sonner";
-import { getProfileUploadUrl, updateProfileImage, getProfileImage } from "@/app/actions/user";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,14 +38,18 @@ export default function SettingsPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const [sessionsRes, accountsRes, profileImg] = await Promise.all([
+                const [sessionsRes, accountsRes] = await Promise.all([
                     authClient.listSessions(),
-                    authClient.listAccounts(),
-                    getProfileImage()
+                    authClient.listAccounts()
                 ]);
+
+                // Get dynamic signed URL for the user's avatar
+                const signedUrlRes = await fetch("/api/s3/signed-url");
+                const signedUrlData = await signedUrlRes.json();
+                
                 setSessions(sessionsRes.data || []);
                 setAccounts(accountsRes.data || []);
-                setAvatarUrl(profileImg);
+                setAvatarUrl(signedUrlData.signedUrl);
             } catch (error) {
                 console.error("Error fetching settings data:", error);
             } finally {
@@ -74,27 +77,44 @@ export default function SettingsPage() {
         const t = toast.loading("Processing uplink... Updating profile data.");
 
         try {
-            const { uploadUrl, key } = await getProfileUploadUrl(file.type);
+            // Step 1: Get Pre-signed Upload URL
+            const presignedRes = await fetch(`/api/s3/presigned-url?contentType=${encodeURIComponent(file.type)}`);
+            if (!presignedRes.ok) throw new Error("Failed to get upload URL");
+            const { uploadUrl, key } = await presignedRes.json();
             
+            // Step 2: PUT file to S3
             const uploadRes = await fetch(uploadUrl, {
                 method: "PUT",
                 body: file,
+                mode: "cors",
                 headers: {
                     "Content-Type": file.type
                 }
             });
 
-            if (!uploadRes.ok) throw new Error("Upload failed");
+            if (!uploadRes.ok) {
+                const errorText = await uploadRes.text();
+                console.error("S3 Upload Error Response:", errorText);
+                throw new Error(`Upload failed with status: ${uploadRes.status}`);
+            }
 
-            await updateProfileImage(key);
-            
-            // Re-fetch social image or use direct upload results
-            const updatedImg = await getProfileImage();
-            setAvatarUrl(updatedImg);
+            // Step 3: Update DB with the S3 key
+            const dbUpdateRes = await fetch("/api/user/profile", {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ imageKey: key })
+            });
+
+            if (!dbUpdateRes.ok) throw new Error("Database update failed");
+
+            // Step 4: Get signed download URL to refresh UI
+            const signedRes = await fetch(`/api/s3/signed-url?key=${key}`);
+            const signedData = await signedRes.json();
+            setAvatarUrl(signedData.signedUrl);
             
             toast.success("Identity updated successfully.", { id: t });
         } catch (error) {
-            console.error("Upload failed:", error);
+            console.error("Upload process error:", error);
             toast.error("Uplink failed. Transmission error.", { id: t });
         } finally {
             setUploading(false);
