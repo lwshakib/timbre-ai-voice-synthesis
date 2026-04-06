@@ -14,8 +14,8 @@ export function SettingsPanelSettings() {
   const isSubmitting = useStore(form.store, (s: any) => s.isSubmitting);
 
   return (
-    <>
-      <div className="border-b border-border p-6 lg:p-12">
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="shrink-0 border-b border-border p-6 lg:p-12">
         <VoiceSelector />
       </div>
 
@@ -62,6 +62,6 @@ export function SettingsPanelSettings() {
           ))}
         </FieldGroup>
       </div>
-    </>
+    </div>
   );
 };

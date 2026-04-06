@@ -38,7 +38,7 @@ export function SettingsPanelHistory() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4">
+      <div className="flex flex-col items-center justify-center flex-1 min-h-0 gap-4">
         <Spinner className="size-6 text-primary" />
         <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[FETCHING_HISTORY]</p>
       </div>
@@ -47,7 +47,7 @@ export function SettingsPanelHistory() {
 
   if (generations.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 gap-4 opacity-50">
+      <div className="flex flex-col items-center justify-center flex-1 min-h-0 gap-4 opacity-50">
         <History className="size-8 text-border" />
         <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">No history found</p>
       </div>
@@ -55,13 +55,15 @@ export function SettingsPanelHistory() {
   }
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="flex flex-col gap-1 mb-6 px-2">
-         <h3 className="text-sm font-medium text-foreground">Recent activity</h3>
-         <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[LOGS // GENERATION_FEED]</p>
+    <div className="flex flex-col h-full overflow-hidden">
+      <div className="shrink-0 p-6 pb-2">
+        <div className="flex flex-col gap-1 mb-6 px-2">
+           <h3 className="text-sm font-medium text-foreground">Recent activity</h3>
+           <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[LOGS // GENERATION_FEED]</p>
+        </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex-1 overflow-y-auto px-6 pb-6 space-y-2">
         {generations.map((gen) => (
           <Link
             key={gen.id}

@@ -42,7 +42,7 @@ export default function VoicesPage() {
   }, [fetchVoices]);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#050505]">
+    <div className="flex-1 flex flex-col min-h-0 bg-background">
       <PageHeader title="Voices" className="lg:hidden" />
       
       <div className="flex-1 p-6 lg:p-16 max-w-[1400px] mx-auto w-full space-y-12">
@@ -50,8 +50,8 @@ export default function VoicesPage() {
 
         {isLoading && !data ? (
           <div className="flex flex-col items-center justify-center py-32 gap-4">
-            <Spinner className="size-8 text-[#d4b87a]" />
-            <p className="text-[10px] text-[#828179] font-mono-custom tracking-[0.2em] uppercase">
+            <Spinner className="size-8 text-primary" />
+            <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
               [SYS_STATUS // INDEXING_MODELS]
             </p>
           </div>

@@ -15,7 +15,7 @@ export default async function TextToSpeechPage({
   const { text, voiceId } = await searchParams;
 
   return (
-    <div className="flex flex-col h-full overflow-hidden bg-[#050505]">
+    <div className="flex flex-col h-full bg-background overflow-hidden">
       <PageHeader title="Text to Speech" className="lg:hidden" />
       <TextToSpeechView initialValues={{ text, voiceId }} />
     </div>

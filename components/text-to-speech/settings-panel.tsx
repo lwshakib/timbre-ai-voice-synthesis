@@ -28,11 +28,11 @@ export function SettingsPanel() {
           </TabsList>
         </div>
 
-        <div className="flex-1 overflow-hidden">
-          <TabsContent value="settings" className="h-full flex flex-col m-0 data-[state=active]:flex">
+        <div className="flex-1 min-h-0 overflow-hidden">
+          <TabsContent value="settings" className="h-full flex flex-col m-0 data-[state=active]:flex overflow-hidden">
             <SettingsPanelSettings />
           </TabsContent>
-          <TabsContent value="history" className="h-full flex flex-col m-0 data-[state=active]:flex">
+          <TabsContent value="history" className="h-full flex flex-col m-0 data-[state=active]:flex overflow-hidden">
             <SettingsPanelHistory />
           </TabsContent>
         </div>

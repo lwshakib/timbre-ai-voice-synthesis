@@ -52,13 +52,13 @@
 
 :root {
   /* Light Institutional Palette (Institutional-grade professional) */
-  --background: #fdfdfa; /* Crisp gallery white with a warm professional undertone */
+  --background: #fcfaf5; /* Warm Gallery White with professional institutional tone */
   --foreground: #0a0a0a; /* Deep charcoal black */
   --card: #ffffff;
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
-  --primary: #a68d52; /* Institutional gold (slightly darker for better light-mode contrast) */
+  --primary: #947c45; /* Refined Institutional Gold (Higher contrast, more vibrant) */
   --primary-foreground: #ffffff;
   --secondary: #f4f4f0;
   --secondary-foreground: #0a0a0a;
@@ -70,7 +70,7 @@
   --destructive-foreground: #ffffff;
   --border: #e9e9e2;
   --input: #e9e9e2;
-  --ring: #a68d52;
+  --ring: #947c45;
   --radius: 0.5rem;
 }
 
