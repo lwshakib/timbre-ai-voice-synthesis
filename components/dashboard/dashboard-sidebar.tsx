@@ -163,14 +163,16 @@ export function DashboardSidebar() {
           <OrgSwitcher />
         </SidebarHeader>
         
-        <div className="mx-4 border-b border-border" />
+
+        
 
         
         <SidebarContent className="py-4">
           <NavSection items={mainMenuItems} pathname={pathname} />
         </SidebarContent>
         
-        <div className="mx-4 border-b border-border" />
+
+        
         
         <SidebarFooter className="p-4 pt-0">
           <SidebarMenu>
@@ -198,7 +200,7 @@ export function DashboardSidebar() {
               </SidebarMenuItem>
             ))}
             
-            <SidebarMenuItem className="mt-2 pt-2 border-t border-border">
+            <SidebarMenuItem className="mt-2 pt-2">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <SidebarMenuButton

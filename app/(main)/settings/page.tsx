@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Reveal } from "@/components/marketing/reveal";
 import { Icon } from "@iconify/react";
 import { ScrambleText } from "@/components/marketing/scramble-text";
@@ -8,6 +8,7 @@ import { authClient } from "@/lib/auth-client";
 import { MemberList } from "@/components/organization/member-list";
 import { InviteDialog } from "@/components/organization/invite-dialog";
 import { toast } from "sonner";
+import { getProfileUploadUrl, updateProfileImage, getProfileImage } from "@/app/actions/user";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -28,6 +29,9 @@ export default function SettingsPage() {
     const [sessions, setSessions] = useState<any[]>([]);
     const [accounts, setAccounts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+    const [uploading, setUploading] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const user = session?.user;
 
@@ -35,12 +39,14 @@ export default function SettingsPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const [sessionsRes, accountsRes] = await Promise.all([
+                const [sessionsRes, accountsRes, profileImg] = await Promise.all([
                     authClient.listSessions(),
-                    authClient.listAccounts()
+                    authClient.listAccounts(),
+                    getProfileImage()
                 ]);
                 setSessions(sessionsRes.data || []);
                 setAccounts(accountsRes.data || []);
+                setAvatarUrl(profileImg);
             } catch (error) {
                 console.error("Error fetching settings data:", error);
             } finally {
@@ -48,7 +54,52 @@ export default function SettingsPage() {
             }
         };
         fetchData();
-    }, []);
+    }, [session]);
+
+    const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            toast.error("Valid image format required.");
+            return;
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+             toast.error("File size limit exceed (2MB max).");
+             return;
+        }
+
+        setUploading(true);
+        const t = toast.loading("Processing uplink... Updating profile data.");
+
+        try {
+            const { uploadUrl, key } = await getProfileUploadUrl(file.type);
+            
+            const uploadRes = await fetch(uploadUrl, {
+                method: "PUT",
+                body: file,
+                headers: {
+                    "Content-Type": file.type
+                }
+            });
+
+            if (!uploadRes.ok) throw new Error("Upload failed");
+
+            await updateProfileImage(key);
+            
+            // Re-fetch social image or use direct upload results
+            const updatedImg = await getProfileImage();
+            setAvatarUrl(updatedImg);
+            
+            toast.success("Identity updated successfully.", { id: t });
+        } catch (error) {
+            console.error("Upload failed:", error);
+            toast.error("Uplink failed. Transmission error.", { id: t });
+        } finally {
+            setUploading(false);
+        }
+    };
 
     const tabs = ["Profile", "Security", "Workspace", "Billing", "API"];
 
@@ -104,7 +155,21 @@ export default function SettingsPage() {
                                             {user?.name || "Digital Creator // Timbre Lab"}
                                         </div>
                                      </div>
-                                     <div className="pt-4">
+                                     <div className="pt-4 flex items-center gap-4">
+                                        <input 
+                                            type="file" 
+                                            ref={fileInputRef} 
+                                            className="hidden" 
+                                            accept="image/*"
+                                            onChange={handleUpload}
+                                        />
+                                        <button 
+                                            disabled={uploading}
+                                            onClick={() => fileInputRef.current?.click()}
+                                            className="btn-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em]"
+                                        >
+                                            <ScrambleText text={uploading ? "UPLOADING..." : "Update Image"} />
+                                        </button>
                                         <AlertDialog>
                                             <AlertDialogTrigger asChild>
                                                 <button className="btn-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em]">
@@ -134,16 +199,21 @@ export default function SettingsPage() {
                                         </AlertDialog>
                                      </div>
                                 </div>
-                                <div className="flex items-center justify-center border border-dashed border-border rounded-sm p-8 bg-secondary/20">
+                                <div 
+                                    className="flex items-center justify-center border border-dashed border-border rounded-sm p-8 bg-secondary/20 cursor-pointer hover:border-primary/50 transition-all group"
+                                    onClick={() => fileInputRef.current?.click()}
+                                >
                                      <div className="text-center">
-                                        <div className="w-20 h-20 rounded-full bg-background border border-border flex items-center justify-center mx-auto mb-4 text-muted-foreground overflow-hidden">
-                                            {user?.image ? (
-                                                <Image src={user.image} alt={user.name} width={80} height={80} className="object-cover" />
+                                        <div className="w-20 h-20 rounded-full bg-background border border-border flex items-center justify-center mx-auto mb-4 text-muted-foreground overflow-hidden group-hover:border-primary/50 transition-all">
+                                            {avatarUrl ? (
+                                                <Image src={avatarUrl} alt={user?.name || "User"} width={80} height={80} className="object-cover" />
                                             ) : (
                                                 <Icon icon="solar:user-speak-linear" width={32} height={32} />
                                             )}
                                         </div>
-                                        <p className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest">Digital_Vocal_Profile</p>
+                                        <p className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest group-hover:text-primary transition-all">
+                                            {uploading ? "TRANSMITTING..." : "Update_Vocal_Profile"}
+                                        </p>
                                      </div>
                                 </div>
                             </div>
@@ -272,6 +342,10 @@ export default function SettingsPage() {
 
                 {activeTab === "Billing" && (
                     <Reveal className="space-y-10 animate-in fade-in duration-500">
+                         <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] uppercase mb-6 text-center">
+                             It's a hardcoded UI, billing service is not available now
+                         </div>
+
                          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                              <div className="glass-panel p-6 border border-border rounded-sm">
                                 <div className="text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-4">Current Plan</div>
@@ -287,9 +361,6 @@ export default function SettingsPage() {
                                 <div className="absolute top-4 right-4 text-primary">
                                     <Icon icon="solar:coins-linear" width={18} height={18} />
                                 </div>
-                             </div>
-                             <div className="glass-panel p-6 border border-border rounded-sm flex items-center justify-center bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] text-center px-8 uppercase">
-                                 It's a hardcoded UI, billing service is not available now
                              </div>
                          </div>
 
@@ -323,6 +394,10 @@ export default function SettingsPage() {
 
                 {activeTab === "API" && (
                     <Reveal className="space-y-8 animate-in fade-in duration-500">
+                         <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] uppercase mb-6 text-center">
+                             It's a hardcoded UI, API service is not available right now
+                         </div>
+
                         <section className="space-y-6">
                              <div className="flex items-center justify-between">
                                  <div>
@@ -356,9 +431,6 @@ export default function SettingsPage() {
                              <Icon icon="solar:code-square-linear" width={32} height={32} className="text-muted-foreground/20 mx-auto mb-4" />
                              <h4 className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-1">Developer Documentation</h4>
                              <p className="text-muted-foreground/40 text-xs mb-6 font-mono-custom uppercase tracking-wider">Access the Timbre AI specification ledger.</p>
-                             <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] inline-block uppercase mb-6">
-                                 It's a hardcoded UI, API service is not available right now
-                             </div>
                              <br />
                              <button className="text-primary font-mono-custom text-[0.625rem] uppercase tracking-widest hover:opacity-50 transition-opacity">
                                 <ScrambleText text="VIEW_OPEN_SPECS" />

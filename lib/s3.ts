@@ -54,3 +54,26 @@ export async function getSignedAudioUrl(key: string): Promise<string> {
   });
   return getSignedUrl(s3, command, { expiresIn: 3600 }); // 1 hour
 }
+
+export async function getPresignedUploadUrl({
+  key,
+  contentType,
+}: {
+  key: string;
+  contentType: string;
+}): Promise<string> {
+  const command = new PutObjectCommand({
+    Bucket: BUCKET_NAME,
+    Key: key,
+    ContentType: contentType,
+  });
+  return getSignedUrl(s3, command, { expiresIn: 3600 }); // 1 hour
+}
+
+export async function getPresignedDownloadUrl(key: string): Promise<string> {
+  const command = new GetObjectCommand({
+    Bucket: BUCKET_NAME,
+    Key: key,
+  });
+  return getSignedUrl(s3, command, { expiresIn: 3600 }); // 1 hour
+}
