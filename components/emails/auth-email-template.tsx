@@ -40,7 +40,7 @@ export const AuthEmailTemplate = ({ type, url }: AuthEmailTemplateProps) => {
             </Button>
           </Section>
           <Text style={text}>
-            If the button doesn't work, you can also copy and paste this link into your browser:
+            If the button doesn&apos;t work, you can also copy and paste this link into your browser:
           </Text>
           <Text style={link}>{url}</Text>
           <Section style={footer}>

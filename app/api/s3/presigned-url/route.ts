@@ -14,7 +14,6 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const contentType = searchParams.get('contentType');
-  const fileName = searchParams.get('fileName');
 
   if (!contentType) {
     return new NextResponse('Missing contentType', { status: 400 });

@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
           Check your email
         </h2>
         <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
-          We've sent a password recovery link to <span className="text-primary">{email}</span>.
+          We&apos;ve sent a password recovery link to <span className="text-primary">{email}</span>.
           Please authorize via the link in your inbox.
         </p>
 
@@ -83,7 +83,7 @@ export default function ForgotPasswordPage() {
           Reset your password
         </h2>
         <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
-          We'll send a secure link to your email.
+          We&apos;ll send a secure link to your email.
         </p>
       </div>
 

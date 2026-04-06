@@ -8,7 +8,8 @@ import { ScrambleText } from '@/components/marketing/scramble-text';
 import { Reveal } from '@/components/marketing/reveal';
 import { CountingNumber } from '@/components/marketing/counting-number';
 import { Logo } from '@/components/ui/logo';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import Image from 'next/image';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -210,10 +211,11 @@ export default function LandingPage() {
             {/* --- Dashboard Composite --- */}
             <Reveal className="hidden lg:block relative h-[40rem]">
               <div className="absolute inset-0 rounded-sm overflow-hidden img-mask-chamfer border border-border">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80"
                   alt="Data Architecture"
-                  className="w-full h-full object-cover dark:opacity-30 opacity-20 mix-blend-luminosity grayscale"
+                  fill
+                  className="object-cover dark:opacity-30 opacity-20 mix-blend-luminosity grayscale"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
               </div>
@@ -284,7 +286,7 @@ export default function LandingPage() {
                 Problem Diagnostic
               </div>
               <h2 className="text-foreground text-[clamp(2.25rem,4vw,4rem)] font-light tracking-tighter leading-[1.05] mb-8">
-                Your brand's voice is static by design. Not necessity.
+                Your brand&apos;s voice is static by design. Not necessity.
               </h2>
               <p className="text-muted-foreground text-[clamp(1rem,1.1vw,1.125rem)]">
                 Conventional TTS infrastructure dictates that vocal outputs are restricted to
@@ -354,10 +356,11 @@ export default function LandingPage() {
             <div className="grid lg:grid-cols-[2fr_1fr] gap-6">
               {/* --- Interactive Map Mock (Simplified SVG) --- */}
               <Reveal className="glass-panel rounded-sm relative overflow-hidden group min-h-[450px]">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
                   alt="Acoustic Processor"
-                  className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen transition-transform duration-1000 group-hover:scale-105"
+                  fill
+                  className="object-cover opacity-20 mix-blend-screen transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-background/60 mix-blend-multiply"></div>
 

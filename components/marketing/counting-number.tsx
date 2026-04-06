@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 interface CountingNumberProps {
   value: number;
@@ -19,6 +19,32 @@ export const CountingNumber = ({
   const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef<HTMLSpanElement>(null);
 
+  const formatValue = useCallback(
+    (val: number) => {
+      if (format === 'percent') return val.toFixed(1);
+      if (format === 'currency-b') return val.toFixed(2);
+      if (format === 'k') return Math.floor(val);
+      if (Number.isInteger(value)) return Math.floor(val);
+      return val.toFixed(1);
+    },
+    [format, value]
+  );
+
+  const startAnimation = useCallback(() => {
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = easeOutExpo(progress);
+      setCount(easeProgress * value);
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [duration, value]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,39 +59,17 @@ export const CountingNumber = ({
       { threshold: 0.1 }
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    const currentElement = elementRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (currentElement) {
+        observer.unobserve(currentElement);
       }
     };
-  }, [hasAnimated, value]);
-
-  const startAnimation = () => {
-    let startTimestamp: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const easeProgress = easeOutExpo(progress);
-      setCount(easeProgress * value);
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
-  };
-
-  const formatValue = (val: number) => {
-    if (format === 'percent') return val.toFixed(1);
-    if (format === 'currency-b') return val.toFixed(2);
-    if (format === 'k') return Math.floor(val);
-    if (Number.isInteger(value)) return Math.floor(val);
-    return val.toFixed(1);
-  };
+  }, [hasAnimated, startAnimation]);
 
   return <span ref={elementRef}>{formatValue(count)}</span>;
 };

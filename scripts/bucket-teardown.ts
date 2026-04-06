@@ -7,6 +7,12 @@ import {
   HeadBucketCommand,
 } from '@aws-sdk/client-s3';
 
+interface AWSError extends Error {
+  $metadata?: {
+    httpStatusCode?: number;
+  };
+}
+
 // Standard S3 environment variables
 const {
   AWS_ACCESS_KEY_ID,
@@ -64,8 +70,11 @@ async function teardownBucket() {
     await s3Client.send(new DeleteBucketCommand({ Bucket: AWS_S3_BUCKET_NAME }));
 
     console.log(`Bucket deleted successfully.`);
-  } catch (error: any) {
-    if (error.name === 'NotFound' || error.$metadata?.httpStatusCode === 404) {
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      (error.name === 'NotFound' || (error as AWSError).$metadata?.httpStatusCode === 404)
+    ) {
       console.log(`Bucket "${AWS_S3_BUCKET_NAME}" not found. No action needed.`);
     } else {
       throw error;

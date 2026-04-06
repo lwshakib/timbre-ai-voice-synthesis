@@ -28,6 +28,8 @@ export const defaultTTSValues: TTSFormValues = {
 };
 
 // Simplified form context for internal components
+// Using any here as TanStack FormApi has 11+ required generic arguments
+// which make manual typing extremely brittle.
 const TTSFormContext = createContext<any>(null);
 
 export const useTTSForm = () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 interface ScrambleTextProps {
   text: string;
@@ -23,7 +23,7 @@ export const ScrambleText = ({
     if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
-      setDisplayText((prev) =>
+      setDisplayText(() =>
         text
           .split('')
           .map((letter, index) => {

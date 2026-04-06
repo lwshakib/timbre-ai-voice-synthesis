@@ -1,4 +1,4 @@
-import { authClient } from './auth-client';
+// API Client for internal service communication
 
 interface FetchOptions extends RequestInit {
   params?: Record<string, string | number | boolean>;
@@ -25,7 +25,7 @@ export async function apiClient<T>(endpoint: string, options: FetchOptions = {})
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({}));
+    const error = (await response.json().catch(() => ({}))) as { message?: string };
     throw new Error(error.message || 'An error occurred');
   }
 
@@ -34,13 +34,13 @@ export async function apiClient<T>(endpoint: string, options: FetchOptions = {})
 
 export const api = {
   get: <T>(url: string, options?: FetchOptions) => apiClient<T>(url, { ...options, method: 'GET' }),
-  post: <T>(url: string, body?: any, options?: FetchOptions) =>
+  post: <T>(url: string, body?: unknown, options?: FetchOptions) =>
     apiClient<T>(url, {
       ...options,
       method: 'POST',
       body: body instanceof FormData ? body : JSON.stringify(body),
     }),
-  patch: <T>(url: string, body?: any, options?: FetchOptions) =>
+  patch: <T>(url: string, body?: unknown, options?: FetchOptions) =>
     apiClient<T>(url, {
       ...options,
       method: 'PATCH',

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Pause, Play, Download, Redo, Undo } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { VoiceAvatar } from '@/components/voice-avatar/voice-avatar';
 import { Spinner } from '@/components/ui/spinner';

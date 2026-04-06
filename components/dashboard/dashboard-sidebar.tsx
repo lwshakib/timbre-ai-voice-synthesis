@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import {
@@ -15,7 +14,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import {
   type LucideIcon,
@@ -25,7 +23,6 @@ import {
   Volume2,
   Settings,
   Headphones,
-  User as UserIcon,
   LogOut,
 } from 'lucide-react';
 import Link from 'next/link';
@@ -105,7 +102,6 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
 
 export function DashboardSidebar() {
   const pathname = usePathname();
-  const { data: session } = authClient.useSession();
   const [voiceDialogOpen, setVoiceDialogOpen] = useState(false);
 
   const mainMenuItems: MenuItem[] = [
@@ -143,8 +139,6 @@ export function DashboardSidebar() {
       icon: Headphones,
     },
   ];
-
-  const user = session?.user;
 
   return (
     <>

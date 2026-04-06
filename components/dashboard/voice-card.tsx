@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { ScrambleText } from '@/components/marketing/scramble-text';
-import { Button } from '@/components/ui/button';
 
 export interface Voice {
   id: string;

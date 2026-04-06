@@ -4,13 +4,18 @@ import React from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Icon } from '@iconify/react';
 import { toast } from 'sonner';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+
+interface Member {
+  id: string;
+  userId: string;
+  role: string;
+  user: {
+    id: string;
+    name: string | null;
+    email: string;
+  };
+}
 
 export function MemberList() {
   const { data: activeOrg, isPending } = authClient.useActiveOrganization();
@@ -24,8 +29,9 @@ export function MemberList() {
         memberIdOrEmail: memberId,
       });
       toast.success('Member removed successfully');
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to remove member');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to remove member';
+      toast.error(message);
     }
   };
 
@@ -36,8 +42,9 @@ export function MemberList() {
         role: newRole,
       });
       toast.success(`Role updated to ${newRole}`);
-    } catch (error: any) {
-      toast.error(error.message || 'Failed to update role');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to update role';
+      toast.error(message);
     }
   };
 
@@ -64,7 +71,7 @@ export function MemberList() {
         <Icon icon="solar:users-group-two-rounded-linear" className="text-muted-foreground/30" />
       </div>
       <div className="divide-y divide-border">
-        {members.map((member: any) => (
+        {members.map((member: Member) => (
           <div
             key={member.id}
             className="px-6 py-4 flex items-center justify-between text-sm group"

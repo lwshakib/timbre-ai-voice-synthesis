@@ -7,12 +7,17 @@ import {
   CreateBucketCommand,
   PutObjectCommand,
   HeadBucketCommand,
-  type PutObjectCommandInput,
 } from '@aws-sdk/client-s3';
 
 import type { VoiceCategory } from '../generated/prisma/client';
 import prisma from '../lib/prisma';
 import { CANONICAL_SYSTEM_VOICE_NAMES } from '../lib/voice-scoping';
+
+interface AWSError extends Error {
+  $metadata?: {
+    httpStatusCode?: number;
+  };
+}
 
 // Standard S3 environment variables
 const {
@@ -155,8 +160,11 @@ async function ensureBucket() {
   try {
     await s3Client.send(new HeadBucketCommand({ Bucket: AWS_S3_BUCKET_NAME }));
     console.log(`Bucket "${AWS_S3_BUCKET_NAME}" already exists.`);
-  } catch (error: any) {
-    if (error.name === 'NotFound' || error.$metadata?.httpStatusCode === 404) {
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      (error.name === 'NotFound' || (error as AWSError).$metadata?.httpStatusCode === 404)
+    ) {
       console.log(`Creating bucket "${AWS_S3_BUCKET_NAME}"...`);
       await s3Client.send(new CreateBucketCommand({ Bucket: AWS_S3_BUCKET_NAME }));
       console.log(`Bucket created.`);

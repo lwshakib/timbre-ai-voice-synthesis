@@ -30,7 +30,6 @@ export default function SettingsPage() {
   const { data: activeOrg } = authClient.useActiveOrganization();
   const [sessions, setSessions] = useState<any[]>([]);
   const [accounts, setAccounts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +38,6 @@ export default function SettingsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const [sessionsRes, accountsRes] = await Promise.all([
           authClient.listSessions(),
@@ -56,7 +54,7 @@ export default function SettingsPage() {
       } catch (error) {
         console.error('Error fetching settings data:', error);
       } finally {
-        setLoading(false);
+        // Data fetch complete
       }
     };
     fetchData();
@@ -360,7 +358,7 @@ export default function SettingsPage() {
                     Active Sessions
                   </h4>
                   <div className="grid gap-3">
-                    {sessions.map((sess, i) => (
+                    {sessions.map((sess) => (
                       <div
                         key={sess.id}
                         className="glass-panel px-4 py-3 border border-border bg-background/50 flex items-center justify-between rounded-sm"
@@ -464,7 +462,7 @@ export default function SettingsPage() {
         {activeTab === 'Billing' && (
           <Reveal className="space-y-10 animate-in fade-in duration-500">
             <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] uppercase mb-6 text-center">
-              It's a hardcoded UI, billing service is not available now
+              It&apos;s a hardcoded UI, billing service is not available now
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -540,7 +538,7 @@ export default function SettingsPage() {
         {activeTab === 'API' && (
           <Reveal className="space-y-8 animate-in fade-in duration-500">
             <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] uppercase mb-6 text-center">
-              It's a hardcoded UI, API service is not available right now
+              It&apos;s a hardcoded UI, API service is not available right now
             </div>
 
             <section className="space-y-6">

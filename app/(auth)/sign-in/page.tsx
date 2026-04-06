@@ -20,7 +20,7 @@ export default function SignInPage() {
         provider: 'google',
         callbackURL: '/',
       });
-    } catch (error) {
+    } catch {
       toast.error('Google authentication failed.');
     }
   };
@@ -125,7 +125,7 @@ export default function SignInPage() {
       {/* Footer */}
       <div className="mt-8 pt-6 border-t border-border text-center">
         <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Link href="/sign-up" className="text-primary hover:underline underline-offset-4">
             Sign up
           </Link>

@@ -36,8 +36,8 @@ import { useRouter } from 'next/navigation';
 export function OrgSwitcher() {
   const { isMobile } = useSidebar();
   const router = useRouter();
-  const { data: organizations, isPending: loadingOrgs } = authClient.useListOrganizations();
-  const { data: activeOrg, isPending: loadingActive } = authClient.useActiveOrganization();
+  const { data: organizations } = authClient.useListOrganizations();
+  const { data: activeOrg } = authClient.useActiveOrganization();
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
   const [newOrgName, setNewOrgName] = React.useState('');
   const [newOrgSlug, setNewOrgSlug] = React.useState('');

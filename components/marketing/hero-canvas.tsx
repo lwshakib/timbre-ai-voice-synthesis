@@ -12,23 +12,22 @@ export const HeroCanvas = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let width: number, height: number;
-    let dots: any[] = [];
+    const dots: any[] = [];
     const spacing = 35;
-    let mouse = { x: 0, y: 0, radius: 250, isActive: false };
+    const mouse = { x: 0, y: 0, radius: 250, isActive: false };
 
     function resize() {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
+      const width = (canvas.width = window.innerWidth);
       const hero = document.getElementById('hero');
-      height = canvas.height = hero ? hero.offsetHeight : window.innerHeight;
-      initGrid();
+      const height = (canvas.height = hero ? hero.offsetHeight : window.innerHeight);
+      initGrid(width, height);
     }
 
-    function initGrid() {
-      dots = [];
-      const cols = Math.floor(width / spacing);
-      const rows = Math.floor(height / spacing);
+    function initGrid(w: number, h: number) {
+      dots.length = 0;
+      const cols = Math.floor(w / spacing);
+      const rows = Math.floor(h / spacing);
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
           dots.push({
@@ -44,7 +43,7 @@ export const HeroCanvas = () => {
 
     const handleMouseMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
-      mouse.y = e.clientY + window.scrollY; // Adjust for scroll
+      mouse.y = e.clientY + window.scrollY;
       mouse.isActive = true;
     };
 
@@ -58,31 +57,30 @@ export const HeroCanvas = () => {
 
     resize();
 
-    let animationFrameId: number;
+    let animationFrameId: number = 0;
 
     function animate() {
       if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Get colors from CSS variables
       const bodyStyle = getComputedStyle(document.body);
-      const primaryColor = bodyStyle.getPropertyValue('--primary').trim(); // e.g., #d4b87a
-      const mutedColor = bodyStyle.getPropertyValue('--muted-foreground').trim(); // e.g., #828179
+      const primaryColor = bodyStyle.getPropertyValue('--primary').trim();
+      const mutedColor = bodyStyle.getPropertyValue('--muted-foreground').trim();
 
       const time = Date.now() * 0.001;
+      const rect = canvas.getBoundingClientRect();
 
       dots.forEach((dot) => {
         dot.alpha = dot.baseAlpha + Math.sin(time * 2 + dot.phase) * 0.05;
         let drawRadius = 1;
 
         if (mouse.isActive) {
-          const rect = canvas.getBoundingClientRect();
           const adjustedMouseX = mouse.x - rect.left;
           const adjustedMouseY = mouse.y - (rect.top + window.scrollY);
 
-          let dx = adjustedMouseX - dot.x;
-          let dy = adjustedMouseY - dot.y;
-          let dist = Math.sqrt(dx * dx + dy * dy);
+          const dx = adjustedMouseX - dot.x;
+          const dy = adjustedMouseY - dot.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < mouse.radius) {
             const force = (mouse.radius - dist) / mouse.radius;
@@ -109,7 +107,6 @@ export const HeroCanvas = () => {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, drawRadius, 0, Math.PI * 2);
 
-        // Use muted color for dots
         ctx.fillStyle =
           mutedColor +
           Math.floor(dot.alpha * 255)

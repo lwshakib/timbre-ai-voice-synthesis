@@ -45,7 +45,7 @@ export default function SignUpPage() {
           Verify your email
         </h2>
         <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
-          We've sent a verification link to <span className="text-foreground">{email}</span>. Please
+          We&apos;ve sent a verification link to <span className="text-foreground">{email}</span>. Please
           check your inbox to complete the setup.
         </p>
 
