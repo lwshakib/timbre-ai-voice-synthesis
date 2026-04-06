@@ -8,10 +8,19 @@ import { ScrambleText } from "@/components/marketing/scramble-text";
 import { Reveal } from "@/components/marketing/reveal";
 import { CountingNumber } from "@/components/marketing/counting-number";
 import { Logo } from "@/components/ui/logo";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -44,9 +53,64 @@ export default function LandingPage() {
             </Link>
           </nav>
           
-          <button className="md:hidden text-foreground">
-            <Icon icon="solar:hamburger-menu-linear" width="24" height="24" />
-          </button>
+          <div className="md:hidden">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button className="text-foreground p-2 -mr-2">
+                  <Icon icon="solar:hamburger-menu-linear" width="24" height="24" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-full bg-background border-l-border p-0">
+                <div className="flex flex-col h-full">
+                  <div className="px-6 h-16 flex items-center border-b border-border">
+                    <Logo size={20} />
+                    <span className="text-foreground text-lg font-medium tracking-tighter ml-3">Timbre AI</span>
+                  </div>
+                  
+                  <div className="flex-1 px-6 py-12 flex flex-col gap-10">
+                    <div className="space-y-8">
+                       <p className="text-[10px] text-muted-foreground/40 font-mono-custom tracking-[0.2em] uppercase">Navigation Protocols</p>
+                       <nav className="flex flex-col gap-6">
+                        {[
+                          { label: "Synthesis", href: "#platform" },
+                          { label: "Cloning", href: "#intelligence" },
+                          { label: "Registry", href: "#secondary" },
+                        ].map((link) => (
+                          <a 
+                            key={link.label} 
+                            href={link.href} 
+                            className="text-2xl font-light tracking-tighter text-foreground hover:text-primary transition-colors flex items-center justify-between group"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <span>{link.label}</span>
+                            <Icon icon="solar:arrow-right-up-linear" className="text-muted-foreground/20 group-hover:text-primary transition-colors" />
+                          </a>
+                        ))}
+                      </nav>
+                    </div>
+
+                    <div className="mt-auto space-y-6">
+                      <p className="text-[10px] text-muted-foreground/40 font-mono-custom tracking-[0.2em] uppercase">Authorized Access</p>
+                      <Link 
+                        href="/dashboard" 
+                        className="btn-swiss w-full py-4 flex items-center justify-center font-mono-custom text-[0.8125rem] tracking-[0.1em]"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                         <ScrambleText text="Access Dashboard" />
+                      </Link>
+                    </div>
+                  </div>
+
+                  <div className="p-6 border-t border-border bg-card">
+                    <div className="font-mono-custom text-[0.625rem] text-muted-foreground/50 uppercase tracking-widest flex justify-between">
+                      <span>SYS_STATE: SECURE</span>
+                      <span>V.2.4</span>
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
         
         {/* --- Technical Live Ticker --- */}
