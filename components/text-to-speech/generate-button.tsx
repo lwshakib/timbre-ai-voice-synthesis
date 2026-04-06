@@ -22,7 +22,7 @@ export function GenerateButton({
     <Button
       size={size}
       className={cn(
-        "bg-[#d4b87a] hover:bg-[#c4a86a] text-black font-semibold rounded-full min-w-[160px]",
+        "bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full min-w-[160px]",
         className
       )}
       onClick={onSubmit}

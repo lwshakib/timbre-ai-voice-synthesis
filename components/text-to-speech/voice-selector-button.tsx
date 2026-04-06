@@ -24,19 +24,19 @@ export function VoiceSelectorButton() {
       type="button"
       variant="outline"
       size="sm"
-        className="flex-1 justify-start gap-3 px-3 border-[#1f1f1e] bg-[#0a0a0a] hover:bg-[#111111] hover:border-[#d4b87a]/50 text-[#f5f5f0] h-10 rounded-xl"
+        className="flex-1 justify-start gap-3 px-3 border-border bg-card hover:bg-secondary hover:border-primary/50 text-foreground h-10 rounded-xl"
       >
         {currentVoice && (
           <VoiceAvatar
             seed={currentVoice.id}
             name={currentVoice.name}
-            className="size-6 border-[#d4b87a]/30"
+            className="size-6 border-primary/30"
           />
         )}
         <span className="flex-1 truncate text-left text-xs font-mono-custom uppercase tracking-wider">
           {buttonLabel}
         </span>
-        <ChevronDown className="size-4 shrink-0 text-[#555]" />
+        <ChevronDown className="size-4 shrink-0 text-muted-foreground/60" />
       </Button>
   );
 }

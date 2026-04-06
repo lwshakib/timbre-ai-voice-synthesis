@@ -106,14 +106,14 @@ function FileDropzone({
 
   if (file) {
     return (
-      <div className="flex items-center gap-3 rounded-xl border border-[#1f1f1e] bg-[#0a0a0a] p-4">
-        <div className="flex size-10 items-center justify-center rounded-lg bg-[#111111]">
-          <FileAudio className="size-5 text-[#d4b87a]" />
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-card p-4">
+        <div className="flex size-10 items-center justify-center rounded-lg bg-secondary">
+          <FileAudio className="size-5 text-primary" />
         </div>
 
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-[#f5f5f0]">{file.name}</p>
-          <p className="text-xs text-[#828179]">
+          <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
+          <p className="text-xs text-muted-foreground">
             {formatFileSize(file.size)}
           </p>
         </div>
@@ -123,7 +123,7 @@ function FileDropzone({
           variant="ghost"
           size="icon"
           onClick={togglePlay}
-          className="text-[#d4b87a] hover:bg-[#d4b87a]/10"
+          className="text-primary hover:bg-primary/10"
         >
           {isPlaying ? (
             <Pause className="size-4" />
@@ -136,7 +136,7 @@ function FileDropzone({
           variant="ghost"
           size="icon"
           onClick={() => onFileChange(null)}
-          className="text-[#828179] hover:text-red-500 hover:bg-red-500/10"
+          className="text-muted-foreground hover:text-destructive hover:bg-destructive/10"
         >
           <X className="size-4" />
         </Button>
@@ -148,30 +148,30 @@ function FileDropzone({
     <div
       {...getRootProps()}
       className={cn(
-        "flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-dashed border-[#1f1f1e] bg-[#0a0a0a] px-6 py-10 transition-all hover:border-[#d4b87a]/50 group",
+        "flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-dashed border-border bg-card px-6 py-10 transition-all hover:border-primary/50 group",
         isDragReject || isInvalid
-          ? "border-red-500/50"
+          ? "border-destructive/50"
           : isDragActive
-            ? "border-[#d4b87a]"
+            ? "border-primary"
             : "",
       )}
     >
       <input {...getInputProps()} />
-      <div className="flex size-12 items-center justify-center rounded-xl bg-[#111111] group-hover:bg-[#d4b87a]/10 transition-colors">
-        <AudioLines className="size-5 text-[#828179] group-hover:text-[#d4b87a]" />
+      <div className="flex size-12 items-center justify-center rounded-xl bg-secondary group-hover:bg-primary/10 transition-colors">
+        <AudioLines className="size-5 text-muted-foreground group-hover:text-primary" />
       </div>
 
       <div className="flex flex-col items-center gap-1.5">
-        <p className="text-base font-medium tracking-tight text-[#f5f5f0]">
+        <p className="text-base font-medium tracking-tight text-foreground">
           Upload your audio file
         </p>
 
-        <p className="text-center text-[10px] text-[#828179] font-mono-custom uppercase tracking-wider">
+        <p className="text-center text-[10px] text-muted-foreground font-mono-custom uppercase tracking-wider">
           Supports all audio formats, max size 20MB
         </p>
       </div>
 
-       <Button type="button" variant="outline" size="sm" className="border-[#d4b87a] text-[#d4b87a] hover:bg-[#d4b87a]/10">
+       <Button type="button" variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
           <FolderOpen className="size-3.5 mr-2" />
           Upload file
         </Button>
@@ -203,22 +203,22 @@ function LanguageCombobox({
           aria-expanded={open}
           aria-invalid={isInvalid}
           className={cn(
-            "h-10 w-full justify-between font-normal border-[#1f1f1e] bg-[#0a0a0a] text-[#f5f5f0] hover:bg-[#111111] hover:border-[#d4b87a]/50 px-4",
-            !value && "text-[#828179]",
+            "h-10 w-full justify-between font-normal border-border bg-card text-foreground hover:bg-secondary hover:border-primary/50 px-4",
+            !value && "text-muted-foreground",
           )}
         >
           <div className="flex items-center gap-2 truncate">
-            <Globe className="size-4 shrink-0 text-[#828179]" />
+            <Globe className="size-4 shrink-0 text-muted-foreground" />
             {value ? selectedLabel : "Select language..."}
           </div>
           <ChevronsUpDown className="size-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 bg-[#0a0a0a] border-[#1f1f1e]">
+      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0 bg-card border-border">
         <Command className="bg-transparent">
-          <CommandInput placeholder="Search language..." className="text-[#f5f5f0]" />
+          <CommandInput placeholder="Search language..." className="text-foreground" />
           <CommandList className="max-h-[300px] overflow-y-auto">
-            <CommandEmpty className="py-6 text-center text-sm text-[#828179]">No language found.</CommandEmpty>
+            <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">No language found.</CommandEmpty>
             <CommandGroup>
               {LANGUAGE_OPTIONS.map((lang) => (
                 <CommandItem
@@ -228,7 +228,7 @@ function LanguageCombobox({
                     onChange(lang.value);
                     setOpen(false);
                   }}
-                  className="text-[#f5f5f0] aria-selected:bg-[#d4b87a]/10 aria-selected:text-[#d4b87a]"
+                  className="text-foreground aria-selected:bg-primary/10 aria-selected:text-primary"
                 >
                   {lang.label}
                   <Check
@@ -337,12 +337,12 @@ export function VoiceCreateForm({
             return (
               <Field data-invalid={isInvalid}>
                 <Tabs defaultValue="upload" className="w-full">
-                  <TabsList className="h-11 w-full bg-[#0a0a0a] border border-[#1f1f1e] p-1">
-                    <TabsTrigger value="upload" className="flex-1 data-[state=active]:bg-[#111111] data-[state=active]:text-[#d4b87a]">
+                  <TabsList className="h-11 w-full bg-card border border-border p-1">
+                    <TabsTrigger value="upload" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary">
                       <Upload className="size-3.5 mr-2" />
                       Upload
                     </TabsTrigger>
-                    <TabsTrigger value="record" className="flex-1 data-[state=active]:bg-[#111111] data-[state=active]:text-[#d4b87a]">
+                    <TabsTrigger value="record" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary">
                       <Mic className="size-3.5 mr-2" />
                       Record
                     </TabsTrigger>
@@ -378,7 +378,7 @@ export function VoiceCreateForm({
               <Field data-invalid={isInvalid}>
                 <div className="relative flex items-center">
                   <div className="pointer-events-none absolute left-0 flex h-full w-10 items-center justify-center">
-                    <Tag className="size-4 text-[#828179]" />
+                    <Tag className="size-4 text-muted-foreground" />
                   </div>
                   <Input
                     id={field.name}
@@ -387,7 +387,7 @@ export function VoiceCreateForm({
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
-                    className="pl-10 h-10 bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0] focus-visible:ring-[#d4b87a]/50 placeholder:text-[#828179]"
+                    className="pl-10 h-10 bg-card border-border text-foreground focus-visible:ring-primary/50 placeholder:text-muted-foreground/50"
                   />
 
                 </div>
@@ -406,20 +406,20 @@ export function VoiceCreateForm({
               <Field data-invalid={isInvalid}>
                 <div className="relative flex items-center">
                   <div className="pointer-events-none absolute left-0 flex h-full w-10 items-center justify-center">
-                    <Layers className="size-4 text-[#828179]" />
+                    <Layers className="size-4 text-muted-foreground" />
                   </div>
                   <Select
                     value={field.state.value}
                     onValueChange={field.handleChange}
                   >
-                    <SelectTrigger className="w-full pl-10 h-10 bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0] focus:ring-[#d4b87a]/50">
+                    <SelectTrigger className="w-full pl-10 h-10 bg-card border-border text-foreground focus:ring-primary/50">
                       <SelectValue 
                         placeholder="Select category..."
                       />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[#1f1f1e]">
+                    <SelectContent className="bg-card border-border">
                       {VOICE_CATEGORIES.map((cat) => (
-                        <SelectItem key={cat} value={cat} className="text-[#f5f5f0] focus:bg-[#d4b87a]/10 focus:text-[#d4b87a]">
+                        <SelectItem key={cat} value={cat} className="text-foreground focus:bg-primary/10 focus:text-primary">
                           {VOICE_CATEGORY_LABELS[cat]}
                         </SelectItem>
                       ))}
@@ -458,7 +458,7 @@ export function VoiceCreateForm({
               <Field data-invalid={isInvalid}>
                 <div className="relative flex items-center">
                   <div className="pointer-events-none absolute left-0 flex h-full w-10 items-center justify-center pt-3">
-                    <AlignLeft className="size-4 text-[#828179]" />
+                    <AlignLeft className="size-4 text-muted-foreground" />
                   </div>
                   <Textarea
                     id={field.name}
@@ -467,7 +467,7 @@ export function VoiceCreateForm({
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
-                    className="min-h-[100px] pl-10 bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0] focus-visible:ring-[#d4b87a]/50 placeholder:text-[#828179]"
+                    className="min-h-[100px] pl-10 bg-card border-border text-foreground focus-visible:ring-primary/50 placeholder:text-muted-foreground/50"
                     rows={3}
                   />
 
@@ -488,7 +488,7 @@ export function VoiceCreateForm({
             <Button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full bg-[#d4b87a] hover:bg-[#c4a86a] text-black font-semibold h-11"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-11"
             >
               {isSubmitting ? "Creating..." : "Create Voice"}
             </Button>

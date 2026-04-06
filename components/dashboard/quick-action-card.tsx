@@ -19,7 +19,7 @@ export function QuickActionCard({
   href,
 }: QuickActionCardProps) {
   return (
-    <div className="flex gap-4 rounded-xl border border-[#1f1f1e] bg-[#0a0a0a] p-3 hover:border-[#d4b87a]/50 transition-all duration-300">
+    <div className="flex gap-4 rounded-xl border border-border bg-card p-3 hover:border-primary/50 transition-all duration-300">
       <div
         className={cn(
           "relative h-28 w-36 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br",
@@ -34,15 +34,15 @@ export function QuickActionCard({
 
       <div className="flex flex-col justify-between py-1 min-w-0">
         <div className="space-y-1">
-          <h3 className="text-sm font-medium text-[#f5f5f0]">{title}</h3>
-          <p className="text-[11px] text-[#828179] leading-relaxed line-clamp-2">
+          <h3 className="text-sm font-medium text-foreground">{title}</h3>
+          <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-2">
             {description}
           </p>
         </div>
         <Button 
           variant="outline" 
           size="sm" 
-          className="w-fit h-7 text-[10px] uppercase font-mono-custom tracking-wider border-[#d4b87a] text-[#d4b87a] hover:bg-[#d4b87a]/10" 
+          className="w-fit h-7 text-[10px] uppercase font-mono-custom tracking-wider border-primary text-primary hover:bg-primary/10" 
           asChild
         >
           <Link href={href}>

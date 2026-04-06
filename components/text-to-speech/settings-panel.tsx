@@ -7,20 +7,20 @@ import { SettingsPanelHistory } from "./settings-panel-history";
 
 export function SettingsPanel() {
   return (
-    <div className="flex flex-col h-full bg-[#050505] border-l border-[#1f1f1e] overflow-hidden">
+    <div className="flex flex-col h-full bg-background border-l border-border overflow-hidden">
       <Tabs defaultValue="settings" className="flex flex-col h-full">
-        <div className="p-4 border-b border-[#1f1f1e] bg-[#070707]">
-          <TabsList className="bg-[#050505] border-[#1f1f1e] w-full p-1 h-10 rounded-lg">
+        <div className="p-4 border-b border-border bg-secondary/50 backdrop-blur-sm">
+          <TabsList className="bg-background border border-border w-full p-1 h-10 rounded-lg">
             <TabsTrigger 
               value="settings" 
-              className="flex-1 gap-2 text-xs font-mono-custom uppercase tracking-wider data-[state=active]:bg-[#d4b87a] data-[state=active]:text-black"
+              className="flex-1 gap-2 text-xs font-mono-custom uppercase tracking-wider data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
             >
               <Settings2 className="size-3.5" />
               Settings
             </TabsTrigger>
             <TabsTrigger 
               value="history" 
-              className="flex-1 gap-2 text-xs font-mono-custom uppercase tracking-wider data-[state=active]:bg-[#d4b87a] data-[state=active]:text-black"
+              className="flex-1 gap-2 text-xs font-mono-custom uppercase tracking-wider data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
             >
               <History className="size-3.5" />
               History

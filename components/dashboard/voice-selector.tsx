@@ -1,8 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Icon } from "@iconify/react";
 import { Voice } from "./voice-card";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 interface VoiceSelectorProps {
     voices: Voice[];
@@ -11,44 +18,52 @@ interface VoiceSelectorProps {
 }
 
 export function VoiceSelector({ voices, selectedId, onSelect }: VoiceSelectorProps) {
-    return (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {voices.map((voice) => {
-                const isActive = selectedId === voice.id;
-                return (
-                    <button
-                        key={voice.id}
-                        onClick={() => onSelect(voice)}
-                        className={`flex flex-col items-start p-4 rounded-sm border transition-all duration-300 text-left relative overflow-hidden group ${
-                            isActive 
-                            ? "bg-[#d4b87a]/10 border-[#d4b87a] shadow-[0_0_15px_rgba(212,184,122,0.1)]" 
-                            : "bg-[#0a0a0a] border-[#1f1f1e] hover:border-[#828179]"
-                        }`}
-                    >
-                        <div className="flex items-center gap-2 mb-2">
-                             <div className={`w-2 h-2 rounded-full ${
-                                 isActive ? "bg-[#d4b87a] shadow-[0_0_8px_#d4b87a]" : "bg-[#333]"
-                             }`} />
-                             <span className={`text-[0.8125rem] font-medium tracking-tight truncate ${
-                                 isActive ? "text-[#f5f5f0]" : "text-[#828179]"
-                             }`}>
-                                {voice.name.split(" // ")[0]}
-                             </span>
-                        </div>
-                        
-                        <div className="flex flex-col">
-                            <span className="text-[0.625rem] font-mono-custom text-[#555] opacity-70 uppercase tracking-widest">
-                                {voice.category}
-                            </span>
-                        </div>
+    const currentVoice = voices.find(v => v.id === selectedId) || voices[0];
 
-                        {/* Hover Overlay */}
-                        {!isActive && (
-                            <div className="absolute inset-0 bg-[#d4b87a]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+    return (
+        <div className="flex flex-col gap-2">
+            <span className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Voice model</span>
+            <Select
+                value={selectedId}
+                onValueChange={(id) => {
+                    const voice = voices.find(v => v.id === id);
+                    if (voice) onSelect(voice);
+                }}
+            >
+                <SelectTrigger className="w-full h-11 gap-3 rounded-xl bg-card border-border px-4 py-2 hover:border-primary/50 text-foreground focus:ring-primary/30">
+                    <SelectValue placeholder="Select a voice">
+                        {currentVoice && (
+                            <div className="flex items-center gap-2.5">
+                                <div className="size-5 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/20">
+                                    <Icon icon="solar:user-speak-linear" width={12} height={12} />
+                                </div>
+                                <span className="truncate text-xs font-mono-custom uppercase tracking-wider">
+                                    {currentVoice.name}
+                                </span>
+                            </div>
                         )}
-                    </button>
-                );
-            })}
+                    </SelectValue>
+                </SelectTrigger>
+                <SelectContent className="bg-card border-border">
+                    {voices.map((v) => (
+                        <SelectItem key={v.id} value={v.id} className="focus:bg-primary/10 focus:text-primary text-muted-foreground transition-colors cursor-pointer">
+                            <div className="flex items-center gap-3">
+                                <div className="size-6 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground">
+                                    <Icon icon="solar:user-speak-linear" width={14} height={14} />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-xs font-mono-custom uppercase tracking-wider">
+                                        {v.name}
+                                    </span>
+                                    <span className="text-[9px] text-muted-foreground/60 lowercase tracking-widest">
+                                        {v.category} [REF_{v.id.slice(0, 4).toUpperCase()}]
+                                    </span>
+                                </div>
+                            </div>
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
         </div>
     );
 }

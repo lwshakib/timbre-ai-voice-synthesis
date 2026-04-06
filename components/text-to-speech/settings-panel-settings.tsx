@@ -15,14 +15,14 @@ export function SettingsPanelSettings() {
 
   return (
     <>
-      <div className="border-b border-[#1f1f1e] p-6 lg:p-12">
+      <div className="border-b border-border p-6 lg:p-12">
         <VoiceSelector />
       </div>
 
       <div className="p-6 lg:p-12 flex-1 space-y-8 overflow-y-auto">
         <div className="flex flex-col gap-1 mb-8">
-           <h3 className="text-sm font-medium text-[#f5f5f0]">Parameters</h3>
-           <p className="text-[10px] text-[#555] font-mono-custom tracking-[0.2em] uppercase">[SYS_CONFIG // MODEL_TUNING]</p>
+           <h3 className="text-sm font-medium text-foreground">Parameters</h3>
+           <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[SYS_CONFIG // MODEL_TUNING]</p>
         </div>
         
         <FieldGroup className="gap-10">
@@ -31,8 +31,8 @@ export function SettingsPanelSettings() {
               {(field: any) => (
                 <Field className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <FieldLabel className="text-xs text-[#828179] font-mono-custom uppercase tracking-wider">{slider.label}</FieldLabel>
-                    <span className="text-[10px] text-[#d4b87a] font-mono-custom tracking-widest bg-[#d4b87a]/10 px-2 py-0.5 rounded border border-[#d4b87a]/20">
+                    <FieldLabel className="text-xs text-muted-foreground font-mono-custom uppercase tracking-wider">{slider.label}</FieldLabel>
+                    <span className="text-[10px] text-primary font-mono-custom tracking-widest bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
                       {field.state.value.toFixed(2)}
                     </span>
                   </div>
@@ -45,13 +45,13 @@ export function SettingsPanelSettings() {
                       max={slider.max}
                       step={slider.step}
                       disabled={isSubmitting}
-                      className="[&_[data-slot=slider-range]]:bg-[#d4b87a] [&_[data-slot=slider-thumb]]:bg-[#d4b87a] [&_[data-slot=slider-thumb]]:border-0 [&_[data-slot=slider-thumb]]:ring-[#d4b87a]/50"
+                      className="[&_[data-slot=slider-range]]:bg-primary [&_[data-slot=slider-thumb]]:bg-primary [&_[data-slot=slider-thumb]]:border-0 [&_[data-slot=slider-thumb]]:ring-primary/50"
                     />
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] text-[#444] font-mono-custom uppercase tracking-[0.15em]">
+                      <span className="text-[9px] text-muted-foreground/30 font-mono-custom uppercase tracking-[0.15em]">
                         {slider.leftLabel}
                       </span>
-                      <span className="text-[9px] text-[#444] font-mono-custom uppercase tracking-[0.15em]">
+                      <span className="text-[9px] text-muted-foreground/30 font-mono-custom uppercase tracking-[0.15em]">
                         {slider.rightLabel}
                       </span>
                     </div>

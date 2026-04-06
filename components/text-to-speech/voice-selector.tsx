@@ -37,20 +37,20 @@ export function VoiceSelector() {
 
   return (
     <Field className="space-y-3">
-      <FieldLabel className="text-[10px] text-[#555] font-mono-custom tracking-[0.2em] uppercase">Voice style</FieldLabel>
+      <FieldLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Voice style</FieldLabel>
       <Select
         value={voiceId}
         onValueChange={(v) => form.setFieldValue("voiceId", v)}
         disabled={isSubmitting}
       >
-        <SelectTrigger className="w-full h-12 gap-3 rounded-xl bg-[#0a0a0a] border-[#1f1f1e] px-4 py-2 hover:border-[#d4b87a]/50 text-[#f5f5f0] focus:ring-[#d4b87a]/30">
+        <SelectTrigger className="w-full h-12 gap-3 rounded-xl bg-card border-border px-4 py-2 hover:border-primary/50 text-foreground focus:ring-primary/30">
           <SelectValue placeholder="[SELECT_VOICE]">
             {currentVoice && (
               <div className="flex items-center gap-3">
                 <VoiceAvatar 
                   seed={currentVoice.id}
                   name={currentVoice.name}
-                  className="size-6 border-[#d4b87a]/30"
+                  className="size-6 border-primary/30"
                 />
                 <span className="truncate text-xs font-mono-custom uppercase tracking-wider">
                   {currentVoice.name}
@@ -62,12 +62,12 @@ export function VoiceSelector() {
             )}
           </SelectValue>
         </SelectTrigger>
-        <SelectContent className="bg-[#0a0a0a] border-[#1f1f1e]">
+        <SelectContent className="bg-card border-border">
           {customVoices.length > 0 && (
             <SelectGroup>
-              <SelectLabel className="text-[10px] text-[#555] font-mono-custom tracking-widest uppercase px-2 py-1.5">[TEAM_VOICES]</SelectLabel>
+              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">[TEAM_VOICES]</SelectLabel>
               {customVoices.map((v) => (
-                <SelectItem key={v.id} value={v.id} className="focus:bg-[#d4b87a]/10 focus:text-[#d4b87a] text-[#828179]">
+                <SelectItem key={v.id} value={v.id} className="focus:bg-primary/10 focus:text-primary text-muted-foreground">
                   <div className="flex items-center gap-3">
                     <VoiceAvatar seed={v.id} name={v.name} className="size-5" />
                     <span className="text-xs font-mono-custom uppercase tracking-wider">
@@ -79,13 +79,13 @@ export function VoiceSelector() {
             </SelectGroup>
           )}
           {customVoices.length > 0 && systemVoices.length > 0 && (
-            <SelectSeparator className="bg-[#1f1f1e]" />
+            <SelectSeparator className="bg-border" />
           )}
           {systemVoices.length > 0 && (
             <SelectGroup>
-              <SelectLabel className="text-[10px] text-[#555] font-mono-custom tracking-widest uppercase px-2 py-1.5">[BUILT_IN_VOICES]</SelectLabel>
+              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">[BUILT_IN_VOICES]</SelectLabel>
               {systemVoices.map((v) => (
-                <SelectItem key={v.id} value={v.id} className="focus:bg-[#d4b87a]/10 focus:text-[#d4b87a] text-[#828179]">
+                <SelectItem key={v.id} value={v.id} className="focus:bg-primary/10 focus:text-primary text-muted-foreground">
                   <div className="flex items-center gap-3">
                     <VoiceAvatar seed={v.id} name={v.name} className="size-5" />
                     <span className="text-xs font-mono-custom uppercase tracking-wider">

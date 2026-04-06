@@ -76,7 +76,7 @@ export function PromptSuggestions({
 }) {
   return (
     <div className="space-y-4">
-      <p className="text-[10px] text-[#555] font-mono-custom tracking-[0.2em] uppercase">
+      <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
         [SYS_PROMPTS // DISCOVER_SUGGESTIONS]
       </p>
       <div className="flex flex-wrap gap-2">
@@ -84,7 +84,7 @@ export function PromptSuggestions({
           <Badge
             key={suggestion.label}
             variant="outline"
-            className="cursor-pointer gap-2 py-2 px-3 text-[11px] font-mono-custom tracking-wider uppercase border-[#1f1f1e] bg-[#0a0a0a] text-[#828179] hover:bg-[#d4b87a]/10 hover:text-[#d4b87a] hover:border-[#d4b87a]/30 transition-all rounded-lg"
+            className="cursor-pointer gap-2 py-2 px-3 text-[11px] font-mono-custom tracking-wider uppercase border-border bg-card text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all rounded-lg"
             onClick={() => onSelect(suggestion.prompt)}
           >
             <suggestion.icon className="size-3.5 shrink-0" />

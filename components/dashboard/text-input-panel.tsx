@@ -23,20 +23,20 @@ export function TextInputPanel() {
 
   return (
     <div className="
-      rounded-[22px] bg-gradient-to-br from-[#d4b87a] via-[#828179] to-[#050505] p-0.5 shadow-[0_0_40px_-15px_rgba(212,184,122,0.3)]
+      rounded-[22px] bg-gradient-to-br from-primary/50 via-muted-foreground/20 to-background p-0.5 shadow-2xl shadow-primary/10
     ">
-      <div className="rounded-[20px] bg-[#050505] p-1">
-        <div className="space-y-4 rounded-2xl bg-[#0a0a0a] p-6 border border-[#1f1f1e]">
+      <div className="rounded-[20px] bg-background p-1">
+        <div className="space-y-4 rounded-2xl bg-card p-6 border border-border">
           <Textarea
             placeholder="Start typing or paste your text here..."
-            className="min-h-[160px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 text-[#f5f5f0] text-lg font-light placeholder:text-[#333]"
+            className="min-h-[160px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 text-foreground text-lg font-light placeholder:text-muted-foreground/20"
             value={text}
             onChange={(e) => setText(e.target.value)}
             maxLength={TEXT_MAX_LENGTH}
           />
 
-          <div className="flex items-center justify-between pt-4 border-t border-[#1f1f1e]/50">
-            <Badge variant="outline" className="gap-1.5 border-dashed border-[#d4b87a]/30 bg-[#d4b87a]/5 text-[#d4b87a]">
+          <div className="flex items-center justify-between pt-4 border-t border-border/50">
+            <Badge variant="outline" className="gap-1.5 border-dashed border-primary/30 bg-primary/5 text-primary">
               <Coins className="size-3" />
               <span className="text-[10px] font-mono-custom tracking-wider uppercase">
                 {text.length === 0 ? (
@@ -51,7 +51,7 @@ export function TextInputPanel() {
                 )}
               </span>
             </Badge>
-            <span className="text-[10px] text-[#828179] font-mono-custom tracking-widest uppercase">
+            <span className="text-[10px] text-muted-foreground font-mono-custom tracking-widest uppercase">
               {text.length.toLocaleString()} / {TEXT_MAX_LENGTH.toLocaleString()} [CHAR_LIMIT]
             </span>
           </div>
@@ -62,7 +62,7 @@ export function TextInputPanel() {
             size="lg"
             disabled={!text.trim()}
             onClick={handleGenerate}
-            className="w-full lg:w-auto bg-[#d4b87a] hover:bg-[#c4a86a] text-black font-semibold px-8 h-12 rounded-full"
+            className="w-full lg:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-12 rounded-full shadow-lg shadow-primary/20"
           >
             <Sparkles className="size-4 mr-2" />
             Generate speech

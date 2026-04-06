@@ -63,9 +63,9 @@ export function TextToSpeechDetailView({
 
   if (isLoading || !voices || !generation) {
     return (
-      <div className="flex flex-col items-center justify-center flex-1 bg-[#050505] gap-4">
-        <Spinner className="size-8 text-[#d4b87a]" />
-        <p className="text-[10px] text-[#828179] font-mono-custom tracking-[0.2em] uppercase">[INIT_PROTOCOLS // LOADING_MEMORY_BANK]</p>
+      <div className="flex flex-col items-center justify-center flex-1 bg-background gap-4">
+        <Spinner className="size-8 text-primary" />
+        <p className="text-[10px] text-muted-foreground font-mono-custom tracking-[0.2em] uppercase">[INIT_PROTOCOLS // LOADING_MEMORY_BANK]</p>
       </div>
     );
   }
@@ -97,7 +97,7 @@ export function TextToSpeechDetailView({
   return (
     <TTSVoicesProvider value={{ customVoices, systemVoices, allVoices }}>
       <TextToSpeechForm key={generationId} defaultValues={defaultValues}>
-        <div className="flex min-h-0 flex-1 overflow-hidden bg-[#050505] flex-col">
+        <div className="flex min-h-0 flex-1 overflow-hidden bg-background flex-col">
           <PageHeader title="Memory Detail" className="lg:hidden" />
           <div className="flex min-h-0 flex-1 overflow-hidden">
              <div className="flex min-h-0 flex-1 flex-col">

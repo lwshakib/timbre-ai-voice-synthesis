@@ -85,7 +85,7 @@ export default function LandingPage() {
                 <Link href="/dashboard" className="btn-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em]">
                   <ScrambleText text="Go to Dashboard" className="relative z-10" />
                 </Link>
-                <button className="btn-ghost-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em] bg-[#050505]">
+                <button className="btn-ghost-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em] bg-background">
                   <ScrambleText text="View Platform" className="relative z-10" />
                 </button>
               </div>
@@ -108,19 +108,19 @@ export default function LandingPage() {
             {/* --- Dashboard Composite --- */}
             <Reveal className="hidden lg:block relative h-[40rem]">
               <div className="absolute inset-0 rounded-sm overflow-hidden img-mask-chamfer border border-border">
-                <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80" alt="Data Architecture" className="w-full h-full object-cover opacity-30 mix-blend-luminosity grayscale" />
+                <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80" alt="Data Architecture" className="w-full h-full object-cover dark:opacity-30 opacity-20 mix-blend-luminosity grayscale" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
               </div>
 
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] glass-panel rounded-sm flex flex-col z-20 overflow-hidden">
-                <div className="h-10 bg-[#0a0a0a]/80 border-b border-[#1f1f1e] flex items-center px-4 justify-between backdrop-blur-md">
+                <div className="h-10 bg-card/80 border-b border-border flex items-center px-4 justify-between backdrop-blur-md">
                   <div className="flex gap-2">
                     <Icon icon="solar:shield-check-linear" className="text-muted-foreground" />
                     <span className="font-mono-custom text-[0.625rem] tracking-[0.1em] text-muted-foreground">TIMBRE_TERM_OS // V.2.4</span>
                   </div>
                   <div className="flex gap-1.5">
-                    <div className="w-1.5 h-1.5 bg-[#828179]"></div>
-                    <div className="w-1.5 h-1.5 bg-[#d4b87a]"></div>
+                    <div className="w-1.5 h-1.5 bg-muted-foreground/50"></div>
+                    <div className="w-1.5 h-1.5 bg-primary"></div>
                   </div>
                 </div>
                 
@@ -224,16 +224,16 @@ export default function LandingPage() {
               {/* --- Interactive Map Mock (Simplified SVG) --- */}
               <Reveal className="glass-panel rounded-sm relative overflow-hidden group min-h-[450px]">
                 <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80" alt="Acoustic Processor" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen transition-transform duration-1000 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-[#050505]/60 mix-blend-multiply"></div>
+                <div className="absolute inset-0 bg-background/60 mix-blend-multiply"></div>
                 
                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                   <svg width="100%" height="100%" viewBox="0 0 600 400" fill="none" className="max-w-2xl opacity-60">
-                    <path d="M150 100 L300 200 L450 120 M300 200 L250 320 L400 300" stroke="#1f1f1e" strokeWidth="1.5" strokeDasharray="4 4" />
-                    <circle cx="150" cy="100" r="4" fill="#828179" />
-                    <circle cx="450" cy="120" r="4" fill="#4a554a" />
+                    <path d="M150 100 L300 200 L450 120 M300 200 L250 320 L400 300" strokeWidth="1.5" strokeDasharray="4 4" className="stroke-border" />
+                    <circle cx="150" cy="100" r="4" className="fill-muted-foreground" />
+                    <circle cx="450" cy="120" r="4" className="fill-muted-foreground/50" />
                     <g>
-                      <circle cx="300" cy="200" r="5" fill="#d4b87a" />
-                      <circle cx="300" cy="200" r="12" stroke="#d4b87a" strokeWidth="1" strokeOpacity="0.5" className="animate-ping" />
+                      <circle cx="300" cy="200" r="5" className="fill-primary" />
+                      <circle cx="300" cy="200" r="12" strokeWidth="1" strokeOpacity="0.5" className="animate-ping stroke-primary" />
                     </g>
                   </svg>
                 </div>
@@ -291,17 +291,17 @@ export default function LandingPage() {
                     <div className="flex flex-col gap-2">
                       {[65, 80, 95, 60, 70].map((w, i) => (
                         <div key={i} className="h-6 flex justify-end relative group">
-                          <div className="bg-[#d4b87a]/20 absolute right-0 h-full border-l border-[#d4b87a] transition-all duration-1000 delay-[500ms]" style={{ width: `${w}%` }}></div>
-                          <span className="relative z-10 font-mono text-[0.625rem] leading-6 pr-3 text-[#f5f5f0]">{(100-i*10)}k | {(2.68 - i*0.02).toFixed(2)}x</span>
+                          <div className="bg-primary/20 absolute right-0 h-full border-l border-primary transition-all duration-1000 delay-[500ms]" style={{ width: `${w}%` }}></div>
+                          <span className="relative z-10 font-mono text-[0.625rem] leading-6 pr-3 text-foreground">{(100-i*10)}k | {(2.68 - i*0.02).toFixed(2)}x</span>
                         </div>
                       ))}
                     </div>
-                    <div className="bg-[#1f1f1e]"></div>
+                    <div className="bg-border"></div>
                     <div className="flex flex-col gap-2">
                       {[75, 60, 90, 65, 85].map((w, i) => (
                         <div key={i} className="h-6 flex justify-start relative group">
-                          <div className="bg-[#f5f5f0]/10 absolute left-0 h-full border-r border-[#f5f5f0]/50 transition-all duration-1000 delay-[500ms]" style={{ width: `${w}%` }}></div>
-                          <span className="relative z-10 font-mono text-[0.625rem] leading-6 pl-3 text-[#f5f5f0]">{(2.71 + i*0.04).toFixed(2)}x | {(85+i*20)}k</span>
+                          <div className="bg-foreground/10 absolute left-0 h-full border-r border-foreground/50 transition-all duration-1000 delay-[500ms]" style={{ width: `${w}%` }}></div>
+                          <span className="relative z-10 font-mono text-[0.625rem] leading-6 pl-3 text-foreground">{(2.71 + i*0.04).toFixed(2)}x | {(85+i*20)}k</span>
                         </div>
                       ))}
                     </div>
@@ -325,7 +325,7 @@ export default function LandingPage() {
                 Timbre AI restricts API access to a hermetic developer cohort. We process exactly 12 institutional onboarding protocols per quarter.
               </p>
               
-              <div className="glass-panel p-6 rounded-sm border-l-2 border-l-[#d4b87a] max-w-sm">
+              <div className="glass-panel p-6 rounded-sm border-l-2 border-l-primary max-w-sm">
                 <div className="font-mono-custom text-[0.625rem] text-muted-foreground mb-4 border-b border-border pb-2 flex justify-between">
                   <span>REGISTRY_STATUS</span>
                   <span className="text-primary">OPEN</span>
@@ -339,7 +339,7 @@ export default function LandingPage() {
             </Reveal>
 
             <Reveal className="relative">
-              <div className="glass-panel p-8 rounded-sm relative z-10 border-[#333]">
+              <div className="glass-panel p-8 rounded-sm relative z-10 border-border">
                 <div className="absolute top-0 right-0 p-4 font-mono-custom text-[0.625rem] text-muted-foreground">
                   SECURE_UPLINK
                 </div>
@@ -393,7 +393,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-        <div className="border-t border-[#1f1f1e] bg-[#0a0a0a] h-12 flex items-center">
+        <div className="border-t border-border bg-card h-12 flex items-center">
             <div className="max-w-[83.75rem] mx-auto px-6 w-full flex items-center justify-between font-mono-custom text-[0.625rem] text-muted-foreground/50">
                 <div>© {new Date().getFullYear()} Timbre AI Technologies AG</div>
                 <div>[SYS_STATE: SECURE]</div>

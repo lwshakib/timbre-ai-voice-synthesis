@@ -92,33 +92,33 @@ export function VoiceCard({ voice }: VoiceCardProps) {
   };
 
   return (
-    <div className="flex items-center gap-1 overflow-hidden rounded-xl border border-[#1f1f1e] bg-[#0a0a0a] pr-3 lg:pr-6 hover:border-[#d4b87a]/30 transition-all duration-300">
+    <div className="flex items-center gap-1 overflow-hidden rounded-xl border border-border bg-card pr-3 lg:pr-6 hover:border-primary/30 transition-all duration-300">
       <div className="relative h-24 w-20 shrink-0 lg:h-30 lg:w-24">
-        <div className="absolute left-0 top-0 h-24 w-10 border-r border-[#1f1f1e] bg-[#111111]/50 lg:h-30 lg:w-12" />
+        <div className="absolute left-0 top-0 h-24 w-10 border-r border-border bg-secondary/50 lg:h-30 lg:w-12" />
 
         <div className="absolute inset-0 flex items-center justify-center">
           <VoiceAvatar
             seed={voice.id}
             name={voice.name}
-            className="size-14 border-[1.5px] border-[#d4b87a]/50 shadow-lg lg:size-18"
+            className="size-14 border-[1.5px] border-primary/50 shadow-lg lg:size-18"
           />
         </div>
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col gap-1.5 lg:gap-3">
-        <div className="flex items-center gap-1.5 line-clamp-1 text-sm font-medium tracking-tight text-[#f5f5f0]">
+        <div className="flex items-center gap-1.5 line-clamp-1 text-sm font-medium tracking-tight text-foreground">
           {voice.name}
-          <span className="size-1 shrink-0 rounded-full bg-[#1f1f1e]" />
-          <span className="text-[#d4b87a] text-[10px] uppercase font-mono-custom tracking-wider">
+          <span className="size-1 shrink-0 rounded-full bg-border" />
+          <span className="text-primary text-[10px] uppercase font-mono-custom tracking-wider">
             {voice.category ? VOICE_CATEGORY_LABELS[voice.category] : "General"}
           </span>
         </div>
 
-        <p className="line-clamp-1 text-xs text-[#828179]">
+        <p className="line-clamp-1 text-xs text-muted-foreground">
           {voice.description || "No description provided."}
         </p>
 
-        <p className="flex items-center gap-2 text-[10px] font-mono-custom text-[#555] uppercase tracking-widest">
+        <p className="flex items-center gap-2 text-[10px] font-mono-custom text-muted-foreground/60 uppercase tracking-widest">
           <span className="shrink-0">{flag}</span>
           <span className="truncate">{region}</span>
         </p>
@@ -128,7 +128,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
         <Button
           variant="outline"
           size="icon"
-          className="rounded-full size-8 border-[#1f1f1e] text-[#d4b87a] hover:bg-[#d4b87a]/10"
+          className="rounded-full size-8 border-border text-primary hover:bg-primary/10"
           onClick={togglePlay}
           disabled={isLoading}
         >
@@ -145,13 +145,13 @@ export function VoiceCard({ voice }: VoiceCardProps) {
             <Button 
               variant="outline" 
               size="icon" 
-              className="rounded-full size-8 border-[#1f1f1e] text-[#828179] hover:text-[#f5f5f0]"
+              className="rounded-full size-8 border-border text-muted-foreground hover:text-foreground"
             >
               <MoreHorizontal className="size-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-[#0a0a0a] border-[#1f1f1e]">
-            <DropdownMenuItem asChild className="focus:bg-[#111111] focus:text-[#d4b87a]">
+          <DropdownMenuContent align="end" className="bg-card border-border">
+            <DropdownMenuItem asChild className="focus:bg-secondary focus:text-primary">
               <Link href={`/text-to-speech?voiceId=${voice.id}`}>
                 <Mic className="size-4 mr-2" />
                 <span className="font-medium">Use this voice</span>
@@ -160,7 +160,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
             {voice.variant === "CUSTOM" && (
               <DropdownMenuItem
                 onClick={() => setShowDeleteDialog(true)}
-                className="text-red-500 focus:text-red-400 focus:bg-red-500/10"
+                className="text-destructive focus:text-destructive focus:bg-destructive/10"
               >
                 <Trash2 className="size-4 mr-2" />
                 <span className="font-medium">Delete voice</span>
@@ -174,16 +174,16 @@ export function VoiceCard({ voice }: VoiceCardProps) {
             open={showDeleteDialog}
             onOpenChange={setShowDeleteDialog}
           >
-            <AlertDialogContent className="bg-[#0a0a0a] border-[#1f1f1e]">
+            <AlertDialogContent className="bg-card border-border">
               <AlertDialogHeader>
-                <AlertDialogTitle className="text-[#f5f5f0]">Delete voice</AlertDialogTitle>
-                <AlertDialogDescription className="text-[#828179]">
+                <AlertDialogTitle className="text-foreground">Delete voice</AlertDialogTitle>
+                <AlertDialogDescription className="text-muted-foreground">
                   Are you sure you want to delete &quot;{voice.name}&quot;? This
                   action cannot be undone and will remove all associated data.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel disabled={isDeleting} className="border-[#1f1f1e] bg-transparent text-[#828179] hover:bg-[#111111]">
+                <AlertDialogCancel disabled={isDeleting} className="border-border bg-transparent text-muted-foreground hover:bg-secondary">
                   Cancel
                 </AlertDialogCancel>
                 <AlertDialogAction
@@ -192,7 +192,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
                     e.preventDefault();
                     handleDelete();
                   }}
-                  className="bg-red-500 hover:bg-red-600 text-white"
+                  className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
                 >
                   {isDeleting ? "Deleting..." : "Delete"}
                 </AlertDialogAction>

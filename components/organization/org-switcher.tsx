@@ -79,9 +79,9 @@ export function OrgSwitcher() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-[#d4b87a]/10 data-[state=open]:text-[#f5f5f0] border border-[#1f1f1e] bg-[#0a0a0a] hover:border-[#d4b87a] transition-all duration-300"
+              className="data-[state=open]:bg-primary/10 data-[state=open]:text-foreground border border-border bg-card hover:border-primary transition-all duration-300"
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-[#d4b87a]/20 text-[#d4b87a]">
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary/20 text-primary">
                 {currentOrg?.logo ? (
                   <Avatar className="size-8 rounded-lg">
                     <AvatarImage src={currentOrg.logo} alt={currentOrg.name} />
@@ -94,23 +94,23 @@ export function OrgSwitcher() {
                 )}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
-                <span className="truncate font-semibold text-[#f5f5f0]">
+                <span className="truncate font-semibold text-foreground">
                   {currentOrg?.name || "Personal Workspace"}
                 </span>
-                <span className="truncate text-xs text-[#828179] font-mono-custom tracking-wider">
+                <span className="truncate text-xs text-muted-foreground font-mono-custom tracking-wider">
                   {currentOrg ? "Institutional" : "Individual Access"}
                 </span>
               </div>
-              <ChevronsUpDown className="size-4 text-[#828179] group-data-[collapsible=icon]:hidden" />
+              <ChevronsUpDown className="size-4 text-muted-foreground group-data-[collapsible=icon]:hidden" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0]"
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-card border-border text-foreground"
             align="start"
             side={isMobile ? "bottom" : "right"}
             sideOffset={4}
           >
-            <DropdownMenuLabel className="text-xs text-[#828179] font-mono-custom tracking-[0.2em] uppercase px-2 py-1.5">
+            <DropdownMenuLabel className="text-xs text-muted-foreground font-mono-custom tracking-[0.2em] uppercase px-2 py-1.5">
               Organizations
             </DropdownMenuLabel>
             
@@ -120,16 +120,16 @@ export function OrgSwitcher() {
                 await authClient.organization.setActive({ organizationId: null });
                 toast.success("Switched to Personal Workspace");
               }}
-              className="gap-2 p-2 focus:bg-[#d4b87a]/10 focus:text-[#f5f5f0] cursor-pointer"
+              className="gap-2 p-2 focus:bg-primary/10 focus:text-foreground cursor-pointer"
             >
-              <div className="flex size-6 items-center justify-center rounded-sm border border-[#1f1f1e] bg-[#050505]">
-                <Plus className="size-4 text-[#828179]" />
+              <div className="flex size-6 items-center justify-center rounded-sm border border-border bg-background">
+                <Plus className="size-4 text-muted-foreground" />
               </div>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Personal Workspace</span>
-                <span className="text-[10px] text-[#828179]">Individual</span>
+                <span className="text-[10px] text-muted-foreground">Individual</span>
               </div>
-              {!currentOrg && <Check className="ml-auto size-4 text-[#d4b87a]" />}
+              {!currentOrg && <Check className="ml-auto size-4 text-primary" />}
             </DropdownMenuItem>
 
             {organizations?.map((org) => (
@@ -139,38 +139,38 @@ export function OrgSwitcher() {
                   await authClient.organization.setActive({ organizationId: org.id });
                   toast.success(`Switched to ${org.name}`);
                 }}
-                className="gap-2 p-2 focus:bg-[#d4b87a]/10 focus:text-[#f5f5f0] cursor-pointer"
+                className="gap-2 p-2 focus:bg-primary/10 focus:text-foreground cursor-pointer"
               >
-                <div className="flex size-6 items-center justify-center rounded-sm border border-[#1f1f1e] bg-[#050505]">
-                  <Building2 className="size-4 text-[#d4b87a]" />
+                <div className="flex size-6 items-center justify-center rounded-sm border border-border bg-background">
+                  <Building2 className="size-4 text-primary" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-sm font-medium">{org.name}</span>
-                  <span className="text-[10px] text-[#828179] uppercase tracking-tighter">{org.slug}</span>
+                  <span className="text-[10px] text-muted-foreground uppercase tracking-tighter">{org.slug}</span>
                 </div>
-                {currentOrg?.id === org.id && <Check className="ml-auto size-4 text-[#d4b87a]" />}
+                {currentOrg?.id === org.id && <Check className="ml-auto size-4 text-primary" />}
               </DropdownMenuItem>
             ))}
 
-            <DropdownMenuSeparator className="bg-[#1f1f1e]" />
+            <DropdownMenuSeparator className="bg-border" />
             
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <DropdownMenuItem 
                   onSelect={(e) => e.preventDefault()}
-                  className="gap-2 p-2 focus:bg-[#d4b87a]/10 focus:text-[#f5f5f0] cursor-pointer"
+                  className="gap-2 p-2 focus:bg-primary/10 focus:text-foreground cursor-pointer"
                 >
-                  <div className="flex size-6 items-center justify-center rounded-md border border-[#1f1f1e] bg-[#050505]">
-                    <Plus className="size-4 text-[#f5f5f0]" />
+                  <div className="flex size-6 items-center justify-center rounded-md border border-border bg-background">
+                    <Plus className="size-4 text-foreground" />
                   </div>
-                  <div className="font-medium text-[#f5f5f0]">Create Organization</div>
+                  <div className="font-medium text-foreground">Create Organization</div>
                 </DropdownMenuItem>
               </DialogTrigger>
-              <DialogContent className="bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0]">
+              <DialogContent className="bg-card border-border text-foreground">
                 <form onSubmit={handleCreateOrg}>
                   <DialogHeader>
-                    <DialogTitle className="text-[#f5f5f0]">Create Organization</DialogTitle>
-                    <DialogDescription className="text-[#828179]">
+                    <DialogTitle className="text-foreground">Create Organization</DialogTitle>
+                    <DialogDescription className="text-muted-foreground">
                       Set up a new institutional workspace for your team.
                     </DialogDescription>
                   </DialogHeader>
@@ -187,7 +187,7 @@ export function OrgSwitcher() {
                           }
                         }}
                         placeholder="Acme Inc."
-                        className="bg-[#050505] border-[#1f1f1e] focus-visible:ring-[#d4b87a]"
+                        className="bg-background border-border focus-visible:ring-primary"
                         required
                       />
                     </div>
@@ -198,7 +198,7 @@ export function OrgSwitcher() {
                         value={newOrgSlug}
                         onChange={(e) => setNewOrgSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
                         placeholder="acme-inc"
-                        className="bg-[#050505] border-[#1f1f1e] focus-visible:ring-[#d4b87a]"
+                        className="bg-background border-border focus-visible:ring-primary"
                         required
                       />
                     </div>
@@ -207,7 +207,7 @@ export function OrgSwitcher() {
                     <Button 
                       type="submit" 
                       disabled={isCreating}
-                      className="bg-[#d4b87a] text-[#050505] hover:bg-[#c4a86a] transition-all"
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-semibold"
                     >
                       {isCreating ? "Creating..." : "Create Workspace"}
                     </Button>

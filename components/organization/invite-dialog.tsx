@@ -60,17 +60,17 @@ export function InviteDialog() {
           <ScrambleText text="ADD_PERSONNEL" className="relative z-10" />
         </button>
       </DialogTrigger>
-      <DialogContent className="bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0]">
+      <DialogContent className="bg-card border-border text-foreground">
         <form onSubmit={handleInvite}>
           <DialogHeader>
-            <DialogTitle className="text-[#f5f5f0]">Invite Personnel</DialogTitle>
-            <DialogDescription className="text-[#828179]">
+            <DialogTitle className="text-foreground">Invite Personnel</DialogTitle>
+            <DialogDescription className="text-muted-foreground">
               Grant synthesis permissions to an institutional entity.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-6">
             <div className="grid gap-2">
-              <Label htmlFor="email" className="text-[10px] font-mono-custom uppercase tracking-widest text-[#555]">
+              <Label htmlFor="email" className="text-[10px] font-mono-custom uppercase tracking-widest text-muted-foreground/60">
                 ENTITY_UPLINK_EMAIL
               </Label>
               <Input
@@ -79,19 +79,19 @@ export function InviteDialog() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="uplink@corp.com"
-                className="bg-[#050505] border-[#1f1f1e] focus-visible:ring-[#d4b87a] h-11"
+                className="bg-background border-border focus-visible:ring-primary h-11"
                 required
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="role" className="text-[10px] font-mono-custom uppercase tracking-widest text-[#555]">
+              <Label htmlFor="role" className="text-[10px] font-mono-custom uppercase tracking-widest text-muted-foreground/60">
                 PERMISSIONS_LEVEL
               </Label>
               <Select value={role} onValueChange={(v) => setRole(v as "member" | "admin" | "owner")}>
-                <SelectTrigger className="bg-[#050505] border-[#1f1f1e] h-11">
+                <SelectTrigger className="bg-background border-border h-11">
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#0a0a0a] border-[#1f1f1e] text-[#f5f5f0]">
+                <SelectContent className="bg-card border-border text-foreground">
                   <SelectItem value="member">Personnel // Member</SelectItem>
                   <SelectItem value="admin">Institutional // Admin</SelectItem>
                   <SelectItem value="owner">System // Owner</SelectItem>
@@ -103,7 +103,7 @@ export function InviteDialog() {
             <Button
               type="submit"
               disabled={isInviting}
-              className="w-full bg-[#d4b87a] text-[#050505] hover:bg-[#c4a86a] transition-all font-mono-custom tracking-widest uppercase text-xs"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-mono-custom tracking-widest uppercase text-xs"
             >
               {isInviting ? "INITIALIZING_HANDSHAKE..." : "AUTHORIZE_INVITATION"}
             </Button>

@@ -48,10 +48,10 @@ export default function SignInPage() {
         <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* Header */}
             <div className="mb-8">
-                <h2 className="text-[#f5f5f0] text-xl font-light tracking-tight mb-1">
+                <h2 className="text-foreground text-xl font-light tracking-tight mb-1">
                     Sign In
                 </h2>
-                <p className="text-[#828179] text-xs font-mono-custom tracking-wider">
+                <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
                     Sign in to your account
                 </p>
             </div>
@@ -59,17 +59,17 @@ export default function SignInPage() {
             {/* Social Login */}
             <button
                 onClick={handleGoogleSignIn}
-                className="btn-ghost-swiss w-full flex items-center justify-center gap-3 py-3 mb-6 bg-[#0a0a0a]/50 hover:bg-[#111111] transition-all"
+                className="btn-ghost-swiss w-full flex items-center justify-center gap-3 py-3 mb-6 bg-card/50 hover:bg-secondary transition-all"
             >
                 <Icon icon="logos:google-icon" width="18" />
-                <span className="font-mono-custom text-[0.75rem] tracking-[0.05em] text-[#f5f5f0]">
+                <span className="font-mono-custom text-[0.75rem] tracking-[0.05em] text-foreground">
                     Continue with Google
                 </span>
             </button>
 
             <div className="relative flex items-center justify-center mb-6">
-                <div className="absolute w-full h-[1px] bg-[#1f1f1e]"></div>
-                <span className="relative z-10 bg-[#0a0a0a] px-3 font-mono-custom text-[0.625rem] text-[#555] tracking-widest lowercase">
+                <div className="absolute w-full h-[1px] bg-border"></div>
+                <span className="relative z-10 bg-card px-3 font-mono-custom text-[0.625rem] text-muted-foreground tracking-widest lowercase">
                     or sign in with email
                 </span>
             </div>
@@ -77,7 +77,7 @@ export default function SignInPage() {
             {/* Email Form */}
             <form onSubmit={handleEmailSignIn} className="space-y-4">
                 <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-[#828179] mb-2 tracking-[0.1em] uppercase">
+                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
                         Email address
                     </label>
                     <input
@@ -85,18 +85,18 @@ export default function SignInPage() {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none focus:border-[#d4b87a] transition-colors"
+                        className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
                         placeholder="institutional@entity.com"
                     />
                 </div>
                 <div>
                     <div className="flex justify-between items-center mb-2">
-                        <label className="block font-mono-custom text-[0.625rem] text-[#828179] tracking-[0.1em] uppercase">
+                        <label className="block font-mono-custom text-[0.625rem] text-muted-foreground tracking-[0.1em] uppercase">
                             Password
                         </label>
                         <Link
                             href="/forgot-password"
-                            className="font-mono-custom text-[0.625rem] text-[#d4b87a] hover:opacity-70 transition-opacity uppercase tracking-widest"
+                            className="font-mono-custom text-[0.625rem] text-primary hover:opacity-70 transition-opacity uppercase tracking-widest"
                         >
                             Forgot password?
                         </Link>
@@ -106,7 +106,7 @@ export default function SignInPage() {
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full bg-[#050505] border border-[#1f1f1e] p-3 text-[0.875rem] text-[#f5f5f0] outline-none focus:border-[#d4b87a] transition-colors"
+                        className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
                         placeholder="••••••••"
                     />
                 </div>
@@ -125,12 +125,12 @@ export default function SignInPage() {
             </form>
 
             {/* Footer */}
-            <div className="mt-8 pt-6 border-t border-[#1f1f1e] text-center">
-                <p className="font-mono-custom text-[0.6875rem] text-[#828179] tracking-wider uppercase">
+            <div className="mt-8 pt-6 border-t border-border text-center">
+                <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
                     Don't have an account? {" "}
                     <Link
                         href="/sign-up"
-                        className="text-[#d4b87a] hover:underline underline-offset-4"
+                        className="text-primary hover:underline underline-offset-4"
                     >
                         Sign up
                     </Link>

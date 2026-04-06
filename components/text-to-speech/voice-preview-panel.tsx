@@ -71,10 +71,10 @@ export function VoicePreviewPanel({
   };
 
   return (
-    <div className="h-full flex flex-col bg-[#050505] border-t border-[#1f1f1e] flex-1">
+    <div className="h-full flex flex-col bg-background border-t border-border flex-1">
       {/* Header */}
       <div className="p-8 pb-4">
-        <h3 className="text-[10px] text-[#555] font-mono-custom tracking-[0.2em] uppercase">[SYS_PREVIEW // AUDIO_MONITOR]</h3>
+        <h3 className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[SYS_PREVIEW // AUDIO_MONITOR]</h3>
       </div>
 
       {/* Content */}
@@ -82,8 +82,8 @@ export function VoicePreviewPanel({
         {!isReady && (
           <div className="absolute inset-0 z-10 flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
-              <Spinner className="size-6 text-[#d4b87a]" />
-              <span className="text-[9px] text-[#828179] font-mono-custom tracking-widest uppercase">Initializing Stream...</span>
+              <Spinner className="size-6 text-primary" />
+              <span className="text-[9px] text-muted-foreground font-mono-custom tracking-widest uppercase">Initializing Stream...</span>
             </div>
           </div>
         )}
@@ -98,20 +98,20 @@ export function VoicePreviewPanel({
 
       {/* Time display */}
       <div className="flex items-center justify-center py-6">
-        <p className="text-5xl font-light tabular-nums tracking-tighter text-[#f5f5f0]">
+        <p className="text-5xl font-light tabular-nums tracking-tighter text-foreground">
           {formatTime(currentTime)}&nbsp;
-          <span className="text-[#333]">
+          <span className="text-muted-foreground/30">
             /&nbsp;{formatTime(duration)}
           </span>
         </p>
       </div>
 
       {/* Footer */}
-      <div className="flex flex-col items-center p-8 border-t border-[#1f1f1e]/30 bg-[#070707]/30">
+      <div className="flex flex-col items-center p-8 border-t border-border/30 bg-secondary/30">
         <div className="grid w-full grid-cols-3 items-center">
           {/* Metadata */}
           <div className="flex min-w-0 flex-col gap-1.5">
-            <p className="truncate text-xs font-medium text-[#f5f5f0] tracking-tight">
+            <p className="truncate text-xs font-medium text-foreground tracking-tight">
               {text}
             </p>
             {selectedVoiceName && (
@@ -119,9 +119,9 @@ export function VoicePreviewPanel({
                 <VoiceAvatar
                   seed={selectedVoiceSeed ?? selectedVoiceName}
                   name={selectedVoiceName}
-                  className="size-5 border-[#d4b87a]/20"
+                  className="size-5 border-primary/20"
                 />
-                <span className="truncate text-[10px] text-[#d4b87a] font-mono-custom uppercase tracking-wider">{selectedVoiceName}</span>
+                <span className="truncate text-[10px] text-primary font-mono-custom uppercase tracking-wider">{selectedVoiceName}</span>
               </div>
             )}
           </div>
@@ -132,7 +132,7 @@ export function VoicePreviewPanel({
               type="button"
               variant="ghost"
               size="icon"
-              className="rounded-full size-10 hover:bg-[#d4b87a]/10 hover:text-[#d4b87a] text-[#555]"
+              className="rounded-full size-10 hover:bg-primary/10 hover:text-primary text-muted-foreground/60"
               onClick={() => seekBackward(10)}
               disabled={!isReady}
             >
@@ -143,7 +143,7 @@ export function VoicePreviewPanel({
               type="button"
               variant="default"
               size="icon"
-              className="size-14 rounded-full bg-[#d4b87a] hover:bg-[#c4a86a] text-black shadow-lg shadow-[#d4b87a]/10 transition-transform hover:scale-105 active:scale-95"
+              className="size-14 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/10 transition-transform hover:scale-105 active:scale-95"
               onClick={togglePlayPause}
               disabled={!isReady}
             >
@@ -158,7 +158,7 @@ export function VoicePreviewPanel({
               type="button"
               variant="ghost"
               size="icon"
-              className="rounded-full size-10 hover:bg-[#d4b87a]/10 hover:text-[#d4b87a] text-[#555]"
+              className="rounded-full size-10 hover:bg-primary/10 hover:text-primary text-muted-foreground/60"
               onClick={() => seekForward(10)}
               disabled={!isReady}
             >
@@ -172,7 +172,7 @@ export function VoicePreviewPanel({
               type="button"
               variant="outline"
               size="sm"
-              className="rounded-full border-[#1f1f1e] bg-[#0a0a0a] hover:bg-[#111] hover:border-[#d4b87a]/50 text-[#f5f5f0] font-mono-custom text-[10px] uppercase tracking-widest px-6 h-10"
+              className="rounded-full border-border bg-card hover:bg-secondary hover:border-primary/50 text-foreground font-mono-custom text-[10px] uppercase tracking-widest px-6 h-10"
               onClick={handleDownload}
               disabled={!isReady || isDownloading}
             >
