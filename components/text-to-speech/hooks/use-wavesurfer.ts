@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import WaveSurfer from "wavesurfer.js";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import WaveSurfer from 'wavesurfer.js';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface UseWaveSurferOptions {
   url?: string;
@@ -20,14 +20,9 @@ interface UseWaveSurferReturn {
   togglePlayPause: () => void;
   seekForward: (seconds?: number) => void;
   seekBackward: (seconds?: number) => void;
-};
+}
 
-export function useWaveSurfer({
-  url,
-  autoplay,
-  onReady,
-  onError,
-}: UseWaveSurferOptions) {
+export function useWaveSurfer({ url, autoplay, onReady, onError }: UseWaveSurferOptions) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
   const isMobile = useIsMobile();
@@ -49,9 +44,9 @@ export function useWaveSurfer({
 
     const ws = WaveSurfer.create({
       container: containerRef.current,
-      waveColor: "#1f1f1e", 
-      progressColor: "#d4b87a", 
-      cursorColor: "#d4b87a",
+      waveColor: '#1f1f1e',
+      progressColor: '#d4b87a',
+      cursorColor: '#d4b87a',
       cursorWidth: 2,
       barWidth: 2,
       barGap: 3,
@@ -63,7 +58,7 @@ export function useWaveSurfer({
 
     wavesurferRef.current = ws;
 
-    ws.on("ready", () => {
+    ws.on('ready', () => {
       setIsReady(true);
       setDuration(ws.getDuration());
 
@@ -71,20 +66,20 @@ export function useWaveSurfer({
       onReady?.();
     });
 
-    ws.on("play", () => setIsPlaying(true));
-    ws.on("pause", () => setIsPlaying(false));
-    ws.on("finish", () => setIsPlaying(false));
-    ws.on("timeupdate", (time) => setCurrentTime(time));
+    ws.on('play', () => setIsPlaying(true));
+    ws.on('pause', () => setIsPlaying(false));
+    ws.on('finish', () => setIsPlaying(false));
+    ws.on('timeupdate', (time) => setCurrentTime(time));
 
-    ws.on("error", (error) => {
+    ws.on('error', (error) => {
       if (destroyed) return;
-      console.error("WaveSurfer error:", error);
+      console.error('WaveSurfer error:', error);
       onError?.(new Error(String(error)));
     });
 
     ws.load(url).catch((error) => {
       if (destroyed) return;
-      console.error("WaveSurfer load error:", error);
+      console.error('WaveSurfer load error:', error);
       onError?.(new Error(String(error)));
     });
 
@@ -124,4 +119,4 @@ export function useWaveSurfer({
     seekForward,
     seekBackward,
   };
-};
+}

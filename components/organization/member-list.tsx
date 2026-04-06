@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
-import { authClient } from "@/lib/auth-client";
-import { Icon } from "@iconify/react";
-import { toast } from "sonner";
-import { 
-  DropdownMenu, 
-  DropdownMenuContent, 
-  DropdownMenuItem, 
-  DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { authClient } from '@/lib/auth-client';
+import { Icon } from '@iconify/react';
+import { toast } from 'sonner';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
 export function MemberList() {
   const { data: activeOrg, isPending } = authClient.useActiveOrganization();
@@ -23,13 +23,13 @@ export function MemberList() {
       await authClient.organization.removeMember({
         memberIdOrEmail: memberId,
       });
-      toast.success("Member removed successfully");
+      toast.success('Member removed successfully');
     } catch (error: any) {
-      toast.error(error.message || "Failed to remove member");
+      toast.error(error.message || 'Failed to remove member');
     }
   };
 
-  const handleUpdateRole = async (memberId: string, newRole: "member" | "admin" | "owner") => {
+  const handleUpdateRole = async (memberId: string, newRole: 'member' | 'admin' | 'owner') => {
     try {
       await authClient.organization.updateMemberRole({
         memberId,
@@ -37,7 +37,7 @@ export function MemberList() {
       });
       toast.success(`Role updated to ${newRole}`);
     } catch (error: any) {
-      toast.error(error.message || "Failed to update role");
+      toast.error(error.message || 'Failed to update role');
     }
   };
 
@@ -65,26 +65,29 @@ export function MemberList() {
       </div>
       <div className="divide-y divide-border">
         {members.map((member: any) => (
-          <div key={member.id} className="px-6 py-4 flex items-center justify-between text-sm group">
+          <div
+            key={member.id}
+            className="px-6 py-4 flex items-center justify-between text-sm group"
+          >
             <div className="flex items-center gap-4">
               <div className="w-8 h-8 rounded-full bg-secondary border border-border flex items-center justify-center text-primary text-xs">
-                {member.user.name?.slice(0, 1).toUpperCase() || "U"}
+                {member.user.name?.slice(0, 1).toUpperCase() || 'U'}
               </div>
               <div className="flex flex-col">
                 <span className="text-foreground tracking-tight font-medium">
-                  {member.user.name} {member.userId === session?.user.id && "(You)"}
+                  {member.user.name} {member.userId === session?.user.id && '(You)'}
                 </span>
                 <span className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase">
                   {member.user.email}
                 </span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-6">
               <span className="text-[10px] font-mono-custom text-primary bg-primary/10 px-2 py-0.5 rounded-sm border border-primary/20 uppercase tracking-widest">
                 {member.role}
               </span>
-              
+
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="text-muted-foreground/30 hover:text-primary transition-colors">
@@ -92,19 +95,19 @@ export function MemberList() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-card border-border text-foreground">
-                  <DropdownMenuItem 
-                    onClick={() => handleUpdateRole(member.id, "admin")}
+                  <DropdownMenuItem
+                    onClick={() => handleUpdateRole(member.id, 'admin')}
                     className="focus:bg-primary/10 focus:text-foreground"
                   >
                     Promote to Admin
                   </DropdownMenuItem>
-                  <DropdownMenuItem 
-                    onClick={() => handleUpdateRole(member.id, "member")}
+                  <DropdownMenuItem
+                    onClick={() => handleUpdateRole(member.id, 'member')}
                     className="focus:bg-primary/10 focus:text-foreground"
                   >
                     Demote to Member
                   </DropdownMenuItem>
-                  <DropdownMenuItem 
+                  <DropdownMenuItem
                     onClick={() => handleRemoveMember(member.id)}
                     className="focus:bg-red-500/10 focus:text-red-500 text-red-500/70"
                   >

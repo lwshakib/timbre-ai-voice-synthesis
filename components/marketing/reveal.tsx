@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
+import React, { useEffect, useRef, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -43,7 +43,10 @@ export const Reveal = ({ children, className, trigger, delay = 0 }: RevealProps)
   return (
     <div
       ref={sectionRef}
-      className={cn(isVisible ? "is-visible" : "opacity-0 translate-y-6 transition-all duration-700", className)}
+      className={cn(
+        isVisible ? 'is-visible' : 'opacity-0 translate-y-6 transition-all duration-700',
+        className
+      )}
       style={{ transitionDelay: `${delay}s` }}
       data-trigger={trigger}
     >

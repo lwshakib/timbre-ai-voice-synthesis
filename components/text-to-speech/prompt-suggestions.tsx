@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   BookOpen,
@@ -9,10 +9,10 @@ import {
   Gamepad2,
   Podcast,
   Brain,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { Badge } from "@/components/ui/badge";
-import type { LucideIcon } from "lucide-react";
+import { Badge } from '@/components/ui/badge';
+import type { LucideIcon } from 'lucide-react';
 
 const PROMPT_SUGGESTIONS: {
   label: string;
@@ -20,60 +20,56 @@ const PROMPT_SUGGESTIONS: {
   icon: LucideIcon;
 }[] = [
   {
-    label: "Narrate a story",
+    label: 'Narrate a story',
     prompt:
-      "In a village tucked between mist-covered mountains, there lived an old clockmaker whose clocks never told the right time — but they always told the truth. One rainy evening, a stranger walked in and asked for a clock that could show him his future.",
+      'In a village tucked between mist-covered mountains, there lived an old clockmaker whose clocks never told the right time — but they always told the truth. One rainy evening, a stranger walked in and asked for a clock that could show him his future.',
     icon: BookOpen,
   },
   {
-    label: "Tell a silly joke",
+    label: 'Tell a silly joke',
     prompt:
       "Why don't scientists trust atoms? Because they make up everything! And honestly, I once asked an atom if it was positive about that — it said it had lost an electron. I said, are you sure? It replied, I'm positive!",
     icon: Smile,
   },
   {
-    label: "Record an advertisement",
+    label: 'Record an advertisement',
     prompt:
       "Introducing BrightBean Coffee — the smoothest roast you'll ever taste. Sourced from high-altitude farms, slow-roasted to perfection, and delivered fresh to your door every single week.",
     icon: Mic,
   },
   {
-    label: "Speak in different languages",
+    label: 'Speak in different languages',
     prompt:
       "Hello and welcome! Today we're going on a journey around the world. Bonjour, comment allez-vous? Hola, bienvenidos a todos. Let's celebrate the beauty of language together.",
     icon: Languages,
   },
   {
-    label: "Direct a dramatic movie scene",
+    label: 'Direct a dramatic movie scene',
     prompt:
       "The rain hammered against the window as she turned to face him. You knew, didn't you? she whispered, her voice barely holding together. He stepped forward, jaw clenched. I did what I had to do.",
     icon: Clapperboard,
   },
   {
-    label: "Hear from a video game character",
+    label: 'Hear from a video game character',
     prompt:
-      "Listen up, adventurer. The realm of Ashenvale is crumbling, and the Crystal of Eternity has been shattered into seven pieces. You are the only one who can reassemble it.",
+      'Listen up, adventurer. The realm of Ashenvale is crumbling, and the Crystal of Eternity has been shattered into seven pieces. You are the only one who can reassemble it.',
     icon: Gamepad2,
   },
   {
-    label: "Introduce your podcast",
+    label: 'Introduce your podcast',
     prompt:
-      "Hey everyone, welcome back to another episode of The Curious Mind — the podcast where we dig into the stories, science, and strange ideas that shape our world.",
+      'Hey everyone, welcome back to another episode of The Curious Mind — the podcast where we dig into the stories, science, and strange ideas that shape our world.',
     icon: Podcast,
   },
   {
-    label: "Guide a meditation class",
+    label: 'Guide a meditation class',
     prompt:
       "Close your eyes and take a deep breath in. Hold it gently... and release. Feel the weight of the day slowly melting away. With each breath, you're sinking deeper into calm.",
     icon: Brain,
   },
 ];
 
-export function PromptSuggestions({
-  onSelect,
-}: {
-  onSelect: (prompt: string) => void;
-}) {
+export function PromptSuggestions({ onSelect }: { onSelect: (prompt: string) => void }) {
   return (
     <div className="space-y-4">
       <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
@@ -94,4 +90,4 @@ export function PromptSuggestions({
       </div>
     </div>
   );
-};
+}

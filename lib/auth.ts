@@ -28,15 +28,15 @@ export const auth = betterAuth({
     organization({
       async sendInvitationEmail(data) {
         const inviteLink = `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/accept-invitation/${data.id}`;
-        
+
         try {
           await resend.emails.send({
             from: 'Timbre AI <noreply@lwshakib.site>',
             to: data.email,
             subject: `You've been invited to join ${data.organization.name}`,
-            react: AuthEmailTemplate({ 
+            react: AuthEmailTemplate({
               type: 'email-verification', // Reusing template for now or could create specialized one
-              url: inviteLink 
+              url: inviteLink,
             }),
           });
         } catch (err) {
@@ -45,7 +45,7 @@ export const auth = betterAuth({
       },
       teams: {
         enabled: true,
-      }
+      },
     }),
   ],
 
@@ -124,4 +124,4 @@ export const auth = betterAuth({
       enabled: true,
     },
   },
-});
+});

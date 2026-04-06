@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface QuickActionCardProps {
   title: string;
@@ -12,18 +12,13 @@ interface QuickActionCardProps {
   href: string;
 }
 
-export function QuickActionCard({
-  title,
-  description,
-  gradient,
-  href,
-}: QuickActionCardProps) {
+export function QuickActionCard({ title, description, gradient, href }: QuickActionCardProps) {
   return (
     <div className="flex gap-4 rounded-xl border border-border bg-card p-3 hover:border-primary/50 transition-all duration-300">
       <div
         className={cn(
-          "relative h-28 w-36 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br",
-          gradient,
+          'relative h-28 w-36 shrink-0 overflow-hidden rounded-lg bg-gradient-to-br',
+          gradient
         )}
       >
         <div className="absolute inset-0 flex items-center justify-center">
@@ -39,10 +34,10 @@ export function QuickActionCard({
             {description}
           </p>
         </div>
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="w-fit h-7 text-[10px] uppercase font-mono-custom tracking-wider border-primary text-primary hover:bg-primary/10" 
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-fit h-7 text-[10px] uppercase font-mono-custom tracking-wider border-primary text-primary hover:bg-primary/10"
           asChild
         >
           <Link href={href}>
@@ -52,5 +47,5 @@ export function QuickActionCard({
         </Button>
       </div>
     </div>
-  )
+  );
 }

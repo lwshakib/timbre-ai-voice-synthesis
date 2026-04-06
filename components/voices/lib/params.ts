@@ -1,8 +1,7 @@
-import { createSearchParamsCache, parseAsString } from "nuqs/server";
+import { createSearchParamsCache, parseAsString } from 'nuqs/server';
 
 export const voicesSearchParams = {
-  query: parseAsString.withDefault(""),
+  query: parseAsString.withDefault(''),
 };
 
-export const voicesSearchParamsCache =
-  createSearchParamsCache(voicesSearchParams);
+export const voicesSearchParamsCache = createSearchParamsCache(voicesSearchParams);

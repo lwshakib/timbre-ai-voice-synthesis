@@ -1,7 +1,7 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { getPresignedUploadUrl } from "@/lib/s3";
-import { NextResponse } from "next/server";
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { getPresignedUploadUrl } from '@/lib/s3';
+import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
   const session = await auth.api.getSession({
@@ -9,18 +9,18 @@ export async function GET(request: Request) {
   });
 
   if (!session?.user) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return new NextResponse('Unauthorized', { status: 401 });
   }
 
   const { searchParams } = new URL(request.url);
-  const contentType = searchParams.get("contentType");
-  const fileName = searchParams.get("fileName");
+  const contentType = searchParams.get('contentType');
+  const fileName = searchParams.get('fileName');
 
   if (!contentType) {
-    return new NextResponse("Missing contentType", { status: 400 });
+    return new NextResponse('Missing contentType', { status: 400 });
   }
 
-  const fileExtension = contentType.split("/")[1] || "png";
+  const fileExtension = contentType.split('/')[1] || 'png';
   const key = `avatars/${session.user.id}-${Date.now()}.${fileExtension}`;
 
   try {
@@ -31,7 +31,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ uploadUrl, key });
   } catch (error) {
-    console.error("S3 Presigned URL Error:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    console.error('S3 Presigned URL Error:', error);
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

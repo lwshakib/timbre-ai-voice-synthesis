@@ -1,28 +1,29 @@
-import type { Metadata } from "next";
-import { DM_Sans, Geist_Mono } from "next/font/google";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/sonner";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from 'next';
+import { DM_Sans, Geist_Mono } from 'next/font/google';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/sonner';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  weight: ["200", "300", "400", "500", "700"],
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+  weight: ['200', '300', '400', '500', '700'],
 });
 
 const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "swap",
-  weight: ["300", "400", "500"],
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  display: 'swap',
+  weight: ['300', '400', '500'],
 });
 
 export const metadata: Metadata = {
-  title: "Timbre AI — Secondary Liquidity & Portfolio Intelligence",
-  description: "Private equity structured for exit. Institutional secondary market and AI-predicted exit topography.",
+  title: 'Timbre AI — Secondary Liquidity & Portfolio Intelligence',
+  description:
+    'Private equity structured for exit. Institutional secondary market and AI-predicted exit topography.',
 };
 
 export default function RootLayout({

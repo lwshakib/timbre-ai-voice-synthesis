@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +16,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   type LucideIcon,
   Home,
@@ -27,12 +27,12 @@ import {
   Headphones,
   User as UserIcon,
   LogOut,
-} from "lucide-react";
-import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
-import { VoiceCreateDialog } from "@/components/voices/voice-create-dialog";
-import { OrgSwitcher } from "@/components/organization/org-switcher";
-import { Logo } from "@/components/ui/logo";
+} from 'lucide-react';
+import Link from 'next/link';
+import { authClient } from '@/lib/auth-client';
+import { VoiceCreateDialog } from '@/components/voices/voice-create-dialog';
+import { OrgSwitcher } from '@/components/organization/org-switcher';
+import { Logo } from '@/components/ui/logo';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -43,20 +43,20 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
 
 interface MenuItem {
   title: string;
   url?: string;
   icon: LucideIcon;
   onClick?: () => void;
-};
+}
 
 interface NavSectionProps {
   label?: string;
   items: MenuItem[];
   pathname: string;
-};
+}
 
 function NavSection({ label, items, pathname }: NavSectionProps) {
   return (
@@ -74,8 +74,8 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
                 asChild={!!item.url}
                 isActive={
                   item.url
-                    ? item.url === "/dashboard"
-                      ? pathname === "/dashboard"
+                    ? item.url === '/dashboard'
+                      ? pathname === '/dashboard'
                       : pathname.startsWith(item.url)
                     : false
                 }
@@ -110,22 +110,22 @@ export function DashboardSidebar() {
 
   const mainMenuItems: MenuItem[] = [
     {
-      title: "Dashboard",
-      url: "/dashboard",
+      title: 'Dashboard',
+      url: '/dashboard',
       icon: Home,
     },
     {
-      title: "Explore voices",
-      url: "/voices",
+      title: 'Explore voices',
+      url: '/voices',
       icon: LayoutGrid,
     },
     {
-      title: "Text to speech",
-      url: "/text-to-speech",
+      title: 'Text to speech',
+      url: '/text-to-speech',
       icon: AudioLines,
     },
     {
-      title: "Voice cloning",
+      title: 'Voice cloning',
       icon: Volume2,
       onClick: () => setVoiceDialogOpen(true),
     },
@@ -133,13 +133,13 @@ export function DashboardSidebar() {
 
   const othersMenuItems: MenuItem[] = [
     {
-      title: "Settings",
-      url: "/settings",
+      title: 'Settings',
+      url: '/settings',
       icon: Settings,
     },
     {
-      title: "Help and support",
-      url: "mailto:support@timbreai.build",
+      title: 'Help and support',
+      url: 'mailto:support@timbreai.build',
       icon: Headphones,
     },
   ];
@@ -148,10 +148,7 @@ export function DashboardSidebar() {
 
   return (
     <>
-      <VoiceCreateDialog
-        open={voiceDialogOpen}
-        onOpenChange={setVoiceDialogOpen}
-      />
+      <VoiceCreateDialog open={voiceDialogOpen} onOpenChange={setVoiceDialogOpen} />
       <Sidebar collapsible="icon" className="border-r border-border bg-background">
         <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
           <div className="flex items-center gap-3">
@@ -192,13 +189,11 @@ export function DashboardSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
-            
+
             <SidebarMenuItem className="mt-2 pt-2">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <SidebarMenuButton
-                    className="h-10 px-3 text-[13px] tracking-tight font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-all"
-                  >
+                  <SidebarMenuButton className="h-10 px-3 text-[13px] tracking-tight font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-all">
                     <LogOut size={18} />
                     <span>Sign Out</span>
                   </SidebarMenuButton>
@@ -207,7 +202,8 @@ export function DashboardSidebar() {
                   <AlertDialogHeader>
                     <AlertDialogTitle>Sign Out</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Are you sure you want to sign out of your account? Your current session will be terminated.
+                      Are you sure you want to sign out of your account? Your current session will
+                      be terminated.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -215,7 +211,7 @@ export function DashboardSidebar() {
                     <AlertDialogAction
                       onClick={async () => {
                         await authClient.signOut();
-                        window.location.href = "/sign-in";
+                        window.location.href = '/sign-in';
                       }}
                       className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                     >

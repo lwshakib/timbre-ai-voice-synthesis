@@ -1,10 +1,10 @@
-import { PageHeader } from "@/components/dashboard/page-header";
-import { TextToSpeechView } from "@/components/text-to-speech/text-to-speech-view";
-import { Metadata } from "next";
+import { PageHeader } from '@/components/dashboard/page-header';
+import { TextToSpeechView } from '@/components/text-to-speech/text-to-speech-view';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Text to Speech | Timbre AI",
-  description: "Generate high-quality AI voices from text.",
+  title: 'Text to Speech | Timbre AI',
+  description: 'Generate high-quality AI voices from text.',
 };
 
 export default async function TextToSpeechPage({

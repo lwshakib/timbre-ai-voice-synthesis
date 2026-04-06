@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+dist/
+build/
+.yarn/
+
+# next.js
+.next/
+out/
+
+# vercel
+.vercel
+
+# tests
+coverage/
+
+# environment files
+.env*
+
+# generated code
+generated/
+prisma/
+
+# binary / assets
+public/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+
+# lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lock
+bun.lockb

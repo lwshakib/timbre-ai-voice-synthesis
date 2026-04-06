@@ -1,19 +1,16 @@
-"use client";
+'use client';
 
-import { Coins } from "lucide-react";
-import { useStore } from "@tanstack/react-form";
+import { Coins } from 'lucide-react';
+import { useStore } from '@tanstack/react-form';
 
-import { VoiceSelectorButton } from "./voice-selector-button";
-import { Badge } from "@/components/ui/badge";
-import { Textarea } from "@/components/ui/textarea";
+import { VoiceSelectorButton } from './voice-selector-button';
+import { Badge } from '@/components/ui/badge';
+import { Textarea } from '@/components/ui/textarea';
 
-import { 
-  COST_PER_UNIT, 
-  TEXT_MAX_LENGTH
-} from "./data/constants";
-import { GenerateButton } from "./generate-button";
-import { PromptSuggestions } from "./prompt-suggestions";
-import { useTTSForm } from "./text-to-speech-form";
+import { COST_PER_UNIT, TEXT_MAX_LENGTH } from './data/constants';
+import { GenerateButton } from './generate-button';
+import { PromptSuggestions } from './prompt-suggestions';
+import { useTTSForm } from './text-to-speech-form';
 
 export function TextInputPanel() {
   const form = useTTSForm();
@@ -60,13 +57,16 @@ export function TextInputPanel() {
           <div className="flex flex-col gap-6 w-full">
             {text.length > 0 ? (
               <div className="flex items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <Badge variant="outline" className="gap-2 border-dashed border-primary/30 bg-primary/5 text-primary py-1.5 px-3">
+                <Badge
+                  variant="outline"
+                  className="gap-2 border-dashed border-primary/30 bg-primary/5 text-primary py-1.5 px-3"
+                >
                   <Coins className="size-3.5" />
                   <span className="text-[10px] font-mono-custom tracking-[0.1em] uppercase">
                     <span className="tabular-nums">
                       ${(text.length * COST_PER_UNIT).toFixed(4)}
-                    </span>&nbsp;
-                    [Cost]
+                    </span>
+                    &nbsp; [Cost]
                   </span>
                 </Badge>
                 <div className="flex items-center gap-6">
@@ -84,13 +84,11 @@ export function TextInputPanel() {
                 </div>
               </div>
             ) : (
-              <PromptSuggestions
-                onSelect={(prompt) => form.setFieldValue("text", prompt)}
-              />
+              <PromptSuggestions onSelect={(prompt) => form.setFieldValue('text', prompt)} />
             )}
           </div>
         </div>
       </div>
     </div>
   );
-};
+}

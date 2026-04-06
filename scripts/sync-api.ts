@@ -8,21 +8,21 @@
  *   npm run sync-api
  */
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import "dotenv/config";
-import openapiTS, { astToString } from "openapi-typescript";
+import 'dotenv/config';
+import openapiTS, { astToString } from 'openapi-typescript';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUTPUT_PATH = path.resolve(__dirname, "../types/chatterbox-api.d.ts");
+const OUTPUT_PATH = path.resolve(__dirname, '../types/chatterbox-api.d.ts');
 
 async function main() {
   const apiUrl = process.env.CHATTERBOX_API_URL;
 
   if (!apiUrl) {
-    console.error("Error: CHATTERBOX_API_URL environment variable is required");
+    console.error('Error: CHATTERBOX_API_URL environment variable is required');
     process.exit(1);
   }
 
@@ -53,6 +53,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("Failed to sync API types:", err);
+  console.error('Failed to sync API types:', err);
   process.exit(1);
 });

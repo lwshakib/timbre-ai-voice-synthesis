@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useRef, useCallback, useEffect } from "react";
-import type RecordRTCType from "recordrtc";
-import WaveSurfer from "wavesurfer.js";
-import RecordPlugin from "wavesurfer.js/dist/plugins/record.esm.js";
+import { useState, useRef, useCallback, useEffect } from 'react';
+import type RecordRTCType from 'recordrtc';
+import WaveSurfer from 'wavesurfer.js';
+import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js';
 
 export function useAudioRecorder() {
   const [isRecording, setIsRecording] = useState(false);
@@ -50,8 +50,8 @@ export function useAudioRecorder() {
 
     const ws = WaveSurfer.create({
       container: containerRef.current,
-      waveColor: "rgba(212, 184, 122, 0.5)", // Themed color
-      progressColor: "#d4b87a",
+      waveColor: 'rgba(212, 184, 122, 0.5)', // Themed color
+      progressColor: '#d4b87a',
       height: 80,
       barWidth: 2,
       barGap: 3,
@@ -66,7 +66,7 @@ export function useAudioRecorder() {
       RecordPlugin.create({
         scrollingWaveform: true,
         continuousWaveform: true,
-      }),
+      })
     );
 
     const handle = record.renderMicStream(streamRef.current);
@@ -83,18 +83,16 @@ export function useAudioRecorder() {
       setAudioBlob(null);
       setElapsedTime(0);
 
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        audio: true
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
       });
       streamRef.current = stream;
 
-      const { default: RecordRTC, StereoAudioRecorder } = await import(
-        "recordrtc"
-      );
+      const { default: RecordRTC, StereoAudioRecorder } = await import('recordrtc');
 
       const recorder = new RecordRTC(stream, {
         recorderType: StereoAudioRecorder,
-        mimeType: "audio/wav",
+        mimeType: 'audio/wav',
         numberOfAudioChannels: 1,
         desiredSampRate: 44100,
       });
@@ -110,12 +108,12 @@ export function useAudioRecorder() {
     } catch (err) {
       cleanup();
 
-      if (err instanceof DOMException && err.name === "NotAllowedError") {
+      if (err instanceof DOMException && err.name === 'NotAllowedError') {
         setError(
-          "Microphone access denied. Please allow microphone access in your browser settings.",
+          'Microphone access denied. Please allow microphone access in your browser settings.'
         );
       } else {
-        setError("Failed to access microphone. Please check your device.");
+        setError('Failed to access microphone. Please check your device.');
       }
     }
   }, [cleanup]);
@@ -133,7 +131,7 @@ export function useAudioRecorder() {
         onBlob?.(blob);
       });
     },
-    [cleanup],
+    [cleanup]
   );
 
   const resetRecording = useCallback(() => {

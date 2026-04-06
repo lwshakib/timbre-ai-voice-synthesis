@@ -1,21 +1,15 @@
-import { Headphones, ThumbsUp } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
-import { cn } from "@/lib/utils";
+import { Headphones, ThumbsUp } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 
-export function PageHeader({
-  title,
-  className,
-}: {
-  title: string;
-  className?: string;
-}) {
+export function PageHeader({ title, className }: { title: string; className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-between border-b border-border bg-background/50 backdrop-blur-md px-4 py-3 sticky top-0 z-50",
-        className,
+        'flex items-center justify-between border-b border-border bg-background/50 backdrop-blur-md px-4 py-3 sticky top-0 z-50',
+        className
       )}
     >
       <div className="flex items-center gap-3">
@@ -28,13 +22,23 @@ export function PageHeader({
         </div>
       </div>
       <div className="flex items-center gap-2">
-         <Button variant="outline" size="sm" asChild className="h-8 border-border bg-card text-muted-foreground hover:text-primary">
-            <Link href="mailto:support@timbreai.build">
-              <ThumbsUp className="size-3.5 mr-2" />
-              <span className="hidden md:block text-[11px]">Feedback</span>
-            </Link>
-         </Button>
-         <Button variant="outline" size="sm" asChild className="h-8 border-border bg-card text-muted-foreground hover:text-primary">
+        <Button
+          variant="outline"
+          size="sm"
+          asChild
+          className="h-8 border-border bg-card text-muted-foreground hover:text-primary"
+        >
+          <Link href="mailto:support@timbreai.build">
+            <ThumbsUp className="size-3.5 mr-2" />
+            <span className="hidden md:block text-[11px]">Feedback</span>
+          </Link>
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          asChild
+          className="h-8 border-border bg-card text-muted-foreground hover:text-primary"
+        >
           <Link href="mailto:support@timbreai.build">
             <Headphones className="size-3.5 mr-2" />
             <span className="hidden md:block text-[11px]">Help</span>

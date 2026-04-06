@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useCallback } from "react";
-import { useQueryState } from "nuqs";
-import { toast } from "sonner";
+import React, { useEffect, useState, useCallback } from 'react';
+import { useQueryState } from 'nuqs';
+import { toast } from 'sonner';
 
-import { VoicesToolbar } from "@/components/voices/voices-toolbar";
-import { VoicesList } from "@/components/voices/voices-list";
-import { voicesSearchParams } from "@/components/voices/lib/params";
-import { api } from "@/lib/api-client";
-import { VoiceItem } from "@/components/voices/voice-card";
-import { Spinner } from "@/components/ui/spinner";
-import { PageHeader } from "@/components/dashboard/page-header";
+import { VoicesToolbar } from '@/components/voices/voices-toolbar';
+import { VoicesList } from '@/components/voices/voices-list';
+import { voicesSearchParams } from '@/components/voices/lib/params';
+import { api } from '@/lib/api-client';
+import { VoiceItem } from '@/components/voices/voice-card';
+import { Spinner } from '@/components/ui/spinner';
+import { PageHeader } from '@/components/dashboard/page-header';
 
 interface VoicesData {
   custom: VoiceItem[];
@@ -18,19 +18,19 @@ interface VoicesData {
 }
 
 export default function VoicesPage() {
-  const [query] = useQueryState("query", voicesSearchParams.query);
+  const [query] = useQueryState('query', voicesSearchParams.query);
   const [data, setData] = useState<VoicesData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchVoices = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await api.get<VoicesData>("/api/voices", {
+      const response = await api.get<VoicesData>('/api/voices', {
         params: { query },
       });
       setData(response);
     } catch (error) {
-      toast.error("Failed to fetch voices");
+      toast.error('Failed to fetch voices');
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -44,7 +44,7 @@ export default function VoicesPage() {
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-background">
       <PageHeader title="Voices" className="lg:hidden" />
-      
+
       <div className="flex-1 p-6 lg:p-16 max-w-[1400px] mx-auto w-full space-y-12">
         <VoicesToolbar />
 

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Dialog,
@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerClose,
@@ -17,12 +17,12 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { VoiceCreateForm } from "./voice-create-form";
-import { Button } from "@/components/ui/button";
-import { useCallback } from "react";
-import { toast } from "sonner";
+} from '@/components/ui/drawer';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { VoiceCreateForm } from './voice-create-form';
+import { Button } from '@/components/ui/button';
+import { useCallback } from 'react';
+import { toast } from 'sonner';
 
 interface VoiceCreateDialogProps {
   children?: React.ReactNode;
@@ -30,19 +30,12 @@ interface VoiceCreateDialogProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-export function VoiceCreateDialog({
-  children,
-  open,
-  onOpenChange,
-}: VoiceCreateDialogProps) {
+export function VoiceCreateDialog({ children, open, onOpenChange }: VoiceCreateDialogProps) {
   const isMobile = useIsMobile();
 
-  const handleError = useCallback(
-    (message: string) => {
-      toast.error(message);
-    },
-    [],
-  );
+  const handleError = useCallback((message: string) => {
+    toast.error(message);
+  }, []);
 
   if (isMobile) {
     return (
@@ -52,8 +45,7 @@ export function VoiceCreateDialog({
           <DrawerHeader>
             <DrawerTitle className="text-foreground">Create custom voice</DrawerTitle>
             <DrawerDescription className="text-muted-foreground">
-              Upload or record an audio sample to add a new voice to your
-              library.
+              Upload or record an audio sample to add a new voice to your library.
             </DrawerDescription>
           </DrawerHeader>
           <VoiceCreateForm
@@ -63,7 +55,12 @@ export function VoiceCreateDialog({
               <DrawerFooter className="pt-2">
                 {submit}
                 <DrawerClose asChild>
-                  <Button variant="outline" className="border-border text-foreground hover:bg-secondary">Cancel</Button>
+                  <Button
+                    variant="outline"
+                    className="border-border text-foreground hover:bg-secondary"
+                  >
+                    Cancel
+                  </Button>
                 </DrawerClose>
               </DrawerFooter>
             )}
@@ -71,7 +68,7 @@ export function VoiceCreateDialog({
         </DrawerContent>
       </Drawer>
     );
-  };
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -87,4 +84,4 @@ export function VoiceCreateDialog({
       </DialogContent>
     </Dialog>
   );
-};
+}

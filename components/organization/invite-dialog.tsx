@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
+import React from 'react';
+import { authClient } from '@/lib/auth-client';
+import { toast } from 'sonner';
 import {
   Dialog,
   DialogContent,
@@ -11,26 +11,26 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@iconify/react";
-import { ScrambleText } from "@/components/marketing/scramble-text";
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Icon } from '@iconify/react';
+import { ScrambleText } from '@/components/marketing/scramble-text';
 
 export function InviteDialog() {
-  const [email, setEmail] = React.useState("");
-  const [role, setRole] = React.useState<"member" | "admin" | "owner">("member");
+  const [email, setEmail] = React.useState('');
+  const [role, setRole] = React.useState<'member' | 'admin' | 'owner'>('member');
   const [isOpen, setIsOpen] = React.useState(false);
   const [isInviting, setIsInviting] = React.useState(false);
-  
+
   const handleInvite = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
@@ -43,10 +43,10 @@ export function InviteDialog() {
       });
       toast.success(`Invitation sent to ${email}`);
       setIsOpen(false);
-      setEmail("");
-      setRole("member");
+      setEmail('');
+      setRole('member');
     } catch (error: any) {
-      toast.error(error.message || "Failed to send invitation");
+      toast.error(error.message || 'Failed to send invitation');
     } finally {
       setIsInviting(false);
     }
@@ -70,7 +70,10 @@ export function InviteDialog() {
           </DialogHeader>
           <div className="grid gap-4 py-6">
             <div className="grid gap-2">
-              <Label htmlFor="email" className="text-[10px] font-mono-custom uppercase tracking-widest text-muted-foreground/60">
+              <Label
+                htmlFor="email"
+                className="text-[10px] font-mono-custom uppercase tracking-widest text-muted-foreground/60"
+              >
                 ENTITY_UPLINK_EMAIL
               </Label>
               <Input
@@ -84,10 +87,16 @@ export function InviteDialog() {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="role" className="text-[10px] font-mono-custom uppercase tracking-widest text-muted-foreground/60">
+              <Label
+                htmlFor="role"
+                className="text-[10px] font-mono-custom uppercase tracking-widest text-muted-foreground/60"
+              >
                 PERMISSIONS_LEVEL
               </Label>
-              <Select value={role} onValueChange={(v) => setRole(v as "member" | "admin" | "owner")}>
+              <Select
+                value={role}
+                onValueChange={(v) => setRole(v as 'member' | 'admin' | 'owner')}
+              >
                 <SelectTrigger className="bg-background border-border h-11">
                   <SelectValue placeholder="Select role" />
                 </SelectTrigger>
@@ -105,7 +114,7 @@ export function InviteDialog() {
               disabled={isInviting}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all font-mono-custom tracking-widest uppercase text-xs"
             >
-              {isInviting ? "INITIALIZING_HANDSHAKE..." : "AUTHORIZE_INVITATION"}
+              {isInviting ? 'INITIALIZING_HANDSHAKE...' : 'AUTHORIZE_INVITATION'}
             </Button>
           </DialogFooter>
         </form>

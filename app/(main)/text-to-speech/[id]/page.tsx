@@ -1,9 +1,9 @@
-import { TextToSpeechDetailView } from "@/components/text-to-speech/text-to-speech-detail-view";
-import { Metadata } from "next";
+import { TextToSpeechDetailView } from '@/components/text-to-speech/text-to-speech-detail-view';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Text to Speech Detail | Timbre AI",
-  description: "View generated AI voice audio.",
+  title: 'Text to Speech Detail | Timbre AI',
+  description: 'View generated AI voice audio.',
 };
 
 export default async function TextToSpeechDetailPage({

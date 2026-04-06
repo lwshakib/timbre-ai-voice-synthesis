@@ -16,10 +16,7 @@ interface AuthEmailTemplateProps {
   url: string;
 }
 
-export const AuthEmailTemplate = ({
-  type,
-  url,
-}: AuthEmailTemplateProps) => {
+export const AuthEmailTemplate = ({ type, url }: AuthEmailTemplateProps) => {
   const isVerification = type === 'email-verification';
   const previewText = isVerification
     ? 'Verify your email for Timbre AI'
@@ -38,10 +35,7 @@ export const AuthEmailTemplate = ({
               : 'Trouble signing in? No worries! Click the button below to reset your password and get back to creating amazing voices.'}
           </Text>
           <Section style={buttonContainer}>
-            <Button
-              style={button}
-              href={url}
-            >
+            <Button style={button} href={url}>
               {isVerification ? 'Verify Email' : 'Reset Password'}
             </Button>
           </Section>

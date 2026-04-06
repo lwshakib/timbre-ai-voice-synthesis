@@ -18,7 +18,7 @@ assignees: []
 - [ ] UI/UX Components
 - [ ] Authentication & Security
 - [ ] API & Server Actions
-- [ ] Other: **__**
+- [ ] Other: **\_\_**
 
 ## 🔁 Reproduction Steps
 

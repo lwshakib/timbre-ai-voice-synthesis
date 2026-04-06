@@ -1,30 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useQueryState } from "nuqs";
-import { useDebouncedCallback } from "use-debounce";
-import { Search, Sparkles } from "lucide-react";
+import { useState } from 'react';
+import { useQueryState } from 'nuqs';
+import { useDebouncedCallback } from 'use-debounce';
+import { Search, Sparkles } from 'lucide-react';
 
-import { Button } from "@/components/ui/button";
-import {
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon,
-} from "@/components/ui/input-group";
-import { voicesSearchParams } from "@/components/voices/lib/params";
-import { VoiceCreateDialog } from "./voice-create-dialog";
+import { Button } from '@/components/ui/button';
+import { InputGroup, InputGroupInput, InputGroupAddon } from '@/components/ui/input-group';
+import { voicesSearchParams } from '@/components/voices/lib/params';
+import { VoiceCreateDialog } from './voice-create-dialog';
 
 export function VoicesToolbar() {
-  const [query, setQuery] = useQueryState(
-    "query",
-    voicesSearchParams.query
-  );
+  const [query, setQuery] = useQueryState('query', voicesSearchParams.query);
   const [localQuery, setLocalQuery] = useState(query);
 
-  const debouncedSetQuery = useDebouncedCallback(
-    (value: string) => setQuery(value),
-    300,
-  );
+  const debouncedSetQuery = useDebouncedCallback((value: string) => setQuery(value), 300);
 
   return (
     <div className="space-y-6">
@@ -55,7 +45,10 @@ export function VoicesToolbar() {
           </InputGroup>
           <div className="ml-auto hidden lg:block">
             <VoiceCreateDialog>
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-10 rounded-full">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-10 rounded-full"
+              >
                 <Sparkles className="size-4 mr-2" />
                 Clone New Voice
               </Button>
@@ -63,7 +56,10 @@ export function VoicesToolbar() {
           </div>
           <div className="lg:hidden">
             <VoiceCreateDialog>
-              <Button size="icon" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full size-8">
+              <Button
+                size="icon"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full size-8"
+              >
                 <Sparkles className="size-4" />
               </Button>
             </VoiceCreateDialog>
@@ -72,4 +68,4 @@ export function VoicesToolbar() {
       </div>
     </div>
   );
-};
+}

@@ -1,13 +1,10 @@
-import { authClient } from "./auth-client";
+import { authClient } from './auth-client';
 
 interface FetchOptions extends RequestInit {
   params?: Record<string, string | number | boolean>;
 }
 
-export async function apiClient<T>(
-  endpoint: string,
-  options: FetchOptions = {}
-): Promise<T> {
+export async function apiClient<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
   const { params, headers, ...rest } = options;
 
   let url = endpoint;
@@ -21,7 +18,7 @@ export async function apiClient<T>(
 
   const response = await fetch(url, {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       ...headers,
     },
     ...rest,
@@ -29,27 +26,26 @@ export async function apiClient<T>(
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
-    throw new Error(error.message || "An error occurred");
+    throw new Error(error.message || 'An error occurred');
   }
 
   return response.json();
 }
 
 export const api = {
-  get: <T>(url: string, options?: FetchOptions) =>
-    apiClient<T>(url, { ...options, method: "GET" }),
+  get: <T>(url: string, options?: FetchOptions) => apiClient<T>(url, { ...options, method: 'GET' }),
   post: <T>(url: string, body?: any, options?: FetchOptions) =>
     apiClient<T>(url, {
       ...options,
-      method: "POST",
+      method: 'POST',
       body: body instanceof FormData ? body : JSON.stringify(body),
     }),
   patch: <T>(url: string, body?: any, options?: FetchOptions) =>
     apiClient<T>(url, {
       ...options,
-      method: "PATCH",
+      method: 'PATCH',
       body: body instanceof FormData ? body : JSON.stringify(body),
     }),
   delete: <T>(url: string, options?: FetchOptions) =>
-    apiClient<T>(url, { ...options, method: "DELETE" }),
+    apiClient<T>(url, { ...options, method: 'DELETE' }),
 };

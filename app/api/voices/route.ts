@@ -1,15 +1,15 @@
-import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import prisma from "@/lib/prisma";
-import { VoiceVariant, VoiceCategory } from "@/generated/prisma/enums";
-import { uploadAudio, getSignedAudioUrl } from "@/lib/s3";
-import { z } from "zod";
+import { NextResponse } from 'next/server';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import prisma from '@/lib/prisma';
+import { VoiceVariant, VoiceCategory } from '@/generated/prisma/enums';
+import { uploadAudio, getSignedAudioUrl } from '@/lib/s3';
+import { z } from 'zod';
 
 const createVoiceSchema = z.object({
-  name: z.string().min(1, "Voice name is required"),
+  name: z.string().min(1, 'Voice name is required'),
   category: z.nativeEnum(VoiceCategory).default(VoiceCategory.GENERAL),
-  language: z.string().min(1, "Language is required"),
+  language: z.string().min(1, 'Language is required'),
   description: z.string().optional(),
 });
 
@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   });
 
   const { searchParams } = new URL(request.url);
-  const query = searchParams.get("query")?.trim();
+  const query = searchParams.get('query')?.trim();
 
   const searchFilter = query
     ? {
@@ -27,13 +27,13 @@ export async function GET(request: Request) {
           {
             name: {
               contains: query,
-              mode: "insensitive" as const,
+              mode: 'insensitive' as const,
             },
           },
           {
             description: {
               contains: query,
-              mode: "insensitive" as const,
+              mode: 'insensitive' as const,
             },
           },
         ],
@@ -47,13 +47,13 @@ export async function GET(request: Request) {
           variant: VoiceVariant.CUSTOM,
           OR: [
             { userId: session?.user?.id },
-            { 
+            {
               organizationId: session?.session?.activeOrganizationId || undefined,
-            }
+            },
           ],
           ...searchFilter,
         },
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: 'desc' },
         select: {
           id: true,
           name: true,
@@ -70,7 +70,7 @@ export async function GET(request: Request) {
           variant: VoiceVariant.SYSTEM,
           ...searchFilter,
         },
-        orderBy: { name: "asc" },
+        orderBy: { name: 'asc' },
         select: {
           id: true,
           name: true,
@@ -84,20 +84,24 @@ export async function GET(request: Request) {
     ]);
 
     const [customWithUrls, systemWithUrls] = await Promise.all([
-      Promise.all(custom.map(async (v) => ({
-        ...v,
-        url: v.path ? await getSignedAudioUrl(v.path) : null,
-      }))),
-      Promise.all(system.map(async (v) => ({
-        ...v,
-        url: v.path ? await getSignedAudioUrl(v.path) : null,
-      }))),
+      Promise.all(
+        custom.map(async (v) => ({
+          ...v,
+          url: v.path ? await getSignedAudioUrl(v.path) : null,
+        }))
+      ),
+      Promise.all(
+        system.map(async (v) => ({
+          ...v,
+          url: v.path ? await getSignedAudioUrl(v.path) : null,
+        }))
+      ),
     ]);
 
     return NextResponse.json({ custom: customWithUrls, system: systemWithUrls });
   } catch (error) {
-    console.error("Failed to fetch voices:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error('Failed to fetch voices:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
 
@@ -107,30 +111,33 @@ export async function POST(request: Request) {
   });
 
   if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
     const { searchParams } = new URL(request.url);
     const validation = createVoiceSchema.safeParse({
-      name: searchParams.get("name"),
-      category: searchParams.get("category") || undefined,
-      language: searchParams.get("language"),
-      description: searchParams.get("description") || undefined,
+      name: searchParams.get('name'),
+      category: searchParams.get('category') || undefined,
+      language: searchParams.get('language'),
+      description: searchParams.get('description') || undefined,
     });
 
     if (!validation.success) {
-      return NextResponse.json({ error: "Invalid input", issues: validation.error.issues }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Invalid input', issues: validation.error.issues },
+        { status: 400 }
+      );
     }
 
     const { name, category, language, description } = validation.data;
     const fileBuffer = await request.arrayBuffer();
 
     if (!fileBuffer.byteLength) {
-      return NextResponse.json({ error: "Please upload an audio file" }, { status: 400 });
+      return NextResponse.json({ error: 'Please upload an audio file' }, { status: 400 });
     }
 
-    const contentType = request.headers.get("content-type") || "audio/wav";
+    const contentType = request.headers.get('content-type') || 'audio/wav';
     const activeOrgId = session.session.activeOrganizationId;
 
     const voice = await prisma.voice.create({
@@ -145,7 +152,7 @@ export async function POST(request: Request) {
       },
     });
 
-    const path = activeOrgId 
+    const path = activeOrgId
       ? `voices/orgs/${activeOrgId}/${voice.id}.wav`
       : `voices/users/${session.user.id}/${voice.id}.wav`;
 
@@ -160,10 +167,12 @@ export async function POST(request: Request) {
       data: { path },
     });
 
-    return NextResponse.json({ id: voice.id, name, message: "Voice created successfully" }, { status: 201 });
+    return NextResponse.json(
+      { id: voice.id, name, message: 'Voice created successfully' },
+      { status: 201 }
+    );
   } catch (error) {
-    console.error("Voice creation error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error('Voice creation error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-

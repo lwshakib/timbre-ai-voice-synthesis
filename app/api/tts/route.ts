@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import prisma from "@/lib/prisma";
-import { uploadAudio, getSignedAudioUrl } from "@/lib/s3";
+import { NextResponse } from 'next/server';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import prisma from '@/lib/prisma';
+import { uploadAudio, getSignedAudioUrl } from '@/lib/s3';
 
 const CHATTERBOX_API_URL = process.env.CHATTERBOX_API_URL;
 const CHATTERBOX_API_KEY = process.env.CHATTERBOX_API_KEY;
@@ -13,11 +13,11 @@ export async function GET(request: Request) {
   });
 
   if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   const { searchParams } = new URL(request.url);
-  const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
+  const limit = Math.min(parseInt(searchParams.get('limit') || '10'), 50);
 
   try {
     const activeOrgId = session.session.activeOrganizationId;
@@ -26,13 +26,13 @@ export async function GET(request: Request) {
       where: {
         OR: [
           { userId: session.user.id },
-          { 
-            organizationId: activeOrgId || undefined 
-          }
+          {
+            organizationId: activeOrgId || undefined,
+          },
         ],
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
       take: limit,
       select: {
@@ -55,8 +55,8 @@ export async function GET(request: Request) {
 
     return NextResponse.json(generationsWithUrls);
   } catch (error) {
-    console.error("Failed to fetch generations:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error('Failed to fetch generations:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
 
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
   });
 
   if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     } = body;
 
     if (!text || !voiceId) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     const voice = await prisma.voice.findUnique({
@@ -96,14 +96,14 @@ export async function POST(request: Request) {
     });
 
     if (!voice || !voice.path) {
-      return NextResponse.json({ error: "Voice not found or invalid" }, { status: 404 });
+      return NextResponse.json({ error: 'Voice not found or invalid' }, { status: 404 });
     }
 
     const response = await fetch(`${CHATTERBOX_API_URL}/generate`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "x-api-key": CHATTERBOX_API_KEY!,
+        'Content-Type': 'application/json',
+        'x-api-key': CHATTERBOX_API_KEY!,
       },
       body: JSON.stringify({
         prompt: text,
@@ -118,8 +118,8 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error("Chatterbox API error:", errorData);
-      return NextResponse.json({ error: "Failed to generate audio" }, { status: 500 });
+      console.error('Chatterbox API error:', errorData);
+      return NextResponse.json({ error: 'Failed to generate audio' }, { status: 500 });
     }
 
     const audioArrayBuffer = await response.arrayBuffer();
@@ -156,8 +156,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ id: generation.id, url });
   } catch (error) {
-    console.error("TTS generation error:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error('TTS generation error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-

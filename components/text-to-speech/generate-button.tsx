@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
+import { Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
+import { cn } from '@/lib/utils';
 
 export function GenerateButton({
-  size = "lg",
+  size = 'lg',
   disabled,
   isSubmitting,
   onSubmit,
   className,
 }: {
-  size?: "default" | "sm" | "lg" | "icon";
+  size?: 'default' | 'sm' | 'lg' | 'icon';
   disabled: boolean;
   isSubmitting: boolean;
   onSubmit?: () => void;
@@ -22,7 +22,7 @@ export function GenerateButton({
     <Button
       size={size}
       className={cn(
-        "bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full min-w-[160px]",
+        'bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full min-w-[160px]',
         className
       )}
       onClick={onSubmit}
@@ -33,7 +33,7 @@ export function GenerateButton({
           <Spinner className="size-4 mr-2" />
           Generating...
         </>
-      ): (
+      ) : (
         <>
           <Sparkles className="size-4 mr-2" />
           Generate speech
@@ -41,4 +41,4 @@ export function GenerateButton({
       )}
     </Button>
   );
-};
+}

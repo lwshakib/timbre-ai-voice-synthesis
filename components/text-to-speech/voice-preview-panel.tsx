@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Pause, Play, Download, Redo, Undo } from "lucide-react";
+import { useState } from 'react';
+import { Pause, Play, Download, Redo, Undo } from 'lucide-react';
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { VoiceAvatar } from "@/components/voice-avatar/voice-avatar";
-import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { VoiceAvatar } from '@/components/voice-avatar/voice-avatar';
+import { Spinner } from '@/components/ui/spinner';
+import { cn } from '@/lib/utils';
 
-import { useWaveSurfer } from "./hooks/use-wavesurfer";
+import { useWaveSurfer } from './hooks/use-wavesurfer';
 
 type VoicePreviewPanelVoice = {
   id?: string;
@@ -19,8 +19,8 @@ type VoicePreviewPanelVoice = {
 function formatTime(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
-  return `${m}:${s.toString().padStart(2, "0")}`;
-};
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
 
 export function VoicePreviewPanel({
   audioUrl,
@@ -56,11 +56,11 @@ export function VoicePreviewPanel({
       text
         .slice(0, 50)
         .trim()
-        .replace(/[^a-zA-Z0-9]+/g, "-")
-        .replace(/^-|-$/g, "")
-        .toLowerCase() || "speech";
+        .replace(/[^a-zA-Z0-9]+/g, '-')
+        .replace(/^-|-$/g, '')
+        .toLowerCase() || 'speech';
 
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = audioUrl;
     link.download = `${safeName}.wav`;
     document.body.appendChild(link);
@@ -74,7 +74,9 @@ export function VoicePreviewPanel({
     <div className="h-full flex flex-col bg-background border-t border-border flex-1">
       {/* Header */}
       <div className="p-8 pb-4">
-        <h3 className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Audio Preview</h3>
+        <h3 className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
+          Audio Preview
+        </h3>
       </div>
 
       {/* Content */}
@@ -83,15 +85,17 @@ export function VoicePreviewPanel({
           <div className="absolute inset-0 z-10 flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
               <Spinner className="size-6 text-primary" />
-              <span className="text-[9px] text-muted-foreground font-mono-custom tracking-widest uppercase">Initializing Stream...</span>
+              <span className="text-[9px] text-muted-foreground font-mono-custom tracking-widest uppercase">
+                Initializing Stream...
+              </span>
             </div>
           </div>
         )}
         <div
           ref={containerRef}
           className={cn(
-            "w-full cursor-pointer transition-opacity duration-500",
-            !isReady && "opacity-0",
+            'w-full cursor-pointer transition-opacity duration-500',
+            !isReady && 'opacity-0'
           )}
         />
       </div>
@@ -100,9 +104,7 @@ export function VoicePreviewPanel({
       <div className="flex items-center justify-center py-6">
         <p className="text-5xl font-light tabular-nums tracking-tighter text-foreground">
           {formatTime(currentTime)}&nbsp;
-          <span className="text-muted-foreground/30">
-            /&nbsp;{formatTime(duration)}
-          </span>
+          <span className="text-muted-foreground/30">/&nbsp;{formatTime(duration)}</span>
         </p>
       </div>
 
@@ -111,9 +113,7 @@ export function VoicePreviewPanel({
         <div className="grid w-full grid-cols-3 items-center">
           {/* Metadata */}
           <div className="flex min-w-0 flex-col gap-1.5">
-            <p className="truncate text-xs font-medium text-foreground tracking-tight">
-              {text}
-            </p>
+            <p className="truncate text-xs font-medium text-foreground tracking-tight">{text}</p>
             {selectedVoiceName && (
               <div className="flex items-center gap-2">
                 <VoiceAvatar
@@ -121,7 +121,9 @@ export function VoicePreviewPanel({
                   name={selectedVoiceName}
                   className="size-5 border-primary/20"
                 />
-                <span className="truncate text-[10px] text-primary font-mono-custom uppercase tracking-wider">{selectedVoiceName}</span>
+                <span className="truncate text-[10px] text-primary font-mono-custom uppercase tracking-wider">
+                  {selectedVoiceName}
+                </span>
               </div>
             )}
           </div>
@@ -176,13 +178,16 @@ export function VoicePreviewPanel({
               onClick={handleDownload}
               disabled={!isReady || isDownloading}
             >
-              {isDownloading ? <Spinner className="size-3 mr-2" /> : <Download className="size-3 mr-2" />}
+              {isDownloading ? (
+                <Spinner className="size-3 mr-2" />
+              ) : (
+                <Download className="size-3 mr-2" />
+              )}
               Download
             </Button>
           </div>
-
         </div>
       </div>
     </div>
   );
-};
+}

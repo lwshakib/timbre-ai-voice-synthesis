@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useAudioPlayback(src: string | File | null) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -11,7 +11,7 @@ export function useAudioPlayback(src: string | File | null) {
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
-        audioRef.current.removeAttribute("src");
+        audioRef.current.removeAttribute('src');
         audioRef.current = null;
       }
     };
@@ -23,12 +23,10 @@ export function useAudioPlayback(src: string | File | null) {
     if (!audioRef.current) {
       const url = src instanceof File ? URL.createObjectURL(src) : src;
       audioRef.current = new Audio(url);
-      audioRef.current.addEventListener("ended", () => setIsPlaying(false));
-      audioRef.current.addEventListener(
-        "canplaythrough",
-        () => setIsLoading(false),
-        { once: true },
-      );
+      audioRef.current.addEventListener('ended', () => setIsPlaying(false));
+      audioRef.current.addEventListener('canplaythrough', () => setIsLoading(false), {
+        once: true,
+      });
     }
 
     if (isPlaying) {
@@ -44,4 +42,4 @@ export function useAudioPlayback(src: string | File | null) {
   }, [src, isPlaying]);
 
   return { isPlaying, isLoading, togglePlay };
-};
+}

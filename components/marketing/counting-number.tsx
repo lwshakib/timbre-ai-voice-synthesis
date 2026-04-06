@@ -1,16 +1,20 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 
 interface CountingNumberProps {
   value: number;
   duration?: number;
-  format?: "currency-b" | "percent" | "k" | "default";
+  format?: 'currency-b' | 'percent' | 'k' | 'default';
 }
 
 const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
-export const CountingNumber = ({ value, duration = 2000, format = "default" }: CountingNumberProps) => {
+export const CountingNumber = ({
+  value,
+  duration = 2000,
+  format = 'default',
+}: CountingNumberProps) => {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef<HTMLSpanElement>(null);
@@ -56,9 +60,9 @@ export const CountingNumber = ({ value, duration = 2000, format = "default" }: C
   };
 
   const formatValue = (val: number) => {
-    if (format === "percent") return val.toFixed(1);
-    if (format === "currency-b") return val.toFixed(2);
-    if (format === "k") return Math.floor(val);
+    if (format === 'percent') return val.toFixed(1);
+    if (format === 'currency-b') return val.toFixed(2);
+    if (format === 'k') return Math.floor(val);
     if (Number.isInteger(value)) return Math.floor(val);
     return val.toFixed(1);
   };

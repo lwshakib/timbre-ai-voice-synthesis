@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { createAvatar } from "@dicebear/core";
-import { glass } from "@dicebear/collection";
+import { useMemo } from 'react';
+import { createAvatar } from '@dicebear/core';
+import { glass } from '@dicebear/collection';
 
 export function useVoiceAvatar(seed: string) {
   return useMemo(() => {
@@ -9,4 +9,4 @@ export function useVoiceAvatar(seed: string) {
       size: 128,
     }).toDataUri();
   }, [seed]);
-};
+}

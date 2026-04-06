@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { z } from "zod";
-import { toast } from "sonner";
-import { useForm } from "@tanstack/react-form";
-import { useDropzone } from "react-dropzone";
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { z } from 'zod';
+import { toast } from 'sonner';
+import { useForm } from '@tanstack/react-form';
+import { useDropzone } from 'react-dropzone';
+import { useRouter } from 'next/navigation';
 import {
   AudioLines,
   FolderOpen,
@@ -21,33 +21,24 @@ import {
   Upload,
   Mic,
   Tag,
-} from "lucide-react";
-import locales from "locale-codes";
+} from 'lucide-react';
+import locales from 'locale-codes';
 
-import { cn, formatFileSize } from "@/lib/utils";
-import { useAudioPlayback } from "@/hooks/use-audio-playback";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Field, FieldError } from "@/components/ui/field";
-import { 
-  Tabs, 
-  TabsList, 
-  TabsTrigger, 
-  TabsContent
-} from "@/components/ui/tabs";
+import { cn, formatFileSize } from '@/lib/utils';
+import { useAudioPlayback } from '@/hooks/use-audio-playback';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Field, FieldError } from '@/components/ui/field';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Command,
   CommandEmpty,
@@ -55,28 +46,25 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import {
-  VOICE_CATEGORIES,
-  VOICE_CATEGORY_LABELS,
-} from "@/components/voices/data/voice-categories";
-import { VoiceRecorder } from "./voice-recorder";
+} from '@/components/ui/command';
+import { VOICE_CATEGORIES, VOICE_CATEGORY_LABELS } from '@/components/voices/data/voice-categories';
+import { VoiceRecorder } from './voice-recorder';
 
 const LANGUAGE_OPTIONS = locales.all
-  .filter((l) => l.tag && l.tag.includes("-") && l.name)
+  .filter((l) => l.tag && l.tag.includes('-') && l.name)
   .map((l) => ({
     value: l.tag,
     label: l.location ? `${l.name} (${l.location})` : l.name,
   }));
 
 const voiceCreateFormSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z.string().min(1, 'Name is required'),
   file: z
-    .instanceof(File, { message: "An audio file is required" })
+    .instanceof(File, { message: 'An audio file is required' })
     .nullable()
-    .refine((f) => f !== null, "An audio file is required"),
-  category: z.string().min(1, "A category is required"),
-  language: z.string().min(1, "A language is required"),
+    .refine((f) => f !== null, 'An audio file is required'),
+  category: z.string().min(1, 'A category is required'),
+  language: z.string().min(1, 'A language is required'),
   description: z.string(),
 });
 
@@ -91,10 +79,8 @@ function FileDropzone({
 }) {
   const { isPlaying, togglePlay } = useAudioPlayback(file);
 
-  const {
-    getRootProps, getInputProps, isDragActive, isDragReject
-  } = useDropzone({
-    accept: { "audio/*": [] },
+  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
+    accept: { 'audio/*': [] },
     maxSize: 20 * 1024 * 1024,
     multiple: false,
     onDrop: (acceptedFiles) => {
@@ -113,9 +99,7 @@ function FileDropzone({
 
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-          <p className="text-xs text-muted-foreground">
-            {formatFileSize(file.size)}
-          </p>
+          <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
         </div>
 
         <Button
@@ -125,11 +109,7 @@ function FileDropzone({
           onClick={togglePlay}
           className="text-primary hover:bg-primary/10"
         >
-          {isPlaying ? (
-            <Pause className="size-4" />
-          ) : (
-            <Play className="size-4" />
-          )}
+          {isPlaying ? <Pause className="size-4" /> : <Play className="size-4" />}
         </Button>
         <Button
           type="button"
@@ -148,12 +128,8 @@ function FileDropzone({
     <div
       {...getRootProps()}
       className={cn(
-        "flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-dashed border-border bg-card px-6 py-10 transition-all hover:border-primary/50 group",
-        isDragReject || isInvalid
-          ? "border-destructive/50"
-          : isDragActive
-            ? "border-primary"
-            : "",
+        'flex cursor-pointer flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl border border-dashed border-border bg-card px-6 py-10 transition-all hover:border-primary/50 group',
+        isDragReject || isInvalid ? 'border-destructive/50' : isDragActive ? 'border-primary' : ''
       )}
     >
       <input {...getInputProps()} />
@@ -171,13 +147,18 @@ function FileDropzone({
         </p>
       </div>
 
-       <Button type="button" variant="outline" size="sm" className="border-primary text-primary hover:bg-primary/10">
-          <FolderOpen className="size-3.5 mr-2" />
-          Upload file
-        </Button>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="border-primary text-primary hover:bg-primary/10"
+      >
+        <FolderOpen className="size-3.5 mr-2" />
+        Upload file
+      </Button>
     </div>
-  )
-};
+  );
+}
 
 function LanguageCombobox({
   value,
@@ -190,8 +171,7 @@ function LanguageCombobox({
 }) {
   const [open, setOpen] = useState(false);
 
-  const selectedLabel =
-    LANGUAGE_OPTIONS.find((l) => l.value === value)?.label ?? "";
+  const selectedLabel = LANGUAGE_OPTIONS.find((l) => l.value === value)?.label ?? '';
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -203,13 +183,13 @@ function LanguageCombobox({
           aria-expanded={open}
           aria-invalid={isInvalid}
           className={cn(
-            "h-10 w-full justify-between font-normal border-border bg-card text-foreground hover:bg-secondary hover:border-primary/50 px-4",
-            !value && "text-muted-foreground",
+            'h-10 w-full justify-between font-normal border-border bg-card text-foreground hover:bg-secondary hover:border-primary/50 px-4',
+            !value && 'text-muted-foreground'
           )}
         >
           <div className="flex items-center gap-2 truncate">
             <Globe className="size-4 shrink-0 text-muted-foreground" />
-            {value ? selectedLabel : "Select language..."}
+            {value ? selectedLabel : 'Select language...'}
           </div>
           <ChevronsUpDown className="size-4 shrink-0 opacity-50" />
         </Button>
@@ -218,7 +198,9 @@ function LanguageCombobox({
         <Command className="bg-transparent">
           <CommandInput placeholder="Search language..." className="text-foreground" />
           <CommandList className="max-h-[300px] overflow-y-auto">
-            <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">No language found.</CommandEmpty>
+            <CommandEmpty className="py-6 text-center text-sm text-muted-foreground">
+              No language found.
+            </CommandEmpty>
             <CommandGroup>
               {LANGUAGE_OPTIONS.map((lang) => (
                 <CommandItem
@@ -233,8 +215,8 @@ function LanguageCombobox({
                   {lang.label}
                   <Check
                     className={cn(
-                      "ml-auto size-4",
-                      value === lang.value ? "opacity-100" : "opacity-0",
+                      'ml-auto size-4',
+                      value === lang.value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                 </CommandItem>
@@ -245,28 +227,24 @@ function LanguageCombobox({
       </PopoverContent>
     </Popover>
   );
-};
+}
 
 interface VoiceCreateFormProps {
   scrollable?: boolean;
   footer?: (submit: React.ReactNode) => React.ReactNode;
   onError?: (message: string) => void;
-};
+}
 
-export function VoiceCreateForm({
-  scrollable,
-  footer,
-  onError,
-}: VoiceCreateFormProps) {
+export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateFormProps) {
   const router = useRouter();
 
   const form = useForm({
     defaultValues: {
-      name: "",
+      name: '',
       file: null as File | null,
-      category: "GENERAL" as string,
-      language: "en-US",
-      description: "",
+      category: 'GENERAL' as string,
+      language: 'en-US',
+      description: '',
     },
     validators: {
       onSubmit: voiceCreateFormSchema,
@@ -280,27 +258,26 @@ export function VoiceCreateForm({
         });
 
         if (value.description) {
-          params.set("description", value.description);
+          params.set('description', value.description);
         }
 
         const response = await fetch(`/api/voices?${params.toString()}`, {
-          method: "POST",
-          headers: { "Content-Type": value.file!.type },
+          method: 'POST',
+          headers: { 'Content-Type': value.file!.type },
           body: value.file!,
         });
 
         if (!response.ok) {
           const body = await response.json();
-          throw new Error(body.error ?? "Failed to create voice");
+          throw new Error(body.error ?? 'Failed to create voice');
         }
 
-        toast.success("Voice created successfully!");
+        toast.success('Voice created successfully!');
         router.refresh();
         form.reset();
       } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Failed to create voice";
-        
+        const message = error instanceof Error ? error.message : 'Failed to create voice';
+
         if (onError) {
           onError(message);
         } else {
@@ -317,32 +294,34 @@ export function VoiceCreateForm({
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className={cn(
-        "flex flex-col", 
-        scrollable ? "min-h-0 flex-1" : "gap-6"
-      )}
+      className={cn('flex flex-col', scrollable ? 'min-h-0 flex-1' : 'gap-6')}
     >
       <div
         className={cn(
           scrollable
-            ? "no-scrollbar flex flex-col gap-6 overflow-y-auto px-4"
-            : "flex flex-col gap-6",
+            ? 'no-scrollbar flex flex-col gap-6 overflow-y-auto px-4'
+            : 'flex flex-col gap-6'
         )}
       >
         <form.Field name="file">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
             return (
               <Field data-invalid={isInvalid}>
                 <Tabs defaultValue="upload" className="w-full">
                   <TabsList className="h-11 w-full bg-card border border-border p-1">
-                    <TabsTrigger value="upload" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary">
+                    <TabsTrigger
+                      value="upload"
+                      className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary"
+                    >
                       <Upload className="size-3.5 mr-2" />
                       Upload
                     </TabsTrigger>
-                    <TabsTrigger value="record" className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary">
+                    <TabsTrigger
+                      value="record"
+                      className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary"
+                    >
                       <Mic className="size-3.5 mr-2" />
                       Record
                     </TabsTrigger>
@@ -362,8 +341,7 @@ export function VoiceCreateForm({
                     />
                   </TabsContent>
                 </Tabs>
-                {isInvalid 
-                  && <FieldError errors={field.state.meta.errors} />}
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
             );
           }}
@@ -371,8 +349,7 @@ export function VoiceCreateForm({
 
         <form.Field name="name">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
             return (
               <Field data-invalid={isInvalid}>
@@ -389,7 +366,6 @@ export function VoiceCreateForm({
                     onBlur={field.handleBlur}
                     className="pl-10 h-10 bg-card border-border text-foreground focus-visible:ring-primary/50 placeholder:text-muted-foreground/50"
                   />
-
                 </div>
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -399,8 +375,7 @@ export function VoiceCreateForm({
 
         <form.Field name="category">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
             return (
               <Field data-invalid={isInvalid}>
@@ -408,18 +383,17 @@ export function VoiceCreateForm({
                   <div className="pointer-events-none absolute left-0 flex h-full w-10 items-center justify-center">
                     <Layers className="size-4 text-muted-foreground" />
                   </div>
-                  <Select
-                    value={field.state.value}
-                    onValueChange={field.handleChange}
-                  >
+                  <Select value={field.state.value} onValueChange={field.handleChange}>
                     <SelectTrigger className="w-full pl-10 h-10 bg-card border-border text-foreground focus:ring-primary/50">
-                      <SelectValue 
-                        placeholder="Select category..."
-                      />
+                      <SelectValue placeholder="Select category..." />
                     </SelectTrigger>
                     <SelectContent className="bg-card border-border">
                       {VOICE_CATEGORIES.map((cat) => (
-                        <SelectItem key={cat} value={cat} className="text-foreground focus:bg-primary/10 focus:text-primary">
+                        <SelectItem
+                          key={cat}
+                          value={cat}
+                          className="text-foreground focus:bg-primary/10 focus:text-primary"
+                        >
                           {VOICE_CATEGORY_LABELS[cat]}
                         </SelectItem>
                       ))}
@@ -434,8 +408,7 @@ export function VoiceCreateForm({
 
         <form.Field name="language">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field data-invalid={isInvalid}>
                 <LanguageCombobox
@@ -451,8 +424,7 @@ export function VoiceCreateForm({
 
         <form.Field name="description">
           {(field) => {
-            const isInvalid =
-              field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
             return (
               <Field data-invalid={isInvalid}>
@@ -470,7 +442,6 @@ export function VoiceCreateForm({
                     className="min-h-[100px] pl-10 bg-card border-border text-foreground focus-visible:ring-primary/50 placeholder:text-muted-foreground/50"
                     rows={3}
                   />
-
                 </div>
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -482,22 +453,22 @@ export function VoiceCreateForm({
           selector={(s) => ({
             isSubmitting: s.isSubmitting,
           })}
-      >
-        {({ isSubmitting }) => {
-          const submitButton = (
-            <Button 
-              type="submit" 
-              disabled={isSubmitting}
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-11"
-            >
-              {isSubmitting ? "Creating..." : "Create Voice"}
-            </Button>
-          );
+        >
+          {({ isSubmitting }) => {
+            const submitButton = (
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-11"
+              >
+                {isSubmitting ? 'Creating...' : 'Create Voice'}
+              </Button>
+            );
 
-          return footer ? footer(submitButton) : submitButton;
-        }}
-      </form.Subscribe>
+            return footer ? footer(submitButton) : submitButton;
+          }}
+        </form.Subscribe>
       </div>
     </form>
-  )
-};
+  );
+}

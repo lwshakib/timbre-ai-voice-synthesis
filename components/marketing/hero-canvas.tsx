@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
 export const HeroCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -9,7 +9,7 @@ export const HeroCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     let width: number, height: number;
@@ -20,7 +20,7 @@ export const HeroCanvas = () => {
     function resize() {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
-      const hero = document.getElementById("hero");
+      const hero = document.getElementById('hero');
       height = canvas.height = hero ? hero.offsetHeight : window.innerHeight;
       initGrid();
     }
@@ -52,9 +52,9 @@ export const HeroCanvas = () => {
       mouse.isActive = false;
     };
 
-    window.addEventListener("resize", resize);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
 
     resize();
 
@@ -68,7 +68,7 @@ export const HeroCanvas = () => {
       const bodyStyle = getComputedStyle(document.body);
       const primaryColor = bodyStyle.getPropertyValue('--primary').trim(); // e.g., #d4b87a
       const mutedColor = bodyStyle.getPropertyValue('--muted-foreground').trim(); // e.g., #828179
-      
+
       const time = Date.now() * 0.001;
 
       dots.forEach((dot) => {
@@ -93,7 +93,11 @@ export const HeroCanvas = () => {
               ctx.beginPath();
               ctx.moveTo(dot.x, dot.y);
               ctx.lineTo(adjustedMouseX, adjustedMouseY);
-              ctx.strokeStyle = primaryColor + Math.floor(force * 0.2 * 255).toString(16).padStart(2, '0');
+              ctx.strokeStyle =
+                primaryColor +
+                Math.floor(force * 0.2 * 255)
+                  .toString(16)
+                  .padStart(2, '0');
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -104,9 +108,13 @@ export const HeroCanvas = () => {
 
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, drawRadius, 0, Math.PI * 2);
-        
+
         // Use muted color for dots
-        ctx.fillStyle = mutedColor + Math.floor(dot.alpha * 255).toString(16).padStart(2, '0');
+        ctx.fillStyle =
+          mutedColor +
+          Math.floor(dot.alpha * 255)
+            .toString(16)
+            .padStart(2, '0');
         ctx.fill();
       });
 
@@ -116,9 +124,9 @@ export const HeroCanvas = () => {
     animate();
 
     return () => {
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

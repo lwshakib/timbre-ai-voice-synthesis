@@ -1,9 +1,9 @@
 /* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
-import { createNoise3D } from "simplex-noise";
+'use client';
+import { cn } from '@/lib/utils';
+import React, { useEffect, useRef, useState } from 'react';
+import { createNoise3D } from 'simplex-noise';
 
 export const WavyBackground = ({
   children,
@@ -13,7 +13,7 @@ export const WavyBackground = ({
   waveWidth,
   backgroundFill,
   blur = 10,
-  speed = "fast",
+  speed = 'fast',
   waveOpacity = 0.5,
   waveYOffset = 250,
   ...props
@@ -25,25 +25,19 @@ export const WavyBackground = ({
   waveWidth?: number;
   backgroundFill?: string;
   blur?: number;
-  speed?: "slow" | "fast";
+  speed?: 'slow' | 'fast';
   waveOpacity?: number;
   waveYOffset?: number;
   [key: string]: any;
 }) => {
   const noise = createNoise3D();
-  let w: number,
-    h: number,
-    nt: number,
-    i: number,
-    x: number,
-    ctx: any,
-    canvas: any;
+  let w: number, h: number, nt: number, i: number, x: number, ctx: any, canvas: any;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const getSpeed = () => {
     switch (speed) {
-      case "slow":
+      case 'slow':
         return 0.001;
-      case "fast":
+      case 'fast':
         return 0.002;
       default:
         return 0.001;
@@ -53,7 +47,7 @@ export const WavyBackground = ({
   const init = () => {
     canvas = canvasRef.current;
     if (!canvas) return;
-    ctx = canvas.getContext("2d");
+    ctx = canvas.getContext('2d');
     if (!ctx) return;
     w = ctx.canvas.width = window.innerWidth;
     h = ctx.canvas.height = window.innerHeight;
@@ -68,11 +62,11 @@ export const WavyBackground = ({
   };
 
   const waveColors = colors ?? [
-    "#d4b87a", // Gold
-    "#c4a86a", // Darker gold
-    "#828179", // Muted
-    "#111111", // Accent
-    "#d4b87a",
+    '#d4b87a', // Gold
+    '#c4a86a', // Darker gold
+    '#828179', // Muted
+    '#111111', // Accent
+    '#d4b87a',
   ];
   const drawWave = (n: number) => {
     nt += getSpeed();
@@ -91,7 +85,7 @@ export const WavyBackground = ({
 
   let animationId: number;
   const render = () => {
-    ctx.fillStyle = backgroundFill || "transparent"; 
+    ctx.fillStyle = backgroundFill || 'transparent';
     ctx.globalAlpha = waveOpacity || 0.5;
     ctx.clearRect(0, 0, w, h); // Clear for transparency
     drawWave(5);
@@ -109,19 +103,14 @@ export const WavyBackground = ({
   useEffect(() => {
     // I am sorry but i have got to support it on safari.
     setIsSafari(
-      typeof window !== "undefined" &&
-        navigator.userAgent.includes("Safari") &&
-        !navigator.userAgent.includes("Chrome")
+      typeof window !== 'undefined' &&
+        navigator.userAgent.includes('Safari') &&
+        !navigator.userAgent.includes('Chrome')
     );
   }, []);
 
   return (
-    <div
-      className={cn(
-        "h-screen flex flex-col items-center justify-center",
-        containerClassName
-      )}
-    >
+    <div className={cn('h-screen flex flex-col items-center justify-center', containerClassName)}>
       <canvas
         className="absolute inset-0 z-0"
         ref={canvasRef}
@@ -130,7 +119,7 @@ export const WavyBackground = ({
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       ></canvas>
-      <div className={cn("relative z-10", className)} {...props}>
+      <div className={cn('relative z-10', className)} {...props}>
         {children}
       </div>
     </div>

@@ -1,8 +1,8 @@
-import { PageHeader } from "./page-header";
-import { HeroPattern } from "./hero-pattern";
-import { DashboardHeader } from "./dashboard-header";
-import { TextInputPanel } from "./text-input-panel";
-import { QuickActionsPanel } from "./quick-actions-panel";
+import { PageHeader } from './page-header';
+import { HeroPattern } from './hero-pattern';
+import { DashboardHeader } from './dashboard-header';
+import { TextInputPanel } from './text-input-panel';
+import { QuickActionsPanel } from './quick-actions-panel';
 
 export function DashboardView() {
   return (

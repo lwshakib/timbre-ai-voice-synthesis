@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
 interface ScrambleTextProps {
   text: string;
@@ -8,9 +8,13 @@ interface ScrambleTextProps {
   as?: React.ElementType;
 }
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/";
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/';
 
-export const ScrambleText = ({ text, className = "", as: Component = "span" }: ScrambleTextProps) => {
+export const ScrambleText = ({
+  text,
+  className = '',
+  as: Component = 'span',
+}: ScrambleTextProps) => {
   const [displayText, setDisplayText] = useState(text);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -21,12 +25,12 @@ export const ScrambleText = ({ text, className = "", as: Component = "span" }: S
     intervalRef.current = setInterval(() => {
       setDisplayText((prev) =>
         text
-          .split("")
+          .split('')
           .map((letter, index) => {
             if (index < iteration) return text[index];
             return letters[Math.floor(Math.random() * 38)];
           })
-          .join("")
+          .join('')
       );
 
       if (iteration >= text.length) {

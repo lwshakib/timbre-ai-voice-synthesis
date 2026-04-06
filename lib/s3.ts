@@ -3,11 +3,11 @@ import {
   PutObjectCommand,
   GetObjectCommand,
   DeleteObjectCommand,
-} from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+} from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 const s3 = new S3Client({
-  region: process.env.AWS_REGION || "auto",
+  region: process.env.AWS_REGION || 'auto',
   endpoint: process.env.AWS_ENDPOINT,
   forcePathStyle: true, // Often required for custom endpoints
   credentials: {
@@ -27,7 +27,7 @@ type UploadAudioOptions = {
 export async function uploadAudio({
   buffer,
   key,
-  contentType = "audio/wav",
+  contentType = 'audio/wav',
 }: UploadAudioOptions): Promise<void> {
   await s3.send(
     new PutObjectCommand({
@@ -35,7 +35,7 @@ export async function uploadAudio({
       Key: key,
       Body: buffer,
       ContentType: contentType,
-    }),
+    })
   );
 }
 
@@ -44,7 +44,7 @@ export async function deleteAudio(key: string): Promise<void> {
     new DeleteObjectCommand({
       Bucket: BUCKET_NAME,
       Key: key,
-    }),
+    })
   );
 }
 
