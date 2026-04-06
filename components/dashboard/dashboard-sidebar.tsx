@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -24,9 +25,11 @@ import {
   Volume2,
   Settings,
   Headphones,
-  User,
+  User as UserIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { VoiceCreateDialog } from "@/components/voices/voice-create-dialog";
 
 interface MenuItem {
   title: string;
@@ -88,6 +91,8 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const { data: session } = authClient.useSession();
+  const [voiceDialogOpen, setVoiceDialogOpen] = useState(false);
 
   const mainMenuItems: MenuItem[] = [
     {
@@ -108,7 +113,7 @@ export function DashboardSidebar() {
     {
       title: "Voice cloning",
       icon: Volume2,
-      onClick: () => console.log("Voice cloning dialog requested"),
+      onClick: () => setVoiceDialogOpen(true),
     },
   ];
 
@@ -125,54 +130,74 @@ export function DashboardSidebar() {
     },
   ];
 
+  const user = session?.user;
+
   return (
-    <Sidebar collapsible="icon" className="border-r border-[#1f1f1e] bg-[#050505]">
-      <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
-        <div 
-        className="flex items-center gap-3 px-4 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
-          <Image
-            src="/logo.svg"
-            alt="Timbre AI"
-            width={24}
-            height={24}
-            className="rounded-sm"
+    <>
+      <VoiceCreateDialog
+        open={voiceDialogOpen}
+        onOpenChange={setVoiceDialogOpen}
+      />
+      <Sidebar collapsible="icon" className="border-r border-[#1f1f1e] bg-[#050505]">
+        <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
+          <div 
+          className="flex items-center gap-3 px-4 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
+            <Image
+              src="/logo.svg"
+              alt="Timbre AI"
+              width={24}
+              height={24}
+              className="rounded-sm"
+            />
+            <span className="group-data-[collapsible=icon]:hidden font-medium text-xl tracking-tighter text-[#f5f5f0]">
+              Timbre AI
+            </span>
+            <SidebarTrigger className="ml-auto lg:hidden" />
+          </div>
+        </SidebarHeader>
+        
+        <div className="mx-4 border-b border-[#1f1f1e]" />
+        
+        <SidebarContent className="py-4">
+          <NavSection items={mainMenuItems} pathname={pathname} />
+          <NavSection
+            label="Others"
+            items={othersMenuItems}
+            pathname={pathname}
           />
-          <span className="group-data-[collapsible=icon]:hidden font-medium text-xl tracking-tighter text-[#f5f5f0]">
-            Timbre AI
-          </span>
-          <SidebarTrigger className="ml-auto lg:hidden" />
-        </div>
-      </SidebarHeader>
-      
-      <div className="mx-4 border-b border-[#1f1f1e]" />
-      
-      <SidebarContent className="py-4">
-        <NavSection items={mainMenuItems} pathname={pathname} />
-        <NavSection
-          label="Others"
-          items={othersMenuItems}
-          pathname={pathname}
-        />
-      </SidebarContent>
-      
-      <div className="mx-4 border-b border-[#1f1f1e]" />
-      
-      <SidebarFooter className="p-4">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="h-12 w-full justify-start gap-3 bg-[#0a0a0a] border border-[#1f1f1e] rounded-sm px-3 hover:border-[#d4b87a] transition-all duration-300">
-               <div className="w-6 h-6 rounded-full bg-[#d4b87a]/20 flex items-center justify-center text-[#d4b87a]">
-                 <User size={14} />
-               </div>
-               <div className="flex flex-col text-left group-data-[collapsible=icon]:hidden">
-                 <span className="text-[13px] font-medium text-[#f5f5f0]">Institutional User</span>
-                 <span className="text-[10px] text-[#828179] font-mono-custom tracking-wider">[SEC_LEVEL_01]</span>
-               </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
+        </SidebarContent>
+        
+        <div className="mx-4 border-b border-[#1f1f1e]" />
+        
+        <SidebarFooter className="p-4">
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton 
+                className="h-12 w-full justify-start gap-3 bg-[#0a0a0a] border border-[#1f1f1e] rounded-sm px-3 hover:border-[#d4b87a] transition-all duration-300"
+                onClick={async () => {
+                  await authClient.signOut();
+                  window.location.href = "/sign-in";
+                }}
+              >
+                 <div className="w-6 h-6 rounded-full bg-[#d4b87a]/20 flex items-center justify-center text-[#d4b87a] shrink-0">
+                   {user?.image ? (
+                     <Image src={user.image} alt={user?.name || "User"} width={24} height={24} className="rounded-full" />
+                   ) : (
+                     <UserIcon size={14} />
+                   )}
+                 </div>
+                 <div className="flex flex-col text-left group-data-[collapsible=icon]:hidden overflow-hidden">
+                   <span className="text-[13px] font-medium text-[#f5f5f0] truncate">{user?.name || "Institutional User"}</span>
+                   <span className="text-[10px] text-[#828179] font-mono-custom tracking-wider truncate">
+                     {user?.email || "[SEC_LEVEL_01]"}
+                   </span>
+                 </div>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
+        <SidebarRail />
+      </Sidebar>
+    </>
   );
 }

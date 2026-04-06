@@ -1,101 +1,74 @@
 "use client";
 
-import React, { useState } from "react";
-import { Icon } from "@iconify/react";
-import { ScrambleText } from "@/components/marketing/scramble-text";
-import { CountingNumber } from "@/components/marketing/counting-number";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Coins, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
-interface TextInputPanelProps {
-    onGenerate: (text: string) => void;
-    isGenerating: boolean;
-}
+const COST_PER_UNIT = 0.0005;
+const TEXT_MAX_LENGTH = 5000;
 
-export function TextInputPanel({ onGenerate, isGenerating }: TextInputPanelProps) {
-    const [text, setText] = useState("");
-    const maxLength = 5000;
+export function TextInputPanel() {
+  const [text, setText] = useState("");
+  const router = useRouter();
 
-    const handleGenerate = () => {
-        if (text.trim() && !isGenerating) {
-            onGenerate(text);
-        }
-    };
+  const handleGenerate = () => {
+    const trimmed = text.trim();
+    if (!trimmed) return;
 
-    const costPerChar = 0.0002;
-    const estimatedCost = text.length * costPerChar;
+    router.push(`/text-to-speech?text=${encodeURIComponent(trimmed)}`);
+  };
 
-    return (
-        <div className="flex flex-col h-full glass-panel border border-[#1f1f1e] overflow-hidden rounded-sm transition-all duration-500 hover:border-[#d4b87a]/20">
-            {/* Toolbar */}
-            <div className="flex items-center justify-between px-6 py-4 bg-[#0a0a0a]/50 border-b border-[#1f1f1e]">
-                <div className="flex items-center gap-3">
-                    <Icon icon="solar:pen-new-square-linear" className="text-[#828179] group-hover:text-[#d4b87a] transition-colors" />
-                    <span className="text-[0.625rem] font-mono-custom text-[#828179] uppercase tracking-widest leading-relaxed">
-                        SYNTHESIS_INPUT_01
-                    </span>
-                </div>
-                <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 text-[0.625rem] font-mono-custom text-[#555] uppercase tracking-widest">
-                        <Icon icon="solar:coins-linear" width={12} height={12} className="text-[#d4b87a]" />
-                        EST: <span className="text-[#f5f5f0] tabular-nums">${estimatedCost.toFixed(4)}</span>
-                    </div>
-                    <div className="w-10 h-[1px] bg-[#1f1f1e]" />
-                    <div className="text-[0.625rem] font-mono-custom text-[#828179] uppercase tracking-widest whitespace-nowrap">
-                        {text.length} / {maxLength} CHARS
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="
+      rounded-[22px] bg-gradient-to-br from-[#d4b87a] via-[#828179] to-[#050505] p-0.5 shadow-[0_0_40px_-15px_rgba(212,184,122,0.3)]
+    ">
+      <div className="rounded-[20px] bg-[#050505] p-1">
+        <div className="space-y-4 rounded-2xl bg-[#0a0a0a] p-6 border border-[#1f1f1e]">
+          <Textarea
+            placeholder="Start typing or paste your text here..."
+            className="min-h-[160px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 text-[#f5f5f0] text-lg font-light placeholder:text-[#333]"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            maxLength={TEXT_MAX_LENGTH}
+          />
 
-            {/* Input */}
-            <div className="relative flex-1 group">
-                <textarea
-                    value={text}
-                    onChange={(e) => setText(e.target.value.slice(0, maxLength))}
-                    placeholder="Enter institutional text protocol for voice synthesis..."
-                    className="w-full h-full bg-transparent p-6 lg:p-8 text-[0.9375rem] leading-relaxed text-[#f5f5f0] font-sans border-none outline-none resize-none placeholder:text-[#333] transition-all scrollbar-hide focus:bg-[#0a0a0a]/20"
-                    disabled={isGenerating}
-                />
-                
-                {/* Visual Accent */}
-                <div className="absolute top-0 right-0 h-full w-[1px] bg-gradient-to-b from-transparent via-[#d4b87a]/10 to-transparent" />
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="px-6 py-6 border-t border-[#1f1f1e] bg-[#050505]">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div className="flex items-center gap-6">
-                         <div className="flex flex-col">
-                            <span className="text-[0.625rem] font-mono-custom text-[#555] uppercase tracking-widest mb-1">OUTPUT_FORMAT</span>
-                            <div className="flex items-center gap-2 text-[#f5f5f0] text-xs font-medium">
-                                <Icon icon="solar:music-note-linear" className="text-[#d4b87a]" />
-                                WAV (High-Fidelity)
-                            </div>
-                         </div>
-                         <div className="w-[1px] h-8 bg-[#1f1f1e] hidden md:block" />
-                         <div className="flex flex-col">
-                            <span className="text-[0.625rem] font-mono-custom text-[#555] uppercase tracking-widest mb-1">LATENCY_MODE</span>
-                            <div className="flex items-center gap-2 text-[#f5f5f0] text-xs font-medium">
-                                <Icon icon="solar:bolt-linear" className="text-[#d4b87a]" />
-                                REALTIME (Modal)
-                            </div>
-                         </div>
-                    </div>
-
-                    <button
-                        onClick={handleGenerate}
-                        disabled={!text.trim() || isGenerating}
-                        className="btn-swiss px-10 py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em] disabled:opacity-30 flex items-center gap-3 transition-transform hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                        {isGenerating ? (
-                            <Icon icon="line-md:loading-loop" width={18} height={18} className="mx-auto" />
-                        ) : (
-                            <>
-                                <Icon icon="solar:soundwave-linear" width={18} height={18} />
-                                <ScrambleText text="GENERATE_AUDIO" />
-                            </>
-                        )}
-                    </button>
-                </div>
-            </div>
+          <div className="flex items-center justify-between pt-4 border-t border-[#1f1f1e]/50">
+            <Badge variant="outline" className="gap-1.5 border-dashed border-[#d4b87a]/30 bg-[#d4b87a]/5 text-[#d4b87a]">
+              <Coins className="size-3" />
+              <span className="text-[10px] font-mono-custom tracking-wider uppercase">
+                {text.length === 0 ? (
+                  "READY_FOR_INPUT"
+                ) : (
+                  <>
+                    <span className="tabular-nums">
+                      ${(text.length * COST_PER_UNIT).toFixed(4)}
+                    </span>{" "}
+                    EST_CREDIT
+                  </>
+                )}
+              </span>
+            </Badge>
+            <span className="text-[10px] text-[#828179] font-mono-custom tracking-widest uppercase">
+              {text.length.toLocaleString()} / {TEXT_MAX_LENGTH.toLocaleString()} [CHAR_LIMIT]
+            </span>
+          </div>
         </div>
-    );
+
+        <div className="flex items-center justify-end p-4">
+          <Button
+            size="lg"
+            disabled={!text.trim()}
+            onClick={handleGenerate}
+            className="w-full lg:w-auto bg-[#d4b87a] hover:bg-[#c4a86a] text-black font-semibold px-8 h-12 rounded-full"
+          >
+            <Sparkles className="size-4 mr-2" />
+            Generate speech
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
 }
