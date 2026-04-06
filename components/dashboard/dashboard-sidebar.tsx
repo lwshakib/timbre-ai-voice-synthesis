@@ -32,6 +32,7 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { VoiceCreateDialog } from "@/components/voices/voice-create-dialog";
 import { OrgSwitcher } from "@/components/organization/org-switcher";
+import { Logo } from "@/components/ui/logo";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -153,6 +154,12 @@ export function DashboardSidebar() {
       />
       <Sidebar collapsible="icon" className="border-r border-border bg-background">
         <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
+          <div className="flex items-center gap-3">
+            <Logo size={24} />
+            <span className="text-foreground text-xl font-bold tracking-tighter truncate group-data-[collapsible=icon]:hidden">
+              Timbre AI
+            </span>
+          </div>
           <OrgSwitcher />
         </SidebarHeader>
         

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Reveal } from "@/components/marketing/reveal";
 import { Icon } from "@iconify/react";
 import { ScrambleText } from "@/components/marketing/scramble-text";
@@ -8,10 +8,47 @@ import { authClient } from "@/lib/auth-client";
 import { MemberList } from "@/components/organization/member-list";
 import { InviteDialog } from "@/components/organization/invite-dialog";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import Image from "next/image";
 
 export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("Profile");
+    const { data: session } = authClient.useSession();
     const { data: activeOrg } = authClient.useActiveOrganization();
+    const [sessions, setSessions] = useState<any[]>([]);
+    const [accounts, setAccounts] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const user = session?.user;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const [sessionsRes, accountsRes] = await Promise.all([
+                    authClient.listSessions(),
+                    authClient.listAccounts()
+                ]);
+                setSessions(sessionsRes.data || []);
+                setAccounts(accountsRes.data || []);
+            } catch (error) {
+                console.error("Error fetching settings data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
 
     const tabs = ["Profile", "Security", "Workspace", "Billing", "API"];
 
@@ -63,20 +100,48 @@ export default function SettingsPage() {
                                 <div className="space-y-4">
                                      <div>
                                         <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Display Name</label>
-                                        <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50 italic">Digital Creator // Timbre Lab</div>
-                                     </div>
-                                     <div>
-                                        <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Access Level</label>
-                                        <div className="flex items-center gap-3 text-primary text-xs font-mono-custom tracking-widest uppercase">
-                                            <Icon icon="solar:shield-star-linear" />
-                                            SEC_LEVEL_01 // CREATOR_PRO
+                                        <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50 italic">
+                                            {user?.name || "Digital Creator // Timbre Lab"}
                                         </div>
+                                     </div>
+                                     <div className="pt-4">
+                                        <AlertDialog>
+                                            <AlertDialogTrigger asChild>
+                                                <button className="btn-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em]">
+                                                    <ScrambleText text="Sign Out" />
+                                                </button>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>Sign Out</AlertDialogTitle>
+                                                    <AlertDialogDescription>
+                                                        Are you sure you want to sign out of your account? Your current session will be terminated.
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                    <AlertDialogAction
+                                                        onClick={async () => {
+                                                            await authClient.signOut();
+                                                            window.location.href = "/sign-in";
+                                                        }}
+                                                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                                                    >
+                                                        Sign Out
+                                                    </AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
                                      </div>
                                 </div>
                                 <div className="flex items-center justify-center border border-dashed border-border rounded-sm p-8 bg-secondary/20">
                                      <div className="text-center">
-                                        <div className="w-16 h-16 rounded-full bg-background border border-border flex items-center justify-center mx-auto mb-4 text-muted-foreground">
-                                            <Icon icon="solar:user-speak-linear" width={24} height={24} />
+                                        <div className="w-20 h-20 rounded-full bg-background border border-border flex items-center justify-center mx-auto mb-4 text-muted-foreground overflow-hidden">
+                                            {user?.image ? (
+                                                <Image src={user.image} alt={user.name} width={80} height={80} className="object-cover" />
+                                            ) : (
+                                                <Icon icon="solar:user-speak-linear" width={32} height={32} />
+                                            )}
                                         </div>
                                         <p className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest">Digital_Vocal_Profile</p>
                                      </div>
@@ -93,7 +158,7 @@ export default function SettingsPage() {
                             </h3>
                             <div className="max-w-[400px]">
                                 <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">Email Address</label>
-                                <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">team@voice-lab.ai</div>
+                                <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">{user?.email || "team@voice-lab.ai"}</div>
                             </div>
                         </section>
                     </Reveal>
@@ -103,19 +168,61 @@ export default function SettingsPage() {
                     <Reveal className="space-y-8 animate-in fade-in duration-500">
                         <section className="glass-panel p-8 border border-border rounded-sm overflow-hidden relative">
                              <div className="flex items-center gap-4 mb-6">
-                                <div className="p-3 rounded-full bg-destructive/10 border border-destructive/20 text-destructive">
+                                <div className="p-3 rounded-full bg-primary/10 border border-primary/20 text-primary">
                                     <Icon icon="solar:shield-keyhole-linear" width={24} height={24} />
                                 </div>
                                 <div>
-                                    <h3 className="text-foreground text-lg font-light tracking-tight">Access Key Rotation</h3>
-                                    <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">Secure re-authentication protocol</p>
+                                    <h3 className="text-foreground text-lg font-light tracking-tight">Security Credentials</h3>
+                                    <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">Active linked accounts and sessions</p>
                                 </div>
                              </div>
-                             <p className="text-muted-foreground text-sm max-w-[500px] mb-8 leading-relaxed">Ensure account security by rotating your master access key every 90 synthesis cycles. This action requires current identity verification.</p>
-                             <button className="btn-ghost-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-destructive/70 border-destructive/20 hover:bg-destructive/10">
-                                <ScrambleText text="ROTATE_ACCESS_KEY" />
-                             </button>
-                             <div className="absolute top-0 right-0 p-4 font-mono-custom text-[0.625rem] text-muted-foreground/20">V.02.48</div>
+
+                             <div className="space-y-8">
+                                <div>
+                                    <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">Linked Accounts</h4>
+                                    <div className="grid gap-3">
+                                        {accounts.map((acc, i) => (
+                                            <div key={i} className="glass-panel px-4 py-3 border border-border bg-background/50 flex items-center justify-between rounded-sm">
+                                                <div className="flex items-center gap-3">
+                                                    <Icon icon={acc.providerId === "google" ? "logos:google-icon" : "solar:letter-linear"} width={16} />
+                                                    <span className="text-sm text-foreground capitalize">{acc.providerId}</span>
+                                                </div>
+                                                <span className="text-[10px] text-muted-foreground font-mono-custom tracking-widest uppercase">Verified</span>
+                                            </div>
+                                        ))}
+                                        {accounts.length === 0 && <p className="text-xs text-muted-foreground/50">No accounts linked.</p>}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">Active Sessions</h4>
+                                    <div className="grid gap-3">
+                                        {sessions.map((sess, i) => (
+                                            <div key={sess.id} className="glass-panel px-4 py-3 border border-border bg-background/50 flex items-center justify-between rounded-sm">
+                                                <div className="flex items-center gap-3">
+                                                    <Icon icon="solar:laptop-minimalistic-linear" className="text-muted-foreground" width={16} />
+                                                    <div className="flex flex-col">
+                                                        <span className="text-sm text-foreground">
+                                                            {sess.userAgent?.includes("Windows") ? "Windows Host" : sess.userAgent?.includes("Mac") ? "Apple Host" : "Terminal Session"}
+                                                        </span>
+                                                        <span className="text-[10px] text-muted-foreground/30 font-mono-custom">IP: {sess.ipAddress || "Internal Uplink"}</span>
+                                                    </div>
+                                                </div>
+                                                {session?.session.id === sess.id && (
+                                                    <span className="text-[10px] text-primary font-mono-custom tracking-widest uppercase border border-primary/20 px-2 py-1 rounded-sm bg-primary/5">Current</span>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                             </div>
+                             
+                             <div className="mt-8 pt-8 border-t border-border/50">
+                                <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">Identity Rotation</h4>
+                                <button className="btn-ghost-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-muted-foreground hover:text-foreground">
+                                    <ScrambleText text="CHANGE_PASSWORD" />
+                                </button>
+                             </div>
                         </section>
                     </Reveal>
                 )}
@@ -180,6 +287,9 @@ export default function SettingsPage() {
                                 <div className="absolute top-4 right-4 text-primary">
                                     <Icon icon="solar:coins-linear" width={18} height={18} />
                                 </div>
+                             </div>
+                             <div className="glass-panel p-6 border border-border rounded-sm flex items-center justify-center bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] text-center px-8 uppercase">
+                                 It's a hardcoded UI, billing service is not available now
                              </div>
                          </div>
 
@@ -246,6 +356,10 @@ export default function SettingsPage() {
                              <Icon icon="solar:code-square-linear" width={32} height={32} className="text-muted-foreground/20 mx-auto mb-4" />
                              <h4 className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-1">Developer Documentation</h4>
                              <p className="text-muted-foreground/40 text-xs mb-6 font-mono-custom uppercase tracking-wider">Access the Timbre AI specification ledger.</p>
+                             <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] inline-block uppercase mb-6">
+                                 It's a hardcoded UI, API service is not available right now
+                             </div>
+                             <br />
                              <button className="text-primary font-mono-custom text-[0.625rem] uppercase tracking-widest hover:opacity-50 transition-opacity">
                                 <ScrambleText text="VIEW_OPEN_SPECS" />
                              </button>
