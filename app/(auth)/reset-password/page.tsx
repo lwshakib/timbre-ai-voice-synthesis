@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Icon } from '@iconify/react';
 import { ScrambleText } from '@/components/marketing/scramble-text';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ export default function ResetPasswordPage() {
         </p>
       </div>
 
-      {/* Email Form */}
+      {/* Form */}
       <form onSubmit={handleResetPassword} className="space-y-5">
         <div>
           <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
@@ -126,5 +126,22 @@ export default function ResetPasswordPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="glass-panel p-12 rounded-sm border border-border flex flex-col items-center justify-center min-h-[400px]">
+          <Icon icon="line-md:loading-loop" className="text-primary text-3xl mb-4" />
+          <p className="text-muted-foreground text-[0.8125rem] font-mono-custom uppercase tracking-widest">
+            Synchronizing...
+          </p>
+        </div>
+      }
+    >
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
