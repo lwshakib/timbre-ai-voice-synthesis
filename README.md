@@ -54,6 +54,9 @@ Start the local development environment:
 npm run dev
 ```
 
+### 6. Vocal Engine Setup
+Timbre AI uses a specialized **CHATTERBOX_TTS** synthesis engine hosted on **Modal**. For detailed instructions on deploying the GPU-accelerated backend, refer to the [**Vocal Engine Setup Guide**](CHATTERBOX_TTS.md).
+
 ## 📜 Project Standards
 Timbre AI maintains high standards for contributions and community interaction. Refer to the following documentation:
 - [**Contributing Guide**](CONTRIBUTING.md)
