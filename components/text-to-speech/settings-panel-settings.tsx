@@ -22,7 +22,7 @@ export function SettingsPanelSettings() {
       <div className="p-6 lg:p-12 flex-1 space-y-8 overflow-y-auto">
         <div className="flex flex-col gap-1 mb-8">
            <h3 className="text-sm font-medium text-foreground">Parameters</h3>
-           <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[SYS_CONFIG // MODEL_TUNING]</p>
+           <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Model Configuration</p>
         </div>
         
         <FieldGroup className="gap-10">

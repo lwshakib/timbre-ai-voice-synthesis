@@ -77,7 +77,7 @@ export function PromptSuggestions({
   return (
     <div className="space-y-4">
       <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
-        [SYS_PROMPTS // DISCOVER_SUGGESTIONS]
+        Prompt Suggestions
       </p>
       <div className="flex flex-wrap gap-2">
         {PROMPT_SUGGESTIONS.map((suggestion) => (

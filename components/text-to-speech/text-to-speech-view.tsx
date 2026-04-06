@@ -45,7 +45,7 @@ export function TextToSpeechView({
     return (
       <div className="flex flex-col items-center justify-center flex-1 bg-background gap-4">
         <Spinner className="size-8 text-primary" />
-        <p className="text-[10px] text-muted-foreground font-mono-custom tracking-[0.2em] uppercase">[INIT_PROTOCOLS // LOADING_VOICE_MODELS]</p>
+        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Initializing voice models...</p>
       </div>
     );
   }
@@ -69,12 +69,12 @@ export function TextToSpeechView({
   return (
     <TTSVoicesProvider value={{ customVoices, systemVoices, allVoices }}>
       <TextToSpeechForm defaultValues={defaultValues}>
-        <div className="flex min-h-0 flex-1 overflow-hidden bg-background">
-          <div className="flex min-h-0 flex-1 flex-col">
+        <div className="flex h-full min-h-0 overflow-hidden bg-background">
+          <div className="flex flex-1 flex-col min-w-0 h-full">
             <TextInputPanel />
             <VoicePreviewPlaceholder />
           </div>
-          <div className="hidden lg:block w-[400px] shrink-0">
+          <div className="hidden lg:block w-[400px] shrink-0 h-full border-l border-border">
             <SettingsPanel />
           </div>
         </div>

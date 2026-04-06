@@ -74,7 +74,7 @@ export function VoicePreviewPanel({
     <div className="h-full flex flex-col bg-background border-t border-border flex-1">
       {/* Header */}
       <div className="p-8 pb-4">
-        <h3 className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[SYS_PREVIEW // AUDIO_MONITOR]</h3>
+        <h3 className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Audio Preview</h3>
       </div>
 
       {/* Content */}

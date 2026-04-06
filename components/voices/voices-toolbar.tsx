@@ -33,7 +33,7 @@ export function VoicesToolbar() {
           Voice Libraries
         </h2>
         <p className="text-[11px] text-muted-foreground font-mono-custom tracking-[0.2em] uppercase">
-          [SYS_BROWSER // DISCOVER_MODELS]
+          Explore and organize your voice library
         </p>
       </div>
 
@@ -44,7 +44,7 @@ export function VoicesToolbar() {
               <Search className="size-4" />
             </InputGroupAddon>
             <InputGroupInput
-              placeholder="SEARCH_MODELS..."
+              placeholder="Search for voices..."
               className="text-foreground placeholder:text-muted-foreground/30 font-mono-custom text-xs tracking-widest uppercase"
               value={localQuery}
               onChange={(e) => {

@@ -48,10 +48,10 @@ export function VoiceCreateDialog({
     return (
       <Drawer open={open} onOpenChange={onOpenChange}>
         {children && <DrawerTrigger asChild>{children}</DrawerTrigger>}
-        <DrawerContent className="bg-[#050505] border-[#1f1f1e]">
+        <DrawerContent className="bg-card border-border">
           <DrawerHeader>
-            <DrawerTitle className="text-[#f5f5f0]">Create custom voice</DrawerTitle>
-            <DrawerDescription className="text-[#828179]">
+            <DrawerTitle className="text-foreground">Create custom voice</DrawerTitle>
+            <DrawerDescription className="text-muted-foreground">
               Upload or record an audio sample to add a new voice to your
               library.
             </DrawerDescription>
@@ -63,7 +63,7 @@ export function VoiceCreateDialog({
               <DrawerFooter className="pt-2">
                 {submit}
                 <DrawerClose asChild>
-                  <Button variant="outline" className="border-[#1f1f1e] text-[#f5f5f0] hover:bg-[#111111]">Cancel</Button>
+                  <Button variant="outline" className="border-border text-foreground hover:bg-secondary">Cancel</Button>
                 </DrawerClose>
               </DrawerFooter>
             )}
@@ -76,10 +76,10 @@ export function VoiceCreateDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
-      <DialogContent className="bg-[#050505] border-[#1f1f1e] max-w-lg">
+      <DialogContent className="bg-card border-border max-w-lg">
         <DialogHeader className="text-left">
-          <DialogTitle className="text-[#f5f5f0]">Create custom voice</DialogTitle>
-          <DialogDescription className="text-[#828179]">
+          <DialogTitle className="text-foreground">Create custom voice</DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Upload or record an audio sample to add a new voice to your library.
           </DialogDescription>
         </DialogHeader>

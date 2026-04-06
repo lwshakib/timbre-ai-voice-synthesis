@@ -31,7 +31,7 @@ export function GenerateButton({
       {isSubmitting ? (
         <>
           <Spinner className="size-4 mr-2" />
-          [GENERATING...]
+          Generating...
         </>
       ): (
         <>

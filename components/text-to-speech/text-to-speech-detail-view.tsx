@@ -65,7 +65,7 @@ export function TextToSpeechDetailView({
     return (
       <div className="flex flex-col items-center justify-center flex-1 bg-background gap-4">
         <Spinner className="size-8 text-primary" />
-        <p className="text-[10px] text-muted-foreground font-mono-custom tracking-[0.2em] uppercase">[INIT_PROTOCOLS // LOADING_MEMORY_BANK]</p>
+        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Loading generation data...</p>
       </div>
     );
   }
@@ -97,10 +97,10 @@ export function TextToSpeechDetailView({
   return (
     <TTSVoicesProvider value={{ customVoices, systemVoices, allVoices }}>
       <TextToSpeechForm key={generationId} defaultValues={defaultValues}>
-        <div className="flex min-h-0 flex-1 overflow-hidden bg-background flex-col">
-          <PageHeader title="Memory Detail" className="lg:hidden" />
-          <div className="flex min-h-0 flex-1 overflow-hidden">
-             <div className="flex min-h-0 flex-1 flex-col">
+        <div className="flex h-full min-h-0 overflow-hidden bg-background flex-col">
+          <PageHeader title="Generation Details" className="lg:hidden" />
+          <div className="flex flex-1 min-h-0 overflow-hidden h-full">
+             <div className="flex flex-1 min-h-0 flex-col min-w-0 h-full">
               <TextInputPanel />
               <VoicePreviewPanel
                 audioUrl={generation.audioUrl}
@@ -108,7 +108,7 @@ export function TextToSpeechDetailView({
                 text={generation.text}
              />
             </div>
-            <div className="hidden lg:block w-[400px] shrink-0">
+            <div className="hidden lg:block w-[400px] shrink-0 h-full border-l border-border">
               <SettingsPanel />
             </div>
           </div>

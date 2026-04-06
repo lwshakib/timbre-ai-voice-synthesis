@@ -24,7 +24,7 @@ export function VoicePreviewPlaceholder() {
 
         <div className="text-center space-y-2">
           <p className="text-lg font-light tracking-tight text-foreground">
-            [MONITOR_STANDBY]
+            Waiting for input
           </p>
           <p className="max-w-64 text-center text-[11px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase">
             Once you generate, your audio result will appear here. Sit back and relax.
@@ -34,7 +34,7 @@ export function VoicePreviewPlaceholder() {
       
       <Button variant="outline" size="sm" className="rounded-full border-border bg-card hover:bg-secondary hover:border-primary/30 text-muted-foreground h-10 px-6 font-mono-custom text-[10px] uppercase tracking-widest">
         <BookOpen className="size-3.5 mr-2" />
-        Protocol Documentation
+        Documentation
       </Button>
     </div>
   );

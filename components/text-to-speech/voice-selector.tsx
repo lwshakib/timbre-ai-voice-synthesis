@@ -44,7 +44,7 @@ export function VoiceSelector() {
         disabled={isSubmitting}
       >
         <SelectTrigger className="w-full h-12 gap-3 rounded-xl bg-card border-border px-4 py-2 hover:border-primary/50 text-foreground focus:ring-primary/30">
-          <SelectValue placeholder="[SELECT_VOICE]">
+          <SelectValue placeholder="Select a voice">
             {currentVoice && (
               <div className="flex items-center gap-3">
                 <VoiceAvatar 
@@ -65,7 +65,7 @@ export function VoiceSelector() {
         <SelectContent className="bg-card border-border">
           {customVoices.length > 0 && (
             <SelectGroup>
-              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">[TEAM_VOICES]</SelectLabel>
+              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">Organization Voices</SelectLabel>
               {customVoices.map((v) => (
                 <SelectItem key={v.id} value={v.id} className="focus:bg-primary/10 focus:text-primary text-muted-foreground">
                   <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export function VoiceSelector() {
           )}
           {systemVoices.length > 0 && (
             <SelectGroup>
-              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">[BUILT_IN_VOICES]</SelectLabel>
+              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">Timbre Collection</SelectLabel>
               {systemVoices.map((v) => (
                 <SelectItem key={v.id} value={v.id} className="focus:bg-primary/10 focus:text-primary text-muted-foreground">
                   <div className="flex items-center gap-3">

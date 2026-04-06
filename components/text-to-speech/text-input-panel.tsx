@@ -31,8 +31,8 @@ export function TextInputPanel() {
             <Textarea
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
-              placeholder="START_TYPING_OR_PASTE_PROTOCOL..."
-              className="absolute inset-0 resize-none border-0 bg-transparent p-6 lg:p-12 text-xl! font-light leading-relaxed tracking-tight text-foreground placeholder:text-muted-foreground/20 shadow-none focus-visible:ring-0"
+              placeholder="Start typing or paste text here..."
+              className="absolute inset-0 resize-none border-0 bg-transparent p-6 lg:p-12 text-xl! font-light leading-relaxed tracking-tight text-foreground placeholder:text-muted-foreground/30 shadow-none focus-visible:ring-0"
               maxLength={TEXT_MAX_LENGTH}
               disabled={isSubmitting}
             />
@@ -66,14 +66,14 @@ export function TextInputPanel() {
                     <span className="tabular-nums">
                       ${(text.length * COST_PER_UNIT).toFixed(4)}
                     </span>&nbsp;
-                    [EST_CREDIT]
+                    [Cost]
                   </span>
                 </Badge>
                 <div className="flex items-center gap-6">
                   <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
                     {text.length.toLocaleString()}
                     <span className="text-muted-foreground/30">
-                      &nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()} [CHAR_LIMIT]
+                      &nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()} Characters
                     </span>
                   </p>
                   <GenerateButton

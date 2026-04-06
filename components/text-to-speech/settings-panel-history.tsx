@@ -40,7 +40,7 @@ export function SettingsPanelHistory() {
     return (
       <div className="flex flex-col items-center justify-center flex-1 min-h-0 gap-4">
         <Spinner className="size-6 text-primary" />
-        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[FETCHING_HISTORY]</p>
+        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Fetching history...</p>
       </div>
     );
   }
@@ -59,7 +59,7 @@ export function SettingsPanelHistory() {
       <div className="shrink-0 p-6 pb-2">
         <div className="flex flex-col gap-1 mb-6 px-2">
            <h3 className="text-sm font-medium text-foreground">Recent activity</h3>
-           <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">[LOGS // GENERATION_FEED]</p>
+           <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">Generation history</p>
         </div>
       </div>
 
