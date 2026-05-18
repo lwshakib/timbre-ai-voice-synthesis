@@ -67,9 +67,7 @@ export function TextInputPanel() {
                   className="gap-1.5 px-3 py-1 text-xs font-medium text-muted-foreground border border-border bg-background"
                 >
                   <Coins className="size-3.5 text-primary" />
-                  <span className="tabular-nums">
-                    ${(text.length * COST_PER_UNIT).toFixed(4)}
-                  </span>
+                  <span className="tabular-nums">${(text.length * COST_PER_UNIT).toFixed(4)}</span>
                   <span className="text-muted-foreground/50">Cost</span>
                 </Badge>
                 <div className="flex items-center gap-4">

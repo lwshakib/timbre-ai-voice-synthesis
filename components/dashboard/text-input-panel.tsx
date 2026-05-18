@@ -25,7 +25,7 @@ export function TextInputPanel() {
     <div className="glass-panel rounded-xl p-6 border border-border bg-card/40 backdrop-blur-md shadow-2xl relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-      
+
       <div className="relative z-10 flex flex-col gap-4">
         <Textarea
           placeholder="Start typing or paste your text here to synthesize..."

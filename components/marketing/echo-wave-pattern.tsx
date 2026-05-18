@@ -32,13 +32,13 @@ export const EchoWavePattern = () => {
     function initCapsules() {
       capsules.length = 0;
       const numTracks = Math.ceil((width + height) / trackSpacing);
-      
+
       for (let i = 0; i < numTracks; i++) {
         const trackC = i * trackSpacing;
-        
+
         // Increased density: almost every track gets capsules
         const numCapsulesOnTrack = Math.random() > 0.25 ? (Math.random() > 0.75 ? 2 : 1) : 0;
-        
+
         for (let j = 0; j < numCapsulesOnTrack; j++) {
           capsules.push({
             trackC,
@@ -89,7 +89,7 @@ export const EchoWavePattern = () => {
       // --- 2. Render Static Diagonal Guide Tracks ---
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.018)';
       ctx.lineWidth = 0.5;
-      
+
       const numTracks = Math.ceil((width + height) / trackSpacing);
       for (let i = 0; i < numTracks; i++) {
         const c = i * trackSpacing;

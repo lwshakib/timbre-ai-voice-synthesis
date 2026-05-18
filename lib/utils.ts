@@ -34,9 +34,11 @@ export function extractWavPeaks(buffer: Buffer, numPeaks = 100): number[] {
       const chunkId = dataView.getUint32(offset, false);
       const chunkSize = dataView.getUint32(offset + 4, true);
 
-      if (chunkId === 0x666d7420) { // "fmt "
+      if (chunkId === 0x666d7420) {
+        // "fmt "
         fmtOffset = offset;
-      } else if (chunkId === 0x64617461) { // "data"
+      } else if (chunkId === 0x64617461) {
+        // "data"
         dataOffset = offset;
         break; // Found the data chunk
       }
@@ -72,11 +74,12 @@ export function extractWavPeaks(buffer: Buffer, numPeaks = 100): number[] {
 
       for (let j = start; j < end; j++) {
         // Read sample from the first channel (mono or left channel of stereo)
-        const sampleOffset = dataStart + (j * numChannels) * bytesPerSample;
+        const sampleOffset = dataStart + j * numChannels * bytesPerSample;
         if (sampleOffset + bytesPerSample > buffer.length) break;
 
         let val = 0;
-        if (audioFormat === 1) { // PCM
+        if (audioFormat === 1) {
+          // PCM
           if (bitsPerSample === 16) {
             val = Math.abs(dataView.getInt16(sampleOffset, true)) / 32768;
           } else if (bitsPerSample === 8) {
@@ -89,7 +92,8 @@ export function extractWavPeaks(buffer: Buffer, numPeaks = 100): number[] {
             const sVal = (b2 << 16) | (b1 << 8) | b0;
             val = Math.abs(sVal) / 8388608;
           }
-        } else if (audioFormat === 3) { // IEEE Float
+        } else if (audioFormat === 3) {
+          // IEEE Float
           if (bitsPerSample === 32) {
             val = Math.abs(dataView.getFloat32(sampleOffset, true));
           }

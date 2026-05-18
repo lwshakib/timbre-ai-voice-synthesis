@@ -51,9 +51,7 @@ function VoicesContent() {
         {isLoading && !data ? (
           <div className="flex flex-col items-center justify-center py-32 gap-4">
             <Spinner className="size-8 text-primary" />
-            <p className="text-xs text-muted-foreground">
-              Indexing models...
-            </p>
+            <p className="text-xs text-muted-foreground">Indexing models...</p>
           </div>
         ) : (
           <div className="space-y-12 animate-in fade-in duration-500">
@@ -72,9 +70,7 @@ export default function VoicesPage() {
       fallback={
         <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] gap-4">
           <Spinner className="size-8 text-primary" />
-          <p className="text-xs text-muted-foreground">
-            Initializing library...
-          </p>
+          <p className="text-xs text-muted-foreground">Initializing library...</p>
         </div>
       }
     >

@@ -43,9 +43,7 @@ export function VoicesList({ title, voices }: VoicesListProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-light tracking-tight text-foreground">{title}</h3>
-        <span className="text-xs text-muted-foreground/50 font-medium">
-          {voices.length} total
-        </span>
+        <span className="text-xs text-muted-foreground/50 font-medium">{voices.length} total</span>
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {voices.map((voice) => (

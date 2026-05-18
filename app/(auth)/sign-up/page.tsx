@@ -121,9 +121,7 @@ export default function SignUpPage() {
       {/* Email Form */}
       <form onSubmit={handleSignUp} className="space-y-4">
         <div>
-          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
-            Full Name
-          </Label>
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">Full Name</Label>
           <Input
             type="text"
             required

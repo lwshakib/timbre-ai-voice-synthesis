@@ -607,16 +607,36 @@ export default function LandingPage() {
               Enterprise-grade real-time voice synthesis and secure acoustic cloning solutions.
             </p>
             <div className="flex items-center gap-4 mb-8">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 <Icon icon="simple-icons:github" width={18} height={18} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 <Icon icon="simple-icons:twitter" width={18} height={18} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 <Icon icon="simple-icons:linkedin" width={18} height={18} />
               </a>
-              <a href="https://discord.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a
+                href="https://discord.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 <Icon icon="simple-icons:discord" width={18} height={18} />
               </a>
             </div>
@@ -626,29 +646,105 @@ export default function LandingPage() {
               Talstrasse 82, 8001 Zürich, Switzerland
             </address>
           </div>
-          
+
           <div className="flex flex-col gap-3">
-            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">Platform</span>
-            <a href="#platform" className="text-xs text-muted-foreground hover:text-foreground transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' }); }}>Voice Synthesis</a>
-            <a href="#intelligence" className="text-xs text-muted-foreground hover:text-foreground transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('intelligence')?.scrollIntoView({ behavior: 'smooth' }); }}>Voice Cloning</a>
-            <a href="#secondary" className="text-xs text-muted-foreground hover:text-foreground transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('secondary')?.scrollIntoView({ behavior: 'smooth' }); }}>Voice Registry</a>
-            <a href="/dashboard" className="text-xs text-muted-foreground hover:text-foreground transition-colors">API Console</a>
+            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">
+              Platform
+            </span>
+            <a
+              href="#platform"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Voice Synthesis
+            </a>
+            <a
+              href="#intelligence"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('intelligence')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Voice Cloning
+            </a>
+            <a
+              href="#secondary"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('secondary')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Voice Registry
+            </a>
+            <a
+              href="/dashboard"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              API Console
+            </a>
           </div>
 
           <div className="flex flex-col gap-3">
-            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">Company</span>
-            <a href="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">About Us</a>
-            <a href="/careers" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Careers</a>
-            <a href="/contact" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Contact</a>
-            <a href="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Newsroom</a>
+            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">
+              Company
+            </span>
+            <a
+              href="/about"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              About Us
+            </a>
+            <a
+              href="/careers"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Careers
+            </a>
+            <a
+              href="/contact"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Contact
+            </a>
+            <a
+              href="/blog"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Newsroom
+            </a>
           </div>
 
           <div className="flex flex-col gap-3">
             <span className="text-foreground text-xs font-semibold tracking-tight mb-2">Legal</span>
-            <a href="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a>
-            <a href="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
-            <a href="/security" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Security Audit</a>
-            <a href="/compliance" className="text-xs text-muted-foreground hover:text-foreground transition-colors">GDPR & HIPAA</a>
+            <a
+              href="/terms"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="/privacy"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/security"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Security Audit
+            </a>
+            <a
+              href="/compliance"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              GDPR & HIPAA
+            </a>
           </div>
         </div>
         <div className="border-t border-border bg-card h-12 flex items-center">

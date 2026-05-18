@@ -22,7 +22,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               Perfected for Enterprise.
             </h1>
             <p className="text-muted-foreground/60 text-sm font-normal mb-8 max-w-md leading-relaxed">
-              Unlock infinite vocal range, sub-millisecond cloning latency, and institutional-grade security clearance.
+              Unlock infinite vocal range, sub-millisecond cloning latency, and institutional-grade
+              security clearance.
             </p>
 
             {/* CTA Buttons */}
@@ -31,18 +32,14 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                 asChild
                 className="h-11 px-6 bg-primary hover:bg-primary/95 text-primary-foreground text-xs rounded-lg font-medium shadow-lg shadow-primary/10 cursor-pointer"
               >
-                <Link href="/sign-up">
-                  14-day Free Trial
-                </Link>
+                <Link href="/sign-up">14-day Free Trial</Link>
               </Button>
               <Button
                 asChild
                 variant="outline"
                 className="h-11 px-6 bg-white/5 border-white/10 text-foreground hover:bg-white/10 text-xs rounded-lg font-medium backdrop-blur-sm cursor-pointer"
               >
-                <a href="/">
-                  Request Demo
-                </a>
+                <Link href="/">Request Demo</Link>
               </Button>
             </div>
           </div>
@@ -68,4 +65,3 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     </main>
   );
 }
-

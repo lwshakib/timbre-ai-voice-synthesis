@@ -5,7 +5,7 @@ import { Resend } from 'resend';
 import { AuthEmailTemplate } from '@/components/emails/auth-email-template';
 import { organization } from 'better-auth/plugins';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_123');
 
 /**
  * Server-side Better Auth configuration.

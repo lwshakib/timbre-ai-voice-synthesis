@@ -180,9 +180,9 @@ export default function SettingsPage() {
                   accept="image/*"
                   onChange={handleUpload}
                 />
-                
+
                 {/* Dynamic Circle Avatar with Camera Overlay */}
-                <div 
+                <div
                   onClick={() => !uploading && fileInputRef.current?.click()}
                   className="relative w-24 h-24 rounded-full border border-border overflow-hidden cursor-pointer group shadow-sm bg-card hover:border-primary/50 transition-all duration-300 shrink-0 animate-in zoom-in-95 duration-300"
                 >
@@ -199,14 +199,14 @@ export default function SettingsPage() {
                       <Icon icon="solar:user-linear" width={40} height={40} />
                     </div>
                   )}
-                  
+
                   {/* Camera Hover Overlay */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300">
-                    <Icon 
-                      icon={uploading ? "eos-icons:loading" : "solar:camera-linear"} 
-                      width={24} 
-                      height={24} 
-                      className="scale-75 group-hover:scale-100 transition-transform duration-300" 
+                    <Icon
+                      icon={uploading ? 'eos-icons:loading' : 'solar:camera-linear'}
+                      width={24}
+                      height={24}
+                      className="scale-75 group-hover:scale-100 transition-transform duration-300"
                     />
                   </div>
                 </div>
@@ -263,9 +263,7 @@ export default function SettingsPage() {
                     }`}
                   >
                     <Icon icon={opt.icon} width={20} height={20} />
-                    <span className="text-xs font-normal">
-                      {opt.label}
-                    </span>
+                    <span className="text-xs font-normal">{opt.label}</span>
                   </Button>
                 ))}
               </div>
@@ -295,8 +293,8 @@ export default function SettingsPage() {
                     <AlertDialogHeader>
                       <AlertDialogTitle>Sign Out</AlertDialogTitle>
                       <AlertDialogDescription>
-                        Are you sure you want to sign out of your account? Your current session
-                        will be terminated.
+                        Are you sure you want to sign out of your account? Your current session will
+                        be terminated.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
@@ -351,8 +349,8 @@ export default function SettingsPage() {
                           <Icon
                             icon={
                               acc.providerId === 'google'
-                                  ? 'logos:google-icon'
-                                  : 'solar:letter-linear'
+                                ? 'logos:google-icon'
+                                : 'solar:letter-linear'
                             }
                             width={16}
                           />
@@ -360,9 +358,7 @@ export default function SettingsPage() {
                             {acc.providerId}
                           </span>
                         </div>
-                        <span className="text-xs text-muted-foreground font-normal">
-                          Verified
-                        </span>
+                        <span className="text-xs text-muted-foreground font-normal">Verified</span>
                       </div>
                     ))}
                     {accounts.length === 0 && (
@@ -462,7 +458,8 @@ export default function SettingsPage() {
                 </div>
               </div>
               <p className="text-muted-foreground text-sm max-w-[500px] mb-8 leading-relaxed">
-                Delete this workspace and permanently remove all voices, audio generations, and team records. This action is irreversible.
+                Delete this workspace and permanently remove all voices, audio generations, and team
+                records. This action is irreversible.
               </p>
               <Button
                 onClick={async () => {
@@ -486,20 +483,14 @@ export default function SettingsPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="glass-panel p-6 border border-border rounded-lg">
-                <div className="text-xs text-muted-foreground mb-4">
-                  Current Plan
-                </div>
+                <div className="text-xs text-muted-foreground mb-4">Current Plan</div>
                 <div className="text-primary text-xl font-medium tracking-tight mb-1">
                   Pro Synthesis
                 </div>
-                <div className="text-muted-foreground/50 text-xs mt-4">
-                  Recurring Flat Fee
-                </div>
+                <div className="text-muted-foreground/50 text-xs mt-4">Recurring Flat Fee</div>
               </div>
               <div className="glass-panel p-6 border border-border rounded-lg relative">
-                <div className="text-xs text-muted-foreground mb-4">
-                  Remaining Credits
-                </div>
+                <div className="text-xs text-muted-foreground mb-4">Remaining Credits</div>
                 <div className="text-foreground text-3xl font-light tracking-tighter mb-1 tabular-nums">
                   42,480.00
                 </div>
@@ -514,9 +505,7 @@ export default function SettingsPage() {
 
             <section className="glass-panel border border-border rounded-lg bg-secondary/10">
               <div className="px-6 py-4 border-b border-border flex justify-between items-center">
-                <h3 className="text-xs text-muted-foreground font-medium">
-                  Recent Invoices
-                </h3>
+                <h3 className="text-xs text-muted-foreground font-medium">Recent Invoices</h3>
                 <Icon icon="solar:history-linear" className="text-muted-foreground/20" />
               </div>
               <div className="divide-y divide-border">
@@ -534,15 +523,11 @@ export default function SettingsPage() {
                         <span className="text-foreground tracking-tight font-medium">
                           Invoice #2026-0{i}
                         </span>
-                        <span className="text-xs text-muted-foreground/40">
-                          Date: 2026-04-0{i}
-                        </span>
+                        <span className="text-xs text-muted-foreground/40">Date: 2026-04-0{i}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-6">
-                      <span className="text-xs text-muted-foreground">
-                        $2,400.00
-                      </span>
+                      <span className="text-xs text-muted-foreground">$2,400.00</span>
                       <Button
                         variant="ghost"
                         size="icon"
