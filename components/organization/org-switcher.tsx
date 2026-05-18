@@ -74,7 +74,7 @@ export function OrgSwitcher() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-primary/10 data-[state=open]:text-foreground border border-border bg-card hover:border-primary transition-all duration-300"
+              className="data-[state=open]:bg-primary/10 data-[state=open]:text-foreground border border-border bg-card hover:border-primary transition-all duration-300 px-3"
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary/20 text-primary">
                 {currentOrg?.logo ? (

@@ -78,7 +78,7 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
                 }
                 onClick={item.onClick}
                 tooltip={item.title}
-                className="h-10 px-4 py-2 text-[13px] tracking-tight font-medium data-[active=true]:bg-primary/10 data-[active=true]:text-foreground hover:bg-secondary transition-all duration-200"
+                className="h-10 px-3 py-2 text-[13px] tracking-tight font-medium data-[active=true]:bg-primary/10 data-[active=true]:text-foreground hover:bg-secondary transition-all duration-200"
               >
                 {item.url ? (
                   <Link href={item.url} className="flex items-center gap-3">
@@ -145,7 +145,7 @@ export function DashboardSidebar() {
       <VoiceCreateDialog open={voiceDialogOpen} onOpenChange={setVoiceDialogOpen} />
       <Sidebar collapsible="icon" className="border-r border-border bg-background">
         <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:justify-center">
             <Logo size={24} />
             <span className="text-foreground text-xl font-bold tracking-tighter truncate group-data-[collapsible=icon]:hidden">
               Timbre AI
@@ -158,7 +158,7 @@ export function DashboardSidebar() {
           <NavSection items={mainMenuItems} pathname={pathname} />
         </SidebarContent>
 
-        <SidebarFooter className="p-4">
+        <SidebarFooter className="px-2 py-4 group-data-[collapsible=icon]:p-2">
           <SidebarMenu>
             {othersMenuItems.map((item) => (
               <SidebarMenuItem key={item.title}>
