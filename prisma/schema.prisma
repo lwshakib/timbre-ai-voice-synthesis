@@ -148,6 +148,7 @@ model Generation {
   topP              Float
   topK              Int
   repetitionPenalty Float
+  peaks             Float[]
 
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt

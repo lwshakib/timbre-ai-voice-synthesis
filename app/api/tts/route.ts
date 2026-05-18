@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import prisma from '@/lib/prisma';
 import { uploadAudio, getSignedAudioUrl } from '@/lib/s3';
+import { extractWavPeaks } from '@/lib/utils';
 
 const CHATTERBOX_API_URL = process.env.CHATTERBOX_API_URL;
 const CHATTERBOX_API_KEY = process.env.CHATTERBOX_API_KEY;
@@ -43,6 +44,7 @@ export async function GET(request: Request) {
         createdAt: true,
         organizationId: true,
         path: true,
+        peaks: true,
       },
     });
 
@@ -124,6 +126,7 @@ export async function POST(request: Request) {
 
     const audioArrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(audioArrayBuffer);
+    const peaks = extractWavPeaks(buffer, 100);
 
     const activeOrgId = session.session.activeOrganizationId;
 
@@ -138,6 +141,7 @@ export async function POST(request: Request) {
         topP,
         topK,
         repetitionPenalty,
+        peaks,
       },
     });
 
@@ -154,7 +158,7 @@ export async function POST(request: Request) {
 
     const url = await getSignedAudioUrl(path);
 
-    return NextResponse.json({ id: generation.id, url });
+    return NextResponse.json({ id: generation.id, url, peaks });
   } catch (error) {
     console.error('TTS generation error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

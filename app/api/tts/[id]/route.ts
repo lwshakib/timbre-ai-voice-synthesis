@@ -30,6 +30,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
         topK: true,
         repetitionPenalty: true,
         createdAt: true,
+        peaks: true,
       },
     });
 

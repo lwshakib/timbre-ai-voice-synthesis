@@ -25,10 +25,12 @@ export function VoicePreviewPanel({
   audioUrl,
   voice,
   text,
+  peaks,
 }: {
   audioUrl: string;
   voice: VoicePreviewPanelVoice | null;
   text: string;
+  peaks?: number[];
 }) {
   const [isDownloading, setIsDownloading] = useState(false);
   const selectedVoiceName = voice?.name ?? null;
@@ -45,6 +47,7 @@ export function VoicePreviewPanel({
     seekForward,
   } = useWaveSurfer({
     url: audioUrl,
+    peaks,
     autoplay: true,
   });
 

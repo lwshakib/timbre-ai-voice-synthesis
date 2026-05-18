@@ -27,6 +27,7 @@ interface GenerationData {
   topK: number;
   repetitionPenalty: number;
   audioUrl: string;
+  peaks?: number[];
 }
 
 export function TextToSpeechDetailView({ generationId }: { generationId: string }) {
@@ -100,6 +101,7 @@ export function TextToSpeechDetailView({ generationId }: { generationId: string 
                 audioUrl={generation.audioUrl}
                 voice={generationVoice}
                 text={generation.text}
+                peaks={generation.peaks}
               />
             </div>
             <div className="hidden lg:block w-[400px] shrink-0 h-full border-l border-border">

@@ -7,11 +7,12 @@ import { useIsMobile } from '@/hooks/use-mobile';
 interface UseWaveSurferOptions {
   url?: string;
   autoplay?: boolean;
+  peaks?: number[];
   onReady?: () => void;
   onError?: (error: Error) => void;
 }
 
-export function useWaveSurfer({ url, autoplay, onReady, onError }: UseWaveSurferOptions) {
+export function useWaveSurfer({ url, autoplay, peaks, onReady, onError }: UseWaveSurferOptions) {
   const containerRef = useRef<HTMLDivElement>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
   const isMobile = useIsMobile();
@@ -31,11 +32,19 @@ export function useWaveSurfer({ url, autoplay, onReady, onError }: UseWaveSurfer
 
     let destroyed = false;
 
+    const rootStyle = typeof window !== 'undefined' ? window.getComputedStyle(document.documentElement) : null;
+    const primaryVar = rootStyle?.getPropertyValue('--primary').trim();
+    const borderVar = rootStyle?.getPropertyValue('--border').trim();
+
+    const progressColor = primaryVar ? `hsl(${primaryVar})` : '#6366f1';
+    const waveColor = borderVar ? `hsl(${borderVar})` : '#e2e8f0';
+    const cursorColor = progressColor;
+
     const ws = WaveSurfer.create({
       container: containerRef.current,
-      waveColor: '#1f1f1e',
-      progressColor: '#d4b87a',
-      cursorColor: '#d4b87a',
+      waveColor,
+      progressColor,
+      cursorColor,
       cursorWidth: 2,
       barWidth: 2,
       barGap: 3,
@@ -43,6 +52,7 @@ export function useWaveSurfer({ url, autoplay, onReady, onError }: UseWaveSurfer
       barMinHeight: 2,
       height: 80,
       normalize: true,
+      peaks: peaks ? [peaks] : undefined,
     });
 
     wavesurferRef.current = ws;
@@ -66,7 +76,7 @@ export function useWaveSurfer({ url, autoplay, onReady, onError }: UseWaveSurfer
       onError?.(new Error(String(error)));
     });
 
-    ws.load(url).catch((error) => {
+    ws.load(url, peaks ? [peaks] : undefined).catch((error) => {
       if (destroyed) return;
       console.error('WaveSurfer load error:', error);
       onError?.(new Error(String(error)));
@@ -76,7 +86,7 @@ export function useWaveSurfer({ url, autoplay, onReady, onError }: UseWaveSurfer
       destroyed = true;
       ws.destroy();
     };
-  }, [url, autoplay, onReady, onError, isMobile]);
+  }, [url, autoplay, peaks, onReady, onError, isMobile]);
 
   const togglePlayPause = useCallback(() => {
     wavesurferRef.current?.playPause();
