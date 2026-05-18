@@ -30,7 +30,7 @@ export function VoiceSelector() {
   const currentVoice = selectedVoice || voices[0];
 
   return (
-    <Field className="space-y-3">
+    <Field className="space-y-4">
       <FieldLabel className="text-[11px] text-muted-foreground/70 font-medium">
         Voice style
       </FieldLabel>
@@ -39,7 +39,7 @@ export function VoiceSelector() {
         onValueChange={(v) => form.setFieldValue('voiceId', v)}
         disabled={isSubmitting}
       >
-        <SelectTrigger className="w-full h-12 gap-3 rounded-xl bg-card border-border px-4 py-2 hover:border-primary/50 text-foreground focus:ring-primary/30">
+        <SelectTrigger className="w-full h-auto gap-3 rounded-xl bg-card border-border px-4 py-3 hover:border-primary/50 text-foreground focus:ring-primary/30">
           <SelectValue placeholder="Select a voice">
             {currentVoice && (
               <div className="flex items-center gap-3">

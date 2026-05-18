@@ -109,7 +109,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
         <div className="flex items-center gap-1.5 line-clamp-1 text-sm font-medium tracking-tight text-foreground">
           {voice.name}
           <span className="size-1 shrink-0 rounded-full bg-border" />
-          <span className="text-primary text-[10px] uppercase font-mono-custom tracking-wider">
+          <span className="text-primary text-[11px] font-medium">
             {voice.category ? VOICE_CATEGORY_LABELS[voice.category] : 'General'}
           </span>
         </div>
@@ -118,7 +118,7 @@ export function VoiceCard({ voice }: VoiceCardProps) {
           {voice.description || 'No description provided.'}
         </p>
 
-        <p className="flex items-center gap-2 text-[10px] font-mono-custom text-muted-foreground/60 uppercase tracking-widest">
+        <p className="flex items-center gap-2 text-[11px] font-medium text-muted-foreground/60">
           <span className="shrink-0">{flag}</span>
           <span className="truncate">{region}</span>
         </p>

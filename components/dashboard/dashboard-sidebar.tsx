@@ -26,6 +26,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import Link from 'next/link';
+import { Icon } from '@iconify/react';
 import { authClient } from '@/lib/auth-client';
 import { VoiceCreateDialog } from '@/components/voices/voice-create-dialog';
 import { OrgSwitcher } from '@/components/organization/org-switcher';
@@ -45,7 +46,7 @@ import {
 interface MenuItem {
   title: string;
   url?: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
   onClick?: () => void;
 }
 
@@ -129,6 +130,18 @@ export function DashboardSidebar() {
 
   const othersMenuItems: MenuItem[] = [
     {
+      title: 'Open Source',
+      url: 'https://github.com/lwshakib/timbre-ai-voice-synthesis',
+      icon: (props) => (
+        <Icon
+          icon="mdi:github"
+          width={props.size}
+          height={props.size}
+          className={props.className}
+        />
+      ),
+    },
+    {
       title: 'Settings',
       url: '/settings',
       icon: Settings,
@@ -144,7 +157,7 @@ export function DashboardSidebar() {
     <>
       <VoiceCreateDialog open={voiceDialogOpen} onOpenChange={setVoiceDialogOpen} />
       <Sidebar collapsible="icon" className="border-r border-border bg-background">
-        <SidebarHeader className="flex flex-col gap-4 pt-6 pb-4">
+        <SidebarHeader className="flex flex-col gap-3 pt-6 pb-2">
           <div className="flex items-center gap-3 px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:justify-center">
             <Logo size={24} />
             <span className="text-foreground text-xl font-bold tracking-tighter truncate group-data-[collapsible=icon]:hidden">
@@ -154,7 +167,7 @@ export function DashboardSidebar() {
           <OrgSwitcher />
         </SidebarHeader>
 
-        <SidebarContent className="py-4">
+        <SidebarContent className="pt-1 pb-4">
           <NavSection items={mainMenuItems} pathname={pathname} />
         </SidebarContent>
 
@@ -170,7 +183,12 @@ export function DashboardSidebar() {
                   className="h-10 px-3 text-[13px] tracking-tight font-medium hover:bg-secondary transition-all"
                 >
                   {item.url ? (
-                    <Link href={item.url} className="flex items-center gap-3">
+                    <Link
+                      href={item.url}
+                      target={item.url.startsWith('http') ? '_blank' : undefined}
+                      rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="flex items-center gap-3"
+                    >
                       <item.icon size={18} />
                       <span>{item.title}</span>
                     </Link>

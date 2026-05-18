@@ -30,7 +30,7 @@ export function VoicesList({ title, voices }: VoicesListProps) {
 
           <div className="flex flex-col items-center gap-2">
             <p className="text-lg font-medium tracking-tight text-foreground">No voices found</p>
-            <p className="max-w-md text-center text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.1em] uppercase">
+            <p className="max-w-md text-center text-xs text-muted-foreground/60 font-medium">
               The {title} library is currently empty.
             </p>
           </div>
@@ -43,8 +43,8 @@ export function VoicesList({ title, voices }: VoicesListProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-light tracking-tight text-foreground">{title}</h3>
-        <span className="text-[10px] text-muted-foreground/40 font-mono-custom tracking-[0.2em] uppercase">
-          {voices.length} Total
+        <span className="text-xs text-muted-foreground/50 font-medium">
+          {voices.length} total
         </span>
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">

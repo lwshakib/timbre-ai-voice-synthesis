@@ -22,7 +22,7 @@ export function VoicesToolbar() {
         <h2 className="text-2xl lg:text-3xl font-light tracking-tight text-foreground">
           Voice Libraries
         </h2>
-        <p className="text-[11px] text-muted-foreground font-mono-custom tracking-[0.2em] uppercase">
+        <p className="text-xs text-muted-foreground font-medium">
           Explore and organize your voice library
         </p>
       </div>
@@ -35,7 +35,7 @@ export function VoicesToolbar() {
             </InputGroupAddon>
             <InputGroupInput
               placeholder="Search for voices..."
-              className="text-foreground placeholder:text-muted-foreground/30 font-mono-custom text-xs tracking-widest uppercase"
+              className="text-foreground placeholder:text-muted-foreground/50 text-xs"
               value={localQuery}
               onChange={(e) => {
                 setLocalQuery(e.target.value);
@@ -47,7 +47,7 @@ export function VoicesToolbar() {
             <VoiceCreateDialog>
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-10 rounded-full"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 h-10 rounded-xl"
               >
                 <Sparkles className="size-4 mr-2" />
                 Clone New Voice
@@ -58,7 +58,7 @@ export function VoicesToolbar() {
             <VoiceCreateDialog>
               <Button
                 size="icon"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full size-8"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl size-8"
               >
                 <Sparkles className="size-4" />
               </Button>

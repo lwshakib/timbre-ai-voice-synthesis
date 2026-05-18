@@ -142,7 +142,7 @@ function FileDropzone({
           Upload your audio file
         </p>
 
-        <p className="text-center text-[10px] text-muted-foreground font-mono-custom uppercase tracking-wider">
+        <p className="text-center text-[11px] text-muted-foreground/75 font-medium">
           Supports all audio formats, max size 20MB
         </p>
       </div>
@@ -310,19 +310,13 @@ export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateForm
             return (
               <Field data-invalid={isInvalid}>
                 <Tabs defaultValue="upload" className="w-full">
-                  <TabsList className="h-11 w-full bg-card border border-border p-1">
-                    <TabsTrigger
-                      value="upload"
-                      className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary"
-                    >
-                      <Upload className="size-3.5 mr-2" />
+                  <TabsList className="h-10 w-full bg-muted p-1 rounded-lg">
+                    <TabsTrigger value="upload" className="flex-1 gap-2 text-xs font-medium py-1.5">
+                      <Upload className="size-3.5" />
                       Upload
                     </TabsTrigger>
-                    <TabsTrigger
-                      value="record"
-                      className="flex-1 data-[state=active]:bg-secondary data-[state=active]:text-primary"
-                    >
-                      <Mic className="size-3.5 mr-2" />
+                    <TabsTrigger value="record" className="flex-1 gap-2 text-xs font-medium py-1.5">
+                      <Mic className="size-3.5" />
                       Record
                     </TabsTrigger>
                   </TabsList>
@@ -428,8 +422,8 @@ export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateForm
 
             return (
               <Field data-invalid={isInvalid}>
-                <div className="relative flex items-center">
-                  <div className="pointer-events-none absolute left-0 flex h-full w-10 items-center justify-center pt-3">
+                <div className="relative flex items-start">
+                  <div className="pointer-events-none absolute left-0 top-0 flex h-10 w-10 items-center justify-center">
                     <AlignLeft className="size-4 text-muted-foreground" />
                   </div>
                   <Textarea
@@ -439,7 +433,7 @@ export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateForm
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     onBlur={field.handleBlur}
-                    className="min-h-[100px] pl-10 bg-card border-border text-foreground focus-visible:ring-primary/50 placeholder:text-muted-foreground/50"
+                    className="min-h-[100px] pl-10 pt-2.5 bg-card border-border text-foreground focus-visible:ring-primary/50 placeholder:text-muted-foreground/50"
                     rows={3}
                   />
                 </div>
@@ -459,7 +453,7 @@ export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateForm
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-11"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl h-11"
               >
                 {isSubmitting ? 'Creating...' : 'Create Voice'}
               </Button>

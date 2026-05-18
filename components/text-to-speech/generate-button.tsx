@@ -22,7 +22,7 @@ export function GenerateButton({
     <Button
       size={size}
       className={cn(
-        'bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full min-w-[160px]',
+        'bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl min-w-[160px]',
         className
       )}
       onClick={onSubmit}
@@ -36,7 +36,7 @@ export function GenerateButton({
       ) : (
         <>
           <Sparkles className="size-4 mr-2" />
-          Generate speech
+          Generate Speech
         </>
       )}
     </Button>

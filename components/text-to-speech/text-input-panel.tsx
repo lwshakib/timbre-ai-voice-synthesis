@@ -45,7 +45,7 @@ export function TextInputPanel() {
       </div>
 
       {/* Action bar */}
-      <div className="shrink-0 p-6 lg:p-12 border-t border-border/30 bg-secondary/50 backdrop-blur-sm">
+      <div className="shrink-0 p-4 border-t border-border/50 bg-secondary/30 backdrop-blur-sm">
         {/* Mobile layout */}
         <div className="flex flex-col gap-4 lg:hidden">
           <VoiceSelectorButton />
@@ -63,25 +63,24 @@ export function TextInputPanel() {
             {text.length > 0 ? (
               <div className="flex items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <Badge
-                  variant="outline"
-                  className="gap-2 border-dashed border-primary/30 bg-primary/5 text-primary py-1.5 px-3"
+                  variant="secondary"
+                  className="gap-1.5 px-3 py-1 text-xs font-medium text-muted-foreground border border-border bg-background"
                 >
-                  <Coins className="size-3.5" />
-                  <span className="text-[10px] font-medium">
-                    <span className="tabular-nums">
-                      ${(text.length * COST_PER_UNIT).toFixed(4)}
-                    </span>
-                    &nbsp; Cost
+                  <Coins className="size-3.5 text-primary" />
+                  <span className="tabular-nums">
+                    ${(text.length * COST_PER_UNIT).toFixed(4)}
                   </span>
+                  <span className="text-muted-foreground/50">Cost</span>
                 </Badge>
-                <div className="flex items-center gap-6">
-                  <p className="text-[10px] text-muted-foreground/60 font-medium">
+                <div className="flex items-center gap-4">
+                  <p className="text-xs text-muted-foreground/60 font-medium">
                     {text.length.toLocaleString()}
                     <span className="text-muted-foreground/30">
-                      &nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()} characters
+                      /{TEXT_MAX_LENGTH.toLocaleString()} chars
                     </span>
                   </p>
                   <GenerateButton
+                    size="default"
                     disabled={isSubmitting || !text.trim()}
                     isSubmitting={isSubmitting}
                     onSubmit={() => form.handleSubmit()}
