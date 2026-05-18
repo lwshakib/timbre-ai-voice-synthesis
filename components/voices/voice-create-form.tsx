@@ -247,7 +247,19 @@ export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateForm
       description: '',
     },
     validators: {
-      onSubmit: voiceCreateFormSchema,
+      onSubmit: ({ value }) => {
+        const result = voiceCreateFormSchema.safeParse(value);
+        if (!result.success) {
+          const errors: Record<string, string> = {};
+          result.error.errors.forEach((err) => {
+            if (err.path.length > 0) {
+              errors[err.path[0]] = err.message;
+            }
+          });
+          return errors;
+        }
+        return undefined;
+      },
     },
     onSubmit: async ({ value }) => {
       try {
@@ -442,7 +454,9 @@ export function VoiceCreateForm({ scrollable, footer, onError }: VoiceCreateForm
             );
           }}
         </form.Field>
+      </div>
 
+      <div className={cn(scrollable ? 'pt-4 border-t border-border/10 mt-auto' : 'pt-2')}>
         <form.Subscribe
           selector={(s) => ({
             isSubmitting: s.isSubmitting,

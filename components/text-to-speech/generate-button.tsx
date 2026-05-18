@@ -9,23 +9,26 @@ export function GenerateButton({
   size = 'lg',
   disabled,
   isSubmitting,
-  onSubmit,
+  type = 'button',
+  onClick,
   className,
 }: {
   size?: 'default' | 'sm' | 'lg' | 'icon';
   disabled: boolean;
   isSubmitting: boolean;
-  onSubmit?: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  onClick?: () => void;
   className?: string;
 }) {
   return (
     <Button
+      type={type}
       size={size}
       className={cn(
         'bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl min-w-[160px]',
         className
       )}
-      onClick={onSubmit}
+      onClick={onClick}
       disabled={disabled || isSubmitting}
     >
       {isSubmitting ? (

@@ -73,7 +73,7 @@ export function VoiceCreateDialog({ children, open, onOpenChange }: VoiceCreateD
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {children && <DialogTrigger asChild>{children}</DialogTrigger>}
-      <DialogContent className="bg-card border-border max-w-lg">
+      <DialogContent className="bg-card border-border max-w-lg max-h-[90vh] md:max-h-[85vh] overflow-y-auto p-6 gap-6 no-scrollbar">
         <DialogHeader className="text-left">
           <DialogTitle className="text-foreground">Create custom voice</DialogTitle>
           <DialogDescription className="text-muted-foreground">

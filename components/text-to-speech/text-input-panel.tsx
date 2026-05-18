@@ -51,16 +51,16 @@ export function TextInputPanel() {
           <VoiceSelectorButton />
           <GenerateButton
             className="w-full h-12"
-            disabled={!text.trim()}
+            disabled={!text?.trim()}
             isSubmitting={isSubmitting}
-            onSubmit={() => form.handleSubmit()}
+            onClick={() => form.handleSubmit()}
           />
         </div>
 
         {/* Desktop layout */}
         <div className="hidden lg:flex items-center justify-between">
           <div className="flex flex-col gap-6 w-full">
-            {text.length > 0 ? (
+            {text && text.length > 0 ? (
               <div className="flex items-center justify-between animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <Badge
                   variant="secondary"
@@ -81,9 +81,9 @@ export function TextInputPanel() {
                   </p>
                   <GenerateButton
                     size="default"
-                    disabled={isSubmitting || !text.trim()}
+                    disabled={isSubmitting || !text?.trim()}
                     isSubmitting={isSubmitting}
-                    onSubmit={() => form.handleSubmit()}
+                    onClick={() => form.handleSubmit()}
                   />
                 </div>
               </div>

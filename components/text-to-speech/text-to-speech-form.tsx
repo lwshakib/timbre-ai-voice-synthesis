@@ -50,7 +50,19 @@ export function TextToSpeechForm({
   const form = useForm({
     defaultValues: { ...defaultTTSValues, ...defaultValues },
     validators: {
-      onChange: ttsFormSchema,
+      onChange: ({ value }) => {
+        const result = ttsFormSchema.safeParse(value);
+        if (!result.success) {
+          const errors: Record<string, string> = {};
+          result.error.errors.forEach((err) => {
+            if (err.path.length > 0) {
+              errors[err.path[0]] = err.message;
+            }
+          });
+          return errors;
+        }
+        return undefined;
+      },
     },
     onSubmit: async ({ value }) => {
       try {

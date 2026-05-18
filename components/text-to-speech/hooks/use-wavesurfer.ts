@@ -37,8 +37,8 @@ export function useWaveSurfer({ url, autoplay, peaks, onReady, onError }: UseWav
     const primaryVar = rootStyle?.getPropertyValue('--primary').trim();
     const borderVar = rootStyle?.getPropertyValue('--border').trim();
 
-    const progressColor = primaryVar ? `hsl(${primaryVar})` : '#6366f1';
-    const waveColor = borderVar ? `hsl(${borderVar})` : '#e2e8f0';
+    const progressColor = primaryVar || '#6366f1';
+    const waveColor = borderVar || '#e2e8f0';
     const cursorColor = progressColor;
 
     const ws = WaveSurfer.create({

@@ -55,7 +55,7 @@ export function TextToSpeechView({ initialValues }: { initialValues?: Partial<TT
 
   const defaultValues: TTSFormValues = {
     ...defaultTTSValues,
-    ...initialValues,
+    text: initialValues?.text || defaultTTSValues.text,
     voiceId: resolvedVoiceId,
   };
 
