@@ -32,7 +32,8 @@ export function useWaveSurfer({ url, autoplay, peaks, onReady, onError }: UseWav
 
     let destroyed = false;
 
-    const rootStyle = typeof window !== 'undefined' ? window.getComputedStyle(document.documentElement) : null;
+    const rootStyle =
+      typeof window !== 'undefined' ? window.getComputedStyle(document.documentElement) : null;
     const primaryVar = rootStyle?.getPropertyValue('--primary').trim();
     const borderVar = rootStyle?.getPropertyValue('--border').trim();
 

@@ -15,11 +15,7 @@ export function extractWavPeaks(buffer: Buffer, numPeaks = 100): number[] {
   try {
     if (buffer.length <= 44) return Array(numPeaks).fill(0.01);
 
-    const dataView = new DataView(
-      buffer.buffer,
-      buffer.byteOffset + 44,
-      buffer.length - 44
-    );
+    const dataView = new DataView(buffer.buffer, buffer.byteOffset + 44, buffer.length - 44);
     const numSamples = Math.floor((buffer.length - 44) / 2);
     const samplesPerPeak = Math.floor(numSamples / numPeaks);
 

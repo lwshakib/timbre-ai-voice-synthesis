@@ -32,6 +32,13 @@ import { VoiceCreateDialog } from '@/components/voices/voice-create-dialog';
 import { OrgSwitcher } from '@/components/organization/org-switcher';
 import { Logo } from '@/components/ui/logo';
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -104,6 +111,7 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
 export function DashboardSidebar() {
   const pathname = usePathname();
   const [voiceDialogOpen, setVoiceDialogOpen] = useState(false);
+  const [helpDialogOpen, setHelpDialogOpen] = useState(false);
 
   const mainMenuItems: MenuItem[] = [
     {
@@ -148,7 +156,7 @@ export function DashboardSidebar() {
     },
     {
       title: 'Help and support',
-      url: 'mailto:support@timbreai.build',
+      onClick: () => setHelpDialogOpen(true),
       icon: Headphones,
     },
   ];
@@ -156,6 +164,34 @@ export function DashboardSidebar() {
   return (
     <>
       <VoiceCreateDialog open={voiceDialogOpen} onOpenChange={setVoiceDialogOpen} />
+      <Dialog open={helpDialogOpen} onOpenChange={setHelpDialogOpen}>
+        <DialogContent className="bg-card border-border sm:max-w-[420px]">
+          <DialogHeader className="flex flex-col gap-1">
+            <DialogTitle className="text-foreground flex items-center gap-2">
+              <Headphones className="size-5 text-primary" />
+              Help & Support
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground/80 pt-2 text-sm leading-relaxed">
+              We are here to help you get the most out of Timbre AI. If you experience any issues or
+              need support, please reach out to us at our dedicated email:
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex flex-col items-center gap-4 py-6 px-4 bg-muted/40 rounded-xl border border-border">
+            <span className="text-sm font-medium text-foreground">Contact Email</span>
+            <a
+              href="mailto:leadwithshakib@gmail.com"
+              className="text-lg font-semibold text-primary hover:underline tracking-tight break-all"
+            >
+              leadwithshakib@gmail.com
+            </a>
+          </div>
+
+          <div className="text-center text-[11px] text-muted-foreground/50">
+            Timbre AI Support Team
+          </div>
+        </DialogContent>
+      </Dialog>
       <Sidebar collapsible="icon" className="border-r border-border bg-background">
         <SidebarHeader className="flex flex-col gap-3 pt-6 pb-2">
           <div className="flex items-center gap-3 px-2 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:justify-center">
