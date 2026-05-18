@@ -1,6 +1,9 @@
 # <img src="public/logo.svg" width="32" height="32" align="left" style="margin-right: 12px; margin-top: 4px;" /> Timbre AI: Institutional-Grade Vocal Synthesis
 
-![Timbre AI Demo](public/app_demo/text-to-speech-dark.png)
+<p align="center">
+  <img src="public/app_demo/dark_text_to_speech.png" width="49%" alt="Timbre AI Dark Mode" />
+  <img src="public/app_demo/light_text_to_speech.png" width="49%" alt="Timbre AI Light Mode" />
+</p>
 
 Timbre AI is a premium, high-performance vocal synthesis engine designed for developers and enterprise scale. It combines advanced AI-modeled vocal topography with an institutional-grade interface to provide unmatched realism and sub-200ms latency.
 
