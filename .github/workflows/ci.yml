@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main, master]
 
+env:
+  DATABASE_URL: 'postgresql://postgres:postgres@localhost:5432/postgres'
+  BETTER_AUTH_SECRET: 'ci_test_secret_32_chars_long_minimum_val'
+  RESEND_API_KEY: 're_123'
+
 jobs:
   validate:
     name: Code Validation
