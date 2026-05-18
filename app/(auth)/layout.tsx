@@ -2,6 +2,8 @@ import React from 'react';
 import { HeroCanvas } from '@/components/marketing/hero-canvas';
 import { EchoWavePattern } from '@/components/marketing/echo-wave-pattern';
 import { Logo } from '@/components/ui/logo';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -10,6 +12,54 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="hidden lg:block lg:w-[70%] relative h-screen bg-black overflow-hidden border-r border-border/40">
         <EchoWavePattern />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/40"></div>
+
+        {/* Sleek Enterprise Value Prop & Two Buttons Overlay */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-between p-16 pointer-events-none">
+          {/* Top Tagline */}
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/40 text-[10px] tracking-[0.2em] uppercase font-light">
+              Timbre AI // Vocal Synthesis Platform
+            </span>
+          </div>
+
+          {/* Value Prop & Premium Buttons */}
+          <div className="max-w-xl pointer-events-auto">
+            <h1 className="text-foreground text-4xl sm:text-5xl font-light tracking-tight mb-4 leading-[1.1]">
+              Voice Synthesis, <br />
+              Perfected for Enterprise.
+            </h1>
+            <p className="text-muted-foreground/60 text-sm font-normal mb-8 max-w-md leading-relaxed">
+              Unlock infinite vocal range, sub-millisecond cloning latency, and institutional-grade security clearance.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex items-center gap-4">
+              <Button
+                asChild
+                className="h-11 px-6 bg-primary hover:bg-primary/95 text-primary-foreground text-xs rounded-lg font-medium shadow-lg shadow-primary/10 cursor-pointer"
+              >
+                <Link href="/sign-up">
+                  14-day Free Trial
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="h-11 px-6 bg-white/5 border-white/10 text-foreground hover:bg-white/10 text-xs rounded-lg font-medium backdrop-blur-sm cursor-pointer"
+              >
+                <a href="/">
+                  Request Demo
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Bottom Telemetry Info */}
+          <div className="flex items-center justify-between text-[10px] text-muted-foreground/20 font-normal">
+            <span>TIMBRE PLATFORM V2.4</span>
+            <span>SECURE END-TO-END SYNTHESIS</span>
+          </div>
+        </div>
       </div>
 
       {/* Right 30% Panel (Auth Content) */}
