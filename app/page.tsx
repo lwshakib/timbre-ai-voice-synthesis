@@ -84,18 +84,12 @@ export default function LandingPage() {
               </SheetTrigger>
               <SheetContent side="right" className="w-full bg-background border-l-border p-0">
                 <div className="flex flex-col h-full">
-                  <div className="px-6 h-16 flex items-center border-b border-border">
-                    <Logo size={20} />
-                    <span className="text-foreground text-lg font-medium tracking-tighter ml-3">
-                      Timbre AI
-                    </span>
+                  <div className="px-6 h-16 flex items-center">
+                    {/* Header branding and border removed per request */}
                   </div>
 
                   <div className="flex-1 px-6 py-12 flex flex-col gap-10">
                     <div className="space-y-8">
-                      <p className="text-xs text-muted-foreground font-medium">
-                        Navigation
-                      </p>
                       <nav className="flex flex-col gap-6">
                         {[
                           { label: 'Synthesis', href: '#platform' },
@@ -105,7 +99,7 @@ export default function LandingPage() {
                           <a
                             key={link.label}
                             href={link.href}
-                            className="text-2xl font-light tracking-tighter text-foreground hover:text-primary transition-colors flex items-center justify-between group"
+                            className="text-base font-medium tracking-tight text-foreground hover:text-primary transition-colors flex items-center justify-between group py-3 border-b border-border/50"
                             onClick={(e) => {
                               e.preventDefault();
                               setMobileMenuOpen(false);
@@ -123,26 +117,16 @@ export default function LandingPage() {
                       </nav>
                     </div>
 
-                    <div className="mt-auto space-y-6">
-                      <p className="text-xs text-muted-foreground font-medium">
-                        Authorized Access
-                      </p>
+                    <div className="mt-auto">
                       <Button
                         asChild
-                        className="w-full h-12 flex items-center justify-center text-xs tracking-wide rounded-lg cursor-pointer"
+                        className="w-full h-12 flex items-center justify-center text-xs tracking-wide rounded-lg cursor-pointer font-medium"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Link href="/dashboard">
-                          <ScrambleText text="Access Dashboard" />
+                          <ScrambleText text="Dashboard" />
                         </Link>
                       </Button>
-                    </div>
-                  </div>
-
-                  <div className="p-6 border-t border-border bg-card">
-                    <div className="text-xs text-muted-foreground/50 flex justify-between font-normal">
-                      <span>Platform Status: Operational</span>
-                      <span>v2.4</span>
                     </div>
                   </div>
                 </div>

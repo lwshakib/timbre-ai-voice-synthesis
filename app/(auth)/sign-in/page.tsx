@@ -21,7 +21,7 @@ export default function SignInPage() {
     try {
       await authClient.signIn.social({
         provider: 'google',
-        callbackURL: '/',
+        callbackURL: '/dashboard',
       });
     } catch {
       toast.error('Google authentication failed.');
@@ -35,7 +35,7 @@ export default function SignInPage() {
     const { error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: '/',
+      callbackURL: '/dashboard',
     });
 
     if (error) {
