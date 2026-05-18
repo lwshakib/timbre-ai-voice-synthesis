@@ -178,8 +178,8 @@ export default function SettingsPage() {
                     <Label className="block text-xs text-muted-foreground mb-2 font-normal">
                       Display Name
                     </Label>
-                    <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50 italic">
-                      {user?.name || 'Digital Creator // Timbre Lab'}
+                    <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">
+                      {user?.name || 'Digital Creator'}
                     </div>
                   </div>
                   <div className="pt-4 flex items-center gap-4">

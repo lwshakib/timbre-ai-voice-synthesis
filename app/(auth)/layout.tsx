@@ -14,14 +14,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/40"></div>
 
         {/* Sleek Enterprise Value Prop & Two Buttons Overlay */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-between p-16 pointer-events-none">
-          {/* Top Tagline */}
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/40 text-[10px] tracking-[0.2em] uppercase font-light">
-              Timbre AI // Vocal Synthesis Platform
-            </span>
-          </div>
-
+        <div className="absolute inset-0 z-10 flex flex-col justify-center p-16 pointer-events-none">
           {/* Value Prop & Premium Buttons */}
           <div className="max-w-xl pointer-events-auto">
             <h1 className="text-foreground text-4xl sm:text-5xl font-light tracking-tight mb-4 leading-[1.1]">
@@ -52,12 +45,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                 </a>
               </Button>
             </div>
-          </div>
-
-          {/* Bottom Telemetry Info */}
-          <div className="flex items-center justify-between text-[10px] text-muted-foreground/20 font-normal">
-            <span>TIMBRE PLATFORM V2.4</span>
-            <span>SECURE END-TO-END SYNTHESIS</span>
           </div>
         </div>
       </div>

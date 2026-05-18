@@ -32,28 +32,42 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             <Logo size={24} />
             <span className="text-foreground text-xl font-medium tracking-tighter">Timbre AI</span>
-            <div className="h-4 w-[1px] bg-border hidden md:block"></div>
-            <div className="hidden md:flex items-center gap-2">
-              <span className="blinking-dot"></span>
-              <span className="font-mono-custom text-[0.625rem] tracking-[0.15em] text-primary mt-[2px]">
-                System Online
-              </span>
-            </div>
           </div>
 
           <nav className="hidden md:flex items-center gap-8 text-[0.8125rem]">
-            <a href="#platform" className="nav-link">
+            <a
+              href="#platform"
+              className="nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <ScrambleText text="Synthesis" />
             </a>
-            <a href="#intelligence" className="nav-link">
+            <a
+              href="#intelligence"
+              className="nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('intelligence')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <ScrambleText text="Cloning" />
             </a>
-            <a href="#secondary" className="nav-link">
+            <a
+              href="#secondary"
+              className="nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('secondary')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <ScrambleText text="Registry" />
             </a>
             <Button
               asChild
-              className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.05em] ml-4 rounded-lg cursor-pointer"
+              className="h-10 px-6 text-xs tracking-wide ml-4 rounded-lg font-medium cursor-pointer"
             >
               <Link href="/dashboard">
                 <ScrambleText text="Dashboard" />
@@ -79,8 +93,8 @@ export default function LandingPage() {
 
                   <div className="flex-1 px-6 py-12 flex flex-col gap-10">
                     <div className="space-y-8">
-                      <p className="text-[10px] text-muted-foreground/40 font-mono-custom tracking-[0.2em] uppercase">
-                        Navigation Protocols
+                      <p className="text-xs text-muted-foreground font-medium">
+                        Navigation
                       </p>
                       <nav className="flex flex-col gap-6">
                         {[
@@ -92,7 +106,12 @@ export default function LandingPage() {
                             key={link.label}
                             href={link.href}
                             className="text-2xl font-light tracking-tighter text-foreground hover:text-primary transition-colors flex items-center justify-between group"
-                            onClick={() => setMobileMenuOpen(false)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setMobileMenuOpen(false);
+                              const id = link.href.substring(1);
+                              document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                            }}
                           >
                             <span>{link.label}</span>
                             <Icon
@@ -105,12 +124,12 @@ export default function LandingPage() {
                     </div>
 
                     <div className="mt-auto space-y-6">
-                      <p className="text-[10px] text-muted-foreground/40 font-mono-custom tracking-[0.2em] uppercase">
+                      <p className="text-xs text-muted-foreground font-medium">
                         Authorized Access
                       </p>
                       <Button
                         asChild
-                        className="w-full h-12 flex items-center justify-center font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg cursor-pointer"
+                        className="w-full h-12 flex items-center justify-center text-xs tracking-wide rounded-lg cursor-pointer"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         <Link href="/dashboard">
@@ -121,9 +140,9 @@ export default function LandingPage() {
                   </div>
 
                   <div className="p-6 border-t border-border bg-card">
-                    <div className="font-mono-custom text-[0.625rem] text-muted-foreground/50 uppercase tracking-widest flex justify-between">
-                      <span>SYS_STATE: SECURE</span>
-                      <span>V.2.4</span>
+                    <div className="text-xs text-muted-foreground/50 flex justify-between font-normal">
+                      <span>Platform Status: Operational</span>
+                      <span>v2.4</span>
                     </div>
                   </div>
                 </div>
@@ -134,29 +153,31 @@ export default function LandingPage() {
 
         {/* --- Technical Live Ticker --- */}
         <div className="h-8 bg-card border-t border-border overflow-hidden flex items-center relative">
-          <div className="animate-marquee font-mono-custom text-[0.625rem] tracking-[0.15em] text-muted-foreground">
-            <span className="mx-4">
-              TIMBRE-EUR-II <span className="text-primary mx-2">/</span> NAV 2.34x{' '}
-              <span className="text-primary mx-2">/</span> ΔQ3 +8.2%
+          <div className="animate-marquee text-xs tracking-wider text-muted-foreground/75 font-normal">
+            <span className="mx-6 text-primary font-medium">
+              Alert: System upgrading to Next-Gen Neural Synthesis v2.5 tonight at 02:00 UTC
             </span>
-            <span className="mx-4">
-              SYS.LOAD: <span className="text-foreground">OPTIMAL</span>
+            <span className="mx-6">
+              Update: Added 5 new high-fidelity expressive voice models to custom directory
             </span>
-            <span className="mx-4">
-              EXIT ALERT: KESSLER HLDG <span className="text-primary mx-2">/</span> Q2 2026{' '}
-              <span className="text-primary mx-2">/</span> ACC: 84.3%
+            <span className="mx-6">
+              Update: API cloning latency reduced by 15% across European clusters
+            </span>
+            <span className="mx-6 text-primary font-medium">
+              Alert: Standard voice generation API v1 deprecating on June 30
             </span>
 
-            <span className="mx-4">
-              TIMBRE-EUR-II <span className="text-primary mx-2">/</span> NAV 2.34x{' '}
-              <span className="text-primary mx-2">/</span> ΔQ3 +8.2%
+            <span className="mx-6 text-primary font-medium">
+              Alert: System upgrading to Next-Gen Neural Synthesis v2.5 tonight at 02:00 UTC
             </span>
-            <span className="mx-4">
-              SYS.LOAD: <span className="text-foreground">OPTIMAL</span>
+            <span className="mx-6">
+              Update: Added 5 new high-fidelity expressive voice models to custom directory
             </span>
-            <span className="mx-4">
-              EXIT ALERT: KESSLER HLDG <span className="text-primary mx-2">/</span> Q2 2026{' '}
-              <span className="text-primary mx-2">/</span> ACC: 84.3%
+            <span className="mx-6">
+              Update: API cloning latency reduced by 15% across European clusters
+            </span>
+            <span className="mx-6 text-primary font-medium">
+              Alert: Standard voice generation API v1 deprecating on June 30
             </span>
           </div>
         </div>
@@ -238,8 +259,8 @@ export default function LandingPage() {
                 <div className="h-10 bg-card/80 border-b border-border flex items-center px-4 justify-between backdrop-blur-md">
                   <div className="flex gap-2">
                     <Icon icon="solar:shield-check-linear" className="text-muted-foreground" />
-                    <span className="font-mono-custom text-[0.625rem] tracking-[0.1em] text-muted-foreground">
-                      TIMBRE_TERM_OS // V.2.4
+                    <span className="text-xs text-muted-foreground font-medium">
+                      Timbre Terminal OS v2.4
                     </span>
                   </div>
                   <div className="flex gap-1.5">
@@ -293,7 +314,7 @@ export default function LandingPage() {
         </section>
 
         {/* [SYS.001] PROBLEM */}
-        <section className="py-32 border-t border-border bg-background">
+        <section id="intelligence" className="py-32 border-t border-border bg-background">
           <div className="max-w-[83.75rem] mx-auto px-6 grid md:grid-cols-[1.2fr_1fr] gap-24 items-start relative z-10">
             <Reveal className="max-w-[38rem]">
               <div className="tech-badge font-mono-custom text-[0.625rem] tracking-[0.2em] mb-6">
@@ -408,8 +429,8 @@ export default function LandingPage() {
                     </g>
                   </svg>
                 </div>
-                <div className="absolute bottom-6 left-6 tech-badge font-mono-custom text-[0.625rem] text-muted-foreground">
-                  SIGNAL_ANALYSIS: EUR-II // REALTIME
+                <div className="absolute bottom-6 left-6 tech-badge text-xs text-muted-foreground font-medium rounded-md">
+                  Signal Analysis: Real-Time
                 </div>
               </Reveal>
 
@@ -470,11 +491,11 @@ export default function LandingPage() {
             <Reveal className="order-1 lg:order-2 glass-panel rounded-sm p-8 relative overflow-hidden">
               <div className="relative z-10">
                 <div className="flex justify-between items-end border-b border-border pb-4 mb-8">
-                  <div className="font-mono-custom text-[0.625rem] text-muted-foreground">
-                    VOICE_EXCHANGE // EUR-II
+                  <div className="text-xs text-muted-foreground font-medium">
+                    Voice Synthesis Engine
                   </div>
-                  <div className="font-mono-custom text-[0.625rem] text-primary flex items-center gap-2">
-                    <span className="blinking-dot"></span> SYNTHESIS_ENGINE: ACTIVE
+                  <div className="text-xs text-primary flex items-center gap-2 font-medium">
+                    <span className="blinking-dot"></span> Engine: Active
                   </div>
                 </div>
 
@@ -592,46 +613,63 @@ export default function LandingPage() {
       </main>
 
       <footer className="bg-background relative z-10 border-t border-border">
-        <div className="max-w-[83.75rem] mx-auto px-6 py-16 grid md:grid-cols-[1fr_1fr] gap-12">
+        <div className="max-w-[83.75rem] mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
           <div>
-            <div className="text-foreground text-xl font-medium tracking-tighter mb-2 uppercase flex items-center gap-2">
-              <Logo size={20} />
+            <div className="text-foreground text-xl font-medium tracking-tighter mb-4 flex items-center gap-2">
+              <Logo size={24} />
               Timbre AI
             </div>
-            <div className="text-[0.8125rem] text-muted-foreground mb-12">
-              Architecting the future of AI Voice.
+            <p className="text-sm text-muted-foreground mb-8 max-w-sm leading-relaxed">
+              Enterprise-grade real-time voice synthesis and secure acoustic cloning solutions.
+            </p>
+            <div className="flex items-center gap-4 mb-8">
+              <a href="https://github.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Icon icon="simple-icons:github" width={18} height={18} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Icon icon="simple-icons:twitter" width={18} height={18} />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Icon icon="simple-icons:linkedin" width={18} height={18} />
+              </a>
+              <a href="https://discord.com" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Icon icon="simple-icons:discord" width={18} height={18} />
+              </a>
             </div>
-            <address className="not-italic font-mono-custom text-[0.625rem] text-muted-foreground leading-relaxed">
+            <address className="not-italic text-xs text-muted-foreground/60 leading-relaxed">
               Timbre AI Technologies AG
               <br />
               Talstrasse 82, 8001 Zürich, Switzerland
             </address>
           </div>
-          <div className="grid grid-cols-2 gap-8 font-mono-custom text-[0.625rem]">
-            <div className="flex flex-col gap-4">
-              <span className="text-foreground mb-2 tracking-wider">SYSTEMS</span>
-              <a href="#" className="hover:text-primary transition-colors">
-                Synthesis
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                Models
-              </a>
-            </div>
-            <div className="flex flex-col gap-4">
-              <span className="text-foreground mb-2 tracking-wider">PROTOCOLS</span>
-              <a href="#" className="hover:text-primary transition-colors">
-                Legal
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                Security
-              </a>
-            </div>
+          
+          <div className="flex flex-col gap-3">
+            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">Platform</span>
+            <a href="#platform" className="text-xs text-muted-foreground hover:text-foreground transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('platform')?.scrollIntoView({ behavior: 'smooth' }); }}>Voice Synthesis</a>
+            <a href="#intelligence" className="text-xs text-muted-foreground hover:text-foreground transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('intelligence')?.scrollIntoView({ behavior: 'smooth' }); }}>Voice Cloning</a>
+            <a href="#secondary" className="text-xs text-muted-foreground hover:text-foreground transition-colors" onClick={(e) => { e.preventDefault(); document.getElementById('secondary')?.scrollIntoView({ behavior: 'smooth' }); }}>Voice Registry</a>
+            <a href="/dashboard" className="text-xs text-muted-foreground hover:text-foreground transition-colors">API Console</a>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">Company</span>
+            <a href="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">About Us</a>
+            <a href="/careers" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Careers</a>
+            <a href="/contact" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+            <a href="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Newsroom</a>
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <span className="text-foreground text-xs font-semibold tracking-tight mb-2">Legal</span>
+            <a href="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a>
+            <a href="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a>
+            <a href="/security" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Security Audit</a>
+            <a href="/compliance" className="text-xs text-muted-foreground hover:text-foreground transition-colors">GDPR & HIPAA</a>
           </div>
         </div>
         <div className="border-t border-border bg-card h-12 flex items-center">
-          <div className="max-w-[83.75rem] mx-auto px-6 w-full flex items-center justify-between font-mono-custom text-[0.625rem] text-muted-foreground/50">
+          <div className="max-w-[83.75rem] mx-auto px-6 w-full flex items-center justify-center text-xs text-muted-foreground/50">
             <div>© {new Date().getFullYear()} Timbre AI Technologies AG</div>
-            <div>[SYS_STATE: SECURE]</div>
           </div>
         </div>
       </footer>
