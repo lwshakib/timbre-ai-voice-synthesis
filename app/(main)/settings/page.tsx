@@ -9,6 +9,7 @@ import { MemberList } from '@/components/organization/member-list';
 import { InviteDialog } from '@/components/organization/invite-dialog';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -174,9 +175,9 @@ export default function SettingsPage() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">
+                    <Label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">
                       Display Name
-                    </label>
+                    </Label>
                     <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50 italic">
                       {user?.name || 'Digital Creator // Timbre Lab'}
                     </div>
@@ -263,9 +264,9 @@ export default function SettingsPage() {
                 Communications
               </h3>
               <div className="max-w-[400px]">
-                <label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">
+                <Label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">
                   Email Address
-                </label>
+                </Label>
                 <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">
                   {user?.email || 'team@voice-lab.ai'}
                 </div>

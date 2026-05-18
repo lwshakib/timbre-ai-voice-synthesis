@@ -11,6 +11,8 @@ import { Logo } from '@/components/ui/logo';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -551,19 +553,19 @@ export default function LandingPage() {
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-4">
                   <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">
+                    <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">
                       Full Name / Organization
-                    </label>
-                    <input
+                    </Label>
+                    <Input
                       type="text"
-                      className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
+                      className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
                       placeholder="e.g. Acme Voice Labs"
                     />
                   </div>
                   <div>
-                    <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">
+                    <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">
                       Usage Tier
-                    </label>
+                    </Label>
                     <select className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none cursor-pointer">
                       <option value="" disabled>
                         Select volume...

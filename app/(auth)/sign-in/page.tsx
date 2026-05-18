@@ -8,6 +8,8 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
@@ -75,23 +77,23 @@ export default function SignInPage() {
       {/* Email Form */}
       <form onSubmit={handleEmailSignIn} className="space-y-4">
         <div>
-          <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
             Email address
-          </label>
-          <input
+          </Label>
+          <Input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
+            className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
             placeholder="institutional@entity.com"
           />
         </div>
         <div>
           <div className="flex justify-between items-center mb-2">
-            <label className="block font-mono-custom text-[0.625rem] text-muted-foreground tracking-[0.1em] uppercase">
+            <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground tracking-[0.1em] uppercase">
               Password
-            </label>
+            </Label>
             <Link
               href="/forgot-password"
               className="font-mono-custom text-[0.625rem] text-primary hover:opacity-70 transition-opacity uppercase tracking-widest"
@@ -99,12 +101,12 @@ export default function SignInPage() {
               Forgot password?
             </Link>
           </div>
-          <input
+          <Input
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
+            className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
             placeholder="••••••••"
           />
         </div>

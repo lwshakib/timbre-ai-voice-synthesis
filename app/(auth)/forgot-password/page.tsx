@@ -7,6 +7,8 @@ import { ScrambleText } from '@/components/marketing/scramble-text';
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -94,15 +96,15 @@ export default function ForgotPasswordPage() {
       {/* Email Form */}
       <form onSubmit={handleForgetPassword} className="space-y-6">
         <div>
-          <label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
             Email Address
-          </label>
-          <input
+          </Label>
+          <Input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none focus:border-primary transition-colors"
+            className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
             placeholder="institutional@entity.com"
           />
           <p className="mt-2 font-mono-custom text-[0.625rem] text-muted-foreground/30 tracking-tight">
