@@ -62,6 +62,27 @@ export default function SettingsPage() {
     fetchData();
   }, [session]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable
+      ) {
+        return;
+      }
+
+      if (e.key === 'd' || e.key === 'D') {
+        e.preventDefault();
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [theme, setTheme]);
+
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -172,86 +193,51 @@ export default function SettingsPage() {
                 <Icon icon="solar:user-id-linear" className="text-primary" />
                 User Identification
               </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div>
-                    <Label className="block text-xs text-muted-foreground mb-2 font-normal">
-                      Display Name
-                    </Label>
-                    <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">
-                      {user?.name || 'Digital Creator'}
-                    </div>
-                  </div>
-                  <div className="pt-4 flex items-center gap-4">
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      className="hidden"
-                      accept="image/*"
-                      onChange={handleUpload}
+              <div className="flex flex-col sm:flex-row items-center gap-8 bg-secondary/10 p-6 rounded-xl border border-border/40">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleUpload}
+                />
+                
+                {/* Dynamic Circle Avatar with Camera Overlay */}
+                <div 
+                  onClick={() => !uploading && fileInputRef.current?.click()}
+                  className="relative w-24 h-24 rounded-full border border-border overflow-hidden cursor-pointer group shadow-sm bg-card hover:border-primary/50 transition-all duration-300 shrink-0 animate-in zoom-in-95 duration-300"
+                >
+                  {avatarUrl ? (
+                    <Image
+                      src={avatarUrl}
+                      alt={user?.name || 'User'}
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <Button
-                      disabled={uploading}
-                      onClick={() => fileInputRef.current?.click()}
-                      className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer"
-                    >
-                      <ScrambleText text={uploading ? 'Uploading...' : 'Update Image'} />
-                    </Button>
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer"
-                        >
-                          <ScrambleText text="Sign Out" />
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Sign Out</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            Are you sure you want to sign out of your account? Your current session
-                            will be terminated.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            variant="ghost"
-                            onClick={async () => {
-                              await authClient.signOut();
-                              window.location.href = '/sign-in';
-                            }}
-                            className="bg-red-600 hover:bg-red-700 text-white hover:text-white transition-colors cursor-pointer font-medium"
-                          >
-                            Sign Out
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground/40 bg-secondary/30">
+                      <Icon icon="solar:user-linear" width={40} height={40} />
+                    </div>
+                  )}
+                  
+                  {/* Camera Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center text-white transition-opacity duration-300">
+                    <Icon 
+                      icon={uploading ? "eos-icons:loading" : "solar:camera-linear"} 
+                      width={24} 
+                      height={24} 
+                      className="scale-75 group-hover:scale-100 transition-transform duration-300" 
+                    />
                   </div>
                 </div>
-                <div
-                  className="flex items-center justify-center border border-dashed border-border rounded-sm p-8 bg-secondary/20 cursor-pointer hover:border-primary/50 transition-all group"
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <div className="text-center">
-                    <div className="w-20 h-20 rounded-full bg-background border border-border flex items-center justify-center mx-auto mb-4 text-muted-foreground overflow-hidden group-hover:border-primary/50 transition-all">
-                      {avatarUrl ? (
-                        <Image
-                          src={avatarUrl}
-                          alt={user?.name || 'User'}
-                          width={80}
-                          height={80}
-                          className="object-cover"
-                        />
-                      ) : (
-                        <Icon icon="solar:user-speak-linear" width={32} height={32} />
-                      )}
-                    </div>
-                    <p className="text-xs text-muted-foreground group-hover:text-primary transition-all font-normal">
-                      {uploading ? 'Transmitting...' : 'Update Vocal Profile'}
-                    </p>
+
+                <div className="flex-1 w-full max-w-[400px]">
+                  <Label className="block text-xs text-muted-foreground mb-2 font-normal">
+                    Display Name
+                  </Label>
+                  <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-lg bg-secondary/30">
+                    {user?.name || 'Digital Creator'}
                   </div>
                 </div>
               </div>
@@ -303,6 +289,52 @@ export default function SettingsPage() {
                     </span>
                   </Button>
                 ))}
+              </div>
+            </section>
+
+            <div className="h-[1px] w-full bg-gradient-to-r from-[#1f1f1e] via-transparent to-transparent" />
+
+            <section className="space-y-6">
+              <h3 className="text-foreground text-sm font-medium tracking-tight flex items-center gap-3">
+                <Icon icon="solar:logout-linear" className="text-primary" />
+                Account Session
+              </h3>
+              <div className="max-w-[400px]">
+                <p className="text-xs text-muted-foreground mb-4">
+                  Terminate your current session and securely sign out of your account.
+                </p>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer border-destructive/20 text-destructive hover:bg-destructive/10 hover:text-destructive transition-colors"
+                    >
+                      Sign Out
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Sign Out</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Are you sure you want to sign out of your account? Your current session
+                        will be terminated.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        variant="ghost"
+                        onClick={async () => {
+                          await authClient.signOut();
+                          window.location.href = '/sign-in';
+                        }}
+                        className="bg-red-600 hover:bg-red-700 text-white hover:text-white transition-colors cursor-pointer font-medium"
+                      >
+                        Sign Out
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             </section>
           </Reveal>
@@ -425,7 +457,7 @@ export default function SettingsPage() {
                     Team Management
                   </h3>
                   <p className="text-muted-foreground text-xs font-normal mt-1">
-                    Authorize Team Clearance
+                    Manage workspace members and invitations.
                   </p>
                 </div>
                 <InviteDialog />
@@ -436,7 +468,7 @@ export default function SettingsPage() {
 
             <div className="h-[1px] w-full bg-gradient-to-r from-[#1f1f1e] via-transparent to-transparent" />
 
-            <section className="glass-panel p-8 border border-border rounded-sm overflow-hidden relative">
+            <section className="glass-panel p-8 border border-border rounded-xl overflow-hidden relative">
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 rounded-full bg-destructive/10 border border-destructive/20 text-destructive">
                   <Icon icon="solar:danger-linear" width={24} height={24} />
@@ -445,26 +477,23 @@ export default function SettingsPage() {
                   <h3 className="text-foreground text-lg font-light tracking-tight">
                     Decommission Workspace
                   </h3>
-                  <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
-                    Permanent data removal
+                  <p className="text-muted-foreground text-xs font-normal mt-1">
+                    Permanently delete all workspace data.
                   </p>
                 </div>
               </div>
               <p className="text-muted-foreground text-sm max-w-[500px] mb-8 leading-relaxed">
-                Permanently decommission this organization and all associated synthesis data,
-                voices, and team records.
+                Delete this workspace and permanently remove all voices, audio generations, and team records. This action is irreversible.
               </p>
               <Button
                 onClick={async () => {
                   if (!activeOrg) return;
-                  toast.info(
-                    'Decommissioning protocol initialized. Identity verification required.'
-                  );
+                  toast.info('Workspace deletion requested. Identity verification required.');
                 }}
                 variant="destructive"
-                className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] rounded-lg cursor-pointer"
+                className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer"
               >
-                <ScrambleText text="INITIALIZE_DECOMMISSION" />
+                Delete Workspace
               </Button>
             </section>
           </Reveal>
@@ -472,24 +501,24 @@ export default function SettingsPage() {
 
         {activeTab === 'Billing' && (
           <Reveal className="space-y-10 animate-in fade-in duration-500">
-            <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] uppercase mb-6 text-center">
-              It&apos;s a hardcoded UI, billing service is not available now
+            <div className="p-4 border border-border rounded-lg bg-secondary/20 text-muted-foreground text-xs text-center">
+              Billing services are currently being updated and are temporarily unavailable.
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="glass-panel p-6 border border-border rounded-sm">
-                <div className="text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-4">
+              <div className="glass-panel p-6 border border-border rounded-lg">
+                <div className="text-xs text-muted-foreground mb-4">
                   Current Plan
                 </div>
                 <div className="text-primary text-xl font-medium tracking-tight mb-1">
-                  PRO_SYNTHESIS
+                  Pro Synthesis
                 </div>
-                <div className="text-muted-foreground/30 text-[10px] font-mono-custom uppercase tracking-widest mt-4">
-                  RECURRING_FLAT_FEE
+                <div className="text-muted-foreground/50 text-xs mt-4">
+                  Recurring Flat Fee
                 </div>
               </div>
-              <div className="glass-panel p-6 border border-border rounded-sm relative">
-                <div className="text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-4">
+              <div className="glass-panel p-6 border border-border rounded-lg relative">
+                <div className="text-xs text-muted-foreground mb-4">
                   Remaining Credits
                 </div>
                 <div className="text-foreground text-3xl font-light tracking-tighter mb-1 tabular-nums">
@@ -504,9 +533,9 @@ export default function SettingsPage() {
               </div>
             </div>
 
-            <section className="glass-panel border border-border rounded-sm bg-secondary/30">
+            <section className="glass-panel border border-border rounded-lg bg-secondary/10">
               <div className="px-6 py-4 border-b border-border flex justify-between items-center">
-                <h3 className="text-muted-foreground text-[0.625rem] font-mono-custom tracking-widest">
+                <h3 className="text-xs text-muted-foreground font-medium">
                   Recent Invoices
                 </h3>
                 <Icon icon="solar:history-linear" className="text-muted-foreground/20" />
@@ -524,15 +553,15 @@ export default function SettingsPage() {
                       />
                       <div className="flex flex-col">
                         <span className="text-foreground tracking-tight font-medium">
-                          INV_2026_0{i}_CREATOR
+                          Invoice #2026-0{i}
                         </span>
-                        <span className="text-[10px] text-muted-foreground/30 font-mono-custom tracking-widest">
-                          BATCH_DATED: 2026-04-0{i}
+                        <span className="text-xs text-muted-foreground/40">
+                          Date: 2026-04-0{i}
                         </span>
                       </div>
                     </div>
                     <div className="flex items-center gap-6">
-                      <span className="font-mono-custom text-xs text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         $2,400.00
                       </span>
                       <Button
@@ -552,39 +581,39 @@ export default function SettingsPage() {
 
         {activeTab === 'API' && (
           <Reveal className="space-y-8 animate-in fade-in duration-500">
-            <div className="glass-panel py-4 px-6 border border-border/50 bg-destructive/5 italic text-destructive text-[10px] font-mono-custom tracking-[0.2em] uppercase mb-6 text-center">
-              It&apos;s a hardcoded UI, API service is not available right now
+            <div className="p-4 border border-border rounded-lg bg-secondary/20 text-muted-foreground text-xs text-center">
+              API services are currently under maintenance and temporarily unavailable.
             </div>
 
             <section className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-foreground text-sm font-medium uppercase tracking-widest flex items-center gap-3">
+                  <h3 className="text-foreground text-sm font-medium flex items-center gap-3">
                     <Icon icon="solar:key-linear" className="text-primary" />
                     Access Keys
                   </h3>
-                  <p className="text-muted-foreground text-xs font-mono-custom tracking-wider mt-1 uppercase">
-                    AUTHENTICATE_MODEL_HANDSHAKES
+                  <p className="text-muted-foreground text-xs mt-1">
+                    Authenticate model syntheses and operations.
                   </p>
                 </div>
-                <Button className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.05em] rounded-lg cursor-pointer">
+                <Button className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer">
                   Generate new API key
                 </Button>
               </div>
 
-              <div className="glass-panel p-4 border border-border rounded-sm bg-background flex items-center justify-between">
+              <div className="glass-panel p-4 border border-border rounded-lg bg-background flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_green]" />
                   <div className="flex flex-col">
                     <span className="text-foreground text-sm font-medium tracking-tight">
                       Main_Synthesis_Production
                     </span>
-                    <span className="text-[10px] text-muted-foreground/30 font-mono-custom tracking-[0.2em] uppercase">
-                      Last Used: 2.1 minutes ago
+                    <span className="text-xs text-muted-foreground/40">
+                      Last used 2 minutes ago
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1 font-mono-custom text-[0.75rem] text-muted-foreground/20 bg-secondary px-3 py-1.5 rounded-sm border border-border">
+                <div className="flex items-center gap-1 text-xs text-muted-foreground/40 bg-secondary px-3 py-1.5 rounded-lg border border-border">
                   <span>sk_timbre_••••••••••••••••••••342f</span>
                   <Button
                     variant="ghost"
@@ -597,25 +626,25 @@ export default function SettingsPage() {
               </div>
             </section>
 
-            <section className="p-8 border border-dashed border-border rounded-sm text-center">
+            <section className="p-8 border border-dashed border-border rounded-lg text-center">
               <Icon
                 icon="solar:code-square-linear"
                 width={32}
                 height={32}
                 className="text-muted-foreground/20 mx-auto mb-4"
               />
-              <h4 className="text-muted-foreground text-sm font-medium uppercase tracking-widest mb-1">
+              <h4 className="text-muted-foreground text-sm font-medium mb-1">
                 Developer Documentation
               </h4>
-              <p className="text-muted-foreground/40 text-xs mb-6 font-mono-custom uppercase tracking-wider">
-                Access the Timbre AI specification ledger.
+              <p className="text-muted-foreground/50 text-xs mb-6">
+                Access the Timbre AI developer and API specifications.
               </p>
               <br />
               <Button
                 variant="ghost"
-                className="h-auto p-0 text-primary font-mono-custom text-[0.625rem] uppercase tracking-widest hover:text-primary/70 hover:bg-transparent cursor-pointer"
+                className="h-auto p-0 text-primary text-xs hover:text-primary/70 hover:bg-transparent cursor-pointer"
               >
-                <ScrambleText text="VIEW_OPEN_SPECS" />
+                View Specifications
               </Button>
             </section>
           </Reveal>
