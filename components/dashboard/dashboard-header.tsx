@@ -13,7 +13,7 @@ export function DashboardHeader() {
     <div className="flex items-start justify-between">
       <div className="space-y-1">
         <p className="text-sm text-muted-foreground font-mono-custom tracking-wider uppercase">
-          System Overview
+          Voice Lab Insights
         </p>
         <h1 className="text-2xl lg:text-3xl font-light tracking-tight text-foreground">
           Welcome back,{' '}

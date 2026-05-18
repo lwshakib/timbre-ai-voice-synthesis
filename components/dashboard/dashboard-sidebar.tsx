@@ -78,7 +78,7 @@ function NavSection({ label, items, pathname }: NavSectionProps) {
                 }
                 onClick={item.onClick}
                 tooltip={item.title}
-                className="h-10 px-4 py-2 text-[13px] tracking-tight font-medium border border-transparent data-[active=true]:border-primary data-[active=true]:bg-primary/10 data-[active=true]:text-foreground hover:bg-secondary transition-all duration-200"
+                className="h-10 px-4 py-2 text-[13px] tracking-tight font-medium data-[active=true]:bg-primary/10 data-[active=true]:text-foreground hover:bg-secondary transition-all duration-200"
               >
                 {item.url ? (
                   <Link href={item.url} className="flex items-center gap-3">

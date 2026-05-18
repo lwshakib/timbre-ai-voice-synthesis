@@ -22,55 +22,53 @@ export function TextInputPanel() {
   };
 
   return (
-    <div
-      className="
-      rounded-[22px] bg-gradient-to-br from-primary/50 via-muted-foreground/20 to-background p-0.5 shadow-2xl shadow-primary/10
-    "
-    >
-      <div className="rounded-[20px] bg-background p-1">
-        <div className="space-y-4 rounded-2xl bg-card p-6 border border-border">
-          <Textarea
-            placeholder="Start typing or paste your text here..."
-            className="min-h-[160px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0 text-foreground text-lg font-light placeholder:text-muted-foreground/20"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            maxLength={TEXT_MAX_LENGTH}
-          />
+    <div className="glass-panel rounded-xl p-6 border border-border bg-card/40 backdrop-blur-md shadow-2xl relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div className="relative z-10 flex flex-col gap-4">
+        <Textarea
+          placeholder="Start typing or paste your text here to synthesize..."
+          className="min-h-[180px] resize-none border border-border/40 bg-background/30 p-4 rounded-lg text-foreground text-sm font-normal placeholder:text-muted-foreground/40 focus-visible:ring-1 focus-visible:ring-primary/20 focus-visible:border-primary/40 transition-all leading-relaxed"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          maxLength={TEXT_MAX_LENGTH}
+        />
 
-          <div className="flex items-center justify-between pt-4 border-t border-border/50">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+          <div className="flex items-center gap-3">
             <Badge
               variant="outline"
-              className="gap-1.5 border-dashed border-primary/30 bg-primary/5 text-primary"
+              className="gap-1.5 border-primary/20 bg-primary/5 text-primary py-1 px-2.5 rounded-md text-[11px] font-medium"
             >
-              <Coins className="size-3" />
-              <span className="text-[10px] font-mono-custom tracking-wider uppercase">
+              <Coins className="size-3.5" />
+              <span>
                 {text.length === 0 ? (
-                  'READY_FOR_INPUT'
+                  'Ready for input'
                 ) : (
                   <>
                     <span className="tabular-nums">
                       ${(text.length * COST_PER_UNIT).toFixed(4)}
                     </span>{' '}
-                    EST_CREDIT
+                    est. credit cost
                   </>
                 )}
               </span>
             </Badge>
-            <span className="text-[10px] text-muted-foreground font-mono-custom tracking-widest uppercase">
-              {text.length.toLocaleString()} / {TEXT_MAX_LENGTH.toLocaleString()} [CHAR_LIMIT]
+
+            <span className="text-[11px] text-muted-foreground/60 font-medium">
+              {text.length.toLocaleString()} / {TEXT_MAX_LENGTH.toLocaleString()} characters
             </span>
           </div>
-        </div>
 
-        <div className="flex items-center justify-end p-4">
           <Button
             size="lg"
             disabled={!text.trim()}
             onClick={handleGenerate}
-            className="w-full lg:w-auto bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 h-12 rounded-full shadow-lg shadow-primary/20"
+            className="w-full sm:w-auto bg-primary hover:bg-primary/95 text-primary-foreground font-medium px-6 h-10 rounded-lg shadow-md shadow-primary/10 select-none cursor-pointer transition-all"
           >
             <Sparkles className="size-4 mr-2" />
-            Generate speech
+            Generate Speech
           </Button>
         </div>
       </div>

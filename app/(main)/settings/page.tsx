@@ -217,11 +217,12 @@ export default function SettingsPage() {
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
                           <AlertDialogAction
+                            variant="ghost"
                             onClick={async () => {
                               await authClient.signOut();
                               window.location.href = '/sign-in';
                             }}
-                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                            className="bg-red-600 hover:bg-red-700 text-white hover:text-white transition-colors cursor-pointer font-medium"
                           >
                             Sign Out
                           </AlertDialogAction>
