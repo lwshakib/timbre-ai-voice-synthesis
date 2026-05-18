@@ -130,36 +130,6 @@ export const EchoWavePattern = () => {
       ctx.stroke();
     }
 
-    function drawTelemetry(w: number, h: number) {
-      if (!ctx) return;
-
-      // Render Technical telemetry markers
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.font = '300 9px Geist Mono, monospace';
-      ctx.letterSpacing = '2px';
-
-      // Left-Bottom telemetry
-      ctx.fillText('[TIMBRE_ENGINE // ACTIVE]', 40, h - 80);
-      ctx.fillText(
-        `[FREQUENCY_LOAD // ${(120 + Math.sin(localTime * 2) * 5).toFixed(1)}Hz]`,
-        40,
-        h - 60
-      );
-
-      // Top-Right coordinates
-      ctx.fillText(`LOC: Zurich, Switzerland`, w - 240, 60);
-      ctx.fillText(`SYS.LATENCY: ${(80 + Math.sin(localTime * 3) * 4).toFixed(0)}ms`, w - 240, 80);
-
-      // Center crosshair
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-      ctx.beginPath();
-      ctx.moveTo(w / 2 - 10, h / 2);
-      ctx.lineTo(w / 2 + 10, h / 2);
-      ctx.moveTo(w / 2, h / 2 - 10);
-      ctx.lineTo(w / 2, h / 2 + 10);
-      ctx.stroke();
-    }
-
     function animate() {
       if (!ctx || !canvas) return;
       ctx.fillStyle = '#050506'; // Deep technical black backdrop
@@ -211,9 +181,6 @@ export const EchoWavePattern = () => {
         }
         ctx.stroke();
       });
-
-      // 4. Render minimal telemetry
-      drawTelemetry(width, height);
 
       animationFrameId = requestAnimationFrame(animate);
     }

@@ -557,12 +557,12 @@ export default function LandingPage() {
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-4">
                   <div>
                     <Label className="block text-xs text-muted-foreground mb-2 font-normal">
-                      Full Name / Organization
+                      Full Name
                     </Label>
                     <Input
                       type="text"
                       className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
-                      placeholder="e.g. Acme Voice Labs"
+                      placeholder="e.g. John Doe"
                     />
                   </div>
                   <div>

@@ -132,10 +132,10 @@ export default function SettingsPage() {
     <div className="flex-1 p-8 pt-12 max-w-[1000px] mx-auto w-full">
       <Reveal>
         <div className="flex flex-col items-start mb-12">
-          <h1 className="text-foreground text-3xl font-light tracking-tight mb-2 uppercase">
+          <h1 className="text-foreground text-3xl font-light tracking-tight mb-2">
             {activeOrg ? `${activeOrg.name} Configuration` : 'Account Configuration'}
           </h1>
-          <p className="text-muted-foreground text-xs font-mono-custom tracking-[0.2em] uppercase">
+          <p className="text-muted-foreground text-xs font-normal">
             Adjust your workspace preferences and identity.
           </p>
         </div>
@@ -148,7 +148,7 @@ export default function SettingsPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-4 font-mono-custom text-[0.625rem] tracking-[0.2em] transition-all relative ${
+              className={`px-6 py-4 text-xs transition-all relative ${
                 activeTab === tab
                   ? 'text-primary'
                   : 'text-muted-foreground/40 hover:text-muted-foreground'
@@ -168,14 +168,14 @@ export default function SettingsPage() {
         {activeTab === 'Profile' && (
           <Reveal className="space-y-10 animate-in fade-in duration-500">
             <section>
-              <h3 className="text-foreground text-sm font-medium uppercase tracking-widest mb-6 flex items-center gap-3">
+              <h3 className="text-foreground text-sm font-medium tracking-tight mb-6 flex items-center gap-3">
                 <Icon icon="solar:user-id-linear" className="text-primary" />
                 User Identification
               </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <Label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">
+                    <Label className="block text-xs text-muted-foreground mb-2 font-normal">
                       Display Name
                     </Label>
                     <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50 italic">
@@ -193,15 +193,15 @@ export default function SettingsPage() {
                     <Button
                       disabled={uploading}
                       onClick={() => fileInputRef.current?.click()}
-                      className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] rounded-lg cursor-pointer"
+                      className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer"
                     >
-                      <ScrambleText text={uploading ? 'UPLOADING...' : 'Update Image'} />
+                      <ScrambleText text={uploading ? 'Uploading...' : 'Update Image'} />
                     </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
                         <Button
                           variant="outline"
-                          className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] rounded-lg cursor-pointer"
+                          className="h-10 px-6 text-xs rounded-lg font-medium cursor-pointer"
                         >
                           <ScrambleText text="Sign Out" />
                         </Button>
@@ -248,8 +248,8 @@ export default function SettingsPage() {
                         <Icon icon="solar:user-speak-linear" width={32} height={32} />
                       )}
                     </div>
-                    <p className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest group-hover:text-primary transition-all">
-                      {uploading ? 'TRANSMITTING...' : 'Update_Vocal_Profile'}
+                    <p className="text-xs text-muted-foreground group-hover:text-primary transition-all font-normal">
+                      {uploading ? 'Transmitting...' : 'Update Vocal Profile'}
                     </p>
                   </div>
                 </div>
@@ -259,12 +259,12 @@ export default function SettingsPage() {
             <div className="h-[1px] w-full bg-gradient-to-r from-[#1f1f1e] via-transparent to-transparent" />
 
             <section>
-              <h3 className="text-foreground text-sm font-medium uppercase tracking-widest mb-6 flex items-center gap-3">
+              <h3 className="text-foreground text-sm font-medium tracking-tight mb-6 flex items-center gap-3">
                 <Icon icon="solar:letter-linear" className="text-primary" />
                 Communications
               </h3>
               <div className="max-w-[400px]">
-                <Label className="block text-[0.625rem] font-mono-custom text-muted-foreground tracking-widest mb-2">
+                <Label className="block text-xs text-muted-foreground mb-2 font-normal">
                   Email Address
                 </Label>
                 <div className="glass-panel p-3 border border-border text-foreground text-sm rounded-sm bg-secondary/50">
@@ -276,7 +276,7 @@ export default function SettingsPage() {
             <div className="h-[1px] w-full bg-gradient-to-r from-[#1f1f1e] via-transparent to-transparent" />
 
             <section className="space-y-6">
-              <h3 className="text-foreground text-sm font-medium uppercase tracking-widest flex items-center gap-3">
+              <h3 className="text-foreground text-sm font-medium tracking-tight flex items-center gap-3">
                 <Icon icon="solar:palette-linear" className="text-primary" />
                 Appearance
               </h3>
@@ -297,7 +297,7 @@ export default function SettingsPage() {
                     }`}
                   >
                     <Icon icon={opt.icon} width={20} height={20} />
-                    <span className="text-[10px] font-mono-custom uppercase tracking-widest">
+                    <span className="text-xs font-normal">
                       {opt.label}
                     </span>
                   </Button>
@@ -318,7 +318,7 @@ export default function SettingsPage() {
                   <h3 className="text-foreground text-lg font-light tracking-tight">
                     Security Credentials
                   </h3>
-                  <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
+                  <p className="text-muted-foreground text-xs font-normal">
                     Active linked accounts and sessions
                   </p>
                 </div>
@@ -326,7 +326,7 @@ export default function SettingsPage() {
 
               <div className="space-y-8">
                 <div>
-                  <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">
+                  <h4 className="text-xs font-normal text-muted-foreground mb-4">
                     Linked Accounts
                   </h4>
                   <div className="grid gap-3">
@@ -339,8 +339,8 @@ export default function SettingsPage() {
                           <Icon
                             icon={
                               acc.providerId === 'google'
-                                ? 'logos:google-icon'
-                                : 'solar:letter-linear'
+                                  ? 'logos:google-icon'
+                                  : 'solar:letter-linear'
                             }
                             width={16}
                           />
@@ -348,7 +348,7 @@ export default function SettingsPage() {
                             {acc.providerId}
                           </span>
                         </div>
-                        <span className="text-[10px] text-muted-foreground font-mono-custom tracking-widest uppercase">
+                        <span className="text-xs text-muted-foreground font-normal">
                           Verified
                         </span>
                       </div>
@@ -360,7 +360,7 @@ export default function SettingsPage() {
                 </div>
 
                 <div>
-                  <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">
+                  <h4 className="text-xs font-normal text-muted-foreground mb-4">
                     Active Sessions
                   </h4>
                   <div className="grid gap-3">
@@ -383,13 +383,13 @@ export default function SettingsPage() {
                                   ? 'Apple Host'
                                   : 'Terminal Session'}
                             </span>
-                            <span className="text-[10px] text-muted-foreground/30 font-mono-custom">
+                            <span className="text-[10px] text-muted-foreground/30 font-normal">
                               IP: {sess.ipAddress || 'Internal Uplink'}
                             </span>
                           </div>
                         </div>
                         {session?.session.id === sess.id && (
-                          <span className="text-[10px] text-primary font-mono-custom tracking-widest uppercase border border-primary/20 px-2 py-1 rounded-sm bg-primary/5">
+                          <span className="text-[10px] text-primary font-normal border border-primary/20 px-2 py-1 rounded-sm bg-primary/5">
                             Current
                           </span>
                         )}
@@ -400,14 +400,14 @@ export default function SettingsPage() {
               </div>
 
               <div className="mt-8 pt-8 border-t border-border/50">
-                <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">
+                <h4 className="text-xs font-normal text-muted-foreground mb-4">
                   Identity Rotation
                 </h4>
                 <Button
                   variant="outline"
-                  className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-muted-foreground hover:text-foreground rounded-lg cursor-pointer"
+                  className="h-10 px-6 text-xs text-muted-foreground hover:text-foreground rounded-lg font-medium cursor-pointer"
                 >
-                  <ScrambleText text="CHANGE_PASSWORD" />
+                  <ScrambleText text="Change Password" />
                 </Button>
               </div>
             </section>
@@ -419,12 +419,12 @@ export default function SettingsPage() {
             <section className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-foreground text-sm font-medium uppercase tracking-widest flex items-center gap-3">
+                  <h3 className="text-foreground text-sm font-medium tracking-tight flex items-center gap-3">
                     <Icon icon="solar:buildings-linear" className="text-primary" />
                     Team Management
                   </h3>
-                  <p className="text-muted-foreground text-xs font-mono-custom tracking-wider mt-1 uppercase">
-                    AUTHORIZE_TEAM_CLEARANCE
+                  <p className="text-muted-foreground text-xs font-normal mt-1">
+                    Authorize Team Clearance
                   </p>
                 </div>
                 <InviteDialog />

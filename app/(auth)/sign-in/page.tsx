@@ -59,7 +59,7 @@ export default function SignInPage() {
       <Button
         onClick={handleGoogleSignIn}
         variant="outline"
-        className="w-full h-11 gap-3 mb-6 bg-card/50 hover:bg-secondary/50 text-[0.875rem] text-foreground rounded-lg font-medium"
+        className="w-full h-11 gap-3 mb-6 bg-card/50 hover:bg-secondary/50 text-[0.875rem] text-foreground rounded-lg font-medium cursor-pointer"
       >
         <Icon icon="logos:google-icon" width="18" />
         Continue with Google
@@ -67,8 +67,8 @@ export default function SignInPage() {
 
       <div className="relative flex items-center justify-center mb-6">
         <div className="absolute w-full h-[1px] bg-border"></div>
-        <span className="relative z-10 bg-card px-3 text-xs text-muted-foreground">
-          Or sign in with email
+        <span className="relative z-10 bg-background px-3 text-xs text-muted-foreground">
+          Or continue with email
         </span>
       </div>
 
@@ -84,7 +84,7 @@ export default function SignInPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
-            placeholder="institutional@entity.com"
+            placeholder="name@domain.com"
           />
         </div>
         <div>

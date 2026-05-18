@@ -17,6 +17,17 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const handleGoogleSignUp = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+      });
+    } catch {
+      toast.error('Google authentication failed.');
+    }
+  };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -90,11 +101,28 @@ export default function SignUpPage() {
         <p className="text-muted-foreground text-xs">Join the Timbre AI network.</p>
       </div>
 
+      {/* Social SignUp */}
+      <Button
+        onClick={handleGoogleSignUp}
+        variant="outline"
+        className="w-full h-11 gap-3 mb-6 bg-card/50 hover:bg-secondary/50 text-[0.875rem] text-foreground rounded-lg font-medium cursor-pointer"
+      >
+        <Icon icon="logos:google-icon" width="18" />
+        Continue with Google
+      </Button>
+
+      <div className="relative flex items-center justify-center mb-6">
+        <div className="absolute w-full h-[1px] bg-border"></div>
+        <span className="relative z-10 bg-background px-3 text-xs text-muted-foreground">
+          Or continue with email
+        </span>
+      </div>
+
       {/* Email Form */}
       <form onSubmit={handleSignUp} className="space-y-4">
         <div>
           <Label className="block text-xs text-muted-foreground mb-2 font-normal">
-            Full Name / Organization
+            Full Name
           </Label>
           <Input
             type="text"
@@ -102,7 +130,7 @@ export default function SignUpPage() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
-            placeholder="John Doe / Voice Lab"
+            placeholder="John Doe"
           />
         </div>
         <div>
@@ -115,7 +143,7 @@ export default function SignUpPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
-            placeholder="team@voice-lab.ai"
+            placeholder="name@domain.com"
           />
         </div>
         <div>

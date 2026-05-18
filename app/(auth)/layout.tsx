@@ -19,28 +19,16 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <HeroCanvas />
         </div>
 
-        <div className="relative z-10 w-full max-w-[360px] mx-auto flex flex-col justify-between min-h-[85vh]">
-          {/* Branding header */}
-          <div className="flex flex-col items-center mb-6 text-center">
-            <Logo size={36} className="mb-3" />
-            <div className="text-foreground text-2xl font-medium tracking-tighter mb-1 uppercase">
-              Timbre AI
-            </div>
-            <div className="text-[10px] font-mono-custom tracking-[0.2em] text-muted-foreground/60 uppercase">
-              Authentication Services
-            </div>
+        <div className="relative z-10 w-full max-w-[360px] mx-auto flex flex-col justify-center min-h-[80vh]">
+          {/* Branding Logo */}
+          <div className="flex flex-col items-center mb-8 text-center">
+            <Logo size={44} />
           </div>
 
-          <div className="my-auto">{children}</div>
-
-          {/* Institutional Disclosure */}
-          <div className="mt-6 text-center">
-            <div className="font-mono-custom text-[0.625rem] text-muted-foreground/30 uppercase tracking-widest">
-              Timbre AI Secure Access
-            </div>
-          </div>
+          <div>{children}</div>
         </div>
       </div>
     </main>
   );
 }
+
