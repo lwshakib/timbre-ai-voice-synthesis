@@ -31,7 +31,7 @@ export function VoiceSelector() {
 
   return (
     <Field className="space-y-3">
-      <FieldLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
+      <FieldLabel className="text-[11px] text-muted-foreground/70 font-medium">
         Voice style
       </FieldLabel>
       <Select
@@ -48,7 +48,7 @@ export function VoiceSelector() {
                   name={currentVoice.name}
                   className="size-6 border-primary/30"
                 />
-                <span className="truncate text-xs font-mono-custom uppercase tracking-wider">
+                <span className="truncate text-xs font-medium text-foreground">
                   {currentVoice.name}
                   {currentVoice.category && ` - ${VOICE_CATEGORY_LABELS[currentVoice.category]}`}
                 </span>
@@ -59,18 +59,18 @@ export function VoiceSelector() {
         <SelectContent className="bg-card border-border">
           {customVoices.length > 0 && (
             <SelectGroup>
-              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">
+              <SelectLabel className="text-[10px] text-muted-foreground/50 font-medium px-3 py-2">
                 Organization Voices
               </SelectLabel>
               {customVoices.map((v) => (
                 <SelectItem
                   key={v.id}
                   value={v.id}
-                  className="focus:bg-primary/10 focus:text-primary text-muted-foreground"
+                  className="focus:bg-primary/10 focus:text-primary text-muted-foreground py-2.5 px-3 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <VoiceAvatar seed={v.id} name={v.name} className="size-5" />
-                    <span className="text-xs font-mono-custom uppercase tracking-wider">
+                    <span className="text-xs font-medium text-foreground">
                       {v.name} - {VOICE_CATEGORY_LABELS[v.category!]}
                     </span>
                   </div>
@@ -83,18 +83,18 @@ export function VoiceSelector() {
           )}
           {systemVoices.length > 0 && (
             <SelectGroup>
-              <SelectLabel className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-widest uppercase px-2 py-1.5">
+              <SelectLabel className="text-[10px] text-muted-foreground/50 font-medium px-3 py-2">
                 Timbre Collection
               </SelectLabel>
               {systemVoices.map((v) => (
                 <SelectItem
                   key={v.id}
                   value={v.id}
-                  className="focus:bg-primary/10 focus:text-primary text-muted-foreground"
+                  className="focus:bg-primary/10 focus:text-primary text-muted-foreground py-2.5 px-3 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <VoiceAvatar seed={v.id} name={v.name} className="size-5" />
-                    <span className="text-xs font-mono-custom uppercase tracking-wider">
+                    <span className="text-xs font-medium text-foreground">
                       {v.name} - {VOICE_CATEGORY_LABELS[v.category!]}
                     </span>
                   </div>

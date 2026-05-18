@@ -73,9 +73,7 @@ export function VoicePreviewPanel({
     <div className="h-full flex flex-col bg-background border-t border-border flex-1">
       {/* Header */}
       <div className="p-8 pb-4">
-        <h3 className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
-          Audio Preview
-        </h3>
+        <h3 className="text-[11px] text-muted-foreground/70 font-medium">Audio Preview</h3>
       </div>
 
       {/* Content */}
@@ -84,8 +82,8 @@ export function VoicePreviewPanel({
           <div className="absolute inset-0 z-10 flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
               <Spinner className="size-6 text-primary" />
-              <span className="text-[9px] text-muted-foreground font-mono-custom tracking-widest uppercase">
-                Initializing Stream...
+              <span className="text-[10px] text-muted-foreground font-medium">
+                Initializing stream...
               </span>
             </div>
           </div>
@@ -120,7 +118,7 @@ export function VoicePreviewPanel({
                   name={selectedVoiceName}
                   className="size-5 border-primary/20"
                 />
-                <span className="truncate text-[10px] text-primary font-mono-custom uppercase tracking-wider">
+                <span className="truncate text-[10px] text-primary font-medium">
                   {selectedVoiceName}
                 </span>
               </div>
@@ -173,7 +171,7 @@ export function VoicePreviewPanel({
               type="button"
               variant="outline"
               size="sm"
-              className="rounded-full border-border bg-card hover:bg-secondary hover:border-primary/50 text-foreground font-mono-custom text-[10px] uppercase tracking-widest px-6 h-10"
+              className="rounded-full border-border bg-card hover:bg-secondary hover:border-primary/50 text-foreground font-medium text-xs px-6 h-10"
               onClick={handleDownload}
               disabled={!isReady || isDownloading}
             >

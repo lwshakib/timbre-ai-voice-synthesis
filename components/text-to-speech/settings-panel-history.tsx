@@ -40,9 +40,7 @@ export function SettingsPanelHistory() {
     return (
       <div className="flex flex-col items-center justify-center flex-1 min-h-0 gap-4">
         <Spinner className="size-6 text-primary" />
-        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
-          Fetching history...
-        </p>
+        <p className="text-[10px] text-muted-foreground/60 font-medium">Fetching history...</p>
       </div>
     );
   }
@@ -51,9 +49,7 @@ export function SettingsPanelHistory() {
     return (
       <div className="flex flex-col items-center justify-center flex-1 min-h-0 gap-4 opacity-50">
         <History className="size-8 text-border" />
-        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
-          No history found
-        </p>
+        <p className="text-[10px] text-muted-foreground/60 font-medium">No history found</p>
       </div>
     );
   }
@@ -63,9 +59,7 @@ export function SettingsPanelHistory() {
       <div className="shrink-0 p-6 pb-2">
         <div className="flex flex-col gap-1 mb-6 px-2">
           <h3 className="text-sm font-medium text-foreground">Recent activity</h3>
-          <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
-            Generation history
-          </p>
+          <p className="text-[11px] text-muted-foreground/70 font-medium">Generation history</p>
         </div>
       </div>
 
@@ -82,10 +76,8 @@ export function SettingsPanelHistory() {
             <div className="min-w-0 flex-1 space-y-1">
               <p className="text-[11px] text-foreground font-medium truncate">{gen.text}</p>
               <div className="flex items-center gap-3">
-                <span className="text-[9px] text-primary font-mono-custom uppercase tracking-wider">
-                  {gen.voiceName}
-                </span>
-                <span className="flex items-center gap-1 text-[9px] text-muted-foreground/60 font-mono-custom uppercase tracking-wider">
+                <span className="text-[10px] text-primary font-medium">{gen.voiceName}</span>
+                <span className="flex items-center gap-1 text-[10px] text-muted-foreground/60 font-medium">
                   <Calendar className="size-2.5" />
                   {format(new Date(gen.createdAt), 'MMM d, HH:mm')}
                 </span>

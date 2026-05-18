@@ -72,15 +72,13 @@ const PROMPT_SUGGESTIONS: {
 export function PromptSuggestions({ onSelect }: { onSelect: (prompt: string) => void }) {
   return (
     <div className="space-y-4">
-      <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
-        Prompt Suggestions
-      </p>
+      <p className="text-[11px] text-muted-foreground/70 font-medium">Prompt Suggestions</p>
       <div className="flex flex-wrap gap-2">
         {PROMPT_SUGGESTIONS.map((suggestion) => (
           <Badge
             key={suggestion.label}
             variant="outline"
-            className="cursor-pointer gap-2 py-2 px-3 text-[11px] font-mono-custom tracking-wider uppercase border-border bg-card text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all rounded-lg"
+            className="cursor-pointer h-auto gap-2 py-2 px-3 text-[11px] font-medium border-border bg-card text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all rounded-lg"
             onClick={() => onSelect(suggestion.prompt)}
           >
             <suggestion.icon className="size-3.5 shrink-0" />

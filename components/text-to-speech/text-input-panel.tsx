@@ -67,18 +67,18 @@ export function TextInputPanel() {
                   className="gap-2 border-dashed border-primary/30 bg-primary/5 text-primary py-1.5 px-3"
                 >
                   <Coins className="size-3.5" />
-                  <span className="text-[10px] font-mono-custom tracking-[0.1em] uppercase">
+                  <span className="text-[10px] font-medium">
                     <span className="tabular-nums">
                       ${(text.length * COST_PER_UNIT).toFixed(4)}
                     </span>
-                    &nbsp; [Cost]
+                    &nbsp; Cost
                   </span>
                 </Badge>
                 <div className="flex items-center gap-6">
-                  <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
+                  <p className="text-[10px] text-muted-foreground/60 font-medium">
                     {text.length.toLocaleString()}
                     <span className="text-muted-foreground/30">
-                      &nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()} Characters
+                      &nbsp;/&nbsp;{TEXT_MAX_LENGTH.toLocaleString()} characters
                     </span>
                   </p>
                   <GenerateButton

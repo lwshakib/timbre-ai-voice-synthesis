@@ -58,7 +58,7 @@ export function TextToSpeechDetailView({ generationId }: { generationId: string 
     return (
       <div className="flex flex-col items-center justify-center flex-1 bg-background gap-4">
         <Spinner className="size-8 text-primary" />
-        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
+        <p className="text-[10px] text-muted-foreground/60 font-medium">
           Loading generation data...
         </p>
       </div>

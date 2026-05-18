@@ -37,7 +37,7 @@ export function TextToSpeechView({ initialValues }: { initialValues?: Partial<TT
     return (
       <div className="flex flex-col items-center justify-center flex-1 bg-background gap-4">
         <Spinner className="size-8 text-primary" />
-        <p className="text-[10px] text-muted-foreground/60 font-mono-custom tracking-[0.2em] uppercase">
+        <p className="text-[10px] text-muted-foreground/60 font-medium">
           Initializing voice models...
         </p>
       </div>

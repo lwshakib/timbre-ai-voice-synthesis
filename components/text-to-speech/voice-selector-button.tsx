@@ -32,7 +32,7 @@ export function VoiceSelectorButton() {
           className="size-6 border-primary/30"
         />
       )}
-      <span className="flex-1 truncate text-left text-xs font-mono-custom uppercase tracking-wider">
+      <span className="flex-1 truncate text-left text-xs font-medium text-foreground">
         {buttonLabel}
       </span>
       <ChevronDown className="size-4 shrink-0 text-muted-foreground/60" />
