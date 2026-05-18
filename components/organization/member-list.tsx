@@ -4,7 +4,13 @@ import React from 'react';
 import { authClient } from '@/lib/auth-client';
 import { Icon } from '@iconify/react';
 import { toast } from 'sonner';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 interface Member {
   id: string;
@@ -97,9 +103,13 @@ export function MemberList() {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="text-muted-foreground/30 hover:text-primary transition-colors">
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="h-8 w-8 text-muted-foreground/30 hover:text-primary hover:bg-secondary cursor-pointer"
+                  >
                     <Icon icon="solar:menu-dots-bold" />
-                  </button>
+                  </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-card border-border text-foreground">
                   <DropdownMenuItem

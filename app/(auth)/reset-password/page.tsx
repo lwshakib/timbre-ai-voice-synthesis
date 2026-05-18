@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import { ScrambleText } from '@/components/marketing/scramble-text';
 import { toast } from 'sonner';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 function ResetPasswordContent() {
   const [password, setPassword] = useState('');
@@ -56,12 +57,12 @@ function ResetPasswordContent() {
         <p className="text-muted-foreground text-[0.8125rem] mb-8">
           Your password reset link is invalid or has expired. Please request a new one.
         </p>
-        <button
+        <Button
           onClick={() => router.push('/forgot-password')}
-          className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
+          className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
         >
-          <ScrambleText text="Request New Link" className="relative z-10" />
-        </button>
+          <ScrambleText text="Request New Link" />
+        </Button>
       </div>
     );
   }
@@ -106,17 +107,17 @@ function ResetPasswordContent() {
         </div>
 
         <div className="pt-2">
-          <button
+          <Button
             disabled={loading}
             type="submit"
-            className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em] disabled:opacity-50"
+            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
           >
             {loading ? (
               <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
             ) : (
-              <ScrambleText text="Reset Password" className="relative z-10" />
+              <ScrambleText text="Reset Password" />
             )}
-          </button>
+          </Button>
         </div>
       </form>
 

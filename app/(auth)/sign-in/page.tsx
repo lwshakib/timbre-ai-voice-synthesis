@@ -7,6 +7,7 @@ import { ScrambleText } from '@/components/marketing/scramble-text';
 import { toast } from 'sonner';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
@@ -55,15 +56,14 @@ export default function SignInPage() {
       </div>
 
       {/* Social Login */}
-      <button
+      <Button
         onClick={handleGoogleSignIn}
-        className="btn-ghost-swiss w-full flex items-center justify-center gap-3 py-3 mb-6 bg-card/50 hover:bg-secondary transition-all"
+        variant="outline"
+        className="w-full h-11 gap-3 mb-6 bg-card/50 hover:bg-secondary/50 font-mono-custom text-[0.75rem] tracking-[0.05em] text-foreground rounded-lg"
       >
         <Icon icon="logos:google-icon" width="18" />
-        <span className="font-mono-custom text-[0.75rem] tracking-[0.05em] text-foreground">
-          Continue with Google
-        </span>
-      </button>
+        Continue with Google
+      </Button>
 
       <div className="relative flex items-center justify-center mb-6">
         <div className="absolute w-full h-[1px] bg-border"></div>
@@ -109,17 +109,17 @@ export default function SignInPage() {
           />
         </div>
 
-        <button
+        <Button
           disabled={loading}
           type="submit"
-          className="btn-swiss w-full py-4 mt-2 font-mono-custom text-[0.8125rem] tracking-[0.1em] disabled:opacity-50"
+          className="w-full h-12 mt-2 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
         >
           {loading ? (
             <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
           ) : (
-            <ScrambleText text="Sign In" className="relative z-10" />
+            <ScrambleText text="Sign In" />
           )}
-        </button>
+        </Button>
       </form>
 
       {/* Footer */}

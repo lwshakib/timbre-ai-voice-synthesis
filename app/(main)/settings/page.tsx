@@ -8,6 +8,7 @@ import { authClient } from '@/lib/auth-client';
 import { MemberList } from '@/components/organization/member-list';
 import { InviteDialog } from '@/components/organization/invite-dialog';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -188,18 +189,21 @@ export default function SettingsPage() {
                       accept="image/*"
                       onChange={handleUpload}
                     />
-                    <button
+                    <Button
                       disabled={uploading}
                       onClick={() => fileInputRef.current?.click()}
-                      className="btn-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em]"
+                      className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] rounded-lg cursor-pointer"
                     >
                       <ScrambleText text={uploading ? 'UPLOADING...' : 'Update Image'} />
-                    </button>
+                    </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
-                        <button className="btn-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em]">
+                        <Button
+                          variant="outline"
+                          className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] rounded-lg cursor-pointer"
+                        >
                           <ScrambleText text="Sign Out" />
-                        </button>
+                        </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
@@ -281,20 +285,21 @@ export default function SettingsPage() {
                   { id: 'dark', label: 'Dark', icon: 'solar:moon-linear' },
                   { id: 'system', label: 'System', icon: 'solar:monitor-linear' },
                 ].map((opt) => (
-                  <button
+                  <Button
                     key={opt.id}
                     onClick={() => setTheme(opt.id)}
-                    className={`glass-panel p-4 border rounded-sm flex flex-col items-center gap-3 transition-all ${
+                    variant={theme === opt.id ? 'default' : 'outline'}
+                    className={`h-auto p-4 flex flex-col items-center gap-3 rounded-lg cursor-pointer ${
                       theme === opt.id
-                        ? 'border-primary bg-primary/5 text-primary'
-                        : 'border-border text-muted-foreground hover:border-primary/30'
+                        ? 'border-primary bg-primary/10 text-primary hover:bg-primary/15'
+                        : 'border-border text-muted-foreground hover:bg-secondary/40'
                     }`}
                   >
                     <Icon icon={opt.icon} width={20} height={20} />
                     <span className="text-[10px] font-mono-custom uppercase tracking-widest">
                       {opt.label}
                     </span>
-                  </button>
+                  </Button>
                 ))}
               </div>
             </section>
@@ -397,9 +402,12 @@ export default function SettingsPage() {
                 <h4 className="text-[0.625rem] font-mono-custom text-muted-foreground uppercase tracking-widest mb-4">
                   Identity Rotation
                 </h4>
-                <button className="btn-ghost-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-muted-foreground hover:text-foreground">
+                <Button
+                  variant="outline"
+                  className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-muted-foreground hover:text-foreground rounded-lg cursor-pointer"
+                >
                   <ScrambleText text="CHANGE_PASSWORD" />
-                </button>
+                </Button>
               </div>
             </section>
           </Reveal>
@@ -444,17 +452,18 @@ export default function SettingsPage() {
                 Permanently decommission this organization and all associated synthesis data,
                 voices, and team records.
               </p>
-              <button
+              <Button
                 onClick={async () => {
                   if (!activeOrg) return;
                   toast.info(
                     'Decommissioning protocol initialized. Identity verification required.'
                   );
                 }}
-                className="btn-ghost-swiss px-6 py-3 font-mono-custom text-[0.6875rem] tracking-[0.1em] text-destructive/70 border-destructive/20 hover:bg-destructive/10"
+                variant="destructive"
+                className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.1em] rounded-lg cursor-pointer"
               >
                 <ScrambleText text="INITIALIZE_DECOMMISSION" />
-              </button>
+              </Button>
             </section>
           </Reveal>
         )}
@@ -524,9 +533,13 @@ export default function SettingsPage() {
                       <span className="font-mono-custom text-xs text-muted-foreground">
                         $2,400.00
                       </span>
-                      <button className="text-primary opacity-50 group-hover:opacity-100 transition-opacity">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 text-primary opacity-50 group-hover:opacity-100 transition-opacity cursor-pointer"
+                      >
                         <Icon icon="solar:download-linear" />
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ))}
@@ -552,9 +565,9 @@ export default function SettingsPage() {
                     AUTHENTICATE_MODEL_HANDSHAKES
                   </p>
                 </div>
-                <button className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em]">
+                <Button className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.05em] rounded-lg cursor-pointer">
                   Generate new API key
-                </button>
+                </Button>
               </div>
 
               <div className="glass-panel p-4 border border-border rounded-sm bg-background flex items-center justify-between">
@@ -571,9 +584,13 @@ export default function SettingsPage() {
                 </div>
                 <div className="flex items-center gap-1 font-mono-custom text-[0.75rem] text-muted-foreground/20 bg-secondary px-3 py-1.5 rounded-sm border border-border">
                   <span>sk_timbre_••••••••••••••••••••342f</span>
-                  <button className="ml-2 hover:text-primary transition-colors">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6 ml-2 hover:text-primary hover:bg-secondary cursor-pointer"
+                  >
                     <Icon icon="solar:copy-linear" width={14} height={14} />
-                  </button>
+                  </Button>
                 </div>
               </div>
             </section>
@@ -592,9 +609,12 @@ export default function SettingsPage() {
                 Access the Timbre AI specification ledger.
               </p>
               <br />
-              <button className="text-primary font-mono-custom text-[0.625rem] uppercase tracking-widest hover:opacity-50 transition-opacity">
+              <Button
+                variant="ghost"
+                className="h-auto p-0 text-primary font-mono-custom text-[0.625rem] uppercase tracking-widest hover:text-primary/70 hover:bg-transparent cursor-pointer"
+              >
                 <ScrambleText text="VIEW_OPEN_SPECS" />
-              </button>
+              </Button>
             </section>
           </Reveal>
         )}

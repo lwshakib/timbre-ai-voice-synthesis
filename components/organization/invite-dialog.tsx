@@ -55,10 +55,10 @@ export function InviteDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <button className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em] flex items-center gap-2">
-          <Icon icon="solar:user-plus-linear" width={16} height={16} className="relative z-10" />
-          <ScrambleText text="ADD_PERSONNEL" className="relative z-10" />
-        </button>
+        <Button className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.05em] flex items-center gap-2 rounded-lg cursor-pointer">
+          <Icon icon="solar:user-plus-linear" width={16} height={16} />
+          <ScrambleText text="ADD_PERSONNEL" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="bg-card border-border text-foreground">
         <form onSubmit={handleInvite}>

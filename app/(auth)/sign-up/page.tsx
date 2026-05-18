@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import { ScrambleText } from '@/components/marketing/scramble-text';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
@@ -45,26 +46,29 @@ export default function SignUpPage() {
           Verify your email
         </h2>
         <p className="text-muted-foreground text-[0.875rem] leading-relaxed max-w-[280px] mb-10">
-          We&apos;ve sent a verification link to <span className="text-foreground">{email}</span>. Please
-          check your inbox to complete the setup.
+          We&apos;ve sent a verification link to <span className="text-foreground">{email}</span>.
+          Please check your inbox to complete the setup.
         </p>
 
         <div className="w-full space-y-4">
-          <a
-            href="https://mail.google.com"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em]"
+          <Button
+            asChild
+            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg cursor-pointer"
           >
-            <ScrambleText text="Open Inbox" className="relative z-10" />
-          </a>
+            <a href="https://mail.google.com" target="_blank" rel="noreferrer">
+              <ScrambleText text="Open Inbox" />
+            </a>
+          </Button>
 
-          <Link
-            href="/sign-in"
-            className="btn-ghost-swiss w-full flex items-center justify-center py-4 bg-secondary/50 text-muted-foreground font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-foreground"
+          <Button
+            asChild
+            variant="outline"
+            className="w-full h-12 bg-secondary/50 hover:bg-secondary text-muted-foreground font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-foreground rounded-lg"
           >
-            <ScrambleText text="Back to Login" />
-          </Link>
+            <Link href="/sign-in">
+              <ScrambleText text="Back to Login" />
+            </Link>
+          </Button>
         </div>
 
         <div className="mt-8 pt-6 border-t border-border w-full">
@@ -131,17 +135,17 @@ export default function SignUpPage() {
         </div>
 
         <div className="pt-2">
-          <button
+          <Button
             disabled={loading}
             type="submit"
-            className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em] disabled:opacity-50"
+            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
           >
             {loading ? (
               <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
             ) : (
-              <ScrambleText text="Create account" className="relative z-10" />
+              <ScrambleText text="Create account" />
             )}
-          </button>
+          </Button>
         </div>
       </form>
 

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 import { ScrambleText } from '@/components/marketing/scramble-text';
+import { Button } from '@/components/ui/button';
 
 export interface Voice {
   id: string;
@@ -54,16 +55,18 @@ export function VoiceCard({ voice }: VoiceCardProps) {
           </div>
         </div>
 
-        <button
+        <Button
           onClick={togglePlay}
-          className="w-8 h-8 rounded-full flex items-center justify-center bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary transition-all"
+          variant="outline"
+          size="icon"
+          className="w-8 h-8 rounded-full cursor-pointer bg-card hover:text-primary hover:border-primary"
         >
           <Icon
             icon={isPlaying ? 'solar:pause-linear' : 'solar:play-linear'}
             width={16}
             height={16}
           />
-        </button>
+        </Button>
       </div>
 
       {/* Description */}
@@ -78,9 +81,12 @@ export function VoiceCard({ voice }: VoiceCardProps) {
           {voice.language}
         </div>
 
-        <button className="text-[0.625rem] font-mono-custom text-primary hover:opacity-70 transition-opacity uppercase tracking-[0.1em]">
+        <Button
+          variant="ghost"
+          className="h-auto p-0 text-[0.625rem] font-mono-custom text-primary hover:text-primary/70 uppercase tracking-[0.1em] cursor-pointer hover:bg-transparent"
+        >
           <ScrambleText text="USE_VOICE" />
-        </button>
+        </Button>
       </div>
 
       {/* Hover Accent */}

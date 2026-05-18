@@ -10,6 +10,7 @@ import { CountingNumber } from '@/components/marketing/counting-number';
 import { Logo } from '@/components/ui/logo';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
 export default function LandingPage() {
   const [mounted, setMounted] = useState(false);
@@ -48,12 +49,14 @@ export default function LandingPage() {
             <a href="#secondary" className="nav-link">
               <ScrambleText text="Registry" />
             </a>
-            <Link
-              href="/dashboard"
-              className="btn-swiss px-6 py-2.5 font-mono-custom text-[0.6875rem] tracking-[0.05em] ml-4"
+            <Button
+              asChild
+              className="h-10 px-6 font-mono-custom text-[0.6875rem] tracking-[0.05em] ml-4 rounded-lg cursor-pointer"
             >
-              <ScrambleText text="Dashboard" className="relative z-10" />
-            </Link>
+              <Link href="/dashboard">
+                <ScrambleText text="Dashboard" />
+              </Link>
+            </Button>
           </nav>
 
           <div className="md:hidden">
@@ -103,13 +106,15 @@ export default function LandingPage() {
                       <p className="text-[10px] text-muted-foreground/40 font-mono-custom tracking-[0.2em] uppercase">
                         Authorized Access
                       </p>
-                      <Link
-                        href="/dashboard"
-                        className="btn-swiss w-full py-4 flex items-center justify-center font-mono-custom text-[0.8125rem] tracking-[0.1em]"
+                      <Button
+                        asChild
+                        className="w-full h-12 flex items-center justify-center font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg cursor-pointer"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        <ScrambleText text="Access Dashboard" />
-                      </Link>
+                        <Link href="/dashboard">
+                          <ScrambleText text="Access Dashboard" />
+                        </Link>
+                      </Button>
                     </div>
                   </div>
 
@@ -176,15 +181,20 @@ export default function LandingPage() {
                 AI-modeled vocal topography. Engineered for latency under 200ms.
               </p>
               <div className="flex flex-wrap items-center gap-4 mb-10">
-                <Link
-                  href="/dashboard"
-                  className="btn-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em]"
+                <Button
+                  asChild
+                  className="h-12 px-8 font-mono-custom text-[0.8125rem] tracking-[0.05em] rounded-lg cursor-pointer"
                 >
-                  <ScrambleText text="Go to Dashboard" className="relative z-10" />
-                </Link>
-                <button className="btn-ghost-swiss px-8 py-4 font-mono-custom text-[0.8125rem] tracking-[0.05em] bg-background">
-                  <ScrambleText text="View Platform" className="relative z-10" />
-                </button>
+                  <Link href="/dashboard">
+                    <ScrambleText text="Go to Dashboard" />
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="h-12 px-8 font-mono-custom text-[0.8125rem] tracking-[0.05em] bg-background rounded-lg cursor-pointer"
+                >
+                  <ScrambleText text="View Platform" />
+                </Button>
               </div>
               <div className="grid grid-cols-3 gap-6 font-mono-custom text-[0.6875rem] text-muted-foreground border-t border-border pt-6">
                 <div>
@@ -443,9 +453,12 @@ export default function LandingPage() {
                 Timbre AI initializes a strictly regulated internal registry for your specialized
                 voice models. It executes clean synthesis transfers devoid of latency.
               </p>
-              <button className="btn-ghost-swiss inline-flex font-mono-custom text-[0.75rem] tracking-[0.05em]">
-                <ScrambleText text="View Specifications" className="relative z-10" />
-              </button>
+              <Button
+                variant="outline"
+                className="h-11 px-6 font-mono-custom text-[0.75rem] tracking-[0.05em] rounded-lg cursor-pointer"
+              >
+                <ScrambleText text="View Specifications" />
+              </Button>
             </Reveal>
 
             {/* --- Market Depth UI Mock --- */}
@@ -560,12 +573,12 @@ export default function LandingPage() {
                       <option value="20m+">20M+ Chars/mo</option>
                     </select>
                   </div>
-                  <button
+                  <Button
                     type="submit"
-                    className="btn-swiss w-full py-4 font-mono-custom text-[0.8125rem] tracking-[0.1em] mt-4"
+                    className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] mt-4 rounded-lg cursor-pointer"
                   >
-                    <ScrambleText text="Send Request" className="relative z-10" />
-                  </button>
+                    <ScrambleText text="Send Request" />
+                  </Button>
                 </form>
               </div>
             </Reveal>

@@ -9,14 +9,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "bunx --bun prisma generate",
-    "db:generate": "bunx --bun prisma generate",
-    "db:push": "bunx --bun prisma db push",
-    "db:migrate": "bunx --bun prisma generate && bunx --bun prisma migrate dev --name init",
-    "db:studio": "bunx --bun prisma studio",
-    "db:reset": "bunx --bun prisma migrate reset",
-    "bucket:setup": "bun scripts/bucket-setup.ts",
-    "bucket:teardown": "bun scripts/bucket-teardown.ts"
+    "postinstall": "prisma generate",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma generate && prisma migrate dev --name init",
+    "db:studio": "prisma studio",
+    "db:reset": "prisma migrate reset",
+    "bucket:setup": "tsx scripts/bucket-setup.ts",
+    "bucket:teardown": "tsx scripts/bucket-teardown.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1024.0",
@@ -75,6 +75,7 @@
     "prettier": "^3.8.1",
     "prisma": "^7.6.0",
     "tailwindcss": "^4",
+    "tsx": "^4.19.3",
     "typescript": "^5"
   },
   "ignoreScripts": [

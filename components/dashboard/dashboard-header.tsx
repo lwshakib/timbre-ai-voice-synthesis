@@ -24,23 +24,13 @@ export function DashboardHeader() {
       </div>
 
       <div className="lg:flex items-center gap-3 hidden">
-        <Button
-          variant="outline"
-          size="sm"
-          asChild
-          className="border-border bg-secondary text-foreground hover:bg-secondary/80 hover:border-primary/50"
-        >
+        <Button variant="outline" size="sm" asChild className="cursor-pointer">
           <Link href="mailto:support@timbreai.build">
             <ThumbsUp className="size-4 mr-2 text-primary" />
             <span>Feedback</span>
           </Link>
         </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          asChild
-          className="border-border bg-secondary text-foreground hover:bg-secondary/80 hover:border-primary/50"
-        >
+        <Button variant="outline" size="sm" asChild className="cursor-pointer">
           <Link href="mailto:support@timbreai.build">
             <Headphones className="size-4 mr-2 text-primary" />
             <span>Need help?</span>

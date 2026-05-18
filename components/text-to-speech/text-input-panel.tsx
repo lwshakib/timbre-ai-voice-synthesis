@@ -15,8 +15,14 @@ import { useTTSForm } from './text-to-speech-form';
 export function TextInputPanel() {
   const form = useTTSForm();
 
-  const text = useStore(form.store, (s: unknown) => (s as { values: { text: string } }).values.text);
-  const isSubmitting = useStore(form.store, (s: unknown) => (s as { isSubmitting: boolean }).isSubmitting);
+  const text = useStore(
+    form.store,
+    (s: unknown) => (s as { values: { text: string } }).values.text
+  );
+  const isSubmitting = useStore(
+    form.store,
+    (s: unknown) => (s as { isSubmitting: boolean }).isSubmitting
+  );
 
   return (
     <div className="flex h-full min-h-0 flex-col flex-1 bg-background">
