@@ -1,11 +1,17 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from 'next-themes';
 
 export const HeroCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
+  
+  const isDark = resolvedTheme === 'dark';
 
   useEffect(() => {
+    if (!isDark) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -91,11 +97,13 @@ export const HeroCanvas = () => {
               ctx.beginPath();
               ctx.moveTo(dot.x, dot.y);
               ctx.lineTo(adjustedMouseX, adjustedMouseY);
-              ctx.strokeStyle =
-                primaryColor +
-                Math.floor(force * 0.2 * 255)
-                  .toString(16)
-                  .padStart(2, '0');
+              
+              // Safe OKLCH formatting overlay
+              const strokeColor = primaryColor.startsWith('oklch') 
+                ? primaryColor.replace(')', ` / ${(force * 0.2).toFixed(2)})`)
+                : primaryColor + Math.floor(force * 0.2 * 255).toString(16).padStart(2, '0');
+                
+              ctx.strokeStyle = strokeColor;
               ctx.lineWidth = 0.5;
               ctx.stroke();
             }
@@ -107,11 +115,12 @@ export const HeroCanvas = () => {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, drawRadius, 0, Math.PI * 2);
 
-        ctx.fillStyle =
-          mutedColor +
-          Math.floor(dot.alpha * 255)
-            .toString(16)
-            .padStart(2, '0');
+        // Safe OKLCH formatting overlay
+        const fillColor = mutedColor.startsWith('oklch')
+          ? mutedColor.replace(')', ` / ${dot.alpha.toFixed(2)})`)
+          : mutedColor + Math.floor(dot.alpha * 255).toString(16).padStart(2, '0');
+
+        ctx.fillStyle = fillColor;
         ctx.fill();
       });
 
@@ -126,7 +135,9 @@ export const HeroCanvas = () => {
       window.removeEventListener('mouseleave', handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isDark]);
+
+  if (!isDark) return null;
 
   return (
     <canvas
