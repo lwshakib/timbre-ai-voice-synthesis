@@ -48,20 +48,18 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-foreground text-xl font-light tracking-tight mb-1">Sign In</h2>
-        <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
-          Sign in to your account
-        </p>
+        <p className="text-muted-foreground text-xs">Sign in to your account</p>
       </div>
 
       {/* Social Login */}
       <Button
         onClick={handleGoogleSignIn}
         variant="outline"
-        className="w-full h-11 gap-3 mb-6 bg-card/50 hover:bg-secondary/50 font-mono-custom text-[0.75rem] tracking-[0.05em] text-foreground rounded-lg"
+        className="w-full h-11 gap-3 mb-6 bg-card/50 hover:bg-secondary/50 text-[0.875rem] text-foreground rounded-lg font-medium"
       >
         <Icon icon="logos:google-icon" width="18" />
         Continue with Google
@@ -69,15 +67,15 @@ export default function SignInPage() {
 
       <div className="relative flex items-center justify-center mb-6">
         <div className="absolute w-full h-[1px] bg-border"></div>
-        <span className="relative z-10 bg-card px-3 font-mono-custom text-[0.625rem] text-muted-foreground tracking-widest lowercase">
-          or sign in with email
+        <span className="relative z-10 bg-card px-3 text-xs text-muted-foreground">
+          Or sign in with email
         </span>
       </div>
 
       {/* Email Form */}
       <form onSubmit={handleEmailSignIn} className="space-y-4">
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             Email address
           </Label>
           <Input
@@ -91,12 +89,10 @@ export default function SignInPage() {
         </div>
         <div>
           <div className="flex justify-between items-center mb-2">
-            <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground tracking-[0.1em] uppercase">
-              Password
-            </Label>
+            <Label className="block text-xs text-muted-foreground font-normal">Password</Label>
             <Link
               href="/forgot-password"
-              className="font-mono-custom text-[0.625rem] text-primary hover:opacity-70 transition-opacity uppercase tracking-widest"
+              className="text-xs text-primary hover:opacity-70 transition-opacity"
             >
               Forgot password?
             </Link>
@@ -114,7 +110,7 @@ export default function SignInPage() {
         <Button
           disabled={loading}
           type="submit"
-          className="w-full h-12 mt-2 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
+          className="w-full h-12 mt-2 text-[0.875rem] rounded-lg font-medium"
         >
           {loading ? (
             <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
@@ -126,7 +122,7 @@ export default function SignInPage() {
 
       {/* Footer */}
       <div className="mt-8 pt-6 border-t border-border text-center">
-        <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
+        <p className="text-xs text-muted-foreground">
           Don&apos;t have an account?{' '}
           <Link href="/sign-up" className="text-primary hover:underline underline-offset-4">
             Sign up

@@ -39,7 +39,7 @@ export default function SignUpPage() {
 
   if (isSuccess) {
     return (
-      <div className="glass-panel p-10 rounded-sm animate-in fade-in zoom-in-95 duration-700 text-center flex flex-col items-center">
+      <div className="w-full animate-in fade-in zoom-in-95 duration-700 text-center flex flex-col items-center">
         <div className="w-16 h-16 rounded-full border border-primary flex items-center justify-center mb-6 bg-primary/10">
           <Icon icon="solar:letter-linear" className="text-primary text-3xl animate-pulse" />
         </div>
@@ -55,7 +55,7 @@ export default function SignUpPage() {
         <div className="w-full space-y-4">
           <Button
             asChild
-            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg cursor-pointer"
+            className="w-full h-12 text-[0.875rem] rounded-lg font-medium cursor-pointer"
           >
             <a href="https://mail.google.com" target="_blank" rel="noreferrer">
               <ScrambleText text="Open Inbox" />
@@ -65,7 +65,7 @@ export default function SignUpPage() {
           <Button
             asChild
             variant="outline"
-            className="w-full h-12 bg-secondary/50 hover:bg-secondary text-muted-foreground font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-foreground rounded-lg"
+            className="w-full h-12 bg-secondary/50 hover:bg-secondary text-muted-foreground text-[0.875rem] hover:text-foreground rounded-lg font-medium"
           >
             <Link href="/sign-in">
               <ScrambleText text="Back to Login" />
@@ -74,30 +74,26 @@ export default function SignUpPage() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-border w-full">
-          <p className="font-mono-custom text-[0.625rem] text-muted-foreground/30 uppercase tracking-widest">
-            Registration Reference: Timbre AI
-          </p>
+          <p className="text-xs text-muted-foreground/30">Registration Reference: Timbre AI</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-foreground text-xl font-light tracking-tight mb-1">
           Create an account
         </h2>
-        <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
-          Join the Timbre AI network.
-        </p>
+        <p className="text-muted-foreground text-xs">Join the Timbre AI network.</p>
       </div>
 
       {/* Email Form */}
       <form onSubmit={handleSignUp} className="space-y-4">
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             Full Name / Organization
           </Label>
           <Input
@@ -110,7 +106,7 @@ export default function SignUpPage() {
           />
         </div>
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             Email Address
           </Label>
           <Input
@@ -123,7 +119,7 @@ export default function SignUpPage() {
           />
         </div>
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             Create Password
           </Label>
           <Input
@@ -140,7 +136,7 @@ export default function SignUpPage() {
           <Button
             disabled={loading}
             type="submit"
-            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
+            className="w-full h-12 text-[0.875rem] rounded-lg font-medium"
           >
             {loading ? (
               <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
@@ -152,7 +148,7 @@ export default function SignUpPage() {
       </form>
 
       <div className="mt-8 pt-6 border-t border-border text-center">
-        <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
+        <p className="text-xs text-muted-foreground">
           Already have an account?{' '}
           <Link href="/sign-in" className="text-primary hover:underline underline-offset-4">
             Sign In

@@ -51,7 +51,7 @@ function ResetPasswordContent() {
 
   if (!token) {
     return (
-      <div className="glass-panel p-10 rounded-sm animate-in fade-in duration-700 text-center">
+      <div className="w-full animate-in fade-in duration-700 text-center">
         <div className="w-16 h-16 rounded-full border border-destructive flex items-center justify-center mx-auto mb-6 bg-destructive/10">
           <Icon icon="solar:shield-warning-linear" className="text-destructive text-3xl" />
         </div>
@@ -61,7 +61,7 @@ function ResetPasswordContent() {
         </p>
         <Button
           onClick={() => router.push('/forgot-password')}
-          className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
+          className="w-full h-12 text-[0.875rem] rounded-lg font-medium"
         >
           <ScrambleText text="Request New Link" />
         </Button>
@@ -70,19 +70,17 @@ function ResetPasswordContent() {
   }
 
   return (
-    <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-foreground text-xl font-light tracking-tight mb-1">Set New Password</h2>
-        <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
-          Update your credentials to regain access.
-        </p>
+        <p className="text-muted-foreground text-xs">Update your credentials to regain access.</p>
       </div>
 
       {/* Form */}
       <form onSubmit={handleResetPassword} className="space-y-5">
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             New Password
           </Label>
           <Input
@@ -95,7 +93,7 @@ function ResetPasswordContent() {
           />
         </div>
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             Confirm Password
           </Label>
           <Input
@@ -112,7 +110,7 @@ function ResetPasswordContent() {
           <Button
             disabled={loading}
             type="submit"
-            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
+            className="w-full h-12 text-[0.875rem] rounded-lg font-medium"
           >
             {loading ? (
               <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
@@ -124,9 +122,7 @@ function ResetPasswordContent() {
       </form>
 
       <div className="mt-8 pt-6 border-t border-border text-center">
-        <p className="font-mono-custom text-[0.625rem] text-muted-foreground/30 tracking-widest uppercase">
-          Security Level: High
-        </p>
+        <p className="text-xs text-muted-foreground/30">Security Level: High</p>
       </div>
     </div>
   );
@@ -136,11 +132,9 @@ export default function ResetPasswordPage() {
   return (
     <Suspense
       fallback={
-        <div className="glass-panel p-12 rounded-sm border border-border flex flex-col items-center justify-center min-h-[400px]">
+        <div className="w-full flex flex-col items-center justify-center min-h-[400px]">
           <Icon icon="line-md:loading-loop" className="text-primary text-3xl mb-4" />
-          <p className="text-muted-foreground text-[0.8125rem] font-mono-custom uppercase tracking-widest">
-            Synchronizing...
-          </p>
+          <p className="text-muted-foreground text-xs">Synchronizing...</p>
         </div>
       }
     >

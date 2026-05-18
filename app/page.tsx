@@ -227,6 +227,8 @@ export default function LandingPage() {
                   src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80"
                   alt="Data Architecture"
                   fill
+                  sizes="(max-width: 1200px) 100vw, 50vw"
+                  priority
                   className="object-cover dark:opacity-30 opacity-20 mix-blend-luminosity grayscale"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
@@ -372,6 +374,7 @@ export default function LandingPage() {
                   src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
                   alt="Acoustic Processor"
                   fill
+                  sizes="(max-width: 1200px) 100vw, 66vw"
                   className="object-cover opacity-20 mix-blend-screen transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-background/60 mix-blend-multiply"></div>
@@ -548,12 +551,12 @@ export default function LandingPage() {
 
             <Reveal className="relative">
               <div className="glass-panel p-8 rounded-sm relative z-10 border-border">
-                <div className="absolute top-0 right-0 p-4 font-mono-custom text-[0.625rem] text-muted-foreground">
-                  SECURE_UPLINK
+                <div className="absolute top-0 right-0 p-4 text-xs text-muted-foreground">
+                  Secure Uplink
                 </div>
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-6 mt-4">
                   <div>
-                    <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">
+                    <Label className="block text-xs text-muted-foreground mb-2 font-normal">
                       Full Name / Organization
                     </Label>
                     <Input
@@ -563,7 +566,7 @@ export default function LandingPage() {
                     />
                   </div>
                   <div>
-                    <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-wider">
+                    <Label className="block text-xs text-muted-foreground mb-2 font-normal">
                       Usage Tier
                     </Label>
                     <select className="w-full bg-background border border-border p-3 text-[0.875rem] text-foreground outline-none cursor-pointer">
@@ -577,7 +580,7 @@ export default function LandingPage() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] mt-4 rounded-lg cursor-pointer"
+                    className="w-full h-12 mt-4 rounded-lg cursor-pointer text-[0.875rem] font-medium"
                   >
                     <ScrambleText text="Send Request" />
                   </Button>

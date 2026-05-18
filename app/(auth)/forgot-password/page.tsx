@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
 
   if (isSuccess) {
     return (
-      <div className="glass-panel p-10 rounded-sm animate-in fade-in zoom-in-95 duration-700 text-center flex flex-col items-center">
+      <div className="w-full animate-in fade-in zoom-in-95 duration-700 text-center flex flex-col items-center">
         <div className="w-16 h-16 rounded-full border border-primary flex items-center justify-center mb-6 bg-primary/10">
           <Icon
             icon="solar:shield-keyhole-linear"
@@ -54,7 +54,7 @@ export default function ForgotPasswordPage() {
         <div className="w-full space-y-4">
           <Button
             asChild
-            className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg cursor-pointer"
+            className="w-full h-12 text-[0.875rem] rounded-lg font-medium cursor-pointer"
           >
             <a href="https://mail.google.com" target="_blank" rel="noreferrer">
               <ScrambleText text="Open Inbox" />
@@ -64,7 +64,7 @@ export default function ForgotPasswordPage() {
           <Button
             asChild
             variant="outline"
-            className="w-full h-12 bg-secondary/50 hover:bg-secondary text-muted-foreground font-mono-custom text-[0.8125rem] tracking-[0.1em] hover:text-foreground rounded-lg"
+            className="w-full h-12 bg-secondary/50 hover:bg-secondary text-muted-foreground text-[0.875rem] hover:text-foreground rounded-lg font-medium"
           >
             <Link href="/sign-in">
               <ScrambleText text="Back to Login" />
@@ -73,7 +73,7 @@ export default function ForgotPasswordPage() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-border w-full">
-          <p className="font-mono-custom text-[0.625rem] text-muted-foreground/30 uppercase tracking-widest leading-relaxed">
+          <p className="text-xs text-muted-foreground/30 leading-relaxed">
             Secure Password Recovery
           </p>
         </div>
@@ -82,13 +82,13 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="glass-panel p-8 rounded-sm animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header */}
       <div className="mb-8">
         <h2 className="text-foreground text-xl font-light tracking-tight mb-1">
           Reset your password
         </h2>
-        <p className="text-muted-foreground text-xs font-mono-custom tracking-wider">
+        <p className="text-muted-foreground text-xs">
           We&apos;ll send a secure link to your email.
         </p>
       </div>
@@ -96,7 +96,7 @@ export default function ForgotPasswordPage() {
       {/* Email Form */}
       <form onSubmit={handleForgetPassword} className="space-y-6">
         <div>
-          <Label className="block font-mono-custom text-[0.625rem] text-muted-foreground mb-2 tracking-[0.1em] uppercase">
+          <Label className="block text-xs text-muted-foreground mb-2 font-normal">
             Email Address
           </Label>
           <Input
@@ -107,7 +107,7 @@ export default function ForgotPasswordPage() {
             className="w-full bg-background border border-border px-3 h-11 text-[0.875rem] text-foreground focus-visible:border-primary focus-visible:ring-0 transition-colors"
             placeholder="institutional@entity.com"
           />
-          <p className="mt-2 font-mono-custom text-[0.625rem] text-muted-foreground/30 tracking-tight">
+          <p className="mt-2 text-xs text-muted-foreground/30">
             We will send a secure link to reset your password.
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function ForgotPasswordPage() {
         <Button
           disabled={loading}
           type="submit"
-          className="w-full h-12 font-mono-custom text-[0.8125rem] tracking-[0.1em] rounded-lg"
+          className="w-full h-12 text-[0.875rem] rounded-lg font-medium"
         >
           {loading ? (
             <Icon icon="line-md:loading-loop" className="mx-auto text-xl" />
@@ -126,7 +126,7 @@ export default function ForgotPasswordPage() {
       </form>
 
       <div className="mt-8 pt-6 border-t border-border text-center">
-        <p className="font-mono-custom text-[0.6875rem] text-muted-foreground tracking-wider uppercase">
+        <p className="text-xs text-muted-foreground">
           Remembered?{' '}
           <Link href="/sign-in" className="text-primary hover:underline underline-offset-4">
             Sign In
